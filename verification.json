@@ -1,0 +1,154 @@
+{
+  "timestamp": "2026-08-31T03:20:26.214063+00:00",
+  "checks": [
+    {
+      "name": "index.html exists",
+      "passed": true,
+      "detail": "found: index.html"
+    },
+    {
+      "name": "style.css exists",
+      "passed": true,
+      "detail": "found: style.css"
+    },
+    {
+      "name": "script.js exists",
+      "passed": true,
+      "detail": "found: script.js"
+    },
+    {
+      "name": "script.js valid syntax",
+      "passed": true,
+      "detail": "valid JS syntax"
+    },
+    {
+      "name": "DOMAIN_SCHEMA.md exists",
+      "passed": true,
+      "detail": "found: DOMAIN_SCHEMA.md"
+    },
+    {
+      "name": "Dockerfile exists",
+      "passed": true,
+      "detail": "found: Dockerfile"
+    },
+    {
+      "name": "index.html contains required form",
+      "passed": true,
+      "detail": "form/email/checkbox elements present"
+    },
+    {
+      "name": "agents_demo.py exists",
+      "passed": true,
+      "detail": "found: agents_demo.py"
+    },
+    {
+      "name": "agents_demo.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: agents_demo.py"
+    },
+    {
+      "name": "run_nondeterminism.py exists",
+      "passed": true,
+      "detail": "found: run_nondeterminism.py"
+    },
+    {
+      "name": "run_nondeterminism.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: run_nondeterminism.py"
+    },
+    {
+      "name": "nondeterminism_input.json exists and valid",
+      "passed": true,
+      "detail": "valid JSON: reports/hw01/cases/nondeterminism_input.json"
+    },
+    {
+      "name": "40 raw run records saved",
+      "passed": true,
+      "detail": "reports/hw01/raw/nondeterminism_runs.json"
+    },
+    {
+      "name": "nondeterminism_runs.csv exists",
+      "passed": true,
+      "detail": "found: reports/hw01/raw/nondeterminism_runs.csv"
+    },
+    {
+      "name": "nondeterminism_summary.json exists and valid",
+      "passed": true,
+      "detail": "valid JSON: reports/hw01/raw/nondeterminism_summary.json"
+    },
+    {
+      "name": "METRICS.md exists",
+      "passed": true,
+      "detail": "found: METRICS.md"
+    },
+    {
+      "name": "src/model_client.py exists",
+      "passed": true,
+      "detail": "found: src/model_client.py"
+    },
+    {
+      "name": "src/model_client.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: src/model_client.py"
+    },
+    {
+      "name": "ModelClient defines complete(messages, tools=None)",
+      "passed": true,
+      "detail": "signature check on src/model_client.py"
+    },
+    {
+      "name": "hw1_client.py exists",
+      "passed": true,
+      "detail": "found: hw1_client.py"
+    },
+    {
+      "name": "hw1_client.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: hw1_client.py"
+    },
+    {
+      "name": "AGENT.md exists",
+      "passed": true,
+      "detail": "found: AGENT.md"
+    },
+    {
+      "name": "README.md exists",
+      "passed": true,
+      "detail": "found: README.md"
+    },
+    {
+      "name": "README.md answers all 4 conceptual questions",
+      "passed": true,
+      "detail": "keyword check on README.md"
+    },
+    {
+      "name": "RUN_LOG.txt exists and non-empty",
+      "passed": true,
+      "detail": "reports/hw01/RUN_LOG.txt"
+    },
+    {
+      "name": "report.pdf exists",
+      "passed": true,
+      "detail": "found: reports/hw01/report.pdf"
+    },
+    {
+      "name": "AI_USE.md exists",
+      "passed": true,
+      "detail": "found: AI_USE.md"
+    },
+    {
+      "name": "Python 3.11/3.12 available",
+      "passed": true,
+      "detail": "running under Python 3.12.13"
+    },
+    {
+      "name": "qwen3:8b pulled in Ollama",
+      "passed": true,
+      "detail": "NAME            ID              SIZE      MODIFIED     "
+    }
+  ],
+  "passed": 29,
+  "failed": 0,
+  "total": 29,
+  "overall": "PASS"
+}

@@ -1,0 +1,36 @@
+{
+  "0.7": {
+    "successful_runs": 20,
+    "failed_runs": 0,
+    "distinct_tag_sets": 11,
+    "tags_in_all_runs": [],
+    "tags_in_exactly_one_run": [
+      "algorithm analysis",
+      "big o analysis",
+      "big o notation",
+      "big-o complexity analysis",
+      "complexity analysis",
+      "dynamic programming methods",
+      "linked list implementation",
+      "python programming",
+      "time and space complexity"
+    ],
+    "latency_p50_ms": 77272.4,
+    "latency_p95_ms": 102800.5,
+    "latency_p99_ms": 111202.8
+  },
+  "0.0": {
+    "successful_runs": 20,
+    "failed_runs": 0,
+    "distinct_tag_sets": 1,
+    "tags_in_all_runs": [
+      "algorithm design techniques",
+      "big o notation",
+      "data structures implementation"
+    ],
+    "tags_in_exactly_one_run": [],
+    "latency_p50_ms": 118949.2,
+    "latency_p95_ms": 135981.1,
+    "latency_p99_ms": 138073.8
+  }
+}

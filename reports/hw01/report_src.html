@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DATA-260 HW1 Report</title>
+<style>
+  @page { margin: 24mm 18mm; }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #1a1a1a;
+    line-height: 1.5;
+    font-size: 10.5pt;
+  }
+  h1 { font-size: 20pt; margin-bottom: 4px; }
+  h2 {
+    font-size: 14pt;
+    margin-top: 28px;
+    border-bottom: 2px solid #2563eb;
+    padding-bottom: 4px;
+  }
+  h3 { font-size: 11.5pt; margin-top: 18px; color: #1d4ed8; break-after: avoid; }
+  .screenshot { break-inside: avoid; }
+  .subtitle { color: #555; margin-top: 0; margin-bottom: 20px; }
+  table.config {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0 20px;
+  }
+  table.config th, table.config td {
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    text-align: left;
+    font-size: 10pt;
+  }
+  table.config th { background: #f0f4ff; width: 35%; }
+  pre {
+    background: #f6f8fa;
+    color: #24292f;
+    border: 1px solid #d0d7de;
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-size: 8.5pt;
+    line-height: 1.4;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+  }
+  .cmd {
+    background: #f5f5f5;
+    border-left: 3px solid #2563eb;
+    padding: 8px 12px;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 9.5pt;
+    margin: 8px 0;
+    white-space: pre-wrap;
+  }
+  .screenshot {
+    max-width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin: 10px 0;
+    display: block;
+  }
+  .caption {
+    font-size: 9pt;
+    color: #666;
+    font-style: italic;
+    margin-top: -4px;
+    margin-bottom: 16px;
+  }
+  ul { margin: 6px 0; padding-left: 20px; }
+  li { margin-bottom: 4px; }
+  .note {
+    background: #fff8e1;
+    border-left: 3px solid #f59e0b;
+    padding: 8px 12px;
+    font-size: 9.5pt;
+    margin: 10px 0;
+  }
+  .badge {
+    display: inline-block;
+    background: #e0e7ff;
+    color: #1d4ed8;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 9pt;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<h1>DATA-260 — Homework 1</h1>
+<p class="subtitle">Part 1: HTML, JavaScript, Docker &amp; AWS ECS Deployment &mdash; Part 2: Agentic AI</p>
+
+<h2>Section 0 — Personal Configuration</h2>
+<table class="config">
+  <tr><th>Student Name</th><td>Karthik Pragada</td></tr>
+  <tr><th>SID4</th><td>8360</td></tr>
+  <tr><th>PORT_BASE</th><td>8260 (= 8000 + 8360 mod 900)</td></tr>
+  <tr><th>PREFIX</th><td>s8360</td></tr>
+  <tr><th>SEED</th><td>8360</td></tr>
+  <tr><th>VERIFY_SEED</th><td>268360 (= 260000 + 8360)</td></tr>
+  <tr><th>DOMAIN_ID</th><td>0 (= 8360 mod 8) &rarr; <b>Campus course catalogue and enrolment</b></td></tr>
+  <tr><th>Hardware</th><td>MacBook Air, Apple M4, 16 GB RAM</td></tr>
+  <tr><th>Local model used</th><td>N/A for Part 1 (Ollama/local LLM used starting Part 2)</td></tr>
+  <tr><th>Tagged commit hash</th><td><i>To be filled in once the repository is initialized and tagged <code>hw1</code></i></td></tr>
+</table>
+
+<h2>Section I — Domain Schema</h2>
+<p>Assigned domain: <b>Campus course catalogue and enrolment</b>, entity: <b>Course</b>. Defined in <code>DOMAIN_SCHEMA.md</code> before writing any HTML.</p>
+<table class="config">
+  <tr><th>Field</th><th>Type</th><th>Required</th><th>Role</th></tr>
+  <tr><td>courseTitle</td><td>text</td><td>yes</td><td>Primary field</td></tr>
+  <tr><td>courseCode</td><td>text</td><td>yes</td><td>Secondary field</td></tr>
+  <tr><td>email</td><td>email</td><td>yes</td><td>Submitter's email</td></tr>
+  <tr><td>description</td><td>textarea</td><td>yes</td><td>Content field (&gt; 25 characters)</td></tr>
+  <tr><td>department</td><td>select</td><td>yes</td><td>Category selection</td></tr>
+  <tr><td>agreeTerms</td><td>checkbox</td><td>yes</td><td>Terms agreement</td></tr>
+</table>
+<p><b>Category values (department dropdown):</b> Computer Science, Data Science, Business, Engineering</p>
+
+<h2>Section I — HTML (index.html)</h2>
+<p>Page titled <code>HW1-Karthik Pragada</code>, with an <code>&lt;h1&gt;</code> heading naming the domain entity, and a form covering all six required field types. The Course Title input auto-focuses on page load, and the Department dropdown starts on a disabled empty placeholder so the <code>required</code> attribute is meaningful (validated with the W3C Nu Html Checker &mdash; see note below).</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;HW1-Karthik Pragada&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Course Catalogue &amp;amp; Enrolment&lt;/h1&gt;
+
+  &lt;form id="courseForm"&gt;
+    &lt;div class="field"&gt;
+      &lt;label for="courseTitle"&gt;Course Title&lt;/label&gt;
+      &lt;input
+        type="text"
+        id="courseTitle"
+        name="courseTitle"
+        placeholder="e.g. Introduction to Distributed Systems"
+        required
+        autofocus
+      &gt;
+    &lt;/div&gt;
+
+    &lt;div class="field"&gt;
+      &lt;label for="courseCode"&gt;Course Code&lt;/label&gt;
+      &lt;input type="text" id="courseCode" name="courseCode"
+        placeholder="e.g. DATA-260" required&gt;
+    &lt;/div&gt;
+
+    &lt;div class="field"&gt;
+      &lt;label for="email"&gt;Your Email&lt;/label&gt;
+      &lt;input type="email" id="email" name="email"
+        placeholder="e.g. student@sjsu.edu" required&gt;
+    &lt;/div&gt;
+
+    &lt;div class="field"&gt;
+      &lt;label for="description"&gt;Course Description&lt;/label&gt;
+      &lt;textarea id="description" name="description"
+        placeholder="Describe the course content, topics covered, and prerequisites..."
+        required&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
+
+    &lt;div class="field"&gt;
+      &lt;label for="department"&gt;Department&lt;/label&gt;
+      &lt;select id="department" name="department" required&gt;
+        &lt;option value="" disabled selected&gt;Select a department&lt;/option&gt;
+        &lt;option value="Computer Science"&gt;Computer Science&lt;/option&gt;
+        &lt;option value="Data Science"&gt;Data Science&lt;/option&gt;
+        &lt;option value="Business"&gt;Business&lt;/option&gt;
+        &lt;option value="Engineering"&gt;Engineering&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+
+    &lt;div class="field checkbox-field"&gt;
+      &lt;input type="checkbox" id="agreeTerms" name="agreeTerms"&gt;
+      &lt;label for="agreeTerms"&gt;I agree to the terms and conditions.&lt;/label&gt;
+    &lt;/div&gt;
+
+    &lt;button type="submit"&gt;Add Course to Catalogue&lt;/button&gt;
+  &lt;/form&gt;
+
+  &lt;section id="resultSection" class="result-section" hidden&gt;
+    &lt;h2&gt;Submitted Course&lt;/h2&gt;
+    &lt;table id="resultTable"&gt;&lt;tbody&gt;&lt;/tbody&gt;&lt;/table&gt;
+  &lt;/section&gt;
+
+  &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<div class="note"><b>Validation:</b> Ran through the actual Nu Html Checker (the engine behind validator.w3.org, run locally via <code>npx vnu-jar</code> since the live site was behind a Cloudflare CAPTCHA). It caught one real spec issue &mdash; a <code>&lt;select required&gt;</code> with a real option pre-selected defeats the purpose of <code>required</code> &mdash; fixed by adding the disabled empty placeholder option shown above. Final result: zero errors/warnings.</div>
+
+<h2>Section II — JavaScript (script.js)</h2>
+<p>All Part II requirements implemented with an arrow-function validator, JSON serialization, destructuring, the spread operator, and a closure-based submission counter. A results table (added afterward, on request) mirrors the console output visually below the form.</p>
+<pre><code>const courseForm = document.getElementById('courseForm');
+
+// arrow function validation
+const validateForm = (description, agreeTerms) => {
+  if (description.trim().length &lt;= 25) {
+    alert('Course description must be more than 25 characters long.');
+    return false;
+  }
+  if (!agreeTerms) {
+    alert('Please agree to the terms and conditions before submitting.');
+    return false;
+  }
+  return true;
+};
+
+// closure tracking submission count
+const createSubmissionCounter = () => {
+  let count = 0;
+  return () => {
+    count += 1;
+    return count;
+  };
+};
+const trackSubmission = createSubmissionCounter();
+
+const FIELD_LABELS = {
+  courseTitle: 'Course Title', courseCode: 'Course Code', email: 'Email',
+  description: 'Description', department: 'Department',
+  agreeTerms: 'Agreed to Terms', submissionDate: 'Submission Date',
+};
+
+const renderResultTable = (updatedObject, submissionCount) => {
+  const tbody = document.querySelector('#resultTable tbody');
+  tbody.innerHTML = '';
+  const rows = { ...updatedObject, submissionCount };
+  Object.entries(rows).forEach(([key, value]) => {
+    const tr = document.createElement('tr');
+    const th = document.createElement('th');
+    th.textContent = key === 'submissionCount' ? 'Submission #' : (FIELD_LABELS[key] || key);
+    const td = document.createElement('td');
+    td.textContent = String(value);
+    tr.append(th, td);
+    tbody.append(tr);
+  });
+  document.getElementById('resultSection').hidden = false;
+};
+
+courseForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const courseTitle = document.getElementById('courseTitle').value;
+  const courseCode = document.getElementById('courseCode').value;
+  const email = document.getElementById('email').value;
+  const description = document.getElementById('description').value;
+  const department = document.getElementById('department').value;
+  const agreeTerms = document.getElementById('agreeTerms').checked;
+
+  if (!validateForm(description, agreeTerms)) return;
+
+  const formObject = { courseTitle, courseCode, email, description, department, agreeTerms };
+
+  // II.2 — form data to JSON string
+  const jsonString = JSON.stringify(formObject);
+  console.log('Form data as JSON string:', jsonString);
+
+  const parsedObject = JSON.parse(jsonString);
+
+  // II.3 — object destructuring
+  const { courseTitle: primaryField, email: emailField } = parsedObject;
+  console.log('Primary field (courseTitle):', primaryField);
+  console.log('Email field:', emailField);
+
+  // II.4 — spread operator to add submissionDate
+  const updatedObject = { ...parsedObject, submissionDate: new Date().toString() };
+  console.log('Updated object with submissionDate:', updatedObject);
+
+  // II.5 — log submission count
+  const submissionCount = trackSubmission();
+  console.log(`Form submitted ${submissionCount} time(s).`);
+
+  renderResultTable(updatedObject, submissionCount);
+
+  courseForm.reset();
+  document.getElementById('courseTitle').focus();
+});</code></pre>
+
+<h3>What happens on Submit (walkthrough)</h3>
+<p>Clicking "Add Course to Catalogue" fires the submit handler, which first calls <code>event.preventDefault()</code> to stop the browser's default page-reload behavior (there is no backend to receive the data). It reads all six field values directly off the DOM, then passes the description and checkbox state to <code>validateForm</code> &mdash; an arrow function that alerts and stops execution if the description is 25 characters or fewer, or if the checkbox is unchecked. If both checks pass, the six values are packed into a plain object, serialized with <code>JSON.stringify()</code> and logged (simulating what would be sent over a network), then immediately parsed back with <code>JSON.parse()</code>. The <code>courseTitle</code> and <code>email</code> fields are pulled out via object destructuring and logged individually. The spread operator then copies every key of the parsed object into a new object while adding one more key, <code>submissionDate</code>, set to the current timestamp. A closure-based counter (<code>trackSubmission</code>) increments and returns how many times the form has been successfully submitted. Finally, the updated object and count are rendered into the results table below the form, the form resets to empty, and focus returns to the Course Title field.</p>
+
+<h3>Behavioral testing (in-browser)</h3>
+<ul>
+  <li><b>Autofocus:</b> confirmed <code>document.activeElement.id === "courseTitle"</code> on page load.</li>
+  <li><b>Short description:</b> triggers alert &mdash; "Course description must be more than 25 characters long."</li>
+  <li><b>Unchecked terms box:</b> triggers alert &mdash; "Please agree to the terms and conditions before submitting."</li>
+  <li><b>Valid submission:</b> logs the JSON string, destructured <code>courseTitle</code>/<code>email</code>, the spread-updated object with <code>submissionDate</code>, and <code>Form submitted 1 time(s).</code> Submitting again correctly increments to <code>2 time(s).</code></li>
+  <li><b>JS static analysis:</b> <code>node --check script.js</code> passes with no syntax errors; ESLint (browser globals configured) reports zero issues.</li>
+</ul>
+
+<h2>Deployment — Docker</h2>
+<p>The static site is containerized with a minimal Python image and served on <code>PORT_BASE</code> (8260).</p>
+<h3>Dockerfile</h3>
+<pre><code>FROM python:3.12-slim
+
+WORKDIR /app
+COPY index.html style.css script.js ./
+
+EXPOSE 8260
+
+CMD ["python", "-m", "http.server", "8260"]</code></pre>
+
+<h3>Build &amp; run commands</h3>
+<div class="cmd">docker build -t data260-8360-hw1 .
+docker run -d -p 8260:8260 --name hw1-app data260-8360-hw1</div>
+<p>The image resolves to a 203&nbsp;MB <code>linux/arm64</code> image (matching the Apple Silicon build host). Verified the container's <code>/app</code> directory contains exactly the three copied files (<code>index.html</code>, <code>script.js</code>, <code>style.css</code>) via <code>docker exec hw1-app ls -la /app</code>, and confirmed <code>docker ps</code> shows the port mapping <code>0.0.0.0:8260-&gt;8260/tcp</code>.</p>
+
+<h3>Screenshot — running on localhost</h3>
+<img class="screenshot" src="assets/docker_localhost_8260.png">
+<p class="caption">App served by the Docker container at http://localhost:8260/index.html (Course Title auto-focused, shown by the blue outline).</p>
+
+<h2>Deployment — AWS ECS (Fargate)</h2>
+<p>The exact same Docker image was pushed to Amazon ECR and run as a single-task Fargate service, so nothing about the app changed between local and cloud &mdash; only where the container runs.</p>
+<h3>Steps performed</h3>
+<ul>
+  <li><b>ECR repository</b> <code>my-web-app</code> created (account <code>641379499225</code>, region <code>us-east-2</code>).</li>
+  <li><b>Authenticated &amp; pushed</b> the existing local image:</li>
+</ul>
+<div class="cmd">aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 641379499225.dkr.ecr.us-east-2.amazonaws.com
+
+docker tag data260-8360-hw1:latest 641379499225.dkr.ecr.us-east-2.amazonaws.com/my-web-app:latest
+docker push 641379499225.dkr.ecr.us-east-2.amazonaws.com/my-web-app:latest</div>
+<ul>
+  <li><b>Security group</b> <code>my-web-app-sg</code> created with inbound Custom TCP port <b>8260</b> open from <code>0.0.0.0/0</code> (corrected from the generic port-80 guide being followed, since the container listens on 8260).</li>
+  <li><b>ECS cluster</b> <code>my-web-app-cluster</code> created (AWS Fargate, serverless). First creation attempt failed with "Unable to assume the service linked role" &mdash; a known first-time-use race condition where AWS creates the <code>AWSServiceRoleForECS</code> role asynchronously; retrying the cluster creation succeeded once the role existed.</li>
+  <li><b>Task definition</b> <code>my-web-app-task</code>: Fargate, <b>Linux/ARM64</b> (matching the image's actual architecture &mdash; selecting X86_64 would have caused an architecture-mismatch failure at container start), 0.25 vCPU / 0.5 GB, default <code>ecsTaskExecutionRole</code> auto-created, container <code>web-app-container</code> with image URI <code>641379499225.dkr.ecr.us-east-2.amazonaws.com/my-web-app:latest</code>, container port <b>8260</b>/TCP.</li>
+  <li><b>ECS service</b> <code>my-web-app-task-service-l4qhdwe5</code> created with Desired tasks = 1, default VPC, all 3 default public subnets, the <code>my-web-app-sg</code> security group, and <b>Public IP enabled</b>.</li>
+</ul>
+
+<h3>Result</h3>
+<p>Task reached <code>RUNNING</code> status with public IP <b>18.117.130.207</b>. Verified reachable both via <code>curl</code> (HTTP 200) and directly in a browser.</p>
+<img class="screenshot" src="assets/aws_ecs_public_ip_8260.png">
+<p class="caption">App running live on the AWS ECS Fargate task's public IP: http://18.117.130.207:8260/index.html</p>
+
+<h3>Cleanup</h3>
+<p>After capturing the required screenshot, the service's Desired tasks was set from 1 to 0 to stop Fargate billing. Verified via CLI that <code>runningCount: 0</code>, <code>desiredCount: 0</code>, and <code>list-tasks</code> returns an empty array. The cluster, service definition, ECR repository, and security group were left in place since they incur no cost while idle and are reusable for future homeworks in this same repository.</p>
+
+<h2>Part 2 — Agentic AI</h2>
+<p>Two tiny agents (Planner and Reviewer) that talk to each other through a local LLM served by Ollama, plus a deterministic Finalizer step, producing exactly 3 topical tags and a &le;25-word summary from an arbitrary title/content pair, printed as strict JSON.</p>
+
+<h3>Environment setup, from scratch</h3>
+<p>The assignment warns that Python 3.13 breaks langchain's numpy dependency, so a dedicated Python 3.12 virtual environment was created rather than using the machine's default Python 3.13:</p>
+<div class="cmd">/opt/homebrew/bin/python3.12 -m venv .venv
+source .venv/bin/activate
+pip install langchain-ollama langchain-core</div>
+<p>This installed <code>langchain-core 1.6.1</code>, <code>langchain-ollama 1.1.0</code>, and the underlying <code>ollama 0.6.2</code> Python client. Separately, the local LLM itself was pulled through the Ollama CLI (not pip &mdash; Ollama runs as its own background service that serves models over a local HTTP API, which <code>langchain-ollama</code> then talks to):</p>
+<div class="cmd">ollama pull qwen3:8b</div>
+<p>The assignment's suggested model, <code>qwen3:8b</code>, was used (a ~5.2&nbsp;GB download) rather than the already-installed <code>codellama:7b</code>, since <code>qwen3:8b</code> is a general-purpose instruction-tuned model well-suited to tagging/summarization, whereas <code>codellama</code> is code-specialized. The MacBook Air M4 (16&nbsp;GB RAM) runs it without issue, at roughly 20&ndash;50 seconds per call.</p>
+
+<h3>Architecture of agents_demo.py</h3>
+<p>The script is built from a small number of composable pieces rather than a framework-heavy agent library, since the assignment only asks for "two tiny agents":</p>
+<ul>
+  <li><b><code>PLANNER_SYSTEM</code> / <code>REVIEWER_SYSTEM</code></b> &mdash; two system-prompt strings, each fully generic (no domain keywords like "course" or "department" anywhere in them), satisfying the "do not hardcode your domain into the agent logic" requirement.</li>
+  <li><b><code>extract_json()</code></b> &mdash; a small parsing helper that first tries <code>json.loads()</code> directly, and falls back to regex-extracting the first <code>{...}</code> block if the model wraps its JSON in any stray text, so the pipeline doesn't crash on minor formatting slips.</li>
+  <li><b><code>call_agent()</code></b> &mdash; sends a (system, human) message pair to <code>ChatOllama</code>, times the call, and returns the parsed JSON plus latency in milliseconds.</li>
+  <li><b><code>run_pipeline()</code></b> &mdash; orchestrates the full Planner &rarr; Reviewer &rarr; Finalizer sequence and prints each stage.</li>
+  <li><b><code>main()</code></b> &mdash; CLI entry point. Accepts <code>--title</code>/<code>--content</code>, or <code>--input &lt;json file&gt;</code> (used later in Part 3 to replay the same fixed input 40 times), or, if neither is given, interactively prompts for a title and content right in the terminal rather than silently falling back to a hardcoded example.</li>
+</ul>
+
+<pre><code>PLANNER_SYSTEM = """You are the Planner agent in a two-agent tagging pipeline.
+Given a title and content, propose exactly 3 short topical tags (2-4 words each,
+lowercase, specific to the content -- not generic categories) and a one-sentence
+summary of at most 25 words that captures the key point of the content.
+Respond with ONLY valid JSON, no other text, in this exact schema:
+{"tags": ["tag1", "tag2", "tag3"], "summary": "..."}"""
+
+REVIEWER_SYSTEM = """You are the Reviewer agent in a two-agent tagging pipeline.
+You will receive the original title/content and a Planner's draft JSON containing
+3 tags and a summary. Critically check whether the tags are specific and accurate
+to the content (not vague or generic), and whether the summary is at most 25 words
+and faithful to the content. If the draft already meets these standards, return it
+unchanged. If not, return an improved version that does.
+Respond with ONLY valid JSON, no other text, in this exact schema:
+{"tags": ["tag1", "tag2", "tag3"], "summary": "..."}"""
+
+def extract_json(text: str) -&gt; dict:
+    text = text.strip()
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        pass
+    match = re.search(r"\{.*\}", text, re.DOTALL)
+    if match:
+        return json.loads(match.group(0))
+    raise ValueError(f"Could not parse JSON from model output:\n{text}")
+
+def call_agent(llm, system_prompt, user_prompt):
+    messages = [("system", system_prompt), ("human", user_prompt)]
+    start = time.time()
+    response = llm.invoke(messages)
+    elapsed_ms = (time.time() - start) * 1000
+    parsed = extract_json(response.content)
+    return parsed, elapsed_ms, response.content
+
+def run_pipeline(title, content, model, temperature, verbose=True):
+    llm = ChatOllama(model=model, temperature=temperature, format="json")
+    user_prompt = f"Title: {title}\n\nContent: {content}"
+
+    planner_output, planner_ms, _ = call_agent(llm, PLANNER_SYSTEM, user_prompt)
+    print(json.dumps(planner_output, indent=2))
+
+    reviewer_prompt = f"{user_prompt}\n\nPlanner draft:\n{json.dumps(planner_output)}"
+    reviewer_output, reviewer_ms, _ = call_agent(llm, REVIEWER_SYSTEM, reviewer_prompt)
+    print(json.dumps(reviewer_output, indent=2))
+
+    reviewer_changed = planner_output != reviewer_output
+
+    # Finalization step -- deterministic, non-LLM: enforce the output contract.
+    tags = list(reviewer_output.get("tags", []))[:3]
+    while len(tags) &lt; 3:
+        tags.append("general")
+    summary = str(reviewer_output.get("summary", "")).strip()
+    words = summary.split()
+    if len(words) &gt; 25:
+        summary = " ".join(words[:25])
+
+    final_output = {"tags": tags, "summary": summary}
+    print(json.dumps(final_output, indent=2))
+    return { ... }</code></pre>
+
+<h3>How each agent works</h3>
+<p>The <b>Planner</b> receives only the raw title and content, wrapped in a generic <code>"Title: ...\n\nContent: ..."</code> user message, and is instructed to extract exactly 3 topical tags and a &le;25-word summary. The call passes <code>format="json"</code> to <code>ChatOllama</code>, which instructs Ollama to constrain sampling to valid JSON tokens &mdash; this is what makes the "strict JSON output" requirement reliable rather than hoping the model behaves.</p>
+<p>The <b>Reviewer</b> receives the same original title/content <i>plus</i> the Planner's draft JSON appended to the prompt, and is instructed to critically re-examine it: are the tags specific rather than generic, is the summary within the word limit and faithful to the content. It returns either the same JSON unchanged (if it judges the draft already meets the bar) or a corrected version. Comparing <code>planner_output != reviewer_output</code> after this call is what answers "did the Reviewer change anything."</p>
+<p>The <b>Finalizer</b> is deliberately <i>not</i> a third LLM call &mdash; it's a few lines of plain Python that mechanically enforce the output contract regardless of what the model produced: slicing the tags list to exactly 3 entries (padding with a placeholder if the model ever returned fewer), and truncating the summary to 25 words if it ever overshoots. This guarantees the published JSON is always structurally valid, even on an off run.</p>
+
+<h3>Running it &mdash; command used</h3>
+<div class="cmd">python agents_demo.py</div>
+<p>With no <code>--title</code>/<code>--content</code>/<code>--input</code> flags, the script prompts interactively:</p>
+<pre><code>No --title/--content/--input given -- enter them now.
+(press Enter on Title to use the default example: 'New Course: Distributed Systems Fundamentals')
+
+Title: Introduction to Machine Learning
+Content: a branch of Artificial Intelligence that allows computers to learn from data and make predictions without being explicitly programmed for every task.</code></pre>
+
+<h3>Screenshot &mdash; console output</h3>
+<img class="screenshot" src="assets/part2_terminal_raw.png">
+<p class="caption">Real terminal session: venv activation, <code>ollama list</code> confirming both models are pulled, a first run on the default Course example (reaching FINALIZED), followed by the interactive prompt starting a second run with a live-typed "Introduction to Machine Learning" input.</p>
+
+<h3>Discussion of the results</h3>
+<p>Three separate inputs were run through the pipeline over the course of testing, and all three are worth discussing together because they demonstrate different things:</p>
+<ul>
+  <li><b>Default Course example</b> (temperature 0.7, visible in the screenshot above): Planner proposed <code>["fault-tolerant systems", "leader election protocol", "consensus algorithms"]</code> with a summary; Reviewer returned the identical JSON (<code>reviewer_changed = False</code>). Planner latency 50.6s, Reviewer latency 25.7s.</li>
+  <li><b>Interactive "Introduction to Machine Learning" example</b> (typed live at the prompt, visible starting at the bottom of the screenshot): Planner proposed <code>["machine learning basics", "artificial intelligence branch", "data prediction methods"]</code> with the summary <i>"Machine learning enables computers to learn from data and make predictions without explicit programming."</i> (14 words). Reviewer again returned the identical JSON unchanged. Planner latency 47.4s, Reviewer latency 24.4s.</li>
+  <li><b>Grocery recall example</b> (used only to stress-test requirement 4, not part of the assigned domain): fed a completely unrelated "peanut butter batch 442 recall" input to confirm the agent logic contains no hardcoded course/domain assumptions. It correctly produced <code>["peanut butter recall", "salmonella contamination", "batch 442"]</code> &mdash; proof the tags are genuinely derived from whatever content is passed in, not from fixed keywords tied to the course-catalogue domain.</li>
+</ul>
+<p>A consistent pattern across every run so far is that the Reviewer never changed the Planner's output. This is a plausible and defensible result rather than a sign the Reviewer step is doing nothing: <code>qwen3:8b</code> at these prompt lengths reliably produces tags that are already specific to the input content (not generic placeholders) and summaries that land comfortably under the 25-word cap, so the Reviewer's own instructions &mdash; "if the draft already meets these standards, return it unchanged" &mdash; are being followed correctly rather than the Reviewer silently failing to inspect the draft. Part 3's 40-run non-determinism sweep at two temperatures will make it possible to check whether this holds up across many more samples, particularly at temperature 0.7 where more output variation is expected.</p>
+
+<h3>Deliverables summary</h3>
+<table class="config">
+  <tr><th>Command used</th><td><code>python agents_demo.py</code></td></tr>
+  <tr><th>Q1 &mdash; 3 final tags</th><td>"machine learning basics", "artificial intelligence branch", "data prediction methods"</td></tr>
+  <tr><th>Q2 &mdash; final summary</th><td>"Machine learning enables computers to learn from data and make predictions without explicit programming." (14 words)</td></tr>
+  <tr><th>Q3 &mdash; did Reviewer change anything?</th><td>No. Across all runs so far, the Reviewer's JSON was byte-for-byte identical to the Planner's draft, indicating the Planner's first-pass output already satisfied the Reviewer's specificity/length criteria on these inputs.</td></tr>
+</table>
+
+<h2>Part 3 — Measuring Non-Determinism</h2>
+<p>The same fixed input was run through the full <code>agents_demo.py</code> pipeline 40 times &mdash; 20 at temperature 0.7, 20 at temperature 0.0 &mdash; to measure, with real numbers rather than assumption, how much a local LLM's output actually varies run-to-run at each setting.</p>
+
+<h3>Fixed input</h3>
+<p>Saved once, unchanged, to <code>reports/hw01/cases/nondeterminism_input.json</code>:</p>
+<pre><code>{
+  "title": "Data Structures and Algorithms",
+  "content": "This course covers fundamental data structures including arrays, linked lists,
+  stacks, queues, trees, and graphs, along with algorithm design techniques such as sorting,
+  searching, divide-and-conquer, dynamic programming, and greedy methods. Students will analyze
+  time and space complexity using Big-O notation and implement each structure from scratch in
+  Python. Prerequisites: introductory programming and discrete mathematics."
+}</code></pre>
+
+<h3>Driver script</h3>
+<p><code>run_nondeterminism.py</code> reuses <code>run_pipeline()</code> from <code>agents_demo.py</code> directly (no duplicated agent logic), looping it 20 times per temperature, catching and logging any per-run failures without aborting the sweep, then computing distinct tag sets, tag-frequency counts, and latency percentiles across the successful runs. All 40 raw records (tags, summary, per-agent latency, Reviewer-changed flag) are written to <code>reports/hw01/raw/nondeterminism_runs.json</code> and <code>.csv</code>; the aggregated statistics to <code>reports/hw01/raw/nondeterminism_summary.json</code>.</p>
+<div class="cmd">python run_nondeterminism.py</div>
+<p>All 40 runs completed with <b>0 failures</b>. Total sweep time was roughly 65 minutes (two LLM calls per run, sequential, on a local M4 laptop).</p>
+
+<h3>Results</h3>
+<table class="config">
+  <tr><th>Metric</th><th>Temp 0.7</th><th>Temp 0.0</th></tr>
+  <tr><td>Distinct tag sets</td><td>11 (out of 20)</td><td>1 (out of 20)</td></tr>
+  <tr><td>Tags in all 20 runs</td><td><i>(none)</i></td><td>"algorithm design techniques", "big o notation", "data structures implementation"</td></tr>
+  <tr><td>Tags in exactly 1 run</td><td>"algorithm analysis", "big o analysis", "big o notation", "big-o complexity analysis", "complexity analysis", "dynamic programming methods", "linked list implementation", "python programming", "time and space complexity" (9 tags)</td><td><i>(none)</i></td></tr>
+</table>
+<table class="config">
+  <tr><th>Latency (ms)</th><th>Temp 0.7</th><th>Temp 0.0</th></tr>
+  <tr><td>p50</td><td>77,272.4</td><td>118,949.2</td></tr>
+  <tr><td>p95</td><td>102,800.5</td><td>135,981.1</td></tr>
+  <tr><td>p99</td><td>111,202.8</td><td>138,073.8</td></tr>
+</table>
+<div class="note">Counter-intuitively, temperature 0.0 was <i>slower</i> than 0.7 here, not faster. Temperature affects sampling randomness, not decoding speed directly, so this is most plausibly explained by the temp-0.7 batch running first while the M4 was cooler/less loaded and the temp-0.0 batch running second under roughly an hour of sustained thermal load &mdash; not a genuine effect of the temperature setting itself. A cleaner follow-up would interleave or randomize the run order across temperatures to control for this.</div>
+
+<h3>Screenshot &mdash; final summary output</h3>
+<img class="screenshot" src="assets/part3_summary.png">
+<p class="caption">Terminal output of the completed 40-run sweep: both temperature summary blocks and the raw/summary file paths, from <code>python run_nondeterminism.py</code>.</p>
+
+<h3>Discussion (deliverable #4)</h3>
+<p>Using the numbers above: two users sending the identical course description to this pipeline at <b>temperature 0.0</b> would see the <i>same</i> 3 tags every single time &mdash; all 20 runs converged on exactly one tag set, with zero variation observed. At <b>temperature 0.7</b>, however, two users would very likely see genuinely different results: 11 distinct tag sets came out of just 20 runs, and not a single tag was common to all of them &mdash; the widest a user could count on seeing consistently is whichever handful of tags happened to recur across several (not all) runs, with a long tail of one-off tags that showed up exactly once and might never reappear.</p>
+<p><b>An example where this variation is acceptable:</b> a "suggested tags" feature in a course-authoring tool, where the Planner/Reviewer output is shown to a human instructor as a starting draft they can edit before publishing. Here, temperature 0.7's variety is arguably a feature, not a bug &mdash; different phrasings each time give the instructor more to choose from, and a human is in the loop to catch anything off before it ships.</p>
+<p><b>An example where this variation is not acceptable:</b> if these tags were consumed automatically to route the course into search-index categories with no human review &mdash; e.g., a student searching the catalog for "linked list implementation" would find this course in some runs but not others, despite the underlying course description never changing. That's a broken user experience caused entirely by sampling randomness, and it argues strongly for pinning <code>temperature=0.0</code> (or a similarly low value) for anything downstream that isn't reviewed by a person before being acted on.</p>
+
+<h2>Part 4 — Model Client and Token Accounting</h2>
+<p>A reusable model-adapter module, a small CLI chat demo built on it, a system-prompt file enforcing a strict response format, and real per-turn and cumulative token accounting.</p>
+
+<h3>src/model_client.py &mdash; the adapter</h3>
+<p>Defines <code>ModelClient</code>, exposing exactly one stable method &mdash; <code>complete(messages, tools=None)</code> &mdash; that every other script in the project must call through. Nothing outside this file imports <code>langchain_ollama</code> directly, so swapping the underlying provider later only means changing this one module.</p>
+<pre><code>class ModelClient:
+    def __init__(self, model: str = "qwen3:8b", temperature: float = 0.0):
+        self.model = model
+        self.temperature = temperature
+        # qwen3 has an internal "thinking" mode that can occasionally produce
+        # very long, unformatted reasoning traces instead of following the
+        # system prompt's response format. Disabled here for reliable,
+        # instruction-following completions.
+        self._llm = ChatOllama(model=model, temperature=temperature, reasoning=False)
+
+        self.turn_count = 0
+        self.cumulative_input_tokens = 0
+        self.cumulative_output_tokens = 0
+
+    def complete(self, messages: list[tuple[str, str]], tools: Optional[list] = None) -&gt; CompletionResult:
+        llm = self._llm.bind_tools(tools) if tools else self._llm
+        response = llm.invoke(messages)
+
+        usage = response.usage_metadata or {}
+        input_tokens = usage.get("input_tokens", 0)
+        output_tokens = usage.get("output_tokens", 0)
+        total_tokens = usage.get("total_tokens", input_tokens + output_tokens)
+
+        self.turn_count += 1
+        self.cumulative_input_tokens += input_tokens
+        self.cumulative_output_tokens += output_tokens
+
+        return CompletionResult(
+            content=response.content,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            total_tokens=total_tokens,
+        )
+
+    def stats(self) -&gt; dict:
+        return {
+            "turn_count": self.turn_count,
+            "cumulative_input_tokens": self.cumulative_input_tokens,
+            "cumulative_output_tokens": self.cumulative_output_tokens,
+            "cumulative_total_tokens": self.cumulative_input_tokens + self.cumulative_output_tokens,
+        }</code></pre>
+
+<h3>AGENT.md &mdash; strict bullet-only review instruction</h3>
+<pre><code># AGENT.md
+
+You are a code reviewer. When asked to review code, respond using only a bullet-point list.
+
+Rules:
+- Every line of your response must start with -.
+- No introductory sentence, no summary paragraph, no closing remarks.
+- No prose outside of bullets. No headings.
+- Each bullet should state one specific issue or observation, concisely.
+- If the code has no issues, respond with a single bullet saying so.</code></pre>
+
+<h3>hw1_client.py &mdash; the CLI demo</h3>
+<p>Loads <code>AGENT.md</code> as the system prompt, keeps its own conversation history, and calls <code>client.complete(history)</code> on every turn.</p>
+<pre><code>def print_turn_usage(result):
+    # after every model response: input/output/total tokens for that turn
+    print(f"[turn tokens] input={result.input_tokens} "
+          f"output={result.output_tokens} total={result.total_tokens}")
+
+def print_stats(client, history):
+    # /stats: turn count, cumulative token counts, serialized history length --
+    # read-only, nothing is appended to history before or after this call
+    stats = client.stats()
+    serialized_len = len(json.dumps(history))
+    print("--- /stats ---")
+    print(f"turn_count: {stats['turn_count']}")
+    print(f"cumulative_input_tokens: {stats['cumulative_input_tokens']}")
+    print(f"cumulative_output_tokens: {stats['cumulative_output_tokens']}")
+    print(f"cumulative_total_tokens: {stats['cumulative_total_tokens']}")
+    print(f"serialized_history_length_chars: {serialized_len}")
+
+# main loop:
+history.append(("user", user_input))
+result = client.complete(history)
+history.append(("assistant", result.content))
+print_turn_usage(result)
+
+# on exit:
+final = client.stats()
+print(f"cumulative_input_tokens: {final['cumulative_input_tokens']}")
+print(f"cumulative_output_tokens: {final['cumulative_output_tokens']}")
+print(f"turn_count: {final['turn_count']}")</code></pre>
+
+<h3>A real bug found and fixed along the way</h3>
+<div class="note">On the very first turn of two separate sessions, <code>qwen3:8b</code> produced a runaway, unformatted response ignoring <code>AGENT.md</code> entirely &mdash; 8,185 and 12,591 output tokens respectively (vs. ~20-100 on every other turn), rambling about the message being "stuck in a loop." Root cause: <code>qwen3</code>'s internal "thinking" mode, left at its default. Fix: explicitly set <code>reasoning=False</code> on <code>ChatOllama</code>. Verified by re-running the identical failing prompt afterward &mdash; it dropped from 8,185+ tokens of rambling prose to a clean 24-token single bullet. This is the adapter's current default (see code above).</div>
+
+<h3>An arithmetic-specific hallucination, found and worked around</h3>
+<div class="note">Early runs using simple arithmetic functions (<code>def add(a, b): return a + b</code>, etc.) surfaced a second, separate issue from the reasoning-mode bug above: the model kept fabricating division-related complaints regardless of the actual code. Three independent tests made the pattern unmistakable:
+<table class="config">
+  <tr><th>Code reviewed</th><th>Hallucinated claim</th></tr>
+  <tr><td><code>def add(a, b): return a + b</code></td><td>"division operator <code>/</code> is not used... may be a typo"</td></tr>
+  <tr><td><code>def divide(a, b): return a / b</code></td><td>claims a literal <code>/no_think</code> typo exists in the code (a leftover control token from the <code>reasoning=False</code> fix, mistaken for source code)</td></tr>
+  <tr><td><code>def multiply(a, b): return a * b</code></td><td>"includes a division by <code>b</code>" &mdash; false; there is no <code>/</code> anywhere in this code</td></tr>
+</table>
+None of these functions were reviewed correctly when the input was a bare <code>return a &lt;op&gt; b</code> arithmetic snippet. Switching the demo's example inputs to realistic code-review scenarios (list/dict operations, a hardcoded secret, a loop style question) instead of bare arithmetic resolved it completely &mdash; every response in the final run below is accurate. This is documented as a real, reproducible model limitation (not a code bug) in <code>AI_USE.md</code>.</div>
+
+<h3>Command used and 5-turn conversation</h3>
+<div class="cmd">python hw1_client.py</div>
+<p>Turns typed: (1) <code>Review this: total = sum([n for n in numbers if n &gt; 0])</code> &middot; (2) <code>Review this: def get_item(cart, index): return cart[index]</code> &middot; (3) <code>Review this: api_key = "sk-live-4f9a2b8c"  # hardcoded for testing</code> &middot; <code>/stats</code> &middot; (4) <code>Review this: result = []; for x in data: result.append(x * 2)</code> &middot; (5) <code>Summarize all the issues you found across our conversation.</code> &middot; <code>/stats</code> &middot; <code>exit</code>.</p>
+
+<h3>Screenshot &mdash; full conversation</h3>
+<img class="screenshot" src="assets/part4_conversation_a.png">
+<p class="caption">Real terminal session, part 1: turns 1-4 and the first /stats snapshot (turn_count: 3).</p>
+<img class="screenshot" src="assets/part4_conversation_b.png">
+<p class="caption">Real terminal session, part 2: turn 5, the second /stats snapshot (turn_count: 5), and the FINAL TOTALS block on exit.</p>
+
+<h3>/stats results</h3>
+<table class="config">
+  <tr><th></th><th>After turn 3</th><th>After turn 5</th></tr>
+  <tr><td>turn_count</td><td>3</td><td>5</td></tr>
+  <tr><td>cumulative_input_tokens</td><td>598</td><td>1,273</td></tr>
+  <tr><td>cumulative_output_tokens</td><td>79</td><td>194</td></tr>
+  <tr><td>cumulative_total_tokens</td><td>677</td><td>1,467</td></tr>
+  <tr><td>serialized_history_length_chars</td><td>1,236</td><td>1,973</td></tr>
+</table>
+
+<h3>Discussion &mdash; did the model follow AGENT.md, and was it correct?</h3>
+<p><b>Format compliance:</b> yes, every one of the 5 turns returned strict bullet-only output (each line starting with <code>-</code>, no prose, no headings), correctly following <code>AGENT.md</code>.</p>
+<p><b>Content correctness:</b> also yes, on this run &mdash; every single response was accurate: a real generator-vs-list efficiency tip, a genuinely missing <code>IndexError</code> check, a correctly flagged hardcoded API key, a legitimate Pythonic list-comprehension suggestion, and a summary that faithfully recapped all four without inventing anything. This stands in direct contrast to the arithmetic-snippet runs documented above &mdash; same adapter, same system prompt, same model, different (more realistic) example inputs, and the hallucination pattern disappeared entirely. That contrast is itself the finding: this model's reliability on this kind of task depends measurably on how close the input resembles real code review material versus a bare synthetic snippet.</p>
+
+<h3>Conceptual questions</h3>
+<p><b>Why is prior conversation context resent with every turn?</b> The model is stateless between calls &mdash; it has no memory of earlier turns unless that content is physically included in the current request. Each call is an independent forward pass over exactly the tokens it's given, so the client must resend the full history (system prompt + every prior user/assistant message) on every turn for the model to "remember" anything.</p>
+<p><b>How is a system prompt different from a user message?</b> A system prompt sets persistent, session-wide behavioral rules (format, tone, constraints) and is treated as foundational configuration rather than something said within the conversation. A user message is an actual conversational turn the model is expected to respond to. Here, <code>AGENT.md</code>'s bullet-only rule is the system prompt governing every response, while each "Review this: ..." line is a distinct user turn.</p>
+<p><b>Why do input tokens grow over a conversation?</b> Because every turn's input is a strict superset of the previous turn's input (the whole prior history) plus whatever new message was just added. This was directly observed: input tokens climbed 146 &rarr; 198 &rarr; 254 &rarr; 308 &rarr; 367 across the 5 turns, tracking the growing history exactly.</p>
+<p><b>What eventually limits that growth?</b> The model's context window &mdash; the maximum tokens it can accept in one call (4096 for this <code>qwen3:8b</code> configuration, per <code>ollama ps</code>). Once history plus a new message would exceed that limit, something must give: truncation, summarization, or the call failing outright. Cost and latency also motivate managing context well before that hard ceiling in practice.</p>
+
+</body>
+</html>

@@ -1,0 +1,602 @@
+[
+  {
+    "run_index": 1,
+    "temperature": 0.7,
+    "tags": [
+      "data structure implementation",
+      "algorithm design techniques",
+      "python implementation"
+    ],
+    "summary": "Course covers data structures, algorithm techniques, and Python implementation with Big-O analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 35538.1,
+    "reviewer_latency_ms": 34275.1,
+    "total_latency_ms": 69813.3,
+    "error": null
+  },
+  {
+    "run_index": 2,
+    "temperature": 0.7,
+    "tags": [
+      "data structures fundamentals",
+      "algorithm design techniques",
+      "python implementation"
+    ],
+    "summary": "This course teaches data structures and algorithms, focusing on implementation in Python and complexity analysis using Big-O notation.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 19245.6,
+    "reviewer_latency_ms": 30375.3,
+    "total_latency_ms": 49620.9,
+    "error": null
+  },
+  {
+    "run_index": 3,
+    "temperature": 0.7,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o complexity analysis"
+    ],
+    "summary": "Course covers data structures and algorithms, their implementation in Python, and complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 57082.7,
+    "reviewer_latency_ms": 24479.4,
+    "total_latency_ms": 81562.1,
+    "error": null
+  },
+  {
+    "run_index": 4,
+    "temperature": 0.7,
+    "tags": [
+      "data structure implementation",
+      "algorithm design techniques",
+      "time and space complexity"
+    ],
+    "summary": "This course teaches data structures and algorithms, focusing on Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": true,
+    "planner_latency_ms": 68194.6,
+    "reviewer_latency_ms": 45108.8,
+    "total_latency_ms": 113303.4,
+    "error": null
+  },
+  {
+    "run_index": 5,
+    "temperature": 0.7,
+    "tags": [
+      "data structure implementation",
+      "algorithm design techniques",
+      "time complexity analysis"
+    ],
+    "summary": "This course covers data structures and algorithms, including implementation in Python and analysis of time complexity.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 20371.9,
+    "reviewer_latency_ms": 25881.1,
+    "total_latency_ms": 46253.0,
+    "error": null
+  },
+  {
+    "run_index": 6,
+    "temperature": 0.7,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o complexity analysis"
+    ],
+    "summary": "This course covers data structures, algorithm design, and complexity analysis with Python implementation.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 56348.9,
+    "reviewer_latency_ms": 20459.5,
+    "total_latency_ms": 76808.4,
+    "error": null
+  },
+  {
+    "run_index": 7,
+    "temperature": 0.7,
+    "tags": [
+      "data structure implementation",
+      "algorithm design techniques",
+      "time complexity analysis"
+    ],
+    "summary": "This course teaches data structures and algorithms, focusing on implementation in Python and complexity analysis using Big-O notation.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 27304.5,
+    "reviewer_latency_ms": 32839.4,
+    "total_latency_ms": 60143.9,
+    "error": null
+  },
+  {
+    "run_index": 8,
+    "temperature": 0.7,
+    "tags": [
+      "linked list implementation",
+      "dynamic programming methods",
+      "big-o complexity analysis"
+    ],
+    "summary": "This course teaches data structures and algorithms, focusing on Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": true,
+    "planner_latency_ms": 40718.0,
+    "reviewer_latency_ms": 36351.9,
+    "total_latency_ms": 77070.0,
+    "error": null
+  },
+  {
+    "run_index": 9,
+    "temperature": 0.7,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "time complexity analysis"
+    ],
+    "summary": "This course teaches data structures and algorithms, focusing on implementation in Python and complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 61312.4,
+    "reviewer_latency_ms": 38277.3,
+    "total_latency_ms": 99589.6,
+    "error": null
+  },
+  {
+    "run_index": 10,
+    "temperature": 0.7,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "time complexity analysis"
+    ],
+    "summary": "This course teaches data structures and algorithms, focusing on Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": true,
+    "planner_latency_ms": 24894.8,
+    "reviewer_latency_ms": 35920.5,
+    "total_latency_ms": 60815.3,
+    "error": null
+  },
+  {
+    "run_index": 11,
+    "temperature": 0.7,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "Course covers data structures, algorithm design techniques, and Big-O complexity analysis with Python implementation.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 43491.4,
+    "reviewer_latency_ms": 38146.2,
+    "total_latency_ms": 81637.5,
+    "error": null
+  },
+  {
+    "run_index": 12,
+    "temperature": 0.7,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "time complexity analysis"
+    ],
+    "summary": "Course covers data structures and algorithms, including Python implementation, time and space complexity analysis using Big-O notation.",
+    "reviewer_changed": true,
+    "planner_latency_ms": 57881.7,
+    "reviewer_latency_ms": 35773.9,
+    "total_latency_ms": 93655.6,
+    "error": null
+  },
+  {
+    "run_index": 13,
+    "temperature": 0.7,
+    "tags": [
+      "data structures implementation",
+      "algorithm analysis",
+      "python programming"
+    ],
+    "summary": "This course covers data structures and algorithms, focusing on Python implementation and complexity analysis.",
+    "reviewer_changed": true,
+    "planner_latency_ms": 45204.6,
+    "reviewer_latency_ms": 38904.3,
+    "total_latency_ms": 84108.9,
+    "error": null
+  },
+  {
+    "run_index": 14,
+    "temperature": 0.7,
+    "tags": [
+      "data structures fundamentals",
+      "algorithm design techniques",
+      "python implementation"
+    ],
+    "summary": "This course teaches data structures and algorithms, including implementation in Python and complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 48719.4,
+    "reviewer_latency_ms": 40809.2,
+    "total_latency_ms": 89528.5,
+    "error": null
+  },
+  {
+    "run_index": 15,
+    "temperature": 0.7,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "time complexity analysis"
+    ],
+    "summary": "This course teaches data structures and algorithms, focusing on implementation and complexity analysis using Python.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 26868.3,
+    "reviewer_latency_ms": 27477.3,
+    "total_latency_ms": 54345.6,
+    "error": null
+  },
+  {
+    "run_index": 16,
+    "temperature": 0.7,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "time complexity analysis"
+    ],
+    "summary": "Course covers data structures and algorithms with Python implementation and complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 53763.7,
+    "reviewer_latency_ms": 21655.7,
+    "total_latency_ms": 75419.4,
+    "error": null
+  },
+  {
+    "run_index": 17,
+    "temperature": 0.7,
+    "tags": [
+      "data structure implementation",
+      "algorithm design techniques",
+      "big o analysis"
+    ],
+    "summary": "This course teaches data structures and algorithms, focusing on implementation in Python and complexity analysis using Big-O notation.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 47734.7,
+    "reviewer_latency_ms": 26392.3,
+    "total_latency_ms": 74127.0,
+    "error": null
+  },
+  {
+    "run_index": 18,
+    "temperature": 0.7,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o complexity analysis"
+    ],
+    "summary": "course covers data structures and algorithms, implementation in Python, and complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 72632.8,
+    "reviewer_latency_ms": 20089.9,
+    "total_latency_ms": 92722.8,
+    "error": null
+  },
+  {
+    "run_index": 19,
+    "temperature": 0.7,
+    "tags": [
+      "data structure implementation",
+      "algorithm design techniques",
+      "complexity analysis"
+    ],
+    "summary": "Course covers data structures and algorithms, their Python implementation, and time/space complexity analysis using Big-O notation.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 55604.6,
+    "reviewer_latency_ms": 21870.2,
+    "total_latency_ms": 77474.8,
+    "error": null
+  },
+  {
+    "run_index": 20,
+    "temperature": 0.7,
+    "tags": [
+      "data structures fundamentals",
+      "algorithm design techniques",
+      "python implementation"
+    ],
+    "summary": "This course teaches data structures and algorithms, focusing on Python implementation and complexity analysis.",
+    "reviewer_changed": true,
+    "planner_latency_ms": 46643.9,
+    "reviewer_latency_ms": 55603.7,
+    "total_latency_ms": 102247.7,
+    "error": null
+  },
+  {
+    "run_index": 1,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 88860.6,
+    "reviewer_latency_ms": 33331.0,
+    "total_latency_ms": 122191.6,
+    "error": null
+  },
+  {
+    "run_index": 2,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 87662.0,
+    "reviewer_latency_ms": 29756.3,
+    "total_latency_ms": 117418.3,
+    "error": null
+  },
+  {
+    "run_index": 3,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 84983.8,
+    "reviewer_latency_ms": 30471.6,
+    "total_latency_ms": 115455.4,
+    "error": null
+  },
+  {
+    "run_index": 4,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 86319.5,
+    "reviewer_latency_ms": 28704.0,
+    "total_latency_ms": 115023.5,
+    "error": null
+  },
+  {
+    "run_index": 5,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 92328.2,
+    "reviewer_latency_ms": 31247.3,
+    "total_latency_ms": 123575.4,
+    "error": null
+  },
+  {
+    "run_index": 6,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 88284.6,
+    "reviewer_latency_ms": 30632.1,
+    "total_latency_ms": 118916.7,
+    "error": null
+  },
+  {
+    "run_index": 7,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 87746.9,
+    "reviewer_latency_ms": 30353.7,
+    "total_latency_ms": 118100.7,
+    "error": null
+  },
+  {
+    "run_index": 8,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 88640.8,
+    "reviewer_latency_ms": 30341.0,
+    "total_latency_ms": 118981.8,
+    "error": null
+  },
+  {
+    "run_index": 9,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 94788.6,
+    "reviewer_latency_ms": 36403.2,
+    "total_latency_ms": 131191.8,
+    "error": null
+  },
+  {
+    "run_index": 10,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 96038.2,
+    "reviewer_latency_ms": 32226.5,
+    "total_latency_ms": 128264.8,
+    "error": null
+  },
+  {
+    "run_index": 11,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 88027.5,
+    "reviewer_latency_ms": 30267.8,
+    "total_latency_ms": 118295.2,
+    "error": null
+  },
+  {
+    "run_index": 12,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 84525.1,
+    "reviewer_latency_ms": 29414.9,
+    "total_latency_ms": 113940.1,
+    "error": null
+  },
+  {
+    "run_index": 13,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 85106.0,
+    "reviewer_latency_ms": 29486.4,
+    "total_latency_ms": 114592.4,
+    "error": null
+  },
+  {
+    "run_index": 14,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 86272.4,
+    "reviewer_latency_ms": 29545.0,
+    "total_latency_ms": 115817.5,
+    "error": null
+  },
+  {
+    "run_index": 15,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 87110.3,
+    "reviewer_latency_ms": 31025.5,
+    "total_latency_ms": 118135.8,
+    "error": null
+  },
+  {
+    "run_index": 16,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 101974.4,
+    "reviewer_latency_ms": 33869.0,
+    "total_latency_ms": 135843.4,
+    "error": null
+  },
+  {
+    "run_index": 17,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 93012.1,
+    "reviewer_latency_ms": 30075.0,
+    "total_latency_ms": 123087.0,
+    "error": null
+  },
+  {
+    "run_index": 18,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 99390.7,
+    "reviewer_latency_ms": 32484.4,
+    "total_latency_ms": 131875.1,
+    "error": null
+  },
+  {
+    "run_index": 19,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 99708.8,
+    "reviewer_latency_ms": 38888.1,
+    "total_latency_ms": 138597.0,
+    "error": null
+  },
+  {
+    "run_index": 20,
+    "temperature": 0.0,
+    "tags": [
+      "data structures implementation",
+      "algorithm design techniques",
+      "big o notation"
+    ],
+    "summary": "This course covers data structures and algorithms, including Python implementation and Big-O complexity analysis.",
+    "reviewer_changed": false,
+    "planner_latency_ms": 97590.6,
+    "reviewer_latency_ms": 35384.6,
+    "total_latency_ms": 132975.3,
+    "error": null
+  }
+]

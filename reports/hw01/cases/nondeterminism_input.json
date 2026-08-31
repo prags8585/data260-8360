@@ -1,0 +1,4 @@
+{
+  "title": "Data Structures and Algorithms",
+  "content": "This course covers fundamental data structures including arrays, linked lists, stacks, queues, trees, and graphs, along with algorithm design techniques such as sorting, searching, divide-and-conquer, dynamic programming, and greedy methods. Students will analyze time and space complexity using Big-O notation and implement each structure from scratch in Python. Prerequisites: introductory programming and discrete mathematics."
+}

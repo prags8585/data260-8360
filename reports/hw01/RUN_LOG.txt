@@ -1,0 +1,69 @@
+=== 2026-08-28 00:09:05 PDT ===
+$ python agents_demo.py
+======================================================================
+PLANNER
+======================================================================
+{
+  "tags": [
+    "distributed systems design",
+    "consensus algorithms",
+    "fault tolerant key-value store"
+  ],
+  "summary": "Course on distributed systems design focusing on consensus algorithms, fault tolerance, and key-value store implementation."
+}
+(latency: 41069 ms)
+
+======================================================================
+REVIEWER
+======================================================================
+{
+  "tags": [
+    "distributed systems design",
+    "consensus algorithms",
+    "fault tolerant key-value store"
+  ],
+  "summary": "Course on distributed systems design focusing on consensus algorithms, fault tolerance, and key-value store implementation."
+}
+(latency: 41618 ms)
+
+======================================================================
+FINALIZED (Publish)
+======================================================================
+{
+  "tags": [
+    "distributed systems design",
+    "consensus algorithms",
+    "fault tolerant key-value store"
+  ],
+  "summary": "Course on distributed systems design focusing on consensus algorithms, fault tolerance, and key-value store implementation."
+}
+
+=== 2026-08-30 01:49:19 PDT (sweep completed) ===
+$ python run_nondeterminism.py
+Ran agents_demo.py pipeline on the fixed input in reports/hw01/cases/nondeterminism_input.json
+20 runs @ temperature=0.7, 20 runs @ temperature=0.0 (40 total, model=qwen3:8b). 0 failures.
+
+Temp 0.7 summary: distinct_tag_sets=11, tags_in_all_runs=[], 9 tags appeared in exactly 1 run,
+  latency p50/p95/p99 = 77272.4 / 102800.5 / 111202.8 ms
+Temp 0.0 summary: distinct_tag_sets=1, tags_in_all_runs=["algorithm design techniques", "big o notation", "data structures implementation"],
+  tags_in_exactly_one_run=[], latency p50/p95/p99 = 118949.2 / 135981.1 / 138073.8 ms
+
+Raw per-run data: reports/hw01/raw/nondeterminism_runs.json, .csv
+Summary: reports/hw01/raw/nondeterminism_summary.json
+Filled tables: METRICS.md
+
+=== 2026-08-30 17:21:02 PDT ===
+Part 4 rebuilt from scratch per assignment spec: src/model_client.py, hw1_client.py, AGENT.md, README.md.
+$ python hw1_client.py
+5-turn conversation run. /stats after turn 3: turn_count=3, cumulative_input=567, cumulative_output=76, cumulative_total=643, serialized_history_chars=1018
+/stats after turn 5: turn_count=5, cumulative_input=1216, cumulative_output=247, cumulative_total=1463, serialized_history_chars=1838
+Found + fixed: qwen3:8b reasoning mode caused runaway 8k-12k token responses on turn 1 twice; fixed via reasoning=False on ChatOllama.
+
+=== 2026-08-30 17:42:18 PDT ===
+Final Part 4 run used (report/README updated to match): original code-review examples
+(list comprehension, dict get_item, hardcoded api_key, list-append loop, summary).
+All 5 turns correct, no hallucinations -- confirms earlier hallucination was specific to
+bare arithmetic 'return a <op> b' snippets, not a general model/adapter defect.
+/stats after turn 3: turn_count=3, cumulative_input=598, cumulative_output=79, chars=1236
+/stats after turn 5: turn_count=5, cumulative_input=1273, cumulative_output=194, chars=1973
+
