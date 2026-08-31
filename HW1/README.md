@@ -2,6 +2,8 @@
 
 ## Reproducible run instructions
 
+All commands below assume you're inside this `HW1/` directory (`cd HW1` from the repo root first).
+
 ```bash
 # One-time setup
 /opt/homebrew/bin/python3.12 -m venv .venv
