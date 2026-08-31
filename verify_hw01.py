@@ -82,7 +82,7 @@ check("40 raw run records saved", lambda: (
 ))
 check("nondeterminism_runs.csv exists", lambda: file_exists("reports/hw01/raw/nondeterminism_runs.csv"))
 check("nondeterminism_summary.json exists and valid", lambda: json_valid("reports/hw01/raw/nondeterminism_summary.json"))
-check("METRICS.md exists", lambda: file_exists("METRICS.md"))
+check("METRICS.md exists", lambda: file_exists("reports/hw01/METRICS.md"))
 
 # --- Part 4: Model client / token accounting ---
 check("src/model_client.py exists", lambda: file_exists("src/model_client.py"))
@@ -116,7 +116,7 @@ check("RUN_LOG.txt exists and non-empty", lambda: (
     "reports/hw01/RUN_LOG.txt",
 ))
 check("report.pdf exists", lambda: file_exists("reports/hw01/report.pdf"))
-check("AI_USE.md exists", lambda: file_exists("AI_USE.md"))
+check("AI_USE.md exists", lambda: file_exists("reports/hw01/AI_USE.md"))
 
 # --- Environment checks ---
 check("Python 3.11/3.12 available", lambda: (
@@ -145,7 +145,7 @@ output = {
     "overall": "PASS" if failed == 0 else "FAIL",
 }
 
-out_path = ROOT / "verification.json"
+out_path = ROOT / "reports/hw01/verification.json"
 out_path.write_text(json.dumps(output, indent=2))
 
 print(f"{passed}/{len(checks)} checks passed.")

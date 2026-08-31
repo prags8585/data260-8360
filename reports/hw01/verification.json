@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-31T03:20:26.214063+00:00",
+  "timestamp": "2026-08-31T05:19:01.158020+00:00",
   "checks": [
     {
       "name": "index.html exists",
@@ -79,7 +79,7 @@
     {
       "name": "METRICS.md exists",
       "passed": true,
-      "detail": "found: METRICS.md"
+      "detail": "found: reports/hw01/METRICS.md"
     },
     {
       "name": "src/model_client.py exists",
@@ -134,7 +134,7 @@
     {
       "name": "AI_USE.md exists",
       "passed": true,
-      "detail": "found: AI_USE.md"
+      "detail": "found: reports/hw01/AI_USE.md"
     },
     {
       "name": "Python 3.11/3.12 available",
