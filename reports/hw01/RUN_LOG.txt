@@ -38,7 +38,7 @@ FINALIZED (Publish)
   "summary": "Course on distributed systems design focusing on consensus algorithms, fault tolerance, and key-value store implementation."
 }
 
-=== 2026-08-30 01:49:19 PDT (sweep completed) ===
+=== 2026-08-30 01:49:19 PDT ===
 $ python run_nondeterminism.py
 Ran agents_demo.py pipeline on the fixed input in reports/hw01/cases/nondeterminism_input.json
 20 runs @ temperature=0.7, 20 runs @ temperature=0.0 (40 total, model=qwen3:8b). 0 failures.
@@ -53,17 +53,79 @@ Summary: reports/hw01/raw/nondeterminism_summary.json
 Filled tables: METRICS.md
 
 === 2026-08-30 17:21:02 PDT ===
-Part 4 rebuilt from scratch per assignment spec: src/model_client.py, hw1_client.py, AGENT.md, README.md.
-$ python hw1_client.py
-5-turn conversation run. /stats after turn 3: turn_count=3, cumulative_input=567, cumulative_output=76, cumulative_total=643, serialized_history_chars=1018
-/stats after turn 5: turn_count=5, cumulative_input=1216, cumulative_output=247, cumulative_total=1463, serialized_history_chars=1838
-Found + fixed: qwen3:8b reasoning mode caused runaway 8k-12k token responses on turn 1 twice; fixed via reasoning=False on ChatOllama.
+Part 4 
+Last login: Sun Aug 30 17:31:22 on ttys001
+(base) prags@Karthiks-MacBook-Air ~ % cd /Users/prags/Desktop/HW1_DATA260
+source .venv/bin/activate
+python hw1_client.py
+hw1_client -- type a message, '/stats' for usage, or 'exit'/'quit' to end.
 
-=== 2026-08-30 17:42:18 PDT ===
-Final Part 4 run used (report/README updated to match): original code-review examples
-(list comprehension, dict get_item, hardcoded api_key, list-append loop, summary).
-All 5 turns correct, no hallucinations -- confirms earlier hallucination was specific to
-bare arithmetic 'return a <op> b' snippets, not a general model/adapter defect.
-/stats after turn 3: turn_count=3, cumulative_input=598, cumulative_output=79, chars=1236
-/stats after turn 5: turn_count=5, cumulative_input=1273, cumulative_output=194, chars=1973
+You: Review this: total = sum([n for n in numbers if n > 0])
 
+=== Turn 1 ===
+User: Review this: total = sum([n for n in numbers if n > 0])
+Assistant:
+- The list comprehension creates a new list, which may be inefficient for large datasets. Consider using a generator expression instead for better memory efficiency.
+
+[tokens] input: 146  output: 29  total: 175
+
+You: Review this: def get_item(cart, index): return cart[index]
+
+=== Turn 2 ===
+User: Review this: def get_item(cart, index): return cart[index]
+Assistant:
+- The function lacks error handling for cases where the index is out of bounds, which could raise an IndexError.
+
+[tokens] input: 198  output: 23  total: 221
+
+You: Review this: api_key = "sk-live-4f9a2b8c"  # hardcoded for testing
+
+=== Turn 3 ===
+User: Review this: api_key = "sk-live-4f9a2b8c"  # hardcoded for testing
+Assistant:
+- Hardcoding the API key is insecure and not suitable for production environments. Consider using environment variables or a secure secrets management solution.
+
+[tokens] input: 254  output: 27  total: 281
+
+You: /stats
+
+----- /stats -----
+Turn count                 : 3
+Cumulative input tokens    : 598
+Cumulative output tokens   : 79
+Cumulative total tokens    : 677
+Serialized history length  : 1236 chars
+------------------
+
+You: Review this: result = []; for x in data: result.append(x * 2)
+
+=== Turn 4 ===
+User: Review this: result = []; for x in data: result.append(x * 2)
+Assistant:
+- The list is being initialized as an empty list, then appended to in a loop. A more Pythonic approach would be to use a list comprehension for conciseness and readability.
+
+[tokens] input: 308  output: 38  total: 346
+
+You: Summarize all the issues you found across our conversation.
+
+=== Turn 5 ===
+User: Summarize all the issues you found across our conversation.
+Assistant:
+- The list comprehension in the first example could be replaced with a generator for better memory efficiency.  
+- The `get_item` function lacks error handling for out-of-bounds indices.  
+- Hardcoding an API key is insecure and should be avoided in production.  
+- The loop and list append approach in the last example is less Pythonic compared to using a list comprehension.
+
+[tokens] input: 367  output: 77  total: 444
+
+You: /stats
+
+----- /stats -----
+Turn count                 : 5
+Cumulative input tokens    : 1273
+Cumulative output tokens   : 194
+Cumulative total tokens    : 1467
+Serialized history length  : 1973 chars
+------------------
+
+Check now if every execution is proper
