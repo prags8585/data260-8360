@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HW1-Karthik Pragada</title>
-  <link rel="stylesheet" href="style.css">
+  <title>HW2-Karthik Pragada</title>
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
   <h1>Course Catalogue &amp; Enrolment</h1>
 
-  <form id="courseForm">
+  {% if error %}
+  <div class="banner banner-error" role="alert">{{ error }}</div>
+  {% endif %}
+
+  <form id="courseForm" method="POST" action="/courses" class="course-form">
     <div class="field">
       <label for="courseTitle">Course Title</label>
       <input
@@ -73,13 +77,33 @@
     <button type="submit">Add Course to Catalogue</button>
   </form>
 
-  <section id="resultSection" class="result-section" hidden>
-    <h2>Submitted Course</h2>
-    <table id="resultTable">
-      <tbody></tbody>
-    </table>
+  <section class="list-section">
+    <div class="list-header">
+      <h2>Courses</h2>
+      <form method="GET" action="/" class="search-form">
+        <input type="search" name="q" placeholder="Search by title or code" value="{{ q or '' }}">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+
+    <div id="loadingState" class="state-banner loading-state" hidden>Loading&hellip;</div>
+
+    {% if courses|length == 0 %}
+    <p class="state-banner empty-state">
+      {% if q %}No courses match &ldquo;{{ q }}&rdquo;.{% else %}No courses yet &mdash; add one above to get started.{% endif %}
+    </p>
+    {% else %}
+    <ul class="course-list">
+      {% for c in courses %}
+      <li class="course-card">
+        <div class="course-card-title">{{ c.courseTitle }}</div>
+        <div class="course-card-meta">{{ c.courseCode }} &middot; {{ c.department }}</div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
   </section>
 
-  <script src="script.js"></script>
+  <script src="/static/script.js"></script>
 </body>
 </html>
