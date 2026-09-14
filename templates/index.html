@@ -77,6 +77,35 @@
     <button type="submit">Add Course to Catalogue</button>
   </form>
 
+  <section class="manage-section">
+    <div class="manage-card">
+      <h2>Update Course #1</h2>
+      {% if course_1 %}
+      <form method="POST" action="/courses/1/update" class="inline-form">
+        <div class="field">
+          <label for="update1Title">Course Title</label>
+          <input type="text" id="update1Title" name="courseTitle" value="{{ course_1.courseTitle }}" required>
+        </div>
+        <div class="field">
+          <label for="update1Code">Course Code</label>
+          <input type="text" id="update1Code" name="courseCode" value="{{ course_1.courseCode }}" required>
+        </div>
+        <button type="submit">Update Course #1</button>
+      </form>
+      {% else %}
+      <p class="state-banner empty-state">No course with ID 1 exists to update.</p>
+      {% endif %}
+    </div>
+
+    <div class="manage-card">
+      <h2>Delete Highest-ID Course</h2>
+      <p class="manage-hint">Removes whichever course currently has the highest ID.</p>
+      <form method="POST" action="/courses/delete-highest" class="inline-form">
+        <button type="submit" class="danger-button">Delete Highest-ID Course</button>
+      </form>
+    </div>
+  </section>
+
   <section class="list-section">
     <div class="list-header">
       <h2>Courses</h2>

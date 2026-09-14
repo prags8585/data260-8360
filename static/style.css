@@ -94,6 +94,60 @@ button[type="submit"]:hover {
   background: #1d4ed8;
 }
 
+.manage-section {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.manage-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.manage-card h2 {
+  font-size: 1rem;
+  margin: 0 0 12px;
+}
+
+.manage-hint {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0 0 12px;
+}
+
+.inline-form .field {
+  margin-bottom: 12px;
+}
+
+.danger-button {
+  width: 100%;
+  background: #fff;
+  color: #b91c1c;
+  border: 1px solid #b91c1c;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.danger-button:hover {
+  background: #fef2f2;
+}
+
+@media (min-width: 480px) {
+  .manage-section {
+    flex-direction: row;
+  }
+
+  .manage-card {
+    flex: 1;
+  }
+}
+
 .list-section {
   margin-top: 24px;
 }
