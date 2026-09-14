@@ -237,7 +237,6 @@ button[type="submit"]:hover {
   color: #666;
 }
 
-/* From this width up there's room to put the search box beside the heading */
 @media (min-width: 480px) {
   .list-header {
     flex-direction: row;

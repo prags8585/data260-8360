@@ -16,7 +16,6 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-# In-memory store. Seeded with a few rows so the list isn't empty on first run.
 COURSES: list[dict] = [
     {
         "id": 1,
@@ -72,7 +71,7 @@ def home(request: Request, q: str = "", state: str = "", error: str = ""):
     return templates.TemplateResponse(
         request,
         "index.html",
-        {"courses": courses, "q": q, "error": error, "course_1": course_1},
+        {"courses": courses, "q": q, "error": error, "course_1": course_1, "state": state},
     )
 
 
@@ -88,7 +87,6 @@ async def create_course(
     if not courseTitle.strip() or not courseCode.strip():
         return RedirectResponse(url="/?error=Course+title+and+code+are+required.", status_code=303)
 
-    # Artificial delay so the loading state (Part 1) stays genuinely visible.
     await asyncio.sleep(1.5)
 
     COURSES.append({

@@ -1,0 +1,38 @@
+{
+  "schema_30runs": {
+    "ceiling": "6 (classification experiment)",
+    "n": 30,
+    "completion_rate": 1.0,
+    "mean_latency_ms": 5421.9,
+    "counts": {
+      "valid_first_attempt": 30
+    }
+  },
+  "ceiling_2": {
+    "ceiling": 2,
+    "n": 20,
+    "completion_rate": 0.0,
+    "mean_latency_ms": 2482.6,
+    "counts": {
+      "abandoned_at_ceiling": 20
+    }
+  },
+  "ceiling_10": {
+    "ceiling": 10,
+    "n": 20,
+    "completion_rate": 1.0,
+    "mean_latency_ms": 5856.3,
+    "counts": {
+      "valid_first_attempt": 20
+    }
+  },
+  "adversarial_5runs": {
+    "ceiling": "6 (adversarial)",
+    "n": 5,
+    "completion_rate": 0.0,
+    "mean_latency_ms": 14777.6,
+    "counts": {
+      "abandoned_at_ceiling": 5
+    }
+  }
+}

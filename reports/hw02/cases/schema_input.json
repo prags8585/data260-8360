@@ -1,0 +1,4 @@
+{
+  "title": "Cloud Computing and Distributed Systems",
+  "content": "This course explores cloud computing architectures, distributed storage systems, container orchestration with Kubernetes, and microservices design patterns. Students will deploy scalable applications using AWS and GCP, and learn about load balancing, auto-scaling, and fault-tolerant system design. Prerequisites: networking fundamentals and basic Linux administration."
+}

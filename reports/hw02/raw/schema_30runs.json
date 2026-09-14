@@ -1,0 +1,482 @@
+[
+  {
+    "run_index": 1,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5342.5,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 2,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5365.7,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 3,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5440.7,
+    "final_tags": [
+      "cloud architectures",
+      "kubernetes deployment",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 4,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5535.5,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 5,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5285.1,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 6,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5277.0,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 7,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5266.4,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 8,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5318.3,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 9,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5564.1,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 10,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5305.2,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, Kubernetes, and scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 11,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5310.8,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 12,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5304.9,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 13,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5314.0,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 14,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5399.0,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 15,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5309.1,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 16,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5390.8,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 17,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5432.5,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 18,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5339.4,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 19,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5455.2,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 20,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5469.6,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 21,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5423.4,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 22,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5463.1,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and container orchestration with Kubernetes for scalable application deployment.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 23,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5401.9,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 24,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5256.5,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 25,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5318.0,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 26,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5261.6,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 27,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5296.8,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 28,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5336.5,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 29,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 5680.9,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for deploying scalable applications on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  },
+  {
+    "run_index": 30,
+    "ceiling": 6,
+    "retries": 0,
+    "abandoned": false,
+    "turn_count": 4,
+    "latency_ms": 6791.6,
+    "final_tags": [
+      "cloud computing architectures",
+      "kubernetes orchestration",
+      "microservices design"
+    ],
+    "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+    "error": null,
+    "classification": "valid_first_attempt"
+  }
+]

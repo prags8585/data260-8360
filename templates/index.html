@@ -115,7 +115,7 @@
       </form>
     </div>
 
-    <div id="loadingState" class="state-banner loading-state" hidden>Loading&hellip;</div>
+    <div id="loadingState" class="state-banner loading-state"{% if state != 'loading' %} hidden{% endif %}>Loading&hellip;</div>
 
     {% if courses|length == 0 %}
     <p class="state-banner empty-state">

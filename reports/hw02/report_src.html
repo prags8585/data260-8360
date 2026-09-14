@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DATA-260 HW2 Report</title>
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+    font-size: 11pt;
+    line-height: 1.4;
+  }
+  .title-block {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .title-block h1 {
+    font-size: 16pt;
+    margin: 4px 0;
+  }
+  table.config {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+  table.config th, table.config td {
+    border: 1px solid #000;
+    padding: 8px 10px;
+    text-align: left;
+    font-size: 10.5pt;
+  }
+  table.config th {
+    background: #000;
+    color: #fff;
+  }
+  h2 {
+    font-size: 13pt;
+    margin-top: 28px;
+    margin-bottom: 6px;
+  }
+  h3 {
+    font-size: 11.5pt;
+    margin-top: 16px;
+    margin-bottom: 4px;
+  }
+  p { margin: 8px 0; }
+  img.shot {
+    max-width: 100%;
+    border: 1px solid #999;
+    display: block;
+    margin: 8px 0 14px;
+  }
+  img.shot-narrow {
+    max-width: 320px;
+    border: 1px solid #999;
+    display: block;
+    margin: 8px 0 14px;
+  }
+  pre {
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    padding: 10px 12px;
+    font-size: 8.5pt;
+    line-height: 1.35;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  code { font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .caption { font-size: 9.5pt; color: #333; margin: -8px 0 14px; font-style: italic; }
+  ul { margin: 6px 0; padding-left: 22px; }
+  li { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<div class="title-block">
+  <h1>DATA - 260</h1>
+  <h1>HomeWork-2</h1>
+  <h1>Name: Karthik Pragada</h1>
+  <h1>SJSU ID: 018768360</h1>
+</div>
+
+<table class="config">
+  <tr><th>Value</th><th>Definition</th></tr>
+  <tr><td>SID</td><td>8360</td></tr>
+  <tr><td>PORT_BASE</td><td>8260</td></tr>
+  <tr><td>PREFIX</td><td>s8360</td></tr>
+  <tr><td>SEED</td><td>8360</td></tr>
+  <tr><td>VERIFY_SEED</td><td>268360</td></tr>
+  <tr><td>DOMAIN_ID</td><td>0</td></tr>
+  <tr><td>HARDWARE</td><td>MacBook Air, Apple M4, 16 GB RAM</td></tr>
+  <tr><td>Local Model Used</td><td>qwen3:8b Ollama Model</td></tr>
+  <tr><td>Tagged commit hash</td><td><i>To be filled in once the repository is tagged hw2</i></td></tr>
+  <tr><td>Git repo</td><td><a href="https://github.com/prags8585/data260-8360/tree/main">https://github.com/prags8585/data260-8360/tree/main</a></td></tr>
+</table>
+
+<h2>Part 1 (HTML &amp; CSS)</h2>
+
+<p>Styled the Course Catalogue form and entity list so it stays usable at 375px width, and added visible loading, empty, and error states. Since the assignment's Part 2 language ("redirected to the home view showing the updated list") describes a server-rendered pattern, I rebuilt the page as a FastAPI + Jinja2 app instead of the static HW1 page &mdash; forms POST directly to the server and the server redirects back to a freshly rendered home page. This became the foundation Part 2 builds real data onto.</p>
+
+<h3>Desktop view</h3>
+<img class="shot" src="assets/part1_desktop_loaded.png">
+
+<h3>Mobile view (375px width)</h3>
+<p>Verified the form, the Update/Delete cards, and the course list all remain fully usable at 375px &mdash; nothing overflows, buttons stay full-width and tappable, and the two management cards stack vertically instead of squeezing side by side.</p>
+<img class="shot-narrow" src="assets/part1_mobile_loaded.png">
+
+<h3>Empty state</h3>
+<p>Shown whenever the course list has zero results (either because no courses exist yet, or because a search matched nothing).</p>
+<img class="shot-narrow" src="assets/part1_mobile_empty.png">
+
+<h3>Error state</h3>
+<p>A red banner driven by a flash-style <code>?error=</code> query parameter. Part 2's create/update/delete routes redirect here with a message whenever something goes wrong (missing required fields, deleting an empty list, etc.) instead of crashing.</p>
+<img class="shot-narrow" src="assets/part1_mobile_error.png">
+
+<h3>Loading state</h3>
+<p>The instant any form is submitted, a small script shows a "Loading..." indicator before the browser finishes navigating to the new page. The create route also has a short artificial delay so this is genuinely visible instead of flashing by instantly on a fast local server.</p>
+<img class="shot-narrow" src="assets/part1_mobile_loading.png">
+
+<h3>Code &mdash; templates/index.html</h3>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;HW2-Karthik Pragada&lt;/title&gt;
+  &lt;link rel="stylesheet" href="/static/style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Course Catalogue &amp;amp; Enrolment&lt;/h1&gt;
+
+  {% if error %}
+  &lt;div class="banner banner-error" role="alert"&gt;{{ error }}&lt;/div&gt;
+  {% endif %}
+
+  &lt;form id="courseForm" method="POST" action="/courses" class="course-form"&gt;
+    &lt;div class="field"&gt;
+      &lt;label for="courseTitle"&gt;Course Title&lt;/label&gt;
+      &lt;input type="text" id="courseTitle" name="courseTitle"
+        placeholder="e.g. Introduction to Distributed Systems" required autofocus&gt;
+    &lt;/div&gt;
+    &lt;div class="field"&gt;
+      &lt;label for="courseCode"&gt;Course Code&lt;/label&gt;
+      &lt;input type="text" id="courseCode" name="courseCode"
+        placeholder="e.g. DATA-260" required&gt;
+    &lt;/div&gt;
+    &lt;div class="field"&gt;
+      &lt;label for="email"&gt;Your Email&lt;/label&gt;
+      &lt;input type="email" id="email" name="email"
+        placeholder="e.g. student@sjsu.edu" required&gt;
+    &lt;/div&gt;
+    &lt;div class="field"&gt;
+      &lt;label for="description"&gt;Course Description&lt;/label&gt;
+      &lt;textarea id="description" name="description"
+        placeholder="Describe the course content, topics covered, and prerequisites..." required&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
+    &lt;div class="field"&gt;
+      &lt;label for="department"&gt;Department&lt;/label&gt;
+      &lt;select id="department" name="department" required&gt;
+        &lt;option value="" disabled selected&gt;Select a department&lt;/option&gt;
+        &lt;option value="Computer Science"&gt;Computer Science&lt;/option&gt;
+        &lt;option value="Data Science"&gt;Data Science&lt;/option&gt;
+        &lt;option value="Business"&gt;Business&lt;/option&gt;
+        &lt;option value="Engineering"&gt;Engineering&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+    &lt;div class="field checkbox-field"&gt;
+      &lt;input type="checkbox" id="agreeTerms" name="agreeTerms"&gt;
+      &lt;label for="agreeTerms"&gt;I agree to the terms and conditions.&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;button type="submit"&gt;Add Course to Catalogue&lt;/button&gt;
+  &lt;/form&gt;
+
+  &lt;section class="manage-section"&gt;
+    &lt;div class="manage-card"&gt;
+      &lt;h2&gt;Update Course #1&lt;/h2&gt;
+      {% if course_1 %}
+      &lt;form method="POST" action="/courses/1/update" class="inline-form"&gt;
+        &lt;div class="field"&gt;
+          &lt;label for="update1Title"&gt;Course Title&lt;/label&gt;
+          &lt;input type="text" id="update1Title" name="courseTitle" value="{{ course_1.courseTitle }}" required&gt;
+        &lt;/div&gt;
+        &lt;div class="field"&gt;
+          &lt;label for="update1Code"&gt;Course Code&lt;/label&gt;
+          &lt;input type="text" id="update1Code" name="courseCode" value="{{ course_1.courseCode }}" required&gt;
+        &lt;/div&gt;
+        &lt;button type="submit"&gt;Update Course #1&lt;/button&gt;
+      &lt;/form&gt;
+      {% else %}
+      &lt;p class="state-banner empty-state"&gt;No course with ID 1 exists to update.&lt;/p&gt;
+      {% endif %}
+    &lt;/div&gt;
+
+    &lt;div class="manage-card"&gt;
+      &lt;h2&gt;Delete Highest-ID Course&lt;/h2&gt;
+      &lt;p class="manage-hint"&gt;Removes whichever course currently has the highest ID.&lt;/p&gt;
+      &lt;form method="POST" action="/courses/delete-highest" class="inline-form"&gt;
+        &lt;button type="submit" class="danger-button"&gt;Delete Highest-ID Course&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class="list-section"&gt;
+    &lt;div class="list-header"&gt;
+      &lt;h2&gt;Courses&lt;/h2&gt;
+      &lt;form method="GET" action="/" class="search-form"&gt;
+        &lt;input type="search" name="q" placeholder="Search by title or code" value="{{ q or '' }}"&gt;
+        &lt;button type="submit"&gt;Search&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+
+    &lt;div id="loadingState" class="state-banner loading-state"{% if state != 'loading' %} hidden{% endif %}&gt;Loading&amp;hellip;&lt;/div&gt;
+
+    {% if courses|length == 0 %}
+    &lt;p class="state-banner empty-state"&gt;
+      {% if q %}No courses match &amp;ldquo;{{ q }}&amp;rdquo;.{% else %}No courses yet &amp;mdash; add one above to get started.{% endif %}
+    &lt;/p&gt;
+    {% else %}
+    &lt;ul class="course-list"&gt;
+      {% for c in courses %}
+      &lt;li class="course-card"&gt;
+        &lt;div class="course-card-title"&gt;{{ c.courseTitle }}&lt;/div&gt;
+        &lt;div class="course-card-meta"&gt;{{ c.courseCode }} &amp;middot; {{ c.department }}&lt;/div&gt;
+      &lt;/li&gt;
+      {% endfor %}
+    &lt;/ul&gt;
+    {% endif %}
+  &lt;/section&gt;
+
+  &lt;script src="/static/script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<h3>Code &mdash; static/script.js</h3>
+<pre><code>// Progressive enhancement only -- forms are real HTML forms that POST/GET
+// to the server and navigate normally (server-rendered, Post/Redirect/Get
+// pattern). This just shows a loading indicator the instant a form is
+// submitted, before the browser finishes navigating to the new page.
+document.addEventListener('DOMContentLoaded', () => {
+  const loadingState = document.getElementById('loadingState');
+  if (!loadingState) return;
+
+  document.querySelectorAll('form').forEach((form) => {
+    form.addEventListener('submit', () => {
+      loadingState.hidden = false;
+    });
+  });
+});</code></pre>
+
+<h2>Part 2 (FastAPI)</h2>
+
+<p>Built a FastAPI backend on PORT_BASE (8260) with real in-memory CRUD for the Course entity, replacing Part 1's mock data. All four routes redirect back to the home view showing the updated list, matching the assignment's Post/Redirect/Get pattern.</p>
+
+<h3>1. Add a new course</h3>
+<p>Filled out the form (title, code, email, description, department, terms checkbox) and submitted. The new course is appended and appears at the end of the list after the redirect.</p>
+<p><b>Before:</b></p>
+<img class="shot" src="assets/part2_create_before.png">
+<p><b>After</b> (added "Cloud Native Systems / DATA-270"):</p>
+<img class="shot" src="assets/part2_create_after.png">
+
+<h3>2. Update the record with ID 1</h3>
+<p>A small "Update Course #1" form, pre-filled with whatever course #1 currently holds, lets me submit new title/code values specifically for that record.</p>
+<p><b>Before</b> (course #1 is "Introduction to Distributed Systems / DATA-260"):</p>
+<img class="shot" src="assets/part2_update_before.png">
+<p><b>After</b> (updated to "Advanced Distributed Systems / DATA-261"):</p>
+<img class="shot" src="assets/part2_update_after.png">
+
+<h3>3. Delete the record with the highest ID</h3>
+<p>The "Delete Highest-ID Course" button always removes whichever record currently has the maximum ID &mdash; at this point that's "Cloud Native Systems" (ID 4, the one just created in step 1).</p>
+<p><b>Before:</b></p>
+<img class="shot" src="assets/part2_delete_before.png">
+<p><b>After</b> (Cloud Native Systems removed, back to 3 courses):</p>
+<img class="shot" src="assets/part2_delete_after.png">
+
+<h3>4. Search by primary or secondary field</h3>
+<p>Typing into the search box and submitting filters the list to only courses whose title or code contains the query (case-insensitive).</p>
+<p><b>Search "data"</b> &mdash; matches all three remaining courses (via title or course code):</p>
+<img class="shot" src="assets/part2_search_result.png">
+<p><b>Search with no matches</b> &mdash; falls back to the empty state from Part 1:</p>
+<img class="shot" src="assets/part2_search_nomatch.png">
+
+<h3>Error handling</h3>
+<p>Tested two edge cases to make sure the app fails gracefully instead of crashing:</p>
+<ul>
+  <li>Deleting repeatedly until the list is empty, then deleting once more &mdash; shows "No courses to delete." Notice the Update Course #1 card and the list both correctly show their own empty states too, since course #1 no longer exists at this point.</li>
+</ul>
+<img class="shot" src="assets/part2_error_delete_empty.png">
+<ul>
+  <li>Submitting an update for course #1 after it no longer exists (a stale form submission) &mdash; shows "Course with ID 1 not found." instead of a server error.</li>
+</ul>
+<img class="shot" src="assets/part2_error_update_missing.png">
+
+<h3>Code &mdash; main.py</h3>
+<pre><code>"""FastAPI backend for the Course Catalogue app (HW2 Part 2).
+
+Real in-memory CRUD for the Course entity: create, update record #1,
+delete the highest-ID record, and search by primary/secondary field.
+Server-rendered (Jinja2), Post/Redirect/Get throughout.
+"""
+
+import asyncio
+
+from fastapi import FastAPI, Form, Request
+from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+
+app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
+
+# In-memory store. Seeded with a few rows so the list isn't empty on first run.
+COURSES: list[dict] = [
+    {"id": 1, "courseTitle": "Introduction to Distributed Systems", "courseCode": "DATA-260",
+     "email": "karthik.pragada@sjsu.edu",
+     "description": "Consensus, replication, partitioning, and fault tolerance in distributed systems.",
+     "department": "Data Science"},
+    {"id": 2, "courseTitle": "Machine Learning Foundations", "courseCode": "DATA-245",
+     "email": "karthik.pragada@sjsu.edu",
+     "description": "Supervised and unsupervised learning, model evaluation, and feature engineering.",
+     "department": "Data Science"},
+    {"id": 3, "courseTitle": "Database Systems", "courseCode": "CS-157A",
+     "email": "karthik.pragada@sjsu.edu",
+     "description": "Relational modeling, SQL, transactions, and indexing.",
+     "department": "Computer Science"},
+]
+_next_id = 4
+
+
+def _get_next_id() -&gt; int:
+    global _next_id
+    course_id = _next_id
+    _next_id += 1
+    return course_id
+
+
+def _find_by_id(course_id: int) -&gt; dict | None:
+    return next((c for c in COURSES if c["id"] == course_id), None)
+
+
+@app.get("/")
+def home(request: Request, q: str = "", state: str = "", error: str = ""):
+    courses = COURSES
+    if state == "empty":
+        courses = []
+    elif q:
+        needle = q.lower()
+        courses = [
+            c for c in courses
+            if needle in c["courseTitle"].lower() or needle in c["courseCode"].lower()
+        ]
+    course_1 = _find_by_id(1)
+    return templates.TemplateResponse(
+        request,
+        "index.html",
+        {"courses": courses, "q": q, "error": error, "course_1": course_1, "state": state},
+    )
+
+
+@app.post("/courses")
+async def create_course(
+    courseTitle: str = Form(...),
+    courseCode: str = Form(...),
+    email: str = Form(""),
+    description: str = Form(""),
+    department: str = Form(""),
+    agreeTerms: str | None = Form(None),
+):
+    if not courseTitle.strip() or not courseCode.strip():
+        return RedirectResponse(url="/?error=Course+title+and+code+are+required.", status_code=303)
+
+    # Artificial delay so the loading state (Part 1) stays genuinely visible.
+    await asyncio.sleep(1.5)
+
+    COURSES.append({
+        "id": _get_next_id(),
+        "courseTitle": courseTitle.strip(),
+        "courseCode": courseCode.strip(),
+        "email": email.strip(),
+        "description": description.strip(),
+        "department": department,
+        "agreeTerms": bool(agreeTerms),
+    })
+    return RedirectResponse(url="/", status_code=303)
+
+
+@app.post("/courses/1/update")
+async def update_course_1(courseTitle: str = Form(...), courseCode: str = Form(...)):
+    course = _find_by_id(1)
+    if course is None:
+        return RedirectResponse(url="/?error=Course+with+ID+1+not+found.", status_code=303)
+    if not courseTitle.strip() or not courseCode.strip():
+        return RedirectResponse(url="/?error=Course+title+and+code+are+required.", status_code=303)
+
+    course["courseTitle"] = courseTitle.strip()
+    course["courseCode"] = courseCode.strip()
+    return RedirectResponse(url="/", status_code=303)
+
+
+@app.post("/courses/delete-highest")
+async def delete_highest_course():
+    if not COURSES:
+        return RedirectResponse(url="/?error=No+courses+to+delete.", status_code=303)
+
+    highest = max(COURSES, key=lambda c: c["id"])
+    COURSES.remove(highest)
+    return RedirectResponse(url="/", status_code=303)</code></pre>
+
+<h2>Part 3 (Stateful Agent Graph)</h2>
+
+<p>Refactored HW1's sequential Planner &rarr; Reviewer &rarr; Finalizer pipeline (<code>agents_demo.py</code>) into a LangGraph <code>StateGraph</code> (<code>agent_graph.py</code>) built around a supervisor node that re-evaluates where to go next after every node finishes, so the graph can loop back to the Planner for self-correction instead of always running straight through. A deterministic <code>router_logic()</code> function (no LLM call) inspects the shared state on each supervisor visit and decides the next node: it checks a <code>turn_count</code> ceiling first (a safety valve against runaway loops), then whether a proposal exists yet, then whether that proposal has cleared the Part 4 schema gate, then whether the Reviewer has flagged issues. Both LLM-calling nodes (Planner, Reviewer) go through <code>ModelClient</code> from HW1 Part 4 &mdash; they never touch <code>ChatOllama</code>/LangChain directly.</p>
+
+<h3>1. Baseline run &mdash; no issues, ends normally</h3>
+<p>Default demo input (distributed systems course), <code>qwen3:8b</code>, temperature 0.7. The Planner proposes 3 tags and a summary, the proposal passes the Part 4 schema gate, and the Reviewer approves it on the first pass (<code>"has_issues": false</code>), so the router sends control straight to <code>END</code>: 4 supervisor visits, 1 planner call, 0 retries, not abandoned.</p>
+<pre><code>$ python agent_graph.py --temperature 0.7
+--- ROUTER: no proposal yet -> planner ---
+=== after node: supervisor ===
+--- NODE: Planner ---
+{
+  "tags": [
+    "consensus algorithms",
+    "key-value store",
+    "leader election"
+  ],
+  "summary": "This course teaches design and implementation of distributed systems with focus on fault tolerance and consensus protocols."
+}
+=== after node: planner ===
+--- ROUTER: proposal not yet schema-validated -> validate ---
+=== after node: supervisor ===
+--- NODE: Validate (Pydantic) ---
+valid
+=== after node: validate ===
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+=== after node: supervisor ===
+--- NODE: Reviewer ---
+{
+  "tags": ["consensus algorithms", "key-value store", "leader election"],
+  "summary": "This course teaches design and implementation of distributed systems with focus on fault tolerance and consensus protocols.",
+  "has_issues": false,
+  "feedback": ""
+}
+=== after node: reviewer ===
+--- ROUTER: no issues -> END ---
+=== after node: supervisor ===
+
+======================================================================
+FINALIZED (Publish)
+======================================================================
+{
+  "tags": ["consensus algorithms", "key-value store", "leader election"],
+  "summary": "This course teaches design and implementation of distributed systems with focus on fault tolerance and consensus protocols."
+}
+
+Total turns (supervisor visits): 4
+Planner calls: 1 (retries: 0)
+Abandoned at ceiling: False
+Latency: 9742 ms</code></pre>
+
+<h3>2. Forcing the self-correction loop</h3>
+<p><code>reviewer_node</code> has a <code>--force-issue</code> testing hook: it overrides whatever the model actually said and always reports <code>has_issues: true</code>, so the reviewer&rarr;planner loop-back edge can be proven to fire on demand rather than assuming it works from a single lucky run. This run also passes a deliberately tight <code>--ceiling 4</code> to exercise the turn-ceiling safety valve at the same time: the Planner drafts, the Reviewer force-rejects it, the router sends control back to the Planner for a revised draft &mdash; but by the time that second Planner call finishes, <code>turn_count</code> has climbed to 5, which exceeds <code>ceiling=4</code>, so the router ends the graph <i>before</i> the revised draft is ever re-validated or re-reviewed. The deterministic <code>finalize()</code> function (a non-LLM safety net, same idea as HW1's Finalizer) still publishes the best draft available &mdash; the unreviewed revision &mdash; instead of crashing or returning nothing, which is exactly the abandoned-at-ceiling case it exists to handle.</p>
+<pre><code>$ python agent_graph.py --temperature 0.7 --force-issue --ceiling 4
+--- ROUTER: no proposal yet -> planner ---
+=== after node: supervisor ===
+--- NODE: Planner ---
+{
+  "tags": ["consensus algorithms", "key-value store", "leader election"],
+  "summary": "A course on designing distributed systems with focus on consensus, fault tolerance, and leader election protocols."
+}
+=== after node: planner ===
+--- ROUTER: proposal not yet schema-validated -> validate ---
+=== after node: supervisor ===
+--- NODE: Validate (Pydantic) ---
+valid
+=== after node: validate ===
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+=== after node: supervisor ===
+--- NODE: Reviewer ---
+{
+  "tags": ["consensus algorithms", "key-value store", "leader election"],
+  "summary": "A course on designing distributed systems with focus on consensus, fault tolerance, and leader election protocols.",
+  "has_issues": true,
+  "feedback": "(forced for testing the correction loop)"
+}
+=== after node: reviewer ===
+--- ROUTER: issues found -> planner (self-correction) ---
+=== after node: supervisor ===
+--- NODE: Planner ---
+{
+  "tags": ["distributed systems design", "fault tolerance implementation", "leader election protocol"],
+  "summary": "A course on designing distributed systems with focus on consensus, fault tolerance, and leader election protocols."
+}
+=== after node: planner ===
+--- ROUTER: turn ceiling (4) reached -- ending ---
+=== after node: supervisor ===
+
+======================================================================
+FINALIZED (Publish)
+======================================================================
+{
+  "tags": ["distributed systems design", "fault tolerance implementation", "leader election protocol"],
+  "summary": "A course on designing distributed systems with focus on consensus, fault tolerance, and leader election protocols."
+}
+
+Total turns (supervisor visits): 5
+Planner calls: 2 (retries: 1)
+Abandoned at ceiling: True
+Latency: 7854 ms</code></pre>
+
+<h3>Code &mdash; agent_graph.py (router + supervisor loop)</h3>
+<pre><code>def router_logic(state: AgentState) -&gt; str:
+    """Reads the state and decides which node runs next."""
+    if state.get("turn_count", 0) &gt; TURN_CEILING_DEFAULT:
+        print(f"--- ROUTER: turn ceiling ({TURN_CEILING_DEFAULT}) reached -- ending ---")
+        return END
+    if not state.get("planner_proposal"):
+        print("--- ROUTER: no proposal yet -&gt; planner ---")
+        return "planner"
+    if not state.get("schema_checked"):
+        print("--- ROUTER: proposal not yet schema-validated -&gt; validate ---")
+        return "validate"
+    feedback = state.get("reviewer_feedback")
+    if feedback and feedback.get("has_issues"):
+        print("--- ROUTER: issues found -&gt; planner (self-correction) ---")
+        return "planner"
+    if not feedback:
+        print("--- ROUTER: schema OK, not yet reviewed -&gt; reviewer ---")
+        return "reviewer"
+    print("--- ROUTER: no issues -&gt; END ---")
+    return END
+
+
+def build_graph():
+    graph = StateGraph(AgentState)
+    graph.add_node("supervisor", supervisor_node)
+    graph.add_node("planner", planner_node)
+    graph.add_node("validate", validate_node)
+    graph.add_node("reviewer", reviewer_node)
+
+    graph.set_entry_point("supervisor")
+    graph.add_conditional_edges(
+        "supervisor",
+        router_logic,
+        {"planner": "planner", "validate": "validate", "reviewer": "reviewer", END: END},
+    )
+    graph.add_edge("planner", "supervisor")
+    graph.add_edge("validate", "supervisor")
+    graph.add_edge("reviewer", "supervisor")
+
+    return graph.compile()</code></pre>
+
+<h2>Part 4 (Schema Validation Gate + Turn-Ceiling Experiments)</h2>
+
+<p>Added a deterministic Pydantic validation gate (<code>validate_node</code> / <code>TagsSummarySchema</code>) between the Planner and Reviewer: exactly 3 tags, each 3&ndash;30 characters, summary at most 25 words. A schema failure is turned into a synthetic <code>reviewer_feedback</code>-shaped rejection and routed through the exact same <code>has_issues</code> loop-back path as a real Reviewer complaint, so the Planner sees one consistent retry mechanism whether the correction came from the deterministic gate or from the LLM reviewer.</p>
+
+<h3>1. Fixed input, ceiling = 6 &mdash; single demo run</h3>
+<p>Input: <code>reports/hw02/cases/schema_input.json</code> (a cloud-computing/Kubernetes course, chosen to be easy to tag precisely in 3 terms). The first proposal clears the schema gate and the Reviewer approves it immediately &mdash; 4 supervisor visits, 1 planner call, 0 retries.</p>
+<pre><code>$ python agent_graph.py --input reports/hw02/cases/schema_input.json --temperature 0.7
+--- ROUTER: no proposal yet -> planner ---
+=== after node: supervisor ===
+--- NODE: Planner ---
+{
+  "tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+=== after node: planner ===
+--- ROUTER: proposal not yet schema-validated -> validate ---
+=== after node: supervisor ===
+--- NODE: Validate (Pydantic) ---
+valid
+=== after node: validate ===
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+=== after node: supervisor ===
+--- NODE: Reviewer ---
+{
+  "tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+=== after node: reviewer ===
+--- ROUTER: no issues -> END ---
+=== after node: supervisor ===
+
+======================================================================
+FINALIZED (Publish)
+======================================================================
+{
+  "tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+
+Total turns (supervisor visits): 4
+Planner calls: 1 (retries: 0)
+Abandoned at ceiling: False
+Latency: 6469 ms</code></pre>
+
+<h3>2. Adversarial input, ceiling = 6 &mdash; single demo run</h3>
+<p>Input: <code>reports/hw02/cases/adversarial_input.json</code>, a course description deliberately written to span ten unrelated CS subfields in one semester &mdash; hard to compress into 3 accurate, specific tags. The first proposal is mechanically valid (passes the schema gate) but the Reviewer rejects it as <i>too narrow</i> for the course's breadth ("too specific and do not reflect the broader scope"), so the Planner revises toward broader, more general tags. This time the Reviewer is satisfied (<code>"has_issues": false</code>) &mdash; but that approval comes on the graph's 7th supervisor visit, and <code>router_logic()</code> checks the turn ceiling <i>before</i> it ever looks at the Reviewer's feedback. Since <code>turn_count=7 &gt; ceiling=6</code>, the router ends the run on the ceiling check without ever reaching the branch that would have read <code>has_issues: false</code> and sent it to <code>END</code> normally. The published output ends up identical either way (<code>finalize()</code> just republishes the same already-approved draft), but the run is still logged as <code>abandoned_at_ceiling</code> by the harness's <code>turn_count &gt; ceiling</code> definition &mdash; a case where "abandoned" is a bookkeeping artifact of check ordering, not a sign the content is unfinished or wrong.</p>
+<pre><code>$ python agent_graph.py --input reports/hw02/cases/adversarial_input.json --temperature 0.7 --ceiling 6
+--- ROUTER: no proposal yet -> planner ---
+=== after node: supervisor ===
+--- NODE: Planner ---
+{
+  "tags": ["computer networking", "machine learning", "natural language processing"],
+  "summary": "A comprehensive course covering ten computer science subfields with weekly guest lectures and a final exam."
+}
+=== after node: planner ===
+--- ROUTER: proposal not yet schema-validated -> validate ---
+=== after node: supervisor ===
+--- NODE: Validate (Pydantic) ---
+valid
+=== after node: validate ===
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+=== after node: supervisor ===
+--- NODE: Reviewer ---
+{
+  "tags": ["computer networking", "machine learning", "natural language processing"],
+  "summary": "A comprehensive course covering ten computer science subfields with weekly guest lectures and a final exam.",
+  "has_issues": true,
+  "feedback": "Tags are too specific and do not reflect the broader scope of the course."
+}
+=== after node: reviewer ===
+--- ROUTER: issues found -> planner (self-correction) ---
+=== after node: supervisor ===
+--- NODE: Planner ---
+{
+  "tags": ["computer science survey", "multi-subfield course", "comprehensive final"],
+  "summary": "A semester-long course covering ten computer science areas with guest lectures and a comprehensive final exam."
+}
+=== after node: planner ===
+--- ROUTER: proposal not yet schema-validated -> validate ---
+=== after node: supervisor ===
+--- NODE: Validate (Pydantic) ---
+valid
+=== after node: validate ===
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+=== after node: supervisor ===
+--- NODE: Reviewer ---
+{
+  "tags": ["computer science survey", "multi-subfield course", "comprehensive final"],
+  "summary": "A semester-long course covering ten computer science areas with guest lectures and a comprehensive final exam.",
+  "has_issues": false,
+  "feedback": ""
+}
+=== after node: reviewer ===
+--- ROUTER: turn ceiling (6) reached -- ending ---
+=== after node: supervisor ===
+
+======================================================================
+FINALIZED (Publish)
+======================================================================
+{
+  "tags": ["computer science survey", "multi-subfield course", "comprehensive final"],
+  "summary": "A semester-long course covering ten computer science areas with guest lectures and a comprehensive final exam."
+}
+
+Total turns (supervisor visits): 7
+Planner calls: 2 (retries: 1)
+Abandoned at ceiling: True
+Latency: 12224 ms</code></pre>
+
+<h3>3. Batch experiments (run_schema_experiment.py)</h3>
+<p>Beyond the single demo runs above, <code>run_schema_experiment.py</code> automates three repeated experiments through <code>agent_graph.py</code>'s <code>run()</code> function (all with <code>qwen3:8b</code>, temperature 0.7) and writes per-run records to <code>reports/hw02/raw/</code> plus a rolled-up summary to <code>reports/hw02/raw/part4_summary.json</code>. Each run is classified by <code>classify()</code> as <code>valid_first_attempt</code>, <code>valid_after_1_retry</code>, <code>valid_after_2plus_retries</code>, or <code>abandoned_at_ceiling</code> (per the <code>run()</code> function's own <code>turn_count &gt; ceiling</code> definition of "abandoned").</p>
+
+<table class="config">
+  <tr><th>Experiment</th><th>n</th><th>Completion rate</th><th>Mean latency</th><th>Classification breakdown</th></tr>
+  <tr><td>Fixed input, ceiling=6 (4.3)</td><td>30</td><td>100%</td><td>5422 ms</td><td>30/30 valid_first_attempt</td></tr>
+  <tr><td>Fixed input, ceiling=2 (4.4)</td><td>20</td><td>0%</td><td>2483 ms</td><td>20/20 abandoned_at_ceiling</td></tr>
+  <tr><td>Fixed input, ceiling=10 (4.4)</td><td>20</td><td>100%</td><td>5856 ms</td><td>20/20 valid_first_attempt</td></tr>
+  <tr><td>Adversarial input, ceiling=6 (4.5)</td><td>5</td><td>0%</td><td>14778 ms</td><td>5/5 abandoned_at_ceiling (every run: 1 retry, turn_count=7)</td></tr>
+</table>
+
+<p><b>4.3 &mdash; retry behavior on a fixed, well-posed input:</b> across 30 independent runs on <code>schema_input.json</code>, the Planner's first draft always cleared both the schema gate and the Reviewer &mdash; every run finished in exactly 4 supervisor visits with 0 retries. The self-correction loop exists for when it's needed, but on an input this unambiguous it never actually fires.</p>
+
+<p><b>4.4 &mdash; ceiling comparison isolates a structural effect, not a model-quality one:</b> the minimum number of supervisor visits for <i>any</i> successful run is 4 (planner &rarr; validate &rarr; reviewer &rarr; end-check). At <code>ceiling=2</code>, the router's ceiling check fires on the 3rd supervisor visit (<code>turn_count=3 &gt; 2</code>) &mdash; before the Reviewer ever gets to run &mdash; so all 20 runs were abandoned regardless of how good the Planner's draft was, with a correspondingly low mean latency (2483 ms, since the graph is cut short). At <code>ceiling=10</code> every run completed normally in 4 visits, identical in shape to the ceiling=6 baseline (5856 ms vs. 5422 ms, within normal LLM-latency noise). This shows the ceiling parameter has to be set with the graph's own minimum path length in mind, independent of how reliable the model is.</p>
+
+<p><b>4.5 &mdash; the adversarial input reliably burns its one allotted retry:</b> all 5 runs against <code>adversarial_input.json</code> needed exactly one self-correction retry, which puts the second Reviewer verdict at <code>turn_count=7</code>. Because <code>router_logic()</code> checks the turn ceiling <i>before</i> it ever inspects the Reviewer's feedback, that 7th visit is caught by the <code>ceiling=6</code> check regardless of whether the second review actually approved the revision or not &mdash; so all 5 runs are logged as <code>abandoned_at_ceiling</code> under the script's strict <code>turn_count &gt; ceiling</code> definition, with mean latency (14778 ms) roughly 2.7&times; the fixed-input baseline from the extra Planner/Reviewer round trip. As the single demo run above shows concretely (second review: <code>"has_issues": false</code>, yet still abandoned), "abandoned" here doesn't necessarily mean the published output is bad or unfinished &mdash; it can just mean the Reviewer's approval arrived one supervisor visit later than the ceiling check that decides whether anyone gets to read it.</p>
+
+<h3>Code &mdash; agent_graph.py (schema gate) &amp; run_schema_experiment.py (classification)</h3>
+<pre><code>class TagsSummarySchema(BaseModel):
+    """Part 4 output contract: exactly 3 tags (3-30 chars each), summary &lt;=25 words."""
+
+    tags: List[str]
+    summary: str
+
+    @field_validator("tags")
+    @classmethod
+    def check_tags(cls, v: List[str]) -&gt; List[str]:
+        if len(v) != 3:
+            raise ValueError(f"must have exactly 3 tags, got {len(v)}")
+        for tag in v:
+            if not (3 &lt;= len(tag) &lt;= 30):
+                raise ValueError(f"tag {tag!r} must be 3-30 characters long (got {len(tag)})")
+        return v
+
+    @field_validator("summary")
+    @classmethod
+    def check_summary(cls, v: str) -&gt; str:
+        word_count = len(v.split())
+        if word_count &gt; 25:
+            raise ValueError(f"summary must be at most 25 words (got {word_count})")
+        return v
+
+
+def validate_node(state: AgentState) -&gt; Dict[str, Any]:
+    """Deterministic Pydantic validation gate, no LLM call. On failure,
+    synthesizes a reviewer_feedback-shaped rejection so the existing has_issues
+    loop-back path sends it straight back to the Planner for a retry."""
+    proposal = state["planner_proposal"] or {}
+    try:
+        TagsSummarySchema(**proposal)
+        return {"schema_checked": True}
+    except ValidationError as exc:
+        error_msg = "; ".join(e["msg"] for e in exc.errors())
+        return {
+            "schema_checked": True,
+            "reviewer_feedback": {
+                "tags": proposal.get("tags", []),
+                "summary": proposal.get("summary", ""),
+                "has_issues": True,
+                "feedback": f"Schema validation failed: {error_msg}",
+            },
+        }
+
+
+def classify(record):
+    if record["abandoned"]:
+        return "abandoned_at_ceiling"
+    if record["retries"] == 0:
+        return "valid_first_attempt"
+    if record["retries"] == 1:
+        return "valid_after_1_retry"
+    return "valid_after_2plus_retries"</code></pre>
+
+</body>
+</html>
