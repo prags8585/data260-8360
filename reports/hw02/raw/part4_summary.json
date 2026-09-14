@@ -3,7 +3,7 @@
     "ceiling": "6 (classification experiment)",
     "n": 30,
     "completion_rate": 1.0,
-    "mean_latency_ms": 5421.9,
+    "mean_latency_ms": 5625.7,
     "counts": {
       "valid_first_attempt": 30
     }
@@ -12,7 +12,7 @@
     "ceiling": 2,
     "n": 20,
     "completion_rate": 0.0,
-    "mean_latency_ms": 2482.6,
+    "mean_latency_ms": 2387.6,
     "counts": {
       "abandoned_at_ceiling": 20
     }
@@ -21,7 +21,7 @@
     "ceiling": 10,
     "n": 20,
     "completion_rate": 1.0,
-    "mean_latency_ms": 5856.3,
+    "mean_latency_ms": 5705.9,
     "counts": {
       "valid_first_attempt": 20
     }
@@ -30,7 +30,7 @@
     "ceiling": "6 (adversarial)",
     "n": 5,
     "completion_rate": 0.0,
-    "mean_latency_ms": 14777.6,
+    "mean_latency_ms": 14457.4,
     "counts": {
       "abandoned_at_ceiling": 5
     }

@@ -5,13 +5,13 @@
     "retries": 1,
     "abandoned": true,
     "turn_count": 7,
-    "latency_ms": 17585.3,
+    "latency_ms": 15705.9,
     "final_tags": [
-      "computer networking",
-      "database systems",
-      "operating systems internals"
+      "computer science survey",
+      "multi-subfield course",
+      "comprehensive final"
     ],
-    "final_summary": "A comprehensive computer science course covering ten subfields with weekly guest lectures and a final exam.",
+    "final_summary": "A semester-long computer science course covering ten subfields with guest lectures and a comprehensive final.",
     "error": null,
     "classification": "abandoned_at_ceiling"
   },
@@ -21,13 +21,13 @@
     "retries": 1,
     "abandoned": true,
     "turn_count": 7,
-    "latency_ms": 13977.5,
+    "latency_ms": 13750.5,
     "final_tags": [
       "computer science survey",
       "multi-subfield course",
       "comprehensive final"
     ],
-    "final_summary": "A semester-long computer science course covering ten subfields with weekly lectures and a comprehensive final.",
+    "final_summary": "A semester-long course covering ten computer science areas with weekly lectures and a comprehensive final exam.",
     "error": null,
     "classification": "abandoned_at_ceiling"
   },
@@ -37,13 +37,13 @@
     "retries": 1,
     "abandoned": true,
     "turn_count": 7,
-    "latency_ms": 13838.9,
+    "latency_ms": 13726.3,
     "final_tags": [
       "computer science survey",
       "multi-subfield course",
       "comprehensive final"
     ],
-    "final_summary": "A semester-long course covering ten computer science subfields with guest lectures and a cumulative final.",
+    "final_summary": "A semester-long course covering ten computer science areas with guest lectures and a cumulative final.",
     "error": null,
     "classification": "abandoned_at_ceiling"
   },
@@ -53,13 +53,13 @@
     "retries": 1,
     "abandoned": true,
     "turn_count": 7,
-    "latency_ms": 14007.3,
+    "latency_ms": 14256.4,
     "final_tags": [
       "computer science survey",
-      "ten subfields",
-      "cumulative final"
+      "multi-subfield course",
+      "comprehensive final"
     ],
-    "final_summary": "A semester-long computer science course covering ten subfields with weekly lectures and a comprehensive final exam.",
+    "final_summary": "A semester-long course covering ten computer science subfields with weekly guest lectures and a comprehensive final.",
     "error": null,
     "classification": "abandoned_at_ceiling"
   },
@@ -69,13 +69,13 @@
     "retries": 1,
     "abandoned": true,
     "turn_count": 7,
-    "latency_ms": 14479.2,
+    "latency_ms": 14847.7,
     "final_tags": [
       "computer science survey",
-      "ten subfields coverage",
-      "cumulative final exam"
+      "multi-subfield course",
+      "comprehensive final"
     ],
-    "final_summary": "A semester-long course covering ten major computer science subfields with weekly lectures and a comprehensive final exam.",
+    "final_summary": "A semester-long computer science course covering ten subfields with weekly lectures and a comprehensive final exam.",
     "error": null,
     "classification": "abandoned_at_ceiling"
   }

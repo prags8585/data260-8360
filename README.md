@@ -42,3 +42,34 @@ Directly because of the first answer: every turn resends the full history so far
 ### Q: What eventually limits that growth?
 
 The model's context window -- the maximum number of tokens it can accept in a single call. Our `qwen3:8b` instance is configured with a 4096-token context (visible via `ollama ps`). Once system prompt + accumulated history + new message would exceed that limit, something has to give: older turns must be dropped, summarized, or the call fails outright. In practice, real systems manage this proactively -- truncating or summarizing older context, capping conversation length, or using retrieval instead of full history -- both because of this hard ceiling and because cost/latency scale with input size long before the ceiling is ever reached.
+
+# DATA-260 Homework 2 — Karthik Pragada (SID4: 8360)
+
+## Reproducible run instructions
+
+```bash
+# One-time setup (reuses the same venv/model as HW1)
+source .venv/bin/activate
+pip install fastapi "uvicorn[standard]" jinja2 python-multipart langgraph pydantic
+ollama pull qwen3:8b
+
+# Part 1 & 2 -- FastAPI Course Catalogue app (PORT_BASE = 8260)
+uvicorn main:app --host 0.0.0.0 --port 8260
+open http://localhost:8260
+
+# Part 3 -- stateful Planner/Reviewer agent graph
+python agent_graph.py --temperature 0.7                        # baseline, ends normally
+python agent_graph.py --temperature 0.7 --force-issue --ceiling 4   # forces the self-correction loop
+
+# Part 4 -- schema gate demo runs
+python agent_graph.py --input reports/hw02/cases/schema_input.json --temperature 0.7
+python agent_graph.py --input reports/hw02/cases/adversarial_input.json --temperature 0.7 --ceiling 6
+
+# Part 4 -- full batch experiments (30 + 20 + 20 + 5 = 75 runs, ~7 minutes)
+# writes reports/hw02/raw/*.json and reports/hw02/raw/part4_summary.json
+python run_schema_experiment.py
+
+# Smoke test (starts the FastAPI backend and the agent graph, checks both
+# actually respond/terminate correctly) -- writes reports/hw02/verification.json
+python verify_hw02.py
+```

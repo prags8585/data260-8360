@@ -1,0 +1,135 @@
+{
+  "homework": "HW2",
+  "sid4": 8360,
+  "commit_hash": "b78a7c6eb08df7c70d540efa2c23085d33ae8cd3",
+  "model": "qwen3:8b",
+  "seed": 8360,
+  "verify_seed": 268360,
+  "timestamp": "2026-09-14T12:15:05.225375+00:00",
+  "checks": [
+    {
+      "name": "main.py exists",
+      "passed": true,
+      "detail": "found: main.py"
+    },
+    {
+      "name": "main.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: main.py"
+    },
+    {
+      "name": "templates/index.html exists",
+      "passed": true,
+      "detail": "found: templates/index.html"
+    },
+    {
+      "name": "static/style.css exists",
+      "passed": true,
+      "detail": "found: static/style.css"
+    },
+    {
+      "name": "static/script.js exists",
+      "passed": true,
+      "detail": "found: static/script.js"
+    },
+    {
+      "name": "FastAPI backend responds on PORT_BASE (8260)",
+      "passed": true,
+      "detail": "GET / -> HTTP 200 on port 8260"
+    },
+    {
+      "name": "agent_graph.py exists",
+      "passed": true,
+      "detail": "found: agent_graph.py"
+    },
+    {
+      "name": "agent_graph.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: agent_graph.py"
+    },
+    {
+      "name": "src/model_client.py exists",
+      "passed": true,
+      "detail": "found: src/model_client.py"
+    },
+    {
+      "name": "agent_graph.py routes LLM calls through src/model_client.py (not raw ChatOllama)",
+      "passed": true,
+      "detail": "import check on agent_graph.py"
+    },
+    {
+      "name": "LangGraph script terminates and returns exactly 3 tags",
+      "passed": true,
+      "detail": "graph terminated and published exactly 3 tags: ['smoke test', 'course description', 'verification']"
+    },
+    {
+      "name": "TagsSummarySchema defined in agent_graph.py",
+      "passed": true,
+      "detail": "class definition check"
+    },
+    {
+      "name": "reports/hw02/cases/schema_input.json exists and valid",
+      "passed": true,
+      "detail": "valid JSON: reports/hw02/cases/schema_input.json"
+    },
+    {
+      "name": "reports/hw02/cases/adversarial_input.json exists and valid",
+      "passed": true,
+      "detail": "valid JSON: reports/hw02/cases/adversarial_input.json"
+    },
+    {
+      "name": "30-run classification results saved",
+      "passed": true,
+      "detail": "reports/hw02/raw/schema_30runs.json"
+    },
+    {
+      "name": "ceiling=2 (20 runs) results saved",
+      "passed": true,
+      "detail": "reports/hw02/raw/ceiling_2_runs.json"
+    },
+    {
+      "name": "ceiling=10 (20 runs) results saved",
+      "passed": true,
+      "detail": "reports/hw02/raw/ceiling_10_runs.json"
+    },
+    {
+      "name": "adversarial (5 runs) results saved",
+      "passed": true,
+      "detail": "reports/hw02/raw/adversarial_5runs.json"
+    },
+    {
+      "name": "part4_summary.json exists and valid",
+      "passed": true,
+      "detail": "valid JSON: reports/hw02/raw/part4_summary.json"
+    },
+    {
+      "name": "RUN_LOG.txt exists and non-empty",
+      "passed": true,
+      "detail": "reports/hw02/RUN_LOG.txt"
+    },
+    {
+      "name": "METRICS.md exists",
+      "passed": true,
+      "detail": "found: reports/hw02/METRICS.md"
+    },
+    {
+      "name": "AI_USE.md exists",
+      "passed": true,
+      "detail": "found: reports/hw02/AI_USE.md"
+    },
+    {
+      "name": "report.pdf exists",
+      "passed": true,
+      "detail": "found: reports/hw02/report.pdf"
+    },
+    {
+      "name": "qwen3:8b pulled in Ollama",
+      "passed": true,
+      "detail": "NAME            ID              SIZE      MODIFIED     "
+    }
+  ],
+  "passed": 24,
+  "failed": 0,
+  "total": 24,
+  "overall": "PASS"
+}

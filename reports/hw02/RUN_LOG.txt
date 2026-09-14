@@ -1,0 +1,2046 @@
+=== 2026-09-14 05:07:21 PDT ===
+$ python run_schema_experiment.py
+Using existing fixed input at reports/hw02/cases/schema_input.json
+
+######################################################################
+# PART 4.3 -- 30 runs, classifying retry behavior (ceiling=6)
+######################################################################
+[30-run] run 1/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, Kubernetes, and scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 1, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 11585.8, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, Kubernetes, and scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 2/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 2, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5418.7, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 3/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 3, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5399.8, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 4/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 4, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5404.6, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 5/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 5, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5343.3, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 6/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 6, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5374.9, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 7/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 7, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5419.1, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 8/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 8, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5377.3, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 9/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 9, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5421.0, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 10/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 10, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5339.7, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 11/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 11, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5584.9, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 12/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 12, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5369.8, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 13/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 13, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5399.7, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 14/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 14, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5395.9, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 15/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 15, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5386.5, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 16/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 16, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5393.8, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 17/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 17, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5375.3, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 18/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 18, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5316.6, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 19/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 19, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5372.6, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 20/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 20, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5371.2, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 21/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 21, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5346.7, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 22/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 22, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5350.3, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 23/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 23, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5572.4, "final_tags": ["cloud architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 24/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 24, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5517.5, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 25/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 25, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5224.1, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 26/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 26, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5370.4, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 27/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 27, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5356.2, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 28/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud architectures",
+    "kubernetes deployment",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing and distributed systems, focusing on architectures, Kubernetes, and microservices with AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud architectures",
+    "kubernetes deployment",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing and distributed systems, focusing on architectures, Kubernetes, and microservices with AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 28, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5991.7, "final_tags": ["cloud architectures", "kubernetes deployment", "microservices design"], "final_summary": "This course covers cloud computing and distributed systems, focusing on architectures, Kubernetes, and microservices with AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 29/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 29, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5656.8, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[30-run] run 30/30 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 30, "ceiling": 6, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5333.2, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+Saved 30 records to reports/hw02/raw/schema_30runs.json
+{
+  "ceiling": "6 (classification experiment)",
+  "n": 30,
+  "completion_rate": 1.0,
+  "mean_latency_ms": 5625.7,
+  "counts": {
+    "valid_first_attempt": 30
+  }
+}
+
+######################################################################
+# PART 4.4 -- ceiling comparison: 20 runs @ ceiling=2, 20 @ ceiling=10
+######################################################################
+[ceiling=2] run 1/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 1, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2437.6, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 2/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 2, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2426.5, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 3/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 3, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2440.1, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 4/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 4, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2424.3, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 5/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 5, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2393.0, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 6/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 6, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2363.1, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 7/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 7, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2345.0, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 8/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 8, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2367.9, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 9/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 9, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2373.2, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 10/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 10, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2360.2, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 11/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 11, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2347.9, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 12/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 12, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2381.0, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 13/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for deploying scalable applications on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 13, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2357.9, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for deploying scalable applications on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 14/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 14, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2369.2, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 15/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 15, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2359.9, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 16/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 16, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2491.4, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 17/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 17, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2381.9, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 18/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 18, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2369.4, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 19/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 19, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2395.7, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+[ceiling=2] run 20/20 (ceiling=2)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: turn ceiling (2) reached -- ending ---
+{"run_index": 20, "ceiling": 2, "retries": 0, "abandoned": true, "turn_count": 3, "latency_ms": 2366.8, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "abandoned_at_ceiling"}
+Saved 20 records to reports/hw02/raw/ceiling_2_runs.json
+[ceiling=10] run 1/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 1, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5344.9, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 2/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 2, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5406.3, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 3/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 3, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5838.7, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 4/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud architectures",
+    "kubernetes deployment",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud architectures",
+    "kubernetes deployment",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 4, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5661.8, "final_tags": ["cloud architectures", "kubernetes deployment", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 5/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "The course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "The course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 5, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5817.3, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "The course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 6/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 6, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5814.0, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 7/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 7, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5419.3, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 8/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 8, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5444.2, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 9/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 9, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5428.7, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 10/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 10, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5502.8, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 11/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "The course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "The course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 11, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5863.5, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "The course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 12/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 12, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5870.9, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 13/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 13, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5524.1, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 14/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud architectures",
+    "kubernetes deployment",
+    "microservices design"
+  ],
+  "summary": "The course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud architectures",
+    "kubernetes deployment",
+    "microservices design"
+  ],
+  "summary": "The course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 14, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5742.6, "final_tags": ["cloud architectures", "kubernetes deployment", "microservices design"], "final_summary": "The course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 15/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 15, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 6041.6, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 16/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and container orchestration with Kubernetes for scalable application deployment."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and container orchestration with Kubernetes for scalable application deployment.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 16, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5964.5, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and container orchestration with Kubernetes for scalable application deployment.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 17/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for deploying scalable applications on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for deploying scalable applications on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 17, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5674.8, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for deploying scalable applications on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 18/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 18, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5987.2, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 19/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 19, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5887.8, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+[ceiling=10] run 20/20 (ceiling=10)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "cloud computing architectures",
+    "kubernetes orchestration",
+    "microservices design"
+  ],
+  "summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: no issues -> END ---
+{"run_index": 20, "ceiling": 10, "retries": 0, "abandoned": false, "turn_count": 4, "latency_ms": 5882.0, "final_tags": ["cloud computing architectures", "kubernetes orchestration", "microservices design"], "final_summary": "This course covers cloud computing, distributed systems, and Kubernetes for scalable application deployment on AWS and GCP.", "error": null, "classification": "valid_first_attempt"}
+Saved 20 records to reports/hw02/raw/ceiling_10_runs.json
+{
+  "ceiling_2": {
+    "ceiling": 2,
+    "n": 20,
+    "completion_rate": 0.0,
+    "mean_latency_ms": 2387.6,
+    "counts": {
+      "abandoned_at_ceiling": 20
+    }
+  },
+  "ceiling_10": {
+    "ceiling": 10,
+    "n": 20,
+    "completion_rate": 1.0,
+    "mean_latency_ms": 5705.9,
+    "counts": {
+      "valid_first_attempt": 20
+    }
+  }
+}
+
+######################################################################
+# PART 4.5 -- adversarial input, 5 runs (ceiling=6)
+######################################################################
+[adversarial] run 1/5 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "computer networking",
+    "machine learning",
+    "natural language processing"
+  ],
+  "summary": "A comprehensive computer science course covering ten subfields with weekly guest lectures and a final exam."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "computer networking",
+    "machine learning",
+    "natural language processing"
+  ],
+  "summary": "A comprehensive computer science course covering ten subfields with weekly guest lectures and a final exam.",
+  "has_issues": true,
+  "feedback": "Tags are too specific and do not reflect the overall scope of the course, which covers ten major subfields."
+}
+--- ROUTER: issues found -> planner (self-correction) ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "computer science survey",
+    "multi-subfield course",
+    "comprehensive final"
+  ],
+  "summary": "A semester-long computer science course covering ten subfields with guest lectures and a comprehensive final."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "computer science survey",
+    "multi-subfield course",
+    "comprehensive final"
+  ],
+  "summary": "A semester-long computer science course covering ten subfields with guest lectures and a comprehensive final.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: turn ceiling (6) reached -- ending ---
+{"run_index": 1, "ceiling": 6, "retries": 1, "abandoned": true, "turn_count": 7, "latency_ms": 15705.9, "final_tags": ["computer science survey", "multi-subfield course", "comprehensive final"], "final_summary": "A semester-long computer science course covering ten subfields with guest lectures and a comprehensive final.", "error": null, "classification": "abandoned_at_ceiling"}
+[adversarial] run 2/5 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "computer networking",
+    "machine learning",
+    "natural language processing"
+  ],
+  "summary": "A comprehensive course covering ten computer science subfields with weekly guest lectures and a final exam."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "computer networking",
+    "machine learning",
+    "natural language processing"
+  ],
+  "summary": "A comprehensive course covering ten computer science subfields with weekly guest lectures and a final exam.",
+  "has_issues": true,
+  "feedback": "Tags are too specific and do not reflect the broader scope of the course."
+}
+--- ROUTER: issues found -> planner (self-correction) ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "computer science survey",
+    "multi-subfield course",
+    "comprehensive final"
+  ],
+  "summary": "A semester-long course covering ten computer science areas with weekly lectures and a comprehensive final exam."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "computer science survey",
+    "multi-subfield course",
+    "comprehensive final"
+  ],
+  "summary": "A semester-long course covering ten computer science areas with weekly lectures and a comprehensive final exam.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: turn ceiling (6) reached -- ending ---
+{"run_index": 2, "ceiling": 6, "retries": 1, "abandoned": true, "turn_count": 7, "latency_ms": 13750.5, "final_tags": ["computer science survey", "multi-subfield course", "comprehensive final"], "final_summary": "A semester-long course covering ten computer science areas with weekly lectures and a comprehensive final exam.", "error": null, "classification": "abandoned_at_ceiling"}
+[adversarial] run 3/5 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "computer networking",
+    "machine learning",
+    "natural language processing"
+  ],
+  "summary": "A comprehensive course covering ten computer science subfields with weekly guest lectures and a final exam."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "computer networking",
+    "machine learning",
+    "natural language processing"
+  ],
+  "summary": "A comprehensive course covering ten computer science subfields with weekly guest lectures and a final exam.",
+  "has_issues": true,
+  "feedback": "Tags are too specific and do not reflect the broader scope of the course."
+}
+--- ROUTER: issues found -> planner (self-correction) ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "computer science survey",
+    "multi-subfield course",
+    "comprehensive final"
+  ],
+  "summary": "A semester-long course covering ten computer science areas with guest lectures and a cumulative final."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "computer science survey",
+    "multi-subfield course",
+    "comprehensive final"
+  ],
+  "summary": "A semester-long course covering ten computer science areas with guest lectures and a cumulative final.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: turn ceiling (6) reached -- ending ---
+{"run_index": 3, "ceiling": 6, "retries": 1, "abandoned": true, "turn_count": 7, "latency_ms": 13726.3, "final_tags": ["computer science survey", "multi-subfield course", "comprehensive final"], "final_summary": "A semester-long course covering ten computer science areas with guest lectures and a cumulative final.", "error": null, "classification": "abandoned_at_ceiling"}
+[adversarial] run 4/5 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "computer networking",
+    "machine learning",
+    "natural language processing"
+  ],
+  "summary": "A semester-long course covering ten computer science subfields with weekly guest lectures and a comprehensive final."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "computer networking",
+    "machine learning",
+    "natural language processing"
+  ],
+  "summary": "A semester-long course covering ten computer science subfields with weekly guest lectures and a comprehensive final.",
+  "has_issues": true,
+  "feedback": "Tags are too specific and do not reflect the broader scope of the course."
+}
+--- ROUTER: issues found -> planner (self-correction) ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "computer science survey",
+    "multi-subfield course",
+    "comprehensive final"
+  ],
+  "summary": "A semester-long course covering ten computer science subfields with weekly guest lectures and a comprehensive final."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "computer science survey",
+    "multi-subfield course",
+    "comprehensive final"
+  ],
+  "summary": "A semester-long course covering ten computer science subfields with weekly guest lectures and a comprehensive final.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: turn ceiling (6) reached -- ending ---
+{"run_index": 4, "ceiling": 6, "retries": 1, "abandoned": true, "turn_count": 7, "latency_ms": 14256.4, "final_tags": ["computer science survey", "multi-subfield course", "comprehensive final"], "final_summary": "A semester-long course covering ten computer science subfields with weekly guest lectures and a comprehensive final.", "error": null, "classification": "abandoned_at_ceiling"}
+[adversarial] run 5/5 (ceiling=6)
+--- ROUTER: no proposal yet -> planner ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "computer networking",
+    "machine learning",
+    "natural language processing"
+  ],
+  "summary": "A semester-long course covering ten computer science subfields with weekly guest lectures and a comprehensive final exam."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "computer networking",
+    "machine learning",
+    "natural language processing"
+  ],
+  "summary": "A semester-long course covering ten computer science subfields with weekly guest lectures and a comprehensive final exam.",
+  "has_issues": true,
+  "feedback": "Tags are too specific and do not reflect the broader scope of the course."
+}
+--- ROUTER: issues found -> planner (self-correction) ---
+--- NODE: Planner ---
+{
+  "tags": [
+    "computer science survey",
+    "multi-subfield course",
+    "comprehensive final"
+  ],
+  "summary": "A semester-long computer science course covering ten subfields with weekly lectures and a comprehensive final exam."
+}
+--- ROUTER: proposal not yet schema-validated -> validate ---
+--- NODE: Validate (Pydantic) ---
+valid
+--- ROUTER: schema OK, not yet reviewed -> reviewer ---
+--- NODE: Reviewer ---
+{
+  "tags": [
+    "computer science survey",
+    "multi-subfield course",
+    "comprehensive final"
+  ],
+  "summary": "A semester-long computer science course covering ten subfields with weekly lectures and a comprehensive final exam.",
+  "has_issues": false,
+  "feedback": ""
+}
+--- ROUTER: turn ceiling (6) reached -- ending ---
+{"run_index": 5, "ceiling": 6, "retries": 1, "abandoned": true, "turn_count": 7, "latency_ms": 14847.7, "final_tags": ["computer science survey", "multi-subfield course", "comprehensive final"], "final_summary": "A semester-long computer science course covering ten subfields with weekly lectures and a comprehensive final exam.", "error": null, "classification": "abandoned_at_ceiling"}
+Saved 5 records to reports/hw02/raw/adversarial_5runs.json
+{
+  "ceiling": "6 (adversarial)",
+  "n": 5,
+  "completion_rate": 0.0,
+  "mean_latency_ms": 14457.4,
+  "counts": {
+    "abandoned_at_ceiling": 5
+  }
+}
+
+All experiments complete. Summary saved to reports/hw02/raw/part4_summary.json
+
+=== 2026-09-14 05:14:06 PDT completed ===
