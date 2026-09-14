@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-"""Run agents_demo.py's Planner->Reviewer->Finalizer pipeline N times at each of two
-temperatures on one fixed input, to measure run-to-run non-determinism."""
-
 import argparse
 import json
 from collections import Counter

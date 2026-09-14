@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Planner -> Reviewer -> Finalizer agent pipeline over a local Ollama LLM."""
 
 import argparse
 import json

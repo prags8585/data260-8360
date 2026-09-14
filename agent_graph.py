@@ -25,7 +25,6 @@ TURN_CEILING_DEFAULT = 6
 
 
 class TagsSummarySchema(BaseModel):
-    """Part 4 output contract: exactly 3 tags (3-30 chars each), summary <=25 words."""
 
     tags: List[str]
     summary: str

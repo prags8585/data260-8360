@@ -1,9 +1,3 @@
-"""FastAPI backend for the Course Catalogue app (HW2 Part 2).
-
-Real in-memory CRUD for the Course entity: create, update record #1,
-delete the highest-ID record, and search by primary/secondary field.
-Server-rendered (Jinja2), Post/Redirect/Get throughout.
-"""
 
 import asyncio
 
