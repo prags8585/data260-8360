@@ -1,11 +1,11 @@
 {
   "homework": "HW2",
   "sid4": 8360,
-  "commit_hash": "b78a7c6eb08df7c70d540efa2c23085d33ae8cd3",
+  "commit_hash": "6b01cc3a4245dd780042af99f8dec5db45f380bb",
   "model": "qwen3:8b",
   "seed": 8360,
   "verify_seed": 268360,
-  "timestamp": "2026-09-14T12:15:05.225375+00:00",
+  "timestamp": "2026-09-14T13:09:14.942319+00:00",
   "checks": [
     {
       "name": "main.py exists",
@@ -118,9 +118,9 @@
       "detail": "found: reports/hw02/AI_USE.md"
     },
     {
-      "name": "report.pdf exists",
+      "name": "report PDF exists",
       "passed": true,
-      "detail": "found: reports/hw02/report.pdf"
+      "detail": "found: reports/hw02/Pragada_HW2.pdf"
     },
     {
       "name": "qwen3:8b pulled in Ollama",

@@ -165,7 +165,7 @@ check("RUN_LOG.txt exists and non-empty", lambda: (
 ))
 check("METRICS.md exists", lambda: file_exists("reports/hw02/METRICS.md"))
 check("AI_USE.md exists", lambda: file_exists("reports/hw02/AI_USE.md"))
-check("report.pdf exists", lambda: file_exists("reports/hw02/report.pdf"))
+check("report PDF exists", lambda: file_exists("reports/hw02/Pragada_HW2.pdf"))
 
 
 def ollama_model_pulled():
