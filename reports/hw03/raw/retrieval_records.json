@@ -1,0 +1,917 @@
+[
+  {
+    "technique": "token",
+    "question_id": "q1",
+    "query": "What SJSU cumulative GPA must graduate students maintain to remain in good academic standing, and what happens if a graduate student's term GPA falls below that while already on probation?\n",
+    "query_embed_dim": 384,
+    "query_embed_first8": [
+      -0.067905,
+      0.002891,
+      0.00224,
+      -0.054041,
+      0.020934,
+      0.068147,
+      -0.07436,
+      0.060329
+    ],
+    "latency_ms": 9.141,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.772856,
+        "cosine_sim": 0.774124,
+        "chunk_len": 1222,
+        "source_file": "graduate_policies_procedures.txt",
+        "preview": "Policy S17-13. Because graduate students are required to maintain a minimum cumulative GPA of 3.0, all finishing graduate students would receive honors; thus th"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.766352,
+        "cosine_sim": 0.750326,
+        "chunk_len": 1172,
+        "source_file": "graduate_policies_procedures.txt",
+        "preview": "disqualification. To avoid disqualification, at least one graded course must be taken each Spring and Fall semester, while on probation. The student remains on "
+      },
+      {
+        "rank": 3,
+        "store_score": 0.74675,
+        "cosine_sim": 0.765844,
+        "chunk_len": 1186,
+        "source_file": "undergraduate_policies_procedures.txt",
+        "preview": "to Undergraduate Advising and Success Center (UASC), and may do academic work to be reinstated to the major, or change to another major for which they are quali"
+      },
+      {
+        "rank": 4,
+        "store_score": 0.733287,
+        "cosine_sim": 0.745556,
+        "chunk_len": 1183,
+        "source_file": "undergraduate_policies_procedures.txt",
+        "preview": "falls below 2.0. Freshmen on Academic Probation are allowed a second consecutive semester of probation if their SJSU cumulative GPA is in the range 1.50 to 1.99"
+      },
+      {
+        "rank": 5,
+        "store_score": 0.706342,
+        "cosine_sim": 0.694962,
+        "chunk_len": 1309,
+        "source_file": "graduate_policies_procedures.txt",
+        "preview": "to achieve a set of academic standards of the department.  Academic Disqualification  A graduate student who is on academic probation is academically disqualifi"
+      }
+    ],
+    "expected_source_file": "grades_policy.txt",
+    "recall_hit": false
+  },
+  {
+    "technique": "token",
+    "question_id": "q2",
+    "query": "Which specific course satisfies the Graduation Writing Assessment Requirement (GWAR) for the MS in Data Analytics program at SJSU?\n",
+    "query_embed_dim": 384,
+    "query_embed_first8": [
+      -0.066372,
+      -0.035388,
+      -0.026964,
+      0.024589,
+      -0.005733,
+      0.003443,
+      -0.081794,
+      -0.042765
+    ],
+    "latency_ms": 8.289,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.764482,
+        "cosine_sim": 0.761695,
+        "chunk_len": 1300,
+        "source_file": "applied_data_intelligence_ms_program.txt",
+        "preview": "outlined in the Graduation Requirements section of the Graduate Policies and Procedures.  MS - Applied Data Intelligence Graduation Requirements  The program co"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.743648,
+        "cosine_sim": 0.706039,
+        "chunk_len": 1241,
+        "source_file": "data_analytics_ms_program.txt",
+        "preview": "GPA, and culminating experience requirements as outlined in the Graduation Requirements section of the Graduate Policies and Procedures.  MS - Data Analytics Gr"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.719968,
+        "cosine_sim": 0.716676,
+        "chunk_len": 1366,
+        "source_file": "data_analytics_ms_program.txt",
+        "preview": "standing, the successful applicant must have earned a bachelor's degree from a regionally accredited institution and achieved a GPA of at least 3.0 (on a 4.0 sc"
+      },
+      {
+        "rank": 4,
+        "store_score": 0.695243,
+        "cosine_sim": 0.677449,
+        "chunk_len": 1444,
+        "source_file": "applied_data_intelligence_ms_program.txt",
+        "preview": "can be admitted to classified standing if the applicant has a bachelor's degree from an accredited institution with a grade point average of 3.0 or better. In a"
+      },
+      {
+        "rank": 5,
+        "store_score": 0.674693,
+        "cosine_sim": 0.683014,
+        "chunk_len": 1141,
+        "source_file": "data_science_ms_program.txt",
+        "preview": "at SJSU).  Applicants from countries in which the native language is not English must submit TOEFL scores. Minimum TOEFL scores acceptable for admission are 575"
+      }
+    ],
+    "expected_source_file": "data_analytics_ms_program.txt",
+    "recall_hit": true
+  },
+  {
+    "technique": "token",
+    "question_id": "q3",
+    "query": "What are the two specialization tracks in SJSU's MS in Applied Data Intelligence program, and name one elective course unique to the Data Engineering specialization.\n",
+    "query_embed_dim": 384,
+    "query_embed_first8": [
+      -0.02743,
+      -0.068671,
+      -0.022035,
+      0.021754,
+      0.000175,
+      -0.039831,
+      -0.029643,
+      0.0243
+    ],
+    "latency_ms": 7.509,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.675474,
+        "cosine_sim": 0.636141,
+        "chunk_len": 1326,
+        "source_file": "msda_curriculum_courses.txt",
+        "preview": "use, and evaluate applied data intelligence technologies and tools. Apply Necessary Skills Apply effective oral and written communication skills necessary to pr"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.667953,
+        "cosine_sim": 0.644114,
+        "chunk_len": 1434,
+        "source_file": "applied_data_intelligence_ms_program.txt",
+        "preview": "Program: Applied Data Intelligence, MS - San Jos\u00e9 State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=17&poid=13784  Applied Data Intel"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.666494,
+        "cosine_sim": 0.653941,
+        "chunk_len": 1362,
+        "source_file": "data_science_ms_program.txt",
+        "preview": "Program: Data Science, MS - San Jos\u00e9 State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=17&poid=14075  Data Science, MS  Admissions Re"
+      },
+      {
+        "rank": 4,
+        "store_score": 0.660618,
+        "cosine_sim": 0.636305,
+        "chunk_len": 1005,
+        "source_file": "msda_curriculum_courses.txt",
+        "preview": "Program Frequently Asked Questions Want to learn more about our MS in Applied Data Intelligence degree? Explore our FAQs page to get detailed information about "
+      },
+      {
+        "rank": 5,
+        "store_score": 0.656676,
+        "cosine_sim": 0.622502,
+        "chunk_len": 1393,
+        "source_file": "msda_curriculum_courses.txt",
+        "preview": "data into actionable insights, and step confidently into advanced roles across technology, business and research. Apply Now Request Information Why Earn Your Ap"
+      }
+    ],
+    "expected_source_file": "applied_data_intelligence_ms_program.txt",
+    "recall_hit": true
+  },
+  {
+    "technique": "token",
+    "question_id": "q4",
+    "query": "What is SJSU's late registration fee for adding a class after the census date?\n",
+    "query_embed_dim": 384,
+    "query_embed_first8": [
+      -0.064736,
+      -0.056661,
+      -0.019322,
+      0.025363,
+      0.062045,
+      0.116772,
+      -0.098761,
+      -0.003607
+    ],
+    "latency_ms": 6.845,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.703974,
+        "cosine_sim": 0.758438,
+        "chunk_len": 1275,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "department that offers the course. Permission numbers become 'used' only after a successful enrollment request.  Adding Classes on the First Day of Instruction "
+      },
+      {
+        "rank": 2,
+        "store_score": 0.646388,
+        "cosine_sim": 0.638318,
+        "chunk_len": 1071,
+        "source_file": "adding_dropping_classes.txt",
+        "preview": "the MSIDT Candidacy Approval Form Application for Award of Graduate Degree Awards for Graduating Students Onsite Graduation Ceremony Virtual Graduation Celebrat"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.618498,
+        "cosine_sim": 0.60606,
+        "chunk_len": 1156,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "which begin the first day after instruction ends). Students in the Step to College programs are not required to pay the late registration fee.  Waitlisting  SJS"
+      },
+      {
+        "rank": 4,
+        "store_score": 0.600085,
+        "cosine_sim": 0.578474,
+        "chunk_len": 1342,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "who receive financial aid must consult with Financial Aid prior to withdrawing regarding any required return or repayment of grant or loan assistance.  Restrict"
+      },
+      {
+        "rank": 5,
+        "store_score": 0.565728,
+        "cosine_sim": 0.518397,
+        "chunk_len": 1265,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "and units earned during the semester will be disregarded when calculating GPAs for graduation, but the courses and grades will still appear on the transcript.  "
+      }
+    ],
+    "expected_source_file": "registration_and_attendance.txt",
+    "recall_hit": true
+  },
+  {
+    "technique": "token",
+    "question_id": "q5",
+    "query": "What was SJSU's Enrollment Census Date for Fall 2022?\n",
+    "query_embed_dim": 384,
+    "query_embed_first8": [
+      -0.016503,
+      -0.034264,
+      0.04149,
+      0.04135,
+      0.017492,
+      0.10967,
+      -0.171652,
+      0.034994
+    ],
+    "latency_ms": 7.779,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.543922,
+        "cosine_sim": 0.553649,
+        "chunk_len": 881,
+        "source_file": "academic_calendar.txt",
+        "preview": "Calendar - San Jos\u00e9 State University Source: https://catalog.sjsu.edu/content.php?catoid=13&navoid=4974  Calendar  2022-2023 Academic Year  Academic Year: Augus"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.533217,
+        "cosine_sim": 0.533889,
+        "chunk_len": 1071,
+        "source_file": "adding_dropping_classes.txt",
+        "preview": "the MSIDT Candidacy Approval Form Application for Award of Graduate Degree Awards for Graduating Students Onsite Graduation Ceremony Virtual Graduation Celebrat"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.528982,
+        "cosine_sim": 0.495166,
+        "chunk_len": 820,
+        "source_file": "adding_dropping_classes.txt",
+        "preview": "and for dates, read our iSchool Registration Process . Late Registration Late Registration begins on the first official day of the semester.\u00a0For Regular Session"
+      },
+      {
+        "rank": 4,
+        "store_score": 0.481679,
+        "cosine_sim": 0.4455,
+        "chunk_len": 1265,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "and units earned during the semester will be disregarded when calculating GPAs for graduation, but the courses and grades will still appear on the transcript.  "
+      },
+      {
+        "rank": 5,
+        "store_score": 0.471525,
+        "cosine_sim": 0.434102,
+        "chunk_len": 1368,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "appointments are not mailed or emailed to students.  Create a registration worksheet before logging on  Build a sample schedule and have alternate schedules or "
+      }
+    ],
+    "expected_source_file": "academic_calendar.txt",
+    "recall_hit": true
+  },
+  {
+    "technique": "semantic",
+    "question_id": "q1",
+    "query": "What SJSU cumulative GPA must graduate students maintain to remain in good academic standing, and what happens if a graduate student's term GPA falls below that while already on probation?\n",
+    "query_embed_dim": 384,
+    "query_embed_first8": [
+      -0.067905,
+      0.002891,
+      0.00224,
+      -0.054041,
+      0.020934,
+      0.068147,
+      -0.07436,
+      0.060329
+    ],
+    "latency_ms": 5.467,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.739526,
+        "cosine_sim": 0.80019,
+        "chunk_len": 421,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "Probation Holds: undergraduates with SJSU cumulative GPA below 2.00 (3.00 for graduate students), or reinstated on probation status, must see their major adviso"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.73087,
+        "cosine_sim": 0.732879,
+        "chunk_len": 4377,
+        "source_file": "graduate_policies_procedures.txt",
+        "preview": "If letters of permission are not submitted with the final copies of the dissertation, the College of Graduate Studies will not approve the dissertation.  Latin "
+      },
+      {
+        "rank": 3,
+        "store_score": 0.657926,
+        "cosine_sim": 0.669747,
+        "chunk_len": 4330,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "It is the student's responsibility to make sure classes are dropped.  Late Drop Petitions  Students may petition to Late Drop for serious and compelling reasons"
+      },
+      {
+        "rank": 4,
+        "store_score": 0.645642,
+        "cosine_sim": 0.605537,
+        "chunk_len": 3974,
+        "source_file": "undergraduate_policies_procedures.txt",
+        "preview": "Undergraduate Policies & Procedures - San Jos\u00e9 State University Source: https://catalog.sjsu.edu/content.php?catoid=13&navoid=4884  Undergraduate Policies & Pro"
+      },
+      {
+        "rank": 5,
+        "store_score": 0.628175,
+        "cosine_sim": 0.626905,
+        "chunk_len": 1580,
+        "source_file": "graduate_policies_procedures.txt",
+        "preview": "The courses must amount to a minimum of 6 and maximum of 9 units per semester, and all must be taken in a single semester. They must be letter graded, upper div"
+      }
+    ],
+    "expected_source_file": "grades_policy.txt",
+    "recall_hit": false
+  },
+  {
+    "technique": "semantic",
+    "question_id": "q2",
+    "query": "Which specific course satisfies the Graduation Writing Assessment Requirement (GWAR) for the MS in Data Analytics program at SJSU?\n",
+    "query_embed_dim": 384,
+    "query_embed_first8": [
+      -0.066372,
+      -0.035388,
+      -0.026964,
+      0.024589,
+      -0.005733,
+      0.003443,
+      -0.081794,
+      -0.042765
+    ],
+    "latency_ms": 5.444,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.706628,
+        "cosine_sim": 0.659091,
+        "chunk_len": 3254,
+        "source_file": "applied_data_intelligence_ms_program.txt",
+        "preview": "These specializations will be offered according to industry trends, student demands, and resource availability.  Graduation Writing Assessment Requirement  At S"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.701885,
+        "cosine_sim": 0.715758,
+        "chunk_len": 6765,
+        "source_file": "graduate_policies_procedures.txt",
+        "preview": "Details on the RP (Report in Progress) administrative grading symbol may be found in University Policy S09-7.  Graduation Writing Assessment Requirement (GWAR) "
+      },
+      {
+        "rank": 3,
+        "store_score": 0.683125,
+        "cosine_sim": 0.684665,
+        "chunk_len": 2770,
+        "source_file": "data_analytics_ms_program.txt",
+        "preview": "Students can be admitted in either classified or conditionally classified standing. To be admitted to classified standing, the successful applicant must have ea"
+      },
+      {
+        "rank": 4,
+        "store_score": 0.675617,
+        "cosine_sim": 0.670357,
+        "chunk_len": 3421,
+        "source_file": "msda_curriculum_courses.txt",
+        "preview": "Entertainment Waymo World Bank Learn more about what alumni from SJSU\u2019s MS in Applied Data Intelligence - formerly the MS in Data Analytics - have accomplished."
+      },
+      {
+        "rank": 5,
+        "store_score": 0.66789,
+        "cosine_sim": 0.64384,
+        "chunk_len": 1733,
+        "source_file": "applied_data_intelligence_ms_program.txt",
+        "preview": "An applicant can be admitted in either classified or conditionally classified standing.  An applicant can be admitted to classified standing if the applicant ha"
+      }
+    ],
+    "expected_source_file": "data_analytics_ms_program.txt",
+    "recall_hit": true
+  },
+  {
+    "technique": "semantic",
+    "question_id": "q3",
+    "query": "What are the two specialization tracks in SJSU's MS in Applied Data Intelligence program, and name one elective course unique to the Data Engineering specialization.\n",
+    "query_embed_dim": 384,
+    "query_embed_first8": [
+      -0.02743,
+      -0.068671,
+      -0.022035,
+      0.021754,
+      0.000175,
+      -0.039831,
+      -0.029643,
+      0.0243
+    ],
+    "latency_ms": 5.38,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.668653,
+        "cosine_sim": 0.6847,
+        "chunk_len": 3777,
+        "source_file": "msda_curriculum_courses.txt",
+        "preview": "MS in Applied Data Intelligence | Department of Applied Data Science Skip to main content Master of Science in Applied Data Intelligence Transform Data Into Imp"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.667953,
+        "cosine_sim": 0.640085,
+        "chunk_len": 2423,
+        "source_file": "applied_data_intelligence_ms_program.txt",
+        "preview": "Program: Applied Data Intelligence, MS - San Jos\u00e9 State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=17&poid=13784  Applied Data Intel"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.659107,
+        "cosine_sim": 0.655045,
+        "chunk_len": 1249,
+        "source_file": "data_science_ms_program.txt",
+        "preview": "Program: Data Science, MS - San Jos\u00e9 State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=17&poid=14075  Data Science, MS  Admissions Re"
+      },
+      {
+        "rank": 4,
+        "store_score": 0.656215,
+        "cosine_sim": 0.637509,
+        "chunk_len": 3421,
+        "source_file": "msda_curriculum_courses.txt",
+        "preview": "Entertainment Waymo World Bank Learn more about what alumni from SJSU\u2019s MS in Applied Data Intelligence - formerly the MS in Data Analytics - have accomplished."
+      },
+      {
+        "rank": 5,
+        "store_score": 0.626916,
+        "cosine_sim": 0.602787,
+        "chunk_len": 2397,
+        "source_file": "data_analytics_ms_program.txt",
+        "preview": "Program: Data Analytics, MS - San Jos\u00e9 State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=13&poid=7675  Data Analytics, MS  Admissions"
+      }
+    ],
+    "expected_source_file": "applied_data_intelligence_ms_program.txt",
+    "recall_hit": true
+  },
+  {
+    "technique": "semantic",
+    "question_id": "q4",
+    "query": "What is SJSU's late registration fee for adding a class after the census date?\n",
+    "query_embed_dim": 384,
+    "query_embed_first8": [
+      -0.064736,
+      -0.056661,
+      -0.019322,
+      0.025363,
+      0.062045,
+      0.116772,
+      -0.098761,
+      -0.003607
+    ],
+    "latency_ms": 4.754,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.622555,
+        "cosine_sim": 0.576811,
+        "chunk_len": 1339,
+        "source_file": "adding_dropping_classes.txt",
+        "preview": "For Special Session students, the last day to add is 14 days after the first day of the semester.\u00a0Special Session students should\u00a0abide by the drop deadline giv"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.562771,
+        "cosine_sim": 0.588665,
+        "chunk_len": 924,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "Registration and Attendance - San Jos\u00e9 State University Source: https://catalog.sjsu.edu/content.php?catoid=13&navoid=4897  Registration and Attendance  SJSU ID"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.549594,
+        "cosine_sim": 0.51559,
+        "chunk_len": 4330,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "It is the student's responsibility to make sure classes are dropped.  Late Drop Petitions  Students may petition to Late Drop for serious and compelling reasons"
+      },
+      {
+        "rank": 4,
+        "store_score": 0.482015,
+        "cosine_sim": 0.447904,
+        "chunk_len": 421,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "Probation Holds: undergraduates with SJSU cumulative GPA below 2.00 (3.00 for graduate students), or reinstated on probation status, must see their major adviso"
+      },
+      {
+        "rank": 5,
+        "store_score": 0.479821,
+        "cosine_sim": 0.47807,
+        "chunk_len": 4723,
+        "source_file": "graduate_policies_procedures.txt",
+        "preview": "Thus, no more than seven years may elapse between the time the first course in a graduate program is completed and the time the last course in the program is co"
+      }
+    ],
+    "expected_source_file": "registration_and_attendance.txt",
+    "recall_hit": true
+  },
+  {
+    "technique": "semantic",
+    "question_id": "q5",
+    "query": "What was SJSU's Enrollment Census Date for Fall 2022?\n",
+    "query_embed_dim": 384,
+    "query_embed_first8": [
+      -0.016503,
+      -0.034264,
+      0.04149,
+      0.04135,
+      0.017492,
+      0.10967,
+      -0.171652,
+      0.034994
+    ],
+    "latency_ms": 5.181,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.538627,
+        "cosine_sim": 0.540891,
+        "chunk_len": 933,
+        "source_file": "academic_calendar.txt",
+        "preview": "Calendar - San Jos\u00e9 State University Source: https://catalog.sjsu.edu/content.php?catoid=13&navoid=4974  Calendar  2022-2023 Academic Year  Academic Year: Augus"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.507054,
+        "cosine_sim": 0.459179,
+        "chunk_len": 1339,
+        "source_file": "adding_dropping_classes.txt",
+        "preview": "For Special Session students, the last day to add is 14 days after the first day of the semester.\u00a0Special Session students should\u00a0abide by the drop deadline giv"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.474009,
+        "cosine_sim": 0.50115,
+        "chunk_len": 924,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "Registration and Attendance - San Jos\u00e9 State University Source: https://catalog.sjsu.edu/content.php?catoid=13&navoid=4897  Registration and Attendance  SJSU ID"
+      },
+      {
+        "rank": 4,
+        "store_score": 0.468802,
+        "cosine_sim": 0.4424,
+        "chunk_len": 1893,
+        "source_file": "undergraduate_policies_procedures.txt",
+        "preview": "Credit earned may be applied to residence unit requirements for previously matriculated students.  Readmission - Former Students Returning (FSR)  Readmission is"
+      },
+      {
+        "rank": 5,
+        "store_score": 0.463628,
+        "cosine_sim": 0.448554,
+        "chunk_len": 3421,
+        "source_file": "msda_curriculum_courses.txt",
+        "preview": "Entertainment Waymo World Bank Learn more about what alumni from SJSU\u2019s MS in Applied Data Intelligence - formerly the MS in Data Analytics - have accomplished."
+      }
+    ],
+    "expected_source_file": "academic_calendar.txt",
+    "recall_hit": true
+  },
+  {
+    "technique": "sentence_window",
+    "question_id": "q1",
+    "query": "What SJSU cumulative GPA must graduate students maintain to remain in good academic standing, and what happens if a graduate student's term GPA falls below that while already on probation?\n",
+    "query_embed_dim": 384,
+    "query_embed_first8": [
+      -0.067905,
+      0.002891,
+      0.00224,
+      -0.054041,
+      0.020934,
+      0.068147,
+      -0.07436,
+      0.060329
+    ],
+    "latency_ms": 16.929,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.834585,
+        "cosine_sim": 0.859025,
+        "chunk_len": 432,
+        "source_file": "graduate_policies_procedures.txt",
+        "preview": "Academic Standing: Probation | Disqualification | Discontinuation | Appeal | Reinstatement | Readmission  Academic Probation  Graduate students enrolled in a de"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.781998,
+        "cosine_sim": 0.856874,
+        "chunk_len": 160,
+        "source_file": "undergraduate_policies_procedures.txt",
+        "preview": "Students will remain on academic probation until they return to good academic standing (SJSU cumulative GPA greater than or equal to 2.0) or are disqualified.  "
+      },
+      {
+        "rank": 3,
+        "store_score": 0.771021,
+        "cosine_sim": 0.784145,
+        "chunk_len": 146,
+        "source_file": "undergraduate_policies_procedures.txt",
+        "preview": "Freshmen on Academic Probation are allowed a second consecutive semester of probation if their SJSU cumulative GPA is in the range 1.50 to 1.99.  "
+      },
+      {
+        "rank": 4,
+        "store_score": 0.751065,
+        "cosine_sim": 0.812898,
+        "chunk_len": 98,
+        "source_file": "graduate_policies_procedures.txt",
+        "preview": "Probation is cleared when the SJSU cumulative GPA rises to 3.0 or better in any subsequent term.  "
+      },
+      {
+        "rank": 5,
+        "store_score": 0.749936,
+        "cosine_sim": 0.812345,
+        "chunk_len": 241,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "Probation Holds: undergraduates with SJSU cumulative GPA below 2.00 (3.00 for graduate students), or reinstated on probation status, must see their major adviso"
+      }
+    ],
+    "expected_source_file": "grades_policy.txt",
+    "recall_hit": false
+  },
+  {
+    "technique": "sentence_window",
+    "question_id": "q2",
+    "query": "Which specific course satisfies the Graduation Writing Assessment Requirement (GWAR) for the MS in Data Analytics program at SJSU?\n",
+    "query_embed_dim": 384,
+    "query_embed_first8": [
+      -0.066372,
+      -0.035388,
+      -0.026964,
+      0.024589,
+      -0.005733,
+      0.003443,
+      -0.081794,
+      -0.042765
+    ],
+    "latency_ms": 16.43,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.833694,
+        "cosine_sim": 0.794166,
+        "chunk_len": 126,
+        "source_file": "data_analytics_ms_program.txt",
+        "preview": "Graduation Writing Assessment Requirement  At SJSU, students must pass the Graduation Writing Assessment Requirement (GWAR).  "
+      },
+      {
+        "rank": 2,
+        "store_score": 0.797179,
+        "cosine_sim": 0.794166,
+        "chunk_len": 126,
+        "source_file": "applied_data_intelligence_ms_program.txt",
+        "preview": "Graduation Writing Assessment Requirement  At SJSU, students must pass the Graduation Writing Assessment Requirement (GWAR).  "
+      },
+      {
+        "rank": 3,
+        "store_score": 0.776948,
+        "cosine_sim": 0.813284,
+        "chunk_len": 231,
+        "source_file": "applied_data_intelligence_ms_program.txt",
+        "preview": "Candidacy includes successful completion of the Graduation Writing Assessment Requirement (GWAR), MSADI program course requirements and the links to specializat"
+      },
+      {
+        "rank": 4,
+        "store_score": 0.757023,
+        "cosine_sim": 0.694531,
+        "chunk_len": 125,
+        "source_file": "data_analytics_ms_program.txt",
+        "preview": "Candidacy includes successful completion of the Graduation Writing Assessment Requirement (GWAR), described in this catalog. "
+      },
+      {
+        "rank": 5,
+        "store_score": 0.738763,
+        "cosine_sim": 0.740701,
+        "chunk_len": 212,
+        "source_file": "graduate_policies_procedures.txt",
+        "preview": "Graduation Writing Assessment Requirement (GWAR)  The CSU Graduation Writing Assessment Requirement (GWAR) states that all students must demonstrate competency "
+      }
+    ],
+    "expected_source_file": "data_analytics_ms_program.txt",
+    "recall_hit": true
+  },
+  {
+    "technique": "sentence_window",
+    "question_id": "q3",
+    "query": "What are the two specialization tracks in SJSU's MS in Applied Data Intelligence program, and name one elective course unique to the Data Engineering specialization.\n",
+    "query_embed_dim": 384,
+    "query_embed_first8": [
+      -0.02743,
+      -0.068671,
+      -0.022035,
+      0.021754,
+      0.000175,
+      -0.039831,
+      -0.029643,
+      0.0243
+    ],
+    "latency_ms": 16.553,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.724425,
+        "cosine_sim": 0.645132,
+        "chunk_len": 161,
+        "source_file": "msda_curriculum_courses.txt",
+        "preview": "Entertainment Waymo World Bank Learn more about what alumni from SJSU\u2019s MS in Applied Data Intelligence - formerly the MS in Data Analytics - have accomplished."
+      },
+      {
+        "rank": 2,
+        "store_score": 0.724354,
+        "cosine_sim": 0.645212,
+        "chunk_len": 154,
+        "source_file": "msda_curriculum_courses.txt",
+        "preview": "SJSU\u2019s Master of Science in Applied Data Intelligence elevates your technical proficiency and professional leadership, preparing you to drive innovation. "
+      },
+      {
+        "rank": 3,
+        "store_score": 0.712977,
+        "cosine_sim": 0.695679,
+        "chunk_len": 124,
+        "source_file": "msda_curriculum_courses.txt",
+        "preview": "Apply to SJSU MSADI Program Frequently Asked Questions Want to learn more about our MS in Applied Data Intelligence degree? "
+      },
+      {
+        "rank": 4,
+        "store_score": 0.704737,
+        "cosine_sim": 0.609269,
+        "chunk_len": 146,
+        "source_file": "msda_curriculum_courses.txt",
+        "preview": "Financial Aid Embrace Your Data-Driven Future at SJSU Earn your Master of Science in Applied Data Intelligence and make real-world change happen. "
+      },
+      {
+        "rank": 5,
+        "store_score": 0.690282,
+        "cosine_sim": 0.707374,
+        "chunk_len": 551,
+        "source_file": "applied_data_intelligence_ms_program.txt",
+        "preview": "Program: Applied Data Intelligence, MS - San Jos\u00e9 State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=17&poid=13784  Applied Data Intel"
+      }
+    ],
+    "expected_source_file": "applied_data_intelligence_ms_program.txt",
+    "recall_hit": true
+  },
+  {
+    "technique": "sentence_window",
+    "question_id": "q4",
+    "query": "What is SJSU's late registration fee for adding a class after the census date?\n",
+    "query_embed_dim": 384,
+    "query_embed_first8": [
+      -0.064736,
+      -0.056661,
+      -0.019322,
+      0.025363,
+      0.062045,
+      0.116772,
+      -0.098761,
+      -0.003607
+    ],
+    "latency_ms": 13.959,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.744048,
+        "cosine_sim": 0.789405,
+        "chunk_len": 241,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "Late Fee Assessed  Students registering for classes after census are assessed a late registration fee of $200.00, which begins after census for any classes adde"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.610489,
+        "cosine_sim": 0.640341,
+        "chunk_len": 214,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "Adding Classes after the Last Day to Add: before the Census date, students can submit the Pre-census Late Enrollment petition form to the Registrar's office (va"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.599642,
+        "cosine_sim": 0.586032,
+        "chunk_len": 101,
+        "source_file": "adding_dropping_classes.txt",
+        "preview": "For Regular Session students,\u00a0late registration\u00a0end\u00a0dates are posted on the\u00a0SJSU Registrar Calendar. "
+      },
+      {
+        "rank": 4,
+        "store_score": 0.591505,
+        "cosine_sim": 0.62428,
+        "chunk_len": 828,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "Registration and Attendance - San Jos\u00e9 State University Source: https://catalog.sjsu.edu/content.php?catoid=13&navoid=4897  Registration and Attendance  SJSU ID"
+      },
+      {
+        "rank": 5,
+        "store_score": 0.575318,
+        "cosine_sim": 0.543046,
+        "chunk_len": 93,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "Students in the Step to College programs are not required to pay the late registration fee.  "
+      }
+    ],
+    "expected_source_file": "registration_and_attendance.txt",
+    "recall_hit": true
+  },
+  {
+    "technique": "sentence_window",
+    "question_id": "q5",
+    "query": "What was SJSU's Enrollment Census Date for Fall 2022?\n",
+    "query_embed_dim": 384,
+    "query_embed_first8": [
+      -0.016503,
+      -0.034264,
+      0.04149,
+      0.04135,
+      0.017492,
+      0.10967,
+      -0.171652,
+      0.034994
+    ],
+    "latency_ms": 15.263,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.615126,
+        "cosine_sim": 0.653837,
+        "chunk_len": 690,
+        "source_file": "academic_calendar.txt",
+        "preview": "Calendar - San Jos\u00e9 State University Source: https://catalog.sjsu.edu/content.php?catoid=13&navoid=4974  Calendar  2022-2023 Academic Year  Academic Year: Augus"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.531497,
+        "cosine_sim": 0.54636,
+        "chunk_len": 101,
+        "source_file": "adding_dropping_classes.txt",
+        "preview": "For Regular Session students,\u00a0late registration\u00a0end\u00a0dates are posted on the\u00a0SJSU Registrar Calendar. "
+      },
+      {
+        "rank": 3,
+        "store_score": 0.526945,
+        "cosine_sim": 0.573567,
+        "chunk_len": 86,
+        "source_file": "adding_dropping_classes.txt",
+        "preview": "For Regular Session students, these dates are posted on the SJSU Registrar Calendar . "
+      },
+      {
+        "rank": 4,
+        "store_score": 0.508073,
+        "cosine_sim": 0.465659,
+        "chunk_len": 188,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "Course Offerings and Cancelled Classes  The courses listed in the online SJSU Schedule of Classes reflect the scheduled offerings by the departments available a"
+      },
+      {
+        "rank": 5,
+        "store_score": 0.491955,
+        "cosine_sim": 0.519823,
+        "chunk_len": 828,
+        "source_file": "registration_and_attendance.txt",
+        "preview": "Registration and Attendance - San Jos\u00e9 State University Source: https://catalog.sjsu.edu/content.php?catoid=13&navoid=4897  Registration and Attendance  SJSU ID"
+      }
+    ],
+    "expected_source_file": "academic_calendar.txt",
+    "recall_hit": true
+  }
+]

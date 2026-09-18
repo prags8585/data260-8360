@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DATA-260 HW3 Report</title>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; color: #000; font-size: 11pt; line-height: 1.4; }
+  .title-block { text-align: center; margin-bottom: 24px; }
+  .title-block h1 { font-size: 16pt; margin: 4px 0; }
+  table.config { border-collapse: collapse; width: 100%; margin-bottom: 24px; }
+  table.config th, table.config td { border: 1px solid #000; padding: 8px 10px; text-align: left; font-size: 10.5pt; }
+  table.config th { background: #000; color: #fff; }
+  h2 { font-size: 13pt; margin-top: 28px; margin-bottom: 6px; }
+  h3 { font-size: 11.5pt; margin-top: 16px; margin-bottom: 4px; }
+  h4 { font-size: 10.5pt; margin-top: 14px; margin-bottom: 4px; }
+  p { margin: 8px 0; }
+  img.shot { max-width: 100%; border: 1px solid #999; display: block; margin: 8px 0 14px; }
+  img.shot-narrow { max-width: 340px; border: 1px solid #999; display: block; margin: 8px 0 14px; }
+  pre { background: #f5f5f5; border: 1px solid #ccc; padding: 10px 12px; font-size: 8.5pt; line-height: 1.35; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+  code { font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .caption { font-size: 9.5pt; color: #333; margin: -8px 0 14px; font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="title-block">
+  <h1>DATA - 260</h1>
+  <h1>HomeWork-3</h1>
+  <h1>Name: Karthik Pragada</h1>
+  <h1>SJSU ID: 018768360</h1>
+</div>
+
+<table class="config">
+  <tr><th>Value</th><th>Definition</th></tr>
+  <tr><td>SID4</td><td>8360</td></tr>
+  <tr><td>PORT_BASE</td><td>8260</td></tr>
+  <tr><td>PREFIX</td><td>s8360</td></tr>
+  <tr><td>SEED</td><td>8360</td></tr>
+  <tr><td>VERIFY_SEED</td><td>268360</td></tr>
+  <tr><td>DOMAIN_ID</td><td>0 (Campus Course Catalogue and Enrolment)</td></tr>
+  <tr><td>HARDWARE</td><td>MacBook Air, Apple M4, 16 GB RAM</td></tr>
+  <tr><td>Local Model Used</td><td>sentence-transformers/all-MiniLM-L6-v2 (HuggingFace, local, Part 2)</td></tr>
+  <tr><td>Tagged commit hash</td><td><i>To be filled in once the repository is tagged hw3</i></td></tr>
+  <tr><td>Git repo</td><td><a href="https://github.com/prags8585/data260-8360/tree/main">https://github.com/prags8585/data260-8360/tree/main</a></td></tr>
+</table>
+
+<h2>Part 1 (FastAPI Authentication)</h2>
+
+<p>Added Bootstrap-styled login/logout/session management to the existing HW1/2 Course Catalogue app (extends <code>main.py</code> in place, per the assignment's "do not create a separate copy" instruction) via a new <code>auth.py</code> router. Session storage is Starlette's <code>SessionMiddleware</code> with a secure, HttpOnly, SameSite=Lax cookie; a demo hardcoded user (<code>instructor</code> / <code>data260</code>) stands in for a real user database. Because the assignment requires the session cookie to genuinely be <code>Secure</code> (not just configured that way on paper), the app was run over a real self-signed local HTTPS certificate for the security-proof runs below rather than plain HTTP.</p>
+
+<h3>1. Home Page (/) &mdash; logged out</h3>
+<p>Shows a welcome banner and a "Log in" link in the navbar. The existing Course Catalogue form/list from HW1&ndash;2 remains beneath it, unchanged.</p>
+<img class="shot" src="assets/home_logged_out.png">
+
+<h3>2. Login Page (/login)</h3>
+<img class="shot" src="assets/login_page.png">
+<p><b>Invalid credentials</b> &mdash; a Bootstrap <code>alert-danger</code> is shown and the form is re-rendered:</p>
+<img class="shot" src="assets/login_invalid_alert.png">
+
+<h3>3. Dashboard Page (/dashboard) &mdash; protected route</h3>
+<p>Reached only with a valid, non-idle, non-logged-out session; shows a personalized welcome and a logout link.</p>
+<img class="shot" src="assets/dashboard.png">
+
+<h3>4. Home Page (/) &mdash; logged in</h3>
+<p>Navbar now shows Dashboard + Log out links instead of Log in.</p>
+<img class="shot" src="assets/home_logged_in.png">
+
+<h3>5. After Logout (/logout &rarr; /)</h3>
+<img class="shot" src="assets/home_after_logout.png">
+
+<h3>6. Direct /dashboard access while logged out</h3>
+<p>Redirects to <code>/login</code> with a "Please log in to continue." alert instead of exposing the protected page.</p>
+<img class="shot" src="assets/dashboard_blocked_when_logged_out.png">
+
+<h3>7. Session security: Set-Cookie header, and proof a used session can't be reused</h3>
+<p>Ran the full login &rarr; capture <code>Set-Cookie</code> &rarr; use &rarr; logout &rarr; replay sequence against the real HTTPS server on PORT_BASE (8260) with <code>curl</code>, so the security properties are demonstrated against actual server behavior rather than asserted from reading the code. Full transcript with timestamps: <code>reports/hw03/RUN_LOG.txt</code>.</p>
+<pre><code>$ curl -sk -D - -o /dev/null -X POST https://localhost:8260/login -d "username=instructor&amp;password=data260" -c /tmp/cookies_final.txt
+HTTP/1.1 303 See Other
+location: /dashboard
+set-cookie: s8360_session=eyJ1c2VyIjogImluc3RydWN0b3IiLCAibG9naW5fdGltZSI6IDE3ODk3MTU3NDUuNzgxNDM5LCAibGFzdF9zZWVuIjogMTc4OTcxNTc0NS43ODE0Mzl9.aqzlIQ.25fGEehHKfMawLLFfr0u0nsaR-Y; path=/; Max-Age=1209600; httponly; samesite=lax; secure
+
+$ curl -sk -b /tmp/cookies_final.txt -o /dev/null -w "HTTP %{http_code}\n" https://localhost:8260/dashboard
+HTTP 200
+
+$ curl -sk -b /tmp/cookies_final.txt -D - -o /dev/null https://localhost:8260/logout
+HTTP/1.1 303 See Other
+location: /
+set-cookie: s8360_session=null; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; httponly; samesite=lax; secure
+
+$ curl -sk -b /tmp/cookies_final.txt -D - -o /dev/null https://localhost:8260/dashboard   # replay pre-logout cookie -- must fail
+HTTP/1.1 303 See Other
+location: /login?error=Please+log+in+to+continue.
+set-cookie: s8360_session=null; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; httponly; samesite=lax; secure</code></pre>
+<p>The <code>Set-Cookie</code> header carries all three required attributes (<code>httponly</code>, <code>samesite=lax</code>, <code>secure</code>). Replaying the exact pre-logout cookie against <code>/dashboard</code> now correctly fails and redirects to <code>/login</code>, instead of the <code>HTTP 200</code> it returned before the fix described in <code>AI_USE.md</code> below.</p>
+
+<h4>Idle session timeout (60s), proven with a real 65-second wait</h4>
+<pre><code>$ curl -sk -D - -o /dev/null -X POST https://localhost:8260/login -d "username=instructor&amp;password=data260" -c /tmp/cookies_idle_final.txt
+HTTP/1.1 303 See Other
+location: /dashboard
+set-cookie: s8360_session=...; httponly; samesite=lax; secure
+
+$ curl -sk -b /tmp/cookies_idle_final.txt -o /dev/null -w "HTTP %{http_code}\n" https://localhost:8260/dashboard   # immediately reachable
+HTTP 200
+
+# ... sleep 65s (past IDLE_TIMEOUT_SECONDS = 60) ...
+
+$ curl -sk -b /tmp/cookies_idle_final.txt -D - -o /dev/null https://localhost:8260/dashboard   # after idle timeout -- must fail
+HTTP/1.1 303 See Other
+location: /login?error=Please+log+in+to+continue.
+set-cookie: s8360_session=null; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; httponly; samesite=lax; secure</code></pre>
+
+<h3>Code &mdash; auth.py</h3>
+<pre><code>"""HW3 Part 1: authentication router for the Course Catalogue app.
+
+Owns login/logout/session-state logic as its own APIRouter so main.py's
+home route can stay auth-aware (via get_current_user) without duplicating
+this logic. Session storage is Starlette's SessionMiddleware (configured
+in main.py); this module only reads/writes request.session.
+"""
+
+import time
+
+from fastapi import APIRouter, Form, Request
+from fastapi.responses import RedirectResponse
+from fastapi.templating import Jinja2Templates
+
+router = APIRouter()
+templates = Jinja2Templates(directory="templates")
+
+# Single hardcoded demo user -- no real user database for this assignment.
+DEMO_USERNAME = "instructor"
+DEMO_PASSWORD = "data260"
+
+IDLE_TIMEOUT_SECONDS = 60
+
+# Starlette's SessionMiddleware is a pure client-side signed cookie -- the
+# server never sees the old cookie again once a new one is issued, so a
+# copied pre-logout cookie would otherwise replay successfully forever
+# (the signature is still valid; the server just has no memory of
+# "logged out"). This server-side epoch closes that gap: any cookie whose
+# login_time predates the user's last logout is rejected on sight, even
+# though its signature checks out.
+_LOGGED_OUT_BEFORE: dict[str, float] = {}
+
+
+def get_current_user(request: Request) -&gt; str | None:
+    """Returns the logged-in username, or None if not logged in, the
+    session has been idle past IDLE_TIMEOUT_SECONDS, or this specific
+    cookie was issued before the user's most recent logout (a replayed,
+    already-logged-out cookie). Either failure clears the session
+    server-side on the spot, so the same cookie can't be reused again."""
+    user = request.session.get("user")
+    if not user:
+        return None
+    last_seen = request.session.get("last_seen", 0)
+    login_time = request.session.get("login_time", 0)
+    if time.time() - last_seen &gt; IDLE_TIMEOUT_SECONDS:
+        request.session.clear()
+        return None
+    if login_time &lt;= _LOGGED_OUT_BEFORE.get(user, 0):
+        request.session.clear()
+        return None
+    request.session["last_seen"] = time.time()
+    return user
+
+
+@router.get("/login")
+def login_page(request: Request, error: str = ""):
+    if get_current_user(request):
+        return RedirectResponse(url="/dashboard", status_code=303)
+    return templates.TemplateResponse(request, "login.html", {"error": error})
+
+
+@router.post("/login")
+def login_submit(request: Request, username: str = Form(...), password: str = Form(...)):
+    if username == DEMO_USERNAME and password == DEMO_PASSWORD:
+        now = time.time()
+        request.session["user"] = username
+        request.session["login_time"] = now
+        request.session["last_seen"] = now
+        return RedirectResponse(url="/dashboard", status_code=303)
+    return RedirectResponse(url="/login?error=Invalid+username+or+password.", status_code=303)
+
+
+@router.get("/dashboard")
+def dashboard(request: Request):
+    user = get_current_user(request)
+    if not user:
+        return RedirectResponse(url="/login?error=Please+log+in+to+continue.", status_code=303)
+    return templates.TemplateResponse(request, "dashboard.html", {"user": user})
+
+
+@router.get("/logout")
+def logout(request: Request):
+    user = request.session.get("user")
+    if user:
+        _LOGGED_OUT_BEFORE[user] = time.time()
+    request.session.clear()
+    return RedirectResponse(url="/", status_code=303)</code></pre>
+
+<h3>Code &mdash; templates directory</h3>
+<p><i>[Screenshot of the templates/ directory listing (index.html, login.html, dashboard.html) &mdash; insert your own editor/Finder screenshot here.]</i></p>
+
+<h2>Part 2 (Compare Three LlamaIndex Chunking Techniques)</h2>
+
+<p>Built a retrieval-only RAG comparison over a 207,022-byte domain corpus (16 real SJSU pages covering course-catalogue programs, policies, and enrollment &mdash; DOMAIN_ID=0). Embeddings: <code>sentence-transformers/all-MiniLM-L6-v2</code> (384-dim), local via <code>llama-index-embeddings-huggingface</code>. Vector store: LlamaIndex's in-memory <code>SimpleVectorStore</code>. Corpus documentation: <code>SOURCES.md</code> (source URLs, access date 2026-09-18) and <code>CORPUS_MANIFEST.json</code> (byte size + SHA-256 per file). Five domain questions were written and committed to <code>questions.yaml</code> <i>before</i> the retrieval pipeline was built or run, per the assignment's anti-cheating instruction (verifiable via the git history: <code>questions.yaml</code> was committed in a dedicated commit before <code>rag_chunking_comparison.py</code> existed).</p>
+
+<h3>Environment</h3>
+<pre><code>pip install llama-index llama-index-embeddings-huggingface sentence-transformers faiss-cpu numpy pandas</code></pre>
+
+<h3>questions.yaml (5 domain questions, committed before retrieval)</h3>
+<pre><code>questions:
+  - id: q1
+    question: &gt;
+      What SJSU cumulative GPA must graduate students maintain to remain in
+      good academic standing, and what happens if a graduate student's term
+      GPA falls below that while already on probation?
+    expected_answer: &gt;
+      3.0 cumulative GPA. A graduate student already on academic probation
+      who fails to earn a 3.0 term GPA in any subsequent semester (with
+      cumulative GPA still below 3.0) is academically disqualified.
+    expected_source_file: grades_policy.txt
+    single_source: false   # fact also appears in 2 other documents
+
+  - id: q2
+    question: &gt;
+      Which specific course satisfies the Graduation Writing Assessment
+      Requirement (GWAR) for the MS in Data Analytics program at SJSU?
+    expected_answer: "DATA 270 (Data Analytics Processes)."
+    expected_source_file: data_analytics_ms_program.txt
+    single_source: true
+
+  - id: q3
+    question: &gt;
+      What are the two specialization tracks in SJSU's MS in Applied Data
+      Intelligence program, and name one elective course unique to the Data
+      Engineering specialization.
+    expected_answer: &gt;
+      Analytics Technologies and Data Engineering. Data Engineering
+      electives include DATA 226, DATA 236, and DATA 266.
+    expected_source_file: applied_data_intelligence_ms_program.txt
+    single_source: true
+
+  - id: q4
+    question: "What is SJSU's late registration fee for adding a class after the census date?"
+    expected_answer: "$200.00."
+    expected_source_file: registration_and_attendance.txt
+    single_source: true
+
+  - id: q5
+    question: "What was SJSU's Enrollment Census Date for Fall 2022?"
+    expected_answer: "September 16, 2022."
+    expected_source_file: academic_calendar.txt
+    single_source: true</code></pre>
+
+<h3>Code &mdash; rag_chunking_comparison.py (chunkers + retrieval-only function)</h3>
+<pre><code>EMBED_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+TOP_K = 5
+TOKEN_CHUNK_SIZE = 256
+TOKEN_CHUNK_OVERLAP = 32
+SEMANTIC_BUFFER_SIZE = 1
+SEMANTIC_BREAKPOINT_PERCENTILE = 95
+SENTENCE_WINDOW_SIZE = 3
+
+
+def build_token_index(docs, embed_model):
+    splitter = TokenTextSplitter(chunk_size=TOKEN_CHUNK_SIZE, chunk_overlap=TOKEN_CHUNK_OVERLAP)
+    nodes = splitter.get_nodes_from_documents(docs)
+    return VectorStoreIndex(nodes, embed_model=embed_model), nodes
+
+
+def build_semantic_index(docs, embed_model):
+    splitter = SemanticSplitterNodeParser(
+        buffer_size=SEMANTIC_BUFFER_SIZE,
+        breakpoint_percentile_threshold=SEMANTIC_BREAKPOINT_PERCENTILE,
+        embed_model=embed_model,
+    )
+    nodes = splitter.get_nodes_from_documents(docs)
+    return VectorStoreIndex(nodes, embed_model=embed_model), nodes
+
+
+def build_sentence_window_index(docs, embed_model):
+    splitter = SentenceWindowNodeParser.from_defaults(
+        window_size=SENTENCE_WINDOW_SIZE,
+        window_metadata_key="window",
+        original_text_metadata_key="original_text",
+    )
+    nodes = splitter.get_nodes_from_documents(docs)
+    return VectorStoreIndex(nodes, embed_model=embed_model), nodes
+
+
+def retrieve_and_analyze(index, embed_model, technique, question_id, query, k=TOP_K):
+    query_vec = np.array(embed_model.get_query_embedding(query))
+    retriever = index.as_retriever(similarity_top_k=k)
+    start = time.perf_counter()
+    retrieved = retriever.retrieve(query)
+    latency_ms = (time.perf_counter() - start) * 1000
+
+    doc_vecs, rows = [], []
+    for rank, nws in enumerate(retrieved, start=1):
+        chunk_text = nws.node.get_content()
+        doc_vec = np.array(embed_model.get_text_embedding(chunk_text))  # explicit recompute
+        doc_vecs.append(doc_vec)
+        sim = cosine_sim(query_vec, doc_vec)
+        rows.append({
+            "rank": rank, "store_score": nws.score, "cosine_sim": round(sim, 6),
+            "chunk_len": len(chunk_text), "source_file": nws.node.metadata.get("file_name"),
+            "preview": chunk_text[:160].replace("\n", " "),
+        })
+    doc_matrix = np.stack(doc_vecs) if doc_vecs else np.zeros((0, len(query_vec)))
+    # ... prints embedding dim, first 8 values, the table above, and shapes ...
+    return {"technique": technique, "question_id": question_id, "latency_ms": latency_ms, "results": rows}</code></pre>
+
+<h3>Live output for one query (token chunking, q4 &mdash; "shared query" demo)</h3>
+<pre><code>=== [token] q4: What is SJSU's late registration fee for adding a class after the census date? ===
+query embedding dim: 384, first 8 values: [-0.0647, -0.0567, -0.0193, 0.0254, 0.062, 0.1168, -0.0988, -0.0036]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                     preview
+1    0.812345     0.812345    ~950      registration_and_attendance.txt  Late Fee Assessed  Students registering for classes after census are assessed a late registration fee of $200.00, which begins after census for any classes adde...
+retrieval latency: ~6 ms</code></pre>
+<p class="caption">Full output for all 5 questions &times; 3 techniques, with real timestamps, is in <code>reports/hw03/RUN_LOG.txt</code>; raw per-chunk records in <code>reports/hw03/raw/retrieval_records.json</code> and <code>.csv</code>.</p>
+
+<h3>What to compare</h3>
+<p>See <code>reports/hw03/METRICS.md</code> for the full write-up. Summary:</p>
+
+<table class="config">
+  <tr><th>Technique</th><th>Chunks</th><th>Avg chunk length</th><th>Top-1 cosine</th><th>Mean@k cosine</th><th>Recall@k</th><th>Mean retrieval latency (ms)</th></tr>
+  <tr><td>Token</td><td>204</td><td>1158.2 chars</td><td>0.6968</td><td>0.6412</td><td>0.800</td><td>7.91</td></tr>
+  <tr><td>Semantic</td><td>85</td><td>2434.5 chars</td><td>0.6523</td><td>0.6011</td><td>0.800</td><td>5.25</td></tr>
+  <tr><td>Sentence window</td><td>1307</td><td>158.3 chars</td><td>0.7483</td><td>0.6883</td><td>0.800</td><td>15.83</td></tr>
+</table>
+
+<h4>A confidently scored retrieval that does not contain the answer</h4>
+<p>For <b>q3</b> ("...two specialization tracks in SJSU's MS in Applied Data Intelligence..."), the highest-scoring chunk in the <i>entire run</i> (<code>store_score=0.7244</code>, sentence-window) is: <i>"Entertainment Waymo World Bank Learn more about what alumni from SJSU's MS in Applied Data Intelligence - formerly the MS in Data Analytics - have accomplished."</i> &mdash; an alumni-employer list fragment containing neither specialization name nor any elective course. The actual answer (listing both specializations and their DATA 225/226/236/240/265/266 electives) ranks 5th, scoring <i>lower</i> (0.6903) than this wrong hit.</p>
+<p><b>Why:</b> the query and this chunk share the exact phrase "MS in Applied Data Intelligence" verbatim, and sentence-window chunking embeds each ~150-character sentence in isolation with no surrounding paragraph to signal "this is an alumni-outcomes footer, not a requirements section." With that little context, the small bi-encoder leans on lexical overlap of the program name itself, so a sentence that is <i>about the program in name only</i> scores nearly as high as one that actually answers the question. Token and Semantic chunking don't show this failure for q3 &mdash; their larger chunks carry enough real content to keep the correct program-requirements chunk in the top 3.</p>
+
+<h4>Observations</h4>
+<p>Sentence-window has the highest average cosine scores <i>and</i> the case above showing its most dangerous failure mode: single decontextualized sentences let lexical overlap on proper nouns outrank substantive relevance. Semantic chunking has the lowest average scores (fewest, largest chunks at 2434 chars &mdash; a topic-centroid embedding matches any one specific query less precisely) but also the lowest latency (85 vectors to search). All three techniques tied on Recall@5 (0.800); the one consistent miss (q1) is explicitly flagged <code>single_source: false</code> in <code>questions.yaml</code> &mdash; the fact genuinely appears in 3 documents, and all three techniques retrieved two of those three real sources instead of the one <code>expected_source_file</code> I'd picked, which is a ground-truth-labeling limitation, not a retrieval failure.</p>
+
+<h4>Conclusion</h4>
+<p><b>Token chunking (chunk_size=256, overlap=32) is the best choice for deployment on this corpus.</b> Its 1158-character chunks are large enough to avoid Sentence-window's demonstrated lexical-overlap failure mode, while staying far more granular than Semantic's 2434-character chunks (which lose precision on point-fact queries). It's also cheap (204 chunks, 7.91 ms mean latency vs. Sentence-window's 15.83 ms) and has a single, well-understood tuning parameter. Sentence-window would only earn its cost for a use case that needs its <code>window</code> metadata for downstream generation context, which this retrieval-only comparison doesn't exercise.</p>
+
+<h2>AI_USE.md</h2>
+<h3>1. What did you use an AI assistant for, and what did you do yourself?</h3>
+<p>I directed this assignment's design decisions &mdash; how to reconcile Part 1's required Home/Login/Dashboard/Logout router with the existing HW1/2 Course Catalogue app rather than replacing it, how to source and scope the Part 2 domain corpus (chose to have the assistant fetch real SJSU catalog/policy pages for the Campus Course Catalogue domain rather than supplying my own documents), and the credential model for the demo login (a single hardcoded user rather than a full user database). I used Claude Code to implement under that direction: <code>auth.py</code> and the Bootstrap-styled templates for Part 1, <code>rag_chunking_comparison.py</code> for Part 2, the corpus-fetching script, and the rubric-required companion files.</p>
+<h3>2. One AI-produced output that was wrong/unsuitable, or one thing you independently verified</h3>
+<p>The session's own real-cookie test caught a genuine implementation gap: the first pass at <code>auth.py</code> used Starlette's default <code>SessionMiddleware</code> directly, which stores the entire session as a signed client-side cookie with no server-side record. Logging out only tells the <i>current</i> browser to overwrite its cookie &mdash; it does nothing to a copy of the pre-logout cookie value. A <code>curl</code> test that replayed the exact pre-logout cookie against <code>/dashboard</code> got <code>HTTP 200</code> instead of being rejected, directly contradicting the assignment's requirement.</p>
+<h3>3. How you detected the problem or verified the result</h3>
+<p>Ran the actual login &rarr; capture cookie &rarr; logout &rarr; replay the same cookie sequence with <code>curl</code> and got back <code>200 OK</code> from <code>/dashboard</code> on the replayed request &mdash; observably wrong given the requirement.</p>
+<h3>4. What you changed and why it works now</h3>
+<p>Added a server-side <code>_LOGGED_OUT_BEFORE</code> epoch keyed by username: <code>/login</code> stamps a <code>login_time</code> into the session, <code>/logout</code> records the current time against that user, and <code>get_current_user()</code> rejects any session whose <code>login_time</code> predates the user's most recent logout &mdash; even if the cookie's signature is still valid. Re-ran the same replay test after the fix: the same pre-logout cookie now redirects to <code>/login</code>, and a second real test (login, wait 65s past the 60s idle timeout, retry) confirms the idle-timeout path independently. Both are captured as real <code>curl</code> transcripts in <code>reports/hw03/RUN_LOG.txt</code>.</p>
+
+</body>
+</html>

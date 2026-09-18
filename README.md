@@ -73,3 +73,36 @@ python run_schema_experiment.py
 # actually respond/terminate correctly) -- writes reports/hw02/verification.json
 python verify_hw02.py
 ```
+
+# DATA-260 Homework 3 — Karthik Pragada (SID4: 8360)
+
+## Reproducible run instructions
+
+```bash
+# One-time setup
+source .venv/bin/activate
+pip install itsdangerous llama-index llama-index-embeddings-huggingface \
+    sentence-transformers faiss-cpu numpy pandas beautifulsoup4 pyyaml
+
+# Part 1 -- FastAPI Bootstrap login/session app (extends the HW1/2 app)
+# Self-signed local HTTPS cert (one-time), needed so the session cookie's
+# Secure flag can be genuinely exercised rather than faked:
+openssl req -x509 -newkey rsa:2048 -nodes -keyout certs/localhost-key.pem \
+    -out certs/localhost-cert.pem -days 365 -subj "/CN=localhost"
+uvicorn main:app --host 0.0.0.0 --port 8260 \
+    --ssl-keyfile certs/localhost-key.pem --ssl-certfile certs/localhost-cert.pem
+open https://localhost:8260
+# demo user: instructor / data260
+
+# Part 2 -- re-fetch the domain corpus (already committed under corpus/hw03/,
+# only needed to regenerate it from scratch)
+python scripts/fetch_corpus.py /tmp/urls.txt
+
+# Part 2 -- run the three-chunker retrieval comparison (~2-3 minutes)
+# writes reports/hw03/raw/*.json|csv and reports/hw03/METRICS.md's source data
+python rag_chunking_comparison.py --k 5
+
+# Smoke test -- writes reports/hw03/verification.json
+python verify_hw03.py
+```
+

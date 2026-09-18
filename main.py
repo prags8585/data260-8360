@@ -1,12 +1,29 @@
 
 import asyncio
+import os
 
 from fastapi import FastAPI, Form, Request
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from starlette.middleware.sessions import SessionMiddleware
+
+import auth
 
 app = FastAPI()
+app.add_middleware(
+    SessionMiddleware,
+    secret_key=os.environ.get("SESSION_SECRET", "s8360-hw3-dev-secret-do-not-use-in-prod"),
+    session_cookie="s8360_session",
+    max_age=14 * 24 * 60 * 60,
+    same_site="lax",
+    # Secure by default (real HTTPS deployment). SESSION_HTTPS_ONLY=false is
+    # only for taking plain-HTTP UI screenshots locally where TLS tooling
+    # can't be used -- the actual secure-cookie behavior is proven over a
+    # real HTTPS instance (see reports/hw03/RUN_LOG.txt).
+    https_only=os.environ.get("SESSION_HTTPS_ONLY", "true").lower() != "false",
+)
+app.include_router(auth.router)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
@@ -65,7 +82,10 @@ def home(request: Request, q: str = "", state: str = "", error: str = ""):
     return templates.TemplateResponse(
         request,
         "index.html",
-        {"courses": courses, "q": q, "error": error, "course_1": course_1, "state": state},
+        {
+            "courses": courses, "q": q, "error": error, "course_1": course_1, "state": state,
+            "current_user": auth.get_current_user(request),
+        },
     )
 
 

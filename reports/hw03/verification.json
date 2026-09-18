@@ -1,0 +1,110 @@
+{
+  "homework": "HW3",
+  "sid4": 8360,
+  "commit_hash": "561fce2435014d1ce7fa803492ffb97aeff6d629",
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "seed": 8360,
+  "verify_seed": 268360,
+  "timestamp": "2026-09-18T07:17:38.590940+00:00",
+  "checks": [
+    {
+      "name": "auth.py exists",
+      "passed": true,
+      "detail": "found: auth.py"
+    },
+    {
+      "name": "auth.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: auth.py"
+    },
+    {
+      "name": "templates/login.html exists",
+      "passed": true,
+      "detail": "found: templates/login.html"
+    },
+    {
+      "name": "templates/dashboard.html exists",
+      "passed": true,
+      "detail": "found: templates/dashboard.html"
+    },
+    {
+      "name": "main.py wires in SessionMiddleware",
+      "passed": true,
+      "detail": "text check on main.py"
+    },
+    {
+      "name": "FastAPI login issues a secure session cookie on PORT_BASE (8260)",
+      "passed": true,
+      "detail": "login Set-Cookie has all 3 security attributes: True; redirects to /dashboard: True"
+    },
+    {
+      "name": "rag_chunking_comparison.py exists",
+      "passed": true,
+      "detail": "found: rag_chunking_comparison.py"
+    },
+    {
+      "name": "rag_chunking_comparison.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: rag_chunking_comparison.py"
+    },
+    {
+      "name": "questions.yaml exists",
+      "passed": true,
+      "detail": "found: questions.yaml"
+    },
+    {
+      "name": "SOURCES.md exists",
+      "passed": true,
+      "detail": "found: SOURCES.md"
+    },
+    {
+      "name": "CORPUS_MANIFEST.json exists and valid",
+      "passed": true,
+      "detail": "valid JSON: CORPUS_MANIFEST.json"
+    },
+    {
+      "name": "corpus/hw03 has >= 200KB of source documents",
+      "passed": true,
+      "detail": "207022 bytes"
+    },
+    {
+      "name": "reports/hw03/raw/retrieval_records.json exists and valid",
+      "passed": true,
+      "detail": "valid JSON: reports/hw03/raw/retrieval_records.json"
+    },
+    {
+      "name": "reports/hw03/raw/summary.json exists and valid",
+      "passed": true,
+      "detail": "valid JSON: reports/hw03/raw/summary.json"
+    },
+    {
+      "name": "summary covers all 3 chunking techniques",
+      "passed": true,
+      "detail": "key check on summary.json"
+    },
+    {
+      "name": "HuggingFace embedding model loads and returns a 384-dim vector",
+      "passed": true,
+      "detail": "exit code 0"
+    },
+    {
+      "name": "RUN_LOG.txt exists and non-empty",
+      "passed": true,
+      "detail": "reports/hw03/RUN_LOG.txt"
+    },
+    {
+      "name": "METRICS.md exists",
+      "passed": true,
+      "detail": "found: reports/hw03/METRICS.md"
+    },
+    {
+      "name": "AI_USE.md exists",
+      "passed": true,
+      "detail": "found: reports/hw03/AI_USE.md"
+    }
+  ],
+  "passed": 19,
+  "failed": 0,
+  "total": 19,
+  "overall": "PASS"
+}

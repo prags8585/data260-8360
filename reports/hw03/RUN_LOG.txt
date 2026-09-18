@@ -1,0 +1,299 @@
+=== 2026-09-18 00:15:45 PDT ===
+HW3 Part 1: session security proof (real HTTPS server, PORT_BASE=8260)
+
+$ curl -sk -D - -o /dev/null -X POST https://localhost:8260/login -d "username=instructor&password=wrong"
+HTTP/1.1 303 See Other
+date: Fri, 18 Sep 2026 07:15:45 GMT
+server: uvicorn
+content-length: 0
+location: /login?error=Invalid+username+or+password.
+
+
+$ curl -sk -D - -o /dev/null -X POST https://localhost:8260/login -d "username=instructor&password=data260" -c /tmp/cookies_final.txt
+HTTP/1.1 303 See Other
+date: Fri, 18 Sep 2026 07:15:45 GMT
+server: uvicorn
+content-length: 0
+location: /dashboard
+vary: Cookie
+set-cookie: s8360_session=eyJ1c2VyIjogImluc3RydWN0b3IiLCAibG9naW5fdGltZSI6IDE3ODk3MTU3NDUuNzgxNDM5LCAibGFzdF9zZWVuIjogMTc4OTcxNTc0NS43ODE0Mzl9.aqzlIQ.25fGEehHKfMawLLFfr0u0nsaR-Y; path=/; Max-Age=1209600; httponly; samesite=lax; secure
+
+
+$ curl -sk -b /tmp/cookies_final.txt -o /dev/null -w "HTTP %{http_code}
+" https://localhost:8260/dashboard
+HTTP 200
+
+$ curl -sk -b /tmp/cookies_final.txt -D - -o /dev/null https://localhost:8260/logout
+HTTP/1.1 303 See Other
+date: Fri, 18 Sep 2026 07:15:45 GMT
+server: uvicorn
+content-length: 0
+location: /
+vary: Cookie
+set-cookie: s8360_session=null; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; httponly; samesite=lax; secure
+
+
+$ curl -sk -b /tmp/cookies_final.txt -D - -o /dev/null https://localhost:8260/dashboard   # replay pre-logout cookie -- must fail
+HTTP/1.1 303 See Other
+date: Fri, 18 Sep 2026 07:15:45 GMT
+server: uvicorn
+content-length: 0
+location: /login?error=Please+log+in+to+continue.
+vary: Cookie
+set-cookie: s8360_session=null; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; httponly; samesite=lax; secure
+
+
+=== 2026-09-18 00:15:59 PDT ===
+HW3 Part 1: idle session timeout proof (60s IDLE_TIMEOUT_SECONDS)
+
+$ curl -sk -D - -o /dev/null -X POST https://localhost:8260/login -d "username=instructor&password=data260" -c /tmp/cookies_idle_final.txt
+HTTP/1.1 303 See Other
+date: Fri, 18 Sep 2026 07:15:59 GMT
+server: uvicorn
+content-length: 0
+location: /dashboard
+vary: Cookie
+set-cookie: s8360_session=eyJ1c2VyIjogImluc3RydWN0b3IiLCAibG9naW5fdGltZSI6IDE3ODk3MTU3NTkuODc4NzQ3LCAibGFzdF9zZWVuIjogMTc4OTcxNTc1OS44Nzg3NDd9.aqzlLw.TZeLVgBHG5fIo9HPpUCevpJ4xTY; path=/; Max-Age=1209600; httponly; samesite=lax; secure
+
+
+$ curl -sk -b /tmp/cookies_idle_final.txt -o /dev/null -w "HTTP %{http_code}
+" https://localhost:8260/dashboard   # immediately reachable
+HTTP 200
+
+sleeping 65s past the 60s idle timeout...
+$ curl -sk -b /tmp/cookies_idle_final.txt -D - -o /dev/null https://localhost:8260/dashboard   # after idle timeout -- must fail
+HTTP/1.1 303 See Other
+date: Fri, 18 Sep 2026 07:17:04 GMT
+server: uvicorn
+content-length: 0
+location: /login?error=Please+log+in+to+continue.
+vary: Cookie
+set-cookie: s8360_session=null; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; httponly; samesite=lax; secure
+
+
+=== 2026-09-18 00:17:04 PDT completed ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+=== 2026-09-18 00:11:32 PDT ===
+$ python rag_chunking_comparison.py --k 5
+
+Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 21817.75it/s]
+LLM is explicitly disabled. Using MockLLM.
+Loaded 16 corpus documents, 206929 total chars
+
+======================================================================
+TECHNIQUE: token
+======================================================================
+Chunked into 204 nodes (avg len 1158.2 chars) in 1006 ms
+
+=== [token] q1: What SJSU cumulative GPA must graduate students maintain to remain in good acade ===
+query embedding dim: 384, first 8 values: [-0.0679, 0.0029, 0.0022, -0.054, 0.0209, 0.0681, -0.0744, 0.0603]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.772856     0.774124    1222      graduate_policies_procedures.txt             Policy S17-13. Because graduate students are required to maintain a minimum cumulative GPA of 3.0, all finishing graduate students would receive honors; thus th
+2    0.766352     0.750326    1172      graduate_policies_procedures.txt             disqualification. To avoid disqualification, at least one graded course must be taken each Spring and Fall semester, while on probation. The student remains on 
+3    0.74675      0.765844    1186      undergraduate_policies_procedures.txt        to Undergraduate Advising and Success Center (UASC), and may do academic work to be reinstated to the major, or change to another major for which they are quali
+4    0.733287     0.745556    1183      undergraduate_policies_procedures.txt        falls below 2.0. Freshmen on Academic Probation are allowed a second consecutive semester of probation if their SJSU cumulative GPA is in the range 1.50 to 1.99
+5    0.706342     0.694962    1309      graduate_policies_procedures.txt             to achieve a set of academic standards of the department.  Academic Disqualification  A graduate student who is on academic probation is academically disqualifi
+retrieval latency: 9.14 ms
+
+=== [token] q2: Which specific course satisfies the Graduation Writing Assessment Requirement (G ===
+query embedding dim: 384, first 8 values: [-0.0664, -0.0354, -0.027, 0.0246, -0.0057, 0.0034, -0.0818, -0.0428]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.764482     0.761695    1300      applied_data_intelligence_ms_program.txt     outlined in the Graduation Requirements section of the Graduate Policies and Procedures.  MS - Applied Data Intelligence Graduation Requirements  The program co
+2    0.743648     0.706039    1241      data_analytics_ms_program.txt                GPA, and culminating experience requirements as outlined in the Graduation Requirements section of the Graduate Policies and Procedures.  MS - Data Analytics Gr
+3    0.719968     0.716676    1366      data_analytics_ms_program.txt                standing, the successful applicant must have earned a bachelor's degree from a regionally accredited institution and achieved a GPA of at least 3.0 (on a 4.0 sc
+4    0.695243     0.677449    1444      applied_data_intelligence_ms_program.txt     can be admitted to classified standing if the applicant has a bachelor's degree from an accredited institution with a grade point average of 3.0 or better. In a
+5    0.674693     0.683014    1141      data_science_ms_program.txt                  at SJSU).  Applicants from countries in which the native language is not English must submit TOEFL scores. Minimum TOEFL scores acceptable for admission are 575
+retrieval latency: 8.29 ms
+
+=== [token] q3: What are the two specialization tracks in SJSU's MS in Applied Data Intelligence ===
+query embedding dim: 384, first 8 values: [-0.0274, -0.0687, -0.022, 0.0218, 0.0002, -0.0398, -0.0296, 0.0243]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.675474     0.636141    1326      msda_curriculum_courses.txt                  use, and evaluate applied data intelligence technologies and tools. Apply Necessary Skills Apply effective oral and written communication skills necessary to pr
+2    0.667953     0.644114    1434      applied_data_intelligence_ms_program.txt     Program: Applied Data Intelligence, MS - San José State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=17&poid=13784  Applied Data Intel
+3    0.666494     0.653941    1362      data_science_ms_program.txt                  Program: Data Science, MS - San José State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=17&poid=14075  Data Science, MS  Admissions Re
+4    0.660618     0.636305    1005      msda_curriculum_courses.txt                  Program Frequently Asked Questions Want to learn more about our MS in Applied Data Intelligence degree? Explore our FAQs page to get detailed information about 
+5    0.656676     0.622502    1393      msda_curriculum_courses.txt                  data into actionable insights, and step confidently into advanced roles across technology, business and research. Apply Now Request Information Why Earn Your Ap
+retrieval latency: 7.51 ms
+
+=== [token] q4: What is SJSU's late registration fee for adding a class after the census date? ===
+query embedding dim: 384, first 8 values: [-0.0647, -0.0567, -0.0193, 0.0254, 0.062, 0.1168, -0.0988, -0.0036]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.703974     0.758438    1275      registration_and_attendance.txt              department that offers the course. Permission numbers become 'used' only after a successful enrollment request.  Adding Classes on the First Day of Instruction 
+2    0.646388     0.638318    1071      adding_dropping_classes.txt                  the MSIDT Candidacy Approval Form Application for Award of Graduate Degree Awards for Graduating Students Onsite Graduation Ceremony Virtual Graduation Celebrat
+3    0.618498     0.60606     1156      registration_and_attendance.txt              which begin the first day after instruction ends). Students in the Step to College programs are not required to pay the late registration fee.  Waitlisting  SJS
+4    0.600085     0.578474    1342      registration_and_attendance.txt              who receive financial aid must consult with Financial Aid prior to withdrawing regarding any required return or repayment of grant or loan assistance.  Restrict
+5    0.565728     0.518397    1265      registration_and_attendance.txt              and units earned during the semester will be disregarded when calculating GPAs for graduation, but the courses and grades will still appear on the transcript.  
+retrieval latency: 6.85 ms
+
+=== [token] q5: What was SJSU's Enrollment Census Date for Fall 2022? ===
+query embedding dim: 384, first 8 values: [-0.0165, -0.0343, 0.0415, 0.0414, 0.0175, 0.1097, -0.1717, 0.035]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.543922     0.553649    881       academic_calendar.txt                        Calendar - San José State University Source: https://catalog.sjsu.edu/content.php?catoid=13&navoid=4974  Calendar  2022-2023 Academic Year  Academic Year: Augus
+2    0.533217     0.533889    1071      adding_dropping_classes.txt                  the MSIDT Candidacy Approval Form Application for Award of Graduate Degree Awards for Graduating Students Onsite Graduation Ceremony Virtual Graduation Celebrat
+3    0.528982     0.495166    820       adding_dropping_classes.txt                  and for dates, read our iSchool Registration Process . Late Registration Late Registration begins on the first official day of the semester. For Regular Session
+4    0.481679     0.4455      1265      registration_and_attendance.txt              and units earned during the semester will be disregarded when calculating GPAs for graduation, but the courses and grades will still appear on the transcript.  
+5    0.471525     0.434102    1368      registration_and_attendance.txt              appointments are not mailed or emailed to students.  Create a registration worksheet before logging on  Build a sample schedule and have alternate schedules or 
+retrieval latency: 7.78 ms
+
+======================================================================
+TECHNIQUE: semantic
+======================================================================
+Chunked into 85 nodes (avg len 2434.5 chars) in 5866 ms
+
+=== [semantic] q1: What SJSU cumulative GPA must graduate students maintain to remain in good acade ===
+query embedding dim: 384, first 8 values: [-0.0679, 0.0029, 0.0022, -0.054, 0.0209, 0.0681, -0.0744, 0.0603]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.739526     0.80019     421       registration_and_attendance.txt              Probation Holds: undergraduates with SJSU cumulative GPA below 2.00 (3.00 for graduate students), or reinstated on probation status, must see their major adviso
+2    0.73087      0.732879    4377      graduate_policies_procedures.txt             If letters of permission are not submitted with the final copies of the dissertation, the College of Graduate Studies will not approve the dissertation.  Latin 
+3    0.657926     0.669747    4330      registration_and_attendance.txt              It is the student's responsibility to make sure classes are dropped.  Late Drop Petitions  Students may petition to Late Drop for serious and compelling reasons
+4    0.645642     0.605537    3974      undergraduate_policies_procedures.txt        Undergraduate Policies & Procedures - San José State University Source: https://catalog.sjsu.edu/content.php?catoid=13&navoid=4884  Undergraduate Policies & Pro
+5    0.628175     0.626905    1580      graduate_policies_procedures.txt             The courses must amount to a minimum of 6 and maximum of 9 units per semester, and all must be taken in a single semester. They must be letter graded, upper div
+retrieval latency: 5.47 ms
+
+=== [semantic] q2: Which specific course satisfies the Graduation Writing Assessment Requirement (G ===
+query embedding dim: 384, first 8 values: [-0.0664, -0.0354, -0.027, 0.0246, -0.0057, 0.0034, -0.0818, -0.0428]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.706628     0.659091    3254      applied_data_intelligence_ms_program.txt     These specializations will be offered according to industry trends, student demands, and resource availability.  Graduation Writing Assessment Requirement  At S
+2    0.701885     0.715758    6765      graduate_policies_procedures.txt             Details on the RP (Report in Progress) administrative grading symbol may be found in University Policy S09-7.  Graduation Writing Assessment Requirement (GWAR) 
+3    0.683125     0.684665    2770      data_analytics_ms_program.txt                Students can be admitted in either classified or conditionally classified standing. To be admitted to classified standing, the successful applicant must have ea
+4    0.675617     0.670357    3421      msda_curriculum_courses.txt                  Entertainment Waymo World Bank Learn more about what alumni from SJSU’s MS in Applied Data Intelligence - formerly the MS in Data Analytics - have accomplished.
+5    0.66789      0.64384     1733      applied_data_intelligence_ms_program.txt     An applicant can be admitted in either classified or conditionally classified standing.  An applicant can be admitted to classified standing if the applicant ha
+retrieval latency: 5.44 ms
+
+=== [semantic] q3: What are the two specialization tracks in SJSU's MS in Applied Data Intelligence ===
+query embedding dim: 384, first 8 values: [-0.0274, -0.0687, -0.022, 0.0218, 0.0002, -0.0398, -0.0296, 0.0243]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.668653     0.6847      3777      msda_curriculum_courses.txt                  MS in Applied Data Intelligence | Department of Applied Data Science Skip to main content Master of Science in Applied Data Intelligence Transform Data Into Imp
+2    0.667953     0.640085    2423      applied_data_intelligence_ms_program.txt     Program: Applied Data Intelligence, MS - San José State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=17&poid=13784  Applied Data Intel
+3    0.659107     0.655045    1249      data_science_ms_program.txt                  Program: Data Science, MS - San José State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=17&poid=14075  Data Science, MS  Admissions Re
+4    0.656215     0.637509    3421      msda_curriculum_courses.txt                  Entertainment Waymo World Bank Learn more about what alumni from SJSU’s MS in Applied Data Intelligence - formerly the MS in Data Analytics - have accomplished.
+5    0.626916     0.602787    2397      data_analytics_ms_program.txt                Program: Data Analytics, MS - San José State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=13&poid=7675  Data Analytics, MS  Admissions
+retrieval latency: 5.38 ms
+
+=== [semantic] q4: What is SJSU's late registration fee for adding a class after the census date? ===
+query embedding dim: 384, first 8 values: [-0.0647, -0.0567, -0.0193, 0.0254, 0.062, 0.1168, -0.0988, -0.0036]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.622555     0.576811    1339      adding_dropping_classes.txt                  For Special Session students, the last day to add is 14 days after the first day of the semester. Special Session students should abide by the drop deadline giv
+2    0.562771     0.588665    924       registration_and_attendance.txt              Registration and Attendance - San José State University Source: https://catalog.sjsu.edu/content.php?catoid=13&navoid=4897  Registration and Attendance  SJSU ID
+3    0.549594     0.51559     4330      registration_and_attendance.txt              It is the student's responsibility to make sure classes are dropped.  Late Drop Petitions  Students may petition to Late Drop for serious and compelling reasons
+4    0.482015     0.447904    421       registration_and_attendance.txt              Probation Holds: undergraduates with SJSU cumulative GPA below 2.00 (3.00 for graduate students), or reinstated on probation status, must see their major adviso
+5    0.479821     0.47807     4723      graduate_policies_procedures.txt             Thus, no more than seven years may elapse between the time the first course in a graduate program is completed and the time the last course in the program is co
+retrieval latency: 4.75 ms
+
+=== [semantic] q5: What was SJSU's Enrollment Census Date for Fall 2022? ===
+query embedding dim: 384, first 8 values: [-0.0165, -0.0343, 0.0415, 0.0414, 0.0175, 0.1097, -0.1717, 0.035]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.538627     0.540891    933       academic_calendar.txt                        Calendar - San José State University Source: https://catalog.sjsu.edu/content.php?catoid=13&navoid=4974  Calendar  2022-2023 Academic Year  Academic Year: Augus
+2    0.507054     0.459179    1339      adding_dropping_classes.txt                  For Special Session students, the last day to add is 14 days after the first day of the semester. Special Session students should abide by the drop deadline giv
+3    0.474009     0.50115     924       registration_and_attendance.txt              Registration and Attendance - San José State University Source: https://catalog.sjsu.edu/content.php?catoid=13&navoid=4897  Registration and Attendance  SJSU ID
+4    0.468802     0.4424      1893      undergraduate_policies_procedures.txt        Credit earned may be applied to residence unit requirements for previously matriculated students.  Readmission - Former Students Returning (FSR)  Readmission is
+5    0.463628     0.448554    3421      msda_curriculum_courses.txt                  Entertainment Waymo World Bank Learn more about what alumni from SJSU’s MS in Applied Data Intelligence - formerly the MS in Data Analytics - have accomplished.
+retrieval latency: 5.18 ms
+
+======================================================================
+TECHNIQUE: sentence_window
+======================================================================
+Chunked into 1307 nodes (avg len 158.3 chars) in 2342 ms
+
+=== [sentence_window] q1: What SJSU cumulative GPA must graduate students maintain to remain in good acade ===
+query embedding dim: 384, first 8 values: [-0.0679, 0.0029, 0.0022, -0.054, 0.0209, 0.0681, -0.0744, 0.0603]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.834585     0.859025    432       graduate_policies_procedures.txt             Academic Standing: Probation | Disqualification | Discontinuation | Appeal | Reinstatement | Readmission  Academic Probation  Graduate students enrolled in a de
+2    0.781998     0.856874    160       undergraduate_policies_procedures.txt        Students will remain on academic probation until they return to good academic standing (SJSU cumulative GPA greater than or equal to 2.0) or are disqualified.  
+3    0.771021     0.784145    146       undergraduate_policies_procedures.txt        Freshmen on Academic Probation are allowed a second consecutive semester of probation if their SJSU cumulative GPA is in the range 1.50 to 1.99.  
+4    0.751065     0.812898    98        graduate_policies_procedures.txt             Probation is cleared when the SJSU cumulative GPA rises to 3.0 or better in any subsequent term.  
+5    0.749936     0.812345    241       registration_and_attendance.txt              Probation Holds: undergraduates with SJSU cumulative GPA below 2.00 (3.00 for graduate students), or reinstated on probation status, must see their major adviso
+retrieval latency: 16.93 ms
+
+=== [sentence_window] q2: Which specific course satisfies the Graduation Writing Assessment Requirement (G ===
+query embedding dim: 384, first 8 values: [-0.0664, -0.0354, -0.027, 0.0246, -0.0057, 0.0034, -0.0818, -0.0428]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.833694     0.794166    126       data_analytics_ms_program.txt                Graduation Writing Assessment Requirement  At SJSU, students must pass the Graduation Writing Assessment Requirement (GWAR).  
+2    0.797179     0.794166    126       applied_data_intelligence_ms_program.txt     Graduation Writing Assessment Requirement  At SJSU, students must pass the Graduation Writing Assessment Requirement (GWAR).  
+3    0.776948     0.813284    231       applied_data_intelligence_ms_program.txt     Candidacy includes successful completion of the Graduation Writing Assessment Requirement (GWAR), MSADI program course requirements and the links to specializat
+4    0.757023     0.694531    125       data_analytics_ms_program.txt                Candidacy includes successful completion of the Graduation Writing Assessment Requirement (GWAR), described in this catalog. 
+5    0.738763     0.740701    212       graduate_policies_procedures.txt             Graduation Writing Assessment Requirement (GWAR)  The CSU Graduation Writing Assessment Requirement (GWAR) states that all students must demonstrate competency 
+retrieval latency: 16.43 ms
+
+=== [sentence_window] q3: What are the two specialization tracks in SJSU's MS in Applied Data Intelligence ===
+query embedding dim: 384, first 8 values: [-0.0274, -0.0687, -0.022, 0.0218, 0.0002, -0.0398, -0.0296, 0.0243]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.724425     0.645132    161       msda_curriculum_courses.txt                  Entertainment Waymo World Bank Learn more about what alumni from SJSU’s MS in Applied Data Intelligence - formerly the MS in Data Analytics - have accomplished.
+2    0.724354     0.645212    154       msda_curriculum_courses.txt                  SJSU’s Master of Science in Applied Data Intelligence elevates your technical proficiency and professional leadership, preparing you to drive innovation. 
+3    0.712977     0.695679    124       msda_curriculum_courses.txt                  Apply to SJSU MSADI Program Frequently Asked Questions Want to learn more about our MS in Applied Data Intelligence degree? 
+4    0.704737     0.609269    146       msda_curriculum_courses.txt                  Financial Aid Embrace Your Data-Driven Future at SJSU Earn your Master of Science in Applied Data Intelligence and make real-world change happen. 
+5    0.690282     0.707374    551       applied_data_intelligence_ms_program.txt     Program: Applied Data Intelligence, MS - San José State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=17&poid=13784  Applied Data Intel
+retrieval latency: 16.55 ms
+
+=== [sentence_window] q4: What is SJSU's late registration fee for adding a class after the census date? ===
+query embedding dim: 384, first 8 values: [-0.0647, -0.0567, -0.0193, 0.0254, 0.062, 0.1168, -0.0988, -0.0036]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.744048     0.789405    241       registration_and_attendance.txt              Late Fee Assessed  Students registering for classes after census are assessed a late registration fee of $200.00, which begins after census for any classes adde
+2    0.610489     0.640341    214       registration_and_attendance.txt              Adding Classes after the Last Day to Add: before the Census date, students can submit the Pre-census Late Enrollment petition form to the Registrar's office (va
+3    0.599642     0.586032    101       adding_dropping_classes.txt                  For Regular Session students, late registration end dates are posted on the SJSU Registrar Calendar. 
+4    0.591505     0.62428     828       registration_and_attendance.txt              Registration and Attendance - San José State University Source: https://catalog.sjsu.edu/content.php?catoid=13&navoid=4897  Registration and Attendance  SJSU ID
+5    0.575318     0.543046    93        registration_and_attendance.txt              Students in the Step to College programs are not required to pay the late registration fee.  
+retrieval latency: 13.96 ms
+
+=== [sentence_window] q5: What was SJSU's Enrollment Census Date for Fall 2022? ===
+query embedding dim: 384, first 8 values: [-0.0165, -0.0343, 0.0415, 0.0414, 0.0175, 0.1097, -0.1717, 0.035]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.615126     0.653837    690       academic_calendar.txt                        Calendar - San José State University Source: https://catalog.sjsu.edu/content.php?catoid=13&navoid=4974  Calendar  2022-2023 Academic Year  Academic Year: Augus
+2    0.531497     0.54636     101       adding_dropping_classes.txt                  For Regular Session students, late registration end dates are posted on the SJSU Registrar Calendar. 
+3    0.526945     0.573567    86        adding_dropping_classes.txt                  For Regular Session students, these dates are posted on the SJSU Registrar Calendar . 
+4    0.508073     0.465659    188       registration_and_attendance.txt              Course Offerings and Cancelled Classes  The courses listed in the online SJSU Schedule of Classes reflect the scheduled offerings by the departments available a
+5    0.491955     0.519823    828       registration_and_attendance.txt              Registration and Attendance - San José State University Source: https://catalog.sjsu.edu/content.php?catoid=13&navoid=4897  Registration and Attendance  SJSU ID
+retrieval latency: 15.26 ms
+
+Saved 15 per-query/per-technique records to /Users/prags/Desktop/HW1_DATA260/reports/hw03/raw/retrieval_records.json
+Saved flat CSV to /Users/prags/Desktop/HW1_DATA260/reports/hw03/raw/retrieval_records.csv
+
+======================================================================
+SUMMARY
+======================================================================
+{
+  "token": {
+    "n_chunks": 204,
+    "avg_chunk_len": 1158.2,
+    "top1_cosine_mean": 0.6968,
+    "mean_at_k_cosine_mean": 0.6412,
+    "recall_at_k": 0.8,
+    "mean_retrieval_latency_ms": 7.91
+  },
+  "semantic": {
+    "n_chunks": 85,
+    "avg_chunk_len": 2434.5,
+    "top1_cosine_mean": 0.6523,
+    "mean_at_k_cosine_mean": 0.6011,
+    "recall_at_k": 0.8,
+    "mean_retrieval_latency_ms": 5.25
+  },
+  "sentence_window": {
+    "n_chunks": 1307,
+    "avg_chunk_len": 158.3,
+    "top1_cosine_mean": 0.7483,
+    "mean_at_k_cosine_mean": 0.6883,
+    "recall_at_k": 0.8,
+    "mean_retrieval_latency_ms": 15.83
+  }
+}
+
+Saved summary to /Users/prags/Desktop/HW1_DATA260/reports/hw03/raw/summary.json
+
+=== 2026-09-18 00:11:45 PDT completed ===
