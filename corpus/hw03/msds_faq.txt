@@ -1,0 +1,417 @@
+MSDS FAQ | Department of Computer Science
+Skip to main content
+MS Data Science FAQ
+List of Frequently Asked Questions (FAQ)
+Newly Enrolled Students
+For Prospective Students
+For Current Students
+Newly Enrolled Students
+When I tried adding a course, it denied me due to lack of prerequisites despite having
+taken that course.
+MySJSU does not automatically update your academic record if your transcript is not
+from SJSU. Therefore, you will obtain a permission number by contacting the course
+instructor at the start of the semester or attending the very first class and requesting
+it from the instructor. Please bring along your prerequisite documents.
+The CS Office is no longer providing permission numbers during Summer and Winter Sessions.
+When should I take CS 297 and CS 298?
+Most students take CS 297 in their third semester. However, please note you will need
+to select an instructor to serve as your advisor and have their approval
+before
+enrolling into CS 297. You will also need to have taken and passed CS 200W beforehand.
+CS 298 is taken in the semester following CS 297.
+For Prospective Students
+What does it cost to go to SJSU?
+The most current information is on the
+bursar's web page
+.
+I work during the day. Can I obtain the MSDS degree while working?
+We try to offer graduate courses in the late afternoons and evenings or early in the
+morning. Occasionally, you may have to take a course during the day; hopefully your
+employer will help by allowing you to flex your schedule. You have up to 7 years (!)
+to finish the degree, although we naturally don't recommend that you actually take
+that long. Many of our students are professionals who obtain the MS degree while working
+full-time.
+I have been in California for X months/years. Am I entitled to in-state tuition?
+Please check the
+web-based SJSU Catalog
+for more information.
+I don't have a degree in Data Science, can I be admitted?
+The MSDS program accepts applicants with non-science or engineering bachelor's degrees
+(with at least 3.0/4.0 GPA). However, admission of an applicant to the program cannot
+be known in advance. Only after a thorough review of all applications by the MSDS
+admission committee that successful applicants will be selected. Students should check
+the
+MSDS admission criteria
+and the
+university requirements
+for additional information.
+Is it a requirement to complete the prerequisite courses before applying or can those
+undergrad courses be taken in the first few semesters if I am accepted into the program?
+The more prerequisites completed, the higher the chance of acceptance. Therefore,
+applicants are strongly advised to complete as many prerequisites as possible, though
+it is possible to finish the remaining prerequisites within the first year of MSDS.
+I am an international student. Is there additional information available?
+The
+International Programs and Student Services
+.
+What form of financial assistance is available from the department?
+Unfortunately, financial assistance is very limited. The department does not offer
+full scholarships or tuition waivers. A very limited number of teaching associate,
+grader and lab monitor positions are available. However, these positions are not usually
+open to incoming students. The salary for these positions is not high, and you should
+not rely on them for financial support.
+Is the MS in Data Science admssion offered during Summer?
+No. The MSDS admission is offered during Fall and Spring semesters.
+What are the application deadlines?
+Please see
+Admission Deadlines
+for up-to-date information about deadlines.
+Do you accept incomplete applications?
+International applicants have a 20 days after the application deadline to submit letters
+of recommendations.
+Can you mail me the application materials?
+No. You must apply to the university through the online web site (
+http://www.csumentor.edu
+).
+What is the Graduate Admissions and Program Evaluations office?
+The
+Graduate Admissions and Program Evaluations
+office administers all graduate admissions. It checks that your applications fulfill
+the minimum university criteria for admission. It checks your transcripts, degree
+certificates, TOEFL scores, visa status, and financial information. Once Graduate
+Admissions is satisfied that you are qualified to join the university, then it forwards
+your file to the department. In the Computer Science Department, we check your qualifications
+for the master's program in Data Science. Graduate Admissions determines if you can
+be admitted to the University; if you are, then the Computer Science Department decides
+whether to admit you to the MSDS program.
+Where should I mail my application materials?
+The application fee, official transcripts, degree certificates, TOEFL scores, visa
+and financial information, all go to
+Graduate Admissions and Program Evaluations
+office.
+What are the application fees?
+Please visit the
+Prospective Students
+page for the current university application fees.
+Am I eligible for an application fee waiver?
+Unfortunately, the CSU system does not allow application fee waivers for
+graduate
+applicants. The only exceptions at SJSU are given to military veterans, McNair scholars,
+AB540 status holders, and CA residents applying to a regular session campus program
+who present high economic need as reported within their Cal State Apply application
+regarding household size and income. You can find more information on eligibility
+for fee waivers
+here
+.
+Can you look over my application before I submit it?
+Sorry—we cannot help you with putting together your application. Simply submit your
+application and provide the requested information. If we have questions after receiving
+your application, we will contact you. It is important that you provide a current
+email address for that purpose.
+I need to know NOW whether you will accept me later, so that I can decide whether
+I should try applying at a different department or university.
+Unfortunately, we cannot give you a guarantee now that we will admit you later. It
+is always a good idea to apply at more than one university.
+I fulfilled all requirements for admission. Am I guaranteed to be accepted?
+Unfortunately, no. When there are more qualified applicants than we have space available
+in the program, we offer admission to those whom we consider the most promising applicants,
+until all of the available space is filled.
+Should I provide letters of recommendation?
+It is strongly recommended. The MSDS Program requires a minimum of two recommendation
+letters.
+Where should letters of recommendation be mailed?
+We encourage you to submit recommendation letters online through Cal State Apply portal.
+Applicants can provide information for each Recommender asking them for recommendation
+letters online.
+We would still accept hard-copy recommendation letters. Either include them, in sealed
+envelopes, with the documents that you send to the Graduate Admissions office, or,
+if your recommenders mail them directly, ask that they be mailed to the CS department
+and not the Graduate Admissions office. The mailing address is:
+Graduate Coordinator
+Department of Computer Science
+San Jose State University
+One Washington Square
+San Jose, CA 95192-0249
+We do not accept letters of recommendation by email.
+Is there a special form for recommendation letters?
+Letters must be on university or company stationery.
+Letter of recommendation should be at most 2 pages in length.
+There is no special form. Please tell your recommenders to address the following questions:
+How long has the recommender known you, and in what capacity?
+How does the recommender rate your data science achievements? Compared to what pool?
+What specific achievements in computer science did the recommender observe?
+If sending through mail, letters must additionally be sealed in university or company
+envelopes.
+How can I request a confidential letter of recommendation?
+U.S. law states that you have access to all records in your student file unless you
+have explicitly waived this right. Recommenders may be more inclined to write candid
+letters, and those letters may be given more credence, if you do so. You can waive
+your rights to see your recommendation letters by selecting "Yes" to the waiver of
+recommendation option in the online application.
+If you are sending hardcopy, please follow steps below -
+Write a letter to the person providing you the letter of recommendation. Include these
+sentences: "I am asking you to write a letter of recommendation on my behalf and to
+send it to the Graduate Coordinator, Department of Computer Science, San Jose State
+University, San Jose, CA 95192-0249. I understand that, under the Family Educational
+Rights and Privacy Act (FERPA), I have the right to see this letter of recommendation.
+I hereby waive my right of access under FERPA with respect to this letter of recommendation."
+Sign and date the letter.
+Write a letter to "Graduate Coordinator, Department of Computer Science, San Jose
+State University, San Jose, CA 95192-0249.". Include these sentences: "I have asked
+X, Y, and Z to write letters of recommendation on my behalf to support my application
+for the W term. I understand that, under the Family Educational Rights and Privacy
+Act (FERPA), I have the right to see these letters of recommendation. I hereby waive
+my right of access under FERPA with respect to these letters of recommendation." Sign
+and date the letter.
+My BSDS degree is older than 7 years. Can I still apply for the MSDS program?
+Yes, but there is the possibility that you might only be admitted with the condition
+that you take some refresher courses.
+Can the TOEFL/IELTS/PTE requirement be waived?
+TOEFL/IELTS/PTE will only be waived once the official transcripts have been reviewed
+(by GAPE) proving that one of the criteria below has been met.
+Received a Bachelor’s or Master’s degree from a regionally accredited institution
+within the U.S.
+Completed 3 years of full-time coursework in a regionally accredited institution within
+the U.S.
+Completed a Bachelor's or Master's degree from one of the countries outside of the
+US meet the requirement (see full list below)*.
+* the U.S., U.S. Territories, Canada – excluding Quebec, Commonwealth Caribbean (Antigua,
+Bahamas, Belize Barbados, Grenada, Guyana, Jamaica, Trinidad and Tobago), U.K. (England,
+Ireland, Scotland, and Wales), Australia, New Zealand and the Philippines. Refer Step
+7 of steps to admission for
+Domestic
+and
+International
+applicants.
+Can the GRE requirement be waived?
+GRE
+is optional for the MS in Data Science program. However, if you do submit scores,
+they will be used to compare and rank applicants.
+What TOEFL score do I need to have to be accepted?
+Applicants from countries in which the native language is not English must submit
+TOEFL
+scores. Minimum TOEFL scores acceptable for admission are 575 (Paper-based), 240
+(Computer-based), or 90 (Internet-based).
+Are Duolingo scores acceptable?
+No, MSDS does NOT accept Duolingo scores.
+What is the status of my application?
+The department does not give out status information. You can check your status online
+by signing in to
+one.sjsu.edu
+and then search for the MySJSU tile. Use the user ID and password in your confirmation
+email.
+Did you recently change the admission requirements?
+Admission to the MSDS program is a competitive process. We continually monitor the
+number of applicants and the number of spaces in the program. We periodically revise
+our guidelines to give students accurate guidance for submitting successful applications.
+What are my chances of being admitted?
+The MSDS program accepts applicants with non-science or engineering bachelor's degrees
+(with at least 3.0/4.0 GPA). However, admission of an applicant to the program cannot
+be known in advance. Only after a thorough review of all applications by the MSDS
+admission committee that successful applicants will be selected. Students should check
+the
+MSDS admission criteria
+and the
+university requirements
+for additional information.
+I took college courses in (C|C++|Java|Perl|Python|Unix|Oracle|) Python| programming.
+Do you consider these courses when evaluating my Data Science background?
+No.
+What is a typical set of Data Science courses that you might expect of an MSDS applicant?
+Typical courses that are part of the BSDS degree can be found on the
+MSDS Admission Requirements
+webpage
+I am self-taught in Data Science, and I don't want to take a lot of undergraduate
+courses that repeat what I already know. Is there another way to prove my knowledge
+in Data Science?
+We recommend that you take the prerequisite courses.
+I concluded that I need to take quite a few courses to prepare myself for admission
+to the MSDS program. Can I be conditionally admitted and take the courses as an MSDS
+student?
+We may admit in-state students on a conditional basis if the number of fully qualified
+applicants is less than the available space in the MSDS program.
+I was accepted with a condition, but I don't like the condition. Can I negotiate to
+have it waived or changed?
+No. The condition is part of our admission offer to you. This is our final offer,
+and it is not subject to negotiation. If you do not want to fulfill the condition,
+or you do not think that you are able to, then you should not accept our offer of
+conditional admission.
+I will be completing my undergraduate degree in the same semester in which I submit
+an application. Is that ok?
+Be sure to clearly indicate that you expect to earn your bachelor's in the current
+semester. Completing the degree will be a condition for admission. Note that the date
+the degree is conferred must be before the first day of classes in the graduate program.
+I do not have a 4-year Bachelor degree. Can I be admitted to the MSDS program?
+No, a 4-year Bachelor degree is a minimum requirement for admission to the graduate
+school.
+I have a 3-year degree from another country. Can I be admitted to the MSDS program?
+No, a 4-year Bachelor degree is a minimum requirement for admission to the graduate
+school. However, some students with a 3-year degree have gone on to do one or two
+more years of post baccalaureate work in Data Science. These applicants will be handled
+on a case by case basis.
+Can I use work experience to fulfill some of the entrance requirements?
+No, we do not accept experience in the workplace as a substitute for academic requirements.
+The California State University policy states that in unusual cases, the department
+may make exceptions to the 4-year Bachelor degree requirement. Does your department
+make these exceptions?
+No.
+My application was rejected, but I disagree. Can I appeal?
+No.
+My application was rejected. Can I find out why?
+No. We rank applications, and pick the highest ranking ones. For privacy reasons,
+it is not possible for you to compare your application against others.
+If you were not accepted, then that does not mean that we find you unqualified. It
+usually means that we have had more applicants than we were able to accommodate and,
+in our opinion, you did not rank among the top ones.
+My application was rejected. Can I join the program on a part-time or conditional
+basis?
+No. There is no separate part-time program. If we had been able to accept you on a
+conditional basis, then we would have done so. If your application was rejected, the
+only way you might be admitted is to reapply.
+My application was rejected by the Graduate Admissions office. Can you intervene on
+my behalf?
+No. The Graduate Admissions office determines whether you fulfill the minimum entrance
+requirements to join a graduate program at San Jose State University. If the Graduate
+Admissions office determines that you did not meet those requirements, or that you
+did not submit required documents in a timely manner, the CS department cannot intervene.
+My application for a previous semester was rejected, but I would like to be reconsidered
+for the next semester. Can I submit additional materials without reapplying?
+No. Your previous application is no longer active. You need to reapply. The department
+will make an effort to keep letters of recommendations for a semester, so you may
+not need to resubmit these. The
+Graduate Admissions
+office may be able to locate your old transcripts. Check with both offices to see
+if your old materials are still available.
+My application was rejected, and I would like to reapply. What can I do to improve
+my chances?
+Here are some suggestions:
+Complete an undergraduate DS degree.
+Submit letters of recommendation that show exceptional promise in Data Science.
+For Current Students
+The program requirements have changed since I started in the MSDS program. Which requirements
+do I need to follow in order to graduate?
+You may choose to follow the requirements that were in place when you started, or
+those that are in place when you file for candidacy.
+How can I learn about the various policies and procedures that graduate students need
+to follow?
+The Graduate Admissions and Program Evaluations office has several important resources
+on the
+Graduate Admissions and Program Evaluations web site
+for prospective and current graduate students
+I was admitted as a conditionally classified student and fulfilled my conditions a
+long time ago. Why am I still listed as "conditionally classified"?
+There isn't anyone who is monitoring your admission conditions and completed courses
+on your behalf. YOU need to apply for "fully classified status". You will be "fully
+classified" after you have completed your conditions AND have applied for change of
+status. Submit a change of status form using the
+Forms
+page on GAPE's website.
+I was admitted conditionally into the MS in Data Science program, can I transfer my
+admission to MS in Data Science?
+Unfortunately, there is no direct transfer process between any MS programs at SJSU.
+You would need to apply to the program through
+Cal State Apply
+.
+I have been accepted to the program but I won't be able to attend for another semester.
+Can I defer my acceptance?
+Unfortunately, you will need to reapply. However, if you inform us that you were accepted
+in the prior semester, then you need not supply transcripts and letters of recommendations
+again. You will need to pay the application fee. If more than one semester has passed
+since your acceptance, you will need to reapply and resubmit all materials.
+I have already been admitted to the MSDS program and would like help in planning my
+program of study.
+Please see a graduate advisor. Please visit the Computer Science
+Faculty Advisors
+page for to locate the MSDS advisors information.
+I already wrote (a master's thesis|a best-selling novel|a letter to my mom). Do I
+still have to take Technical Writing at SJSU?
+There are six ways to satisfy the Competency in Written English requirement; these
+are listed in
+the requirements document from the GAPE site
+. The last three require a meeting with the graduate coordinator, for the first three
+on your candidacy form you just indicate which one applies to you and GAPE can check
+it.
+What happens if my GPA drops to 3.0 or less?
+If your cumulative GPA is less than 3.0, then you are on academic notice. If you are
+on academic notice, you cannot graduate.
+You will be disqualified from the MSDS program if your semester GPA is not above 3.0.
+Go to
+Policies and Procedures
+, then follow the links General Graduate Policies & Procedures > Academic Standing.
+Then read the articles Academic Notice and Disqualification.
+Once your cumulative GPA is again at least 3.0, you are no longer on Academic Notice.
+You should try very hard not to get onto Academic Notice in the first place. You should
+plan on getting a B+ or better in all your courses. If you do end up getting less
+than a B, make sure that you have another course to make up for it.
+How do I register when I am on academic notice?
+Follow the instructions provided on the
+Academic Notice advising
+webpage.
+What happens if I get a D or F in a class?
+(1) You cannot use that class for graduation. You can repeat it or select another
+course.
+(2) Your GPA will suffer, and you'll probably go on academic notice.
+I was put on academic notice, and now I can't register for classes. What should I
+do?
+Visit the
+Academic Notice webpage
+for guidance.
+I got disqualified from the program. What should I do?
+You can file a petition for
+reinstatement
+. Usually, such a petition involves your committing to take a selection of undergraduate
+(!) courses, to be approved by the graduate coordinator, that (a) more adequately
+prepares you for graduate study and (b) lifts your cumulative GPA. These courses do
+not count towards your graduate degree.
+I would like to take a course from another department. What should I do?
+Before you register, fill out an evaluation form (available in the department office),
+and attach a syllabus for the course. The graduate coordinator will evaluate the syllabus,
+or ask a faculty member who is familiar with the subject matter to carry out the evaluation.
+Courses may be approved as option courses or elective courses, at the discretion of
+the graduate advisor.
+When should I fill out my candidacy form?
+Candidacy forms will not be approved by GAPE until you have completed the GWAR requirement.
+The form serves as an agreement between you and GAPE — if you pass these classes at
+the appropriate level then a degree will be awarded. So, if you decide to take a different
+set of courses, you will need to file an update to your candidacy form. Usually, students
+fill out this form at a minimum one semester before they graduate. Visit the GAPE
+Deadlines
+page for details on deadlines.
+Where can I find more information about theses and writing projects?
+Details on Theses and Writing Projects can be found on the
+Project/Thesis Guidelines
+page.
+Whom should I direct my RCL - Reduced Course Load form for signature/approval?
+Your MSDS Program Coordinator is the one who should be signing your RCL forms.
+Who should be signing my ISSS Culminating Experience Form - Culminating Experience
+Confirmation - F-1 Students Only?
+Find more details on form by visiting
+https://www.sjsu.edu/isss/current-students/f1-status/culminating.php
+and then check under
+How to File the ISSS Culminating Experience Form
+.
+Your MSDS Program Coordinator should be signing your form.
+When are your office hours?
+Please see the web page at
+https://www.sjsu.edu/cs/students/office-hours.php
+to find office hours details.
+Department of Computer Science
+Department of Computer Science on Facebook
+Department of Computer Science on X
+Department of Computer Science on LinkedIn
+Department of Computer Science on Instagram
+Department of Computer Science on YouTube
+Department of Computer Science on Snapchat
+Contact Us
+Phone: 408-924-5060
+Fax: 408-924-5062
+Email:
+info-compsci@sjsu.edu
+Visit Office
+MacQuarrie Hall 208
+One Washington Square
+San Jose, CA 95192-0249
+Monday to Friday
+9:00 AM - 4:00 PM
+(Lunch hours 12:30 PM - 1:30 PM)
+Last Updated Oct 29, 2025

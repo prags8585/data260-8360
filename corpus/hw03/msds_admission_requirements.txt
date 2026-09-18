@@ -1,0 +1,57 @@
+MSDS Admission Requirements | Department of Computer Science
+Skip to main content
+MSDS Admission Requirements
+Students can be admitted in either
+classified
+or
+conditionally classified standing
+.
+GRE is optional
+for the MS in Data Science program. It is not a requirement. However, if you do submit
+the scores, they will be used to compare and rank the applicants.
+To enter this program with classified standing, a student must have passed the following
+prerequisites courses (with a C- or better OR the listed required grade below):
+Three semesters college-level calculus courses - differential calculus (e.g., MATH
+30 at SJSU), integral calculus (e.g., MATH 31 at SJSU), and a multivariable caluculus
+course (e.g., MATH 32 at SJSU), with a grade of B or better on the multivariable calculus
+course.
+A linear algebra course (e.g., MATH 39 at SJSU), with a grade of B or better.
+A discrete math course (e.g., MATH 42 or CS 42 at SJSU).
+An upper-division calculus-based statistics course (e.g., MATH 161A at SJSU), with
+a grade of B or better.
+A probability theory course (e.g., MATH 163 at SJSU), with a grade of C or better.
+Two CS introductory courses on programming and data structures (e.g., CS 46A and CS
+46B at SJSU).
+An upper division data structures and algorithms course (e.g., CS 146 at SJSU), with
+a grade of B or better.
+An advanced course in object-oriented programming (e.g., CS 151 or CMPE 135 at SJSU)
+or two semesters of statistical programming coursework, (e.g., MATH 167R and MATH
+167PS at SJSU).
+Applicants from countries in which the native language is not English must submit
+TOEFL scores. Minimum TOEFL scores acceptable for admission are
+575
+(Paper-based),
+240
+(Computer-based), or
+90
+(Internet-based).
+Department of Computer Science
+Department of Computer Science on Facebook
+Department of Computer Science on X
+Department of Computer Science on LinkedIn
+Department of Computer Science on Instagram
+Department of Computer Science on YouTube
+Department of Computer Science on Snapchat
+Contact Us
+Phone: 408-924-5060
+Fax: 408-924-5062
+Email:
+info-compsci@sjsu.edu
+Visit Office
+MacQuarrie Hall 208
+One Washington Square
+San Jose, CA 95192-0249
+Monday to Friday
+9:00 AM - 4:00 PM
+(Lunch hours 12:30 PM - 1:30 PM)
+Last Updated Oct 13, 2025

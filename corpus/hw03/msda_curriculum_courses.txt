@@ -1,0 +1,267 @@
+MS in Applied Data Intelligence | Department of Applied Data Science
+Skip to main content
+Master of Science in Applied Data Intelligence
+Transform Data Into Impact
+With a Master of Science (MS) in Applied Data Intelligence (MSADI) from San José State
+University, you develop the skills to design, build and deploy intelligent data-driven
+systems that solve real-world problems.
+This
+two-year, STEM-designated program
+integrates applied data science, artificial intelligence (AI), machine learning and
+modern data engineering. You gain hands-on experience working with advanced technologies
+such as deep learning, generative AI, large language models (LLMs) and distributed
+data systems while learning alongside leaders from Silicon Valley. These close Silicon
+Valley industry partnerships and collaborations shape the curriculum, mentor students,
+provide real-world project opportunities and offer professional development, so you’re
+ready to meet the demands of rapidly evolving data-driven fields.
+By the time you graduate, you’ve built the technical expertise needed to build scalable
+data pipelines, deploy AI solutions and transform complex data into actionable insights,
+and step confidently into advanced roles across technology, business and research.
+Apply Now
+Request Information
+Why Earn Your Applied Data Intelligence Degree at SJSU?
+Your gateway to the dynamic world of data and AI begins here. During your time in
+the MS in Applied Data Intelligence program, you benefit from:
+An interdisciplinary curriculum developed in collaboration with Silicon Valley professionals,
+aligned with current industry tools, platforms and emerging AI technologies.
+Advanced course work in machine learning, deep learning, generative AI, large language
+models and distributed systems.
+Dedicated faculty
+who maintain strong industry ties and offer personalized support inside and outside
+the classroom.
+Professional connections with local tech leaders who teach, lead guest seminars and
+provide mentorship.
+Industry partners contribute through curriculum feedback and also support internship
+and job placement pathways.
+STEM designation
+that offers a high standard of technical training and offers practical advantages,
+such as extended work authorization for international students.
+Discover
+why students choose San José State University
+for a one-of-a-kind graduate education.
+#5
+Public University in the Country
+#9
+Best Value School
++200
+Silicon Valley companies have employed Applied Data Intelligence students for internships
+and permanent positions
+What You’ll Learn
+The Master’s in Applied Data Intelligence curriculum integrates rigorous course work
+with real-world case studies and collaborative projects alongside Silicon Valley companies,
+ensuring you graduate with industry-ready skills.
+In just 30 credits, you undergo advanced training to design and deliver real-world
+data solutions. You learn how to process and analyze data from multiple sources, build
+scalable data pipelines, extract meaningful insights and develop full-stack systems.
+By combining data engineering, applied analytics and AI techniques, you gain the ability
+to solve complex problems from initial data collection through final deployment.
+Beyond core courses, you can specialize in data engineering. This track builds expertise
+in data warehousing, big data and distributed systems while advancing your skills
+in generative AI and prompt engineering for scalable, real-world applications.
+Review Program Catalog
+Culminating Experience
+To solidify your theoretical knowledge and applied data expertise, your time in the
+Master of Science in Applied Data Intelligence program concludes with a culminating
+experience.
+Your first option is to complete a thesis, which includes a two-course sequence. You
+will conduct original research under the guidance of a faculty committee and produce
+a thesis that meets San José State University’s graduate education standards.
+The second option is to complete a project. In this two-course applied sequence, you
+collaborate with a small team and a faculty advisor to design and execute a comprehensive
+data or development project, culminating in a detailed written report and presentation.
+Whichever path you choose, you prepare for advanced professional roles by integrating
+data engineering, data intelligence and AI technologies concepts into real-world problem
+solving.
+Learning Outcomes
+Upon graduating from the MSADI program, you’ll demonstrate the ability to:
+Integrate Multidisciplinary Knowledge
+Integrate multidisciplinary knowledge to engage in practical applied data intelligence
+projects, from analyzing requirements to managing data, building models, presenting
+results.
+Identify, Use and Evaluate
+Identify, use, and evaluate applied data intelligence technologies and tools.
+Apply Necessary Skills
+Apply effective oral and written communication skills necessary to professional work,
+including collaboration and presentation to multidisciplinary audiences.
+Perform Research
+Perform research in applying applied data intelligence to specific domains.
+Utilize Quantitative Skills
+Utilize quantitative skills from a rich foundation of essential knowledge to solve
+complex, dynamic, and practical applied data intelligence problems.
+Work Productively
+Work productively as individuals and in teamwork to perform applied data intelligence
+tasks as part of a team.
+Identify and Contribute
+Identify ways in which applied data intelligence professionals can contribute to the
+cultural, economic, educational, and social well-being in diverse and multicultural
+local, national, and global contexts.
+See the
+Program Learning Outcomes in the SJSU Catalog
+.
+Careers for Applied Data Intelligence
+Ready to step into a high-impact career? SJSU’s Master of Science in Applied Data
+Intelligence elevates your technical proficiency and professional leadership, preparing
+you to drive innovation. The Bureau of Labor Statistics projects that
+data scientist roles will grow by 34% over the coming decade
+, significantly outpacing the average 3% increase for all other occupations.
+Equipped with advanced data engineering, machine learning and generative AI expertise,
+you can pursue positions, including:
+Agentic AI Engineer
+AI Application Engineer
+AI Solutions Engineer
+Applied AI Engineer
+Business Intelligence Analyst
+Data-AI Engineer
+Data Analyst
+Data Engineer
+Data Scientist
+Deep Learning Engineer
+Generative AI Engineer
+Intelligent Systems Engineer
+NLP Engineer
+Machine Learning Engineer
+MLOps Engineer
+Software Engineer
+Where San José State Graduates Work
+Known for their depth of knowledge, dedication to problem solving and strong work
+ethic, SJSU graduates have secured internships and careers at more than 200 prominent
+companies, many of which are located in Silicon Valley, including:
+3M
+Accenture
+Adobe
+Airbnb
+Alphabet
+AMD
+Amazon
+Apple
+Applied Materials
+Autodesk
+BlackRock
+Capital One
+Cisco
+Cognizant
+Coupang
+El Camino Health
+Electric Power
+Research Institute
+Equinix
+Ernst & Young
+Esri
+Experian
+Glassdoor
+GM Financial
+Google
+HP Inc.
+IBM
+Informatica
+Intel
+Intuit
+John Deere
+Juniper Networks
+Lam Research
+Lucid
+Mercedes-Benz
+Meta Platforms
+Micron
+Microsoft
+NetApp
+Nokia
+Nvidia
+Palo Alto Networks
+Panasonic
+PayPal
+Rackspace Technology
+Roche
+Roku
+Salesforce
+SAS
+Seagate
+Teladoc Health
+Teradata
+Tesla
+TikTok
+Uber
+Udemy
+Visa
+VMware
+Walmart
+Warner Bros.
+Entertainment
+Waymo
+World Bank
+Learn more about what alumni from
+SJSU’s MS in Applied Data Intelligence - formerly the MS in Data Analytics - have
+accomplished.
+Master’s in Applied Data Intelligence Program Admissions
+Ready to pursue your academic goals? Start by applying to San José State University’s
+STEM-designated MS in Applied Data Intelligence program.
+Our graduate admissions process includes two steps. First, you must meet the
+university’s graduate admission requirements
+, and then you must meet the specific
+requirements of the Applied Data Intelligence program
+.
+The College of Graduate Studies is available to guide you through the SJSU application
+process. They offer
+Information Sessions
+,
+Drop-in 1:1 Sessions
+, and support via email at
+grad-admissions@sjsu.edu
+for university application questions.
+Explore Graduate Admissions at SJSU
+Application Requirements
+When applying, please complete the following steps:
+Submit your application through
+Cal State Apply
+Submit your
+official documents to Graduate Admissions
+by the
+Applied Data Intelligence document deadline
+No GRE and GMAT scores or recommendation letters are required
+GPA 3.0 or higher
+A background in mathematics or computer programming must be considered adequate to
+meet the department prerequisites
+Learn more about
+how to apply to the applied data intelligence program
+.
+Financial Aid
+A Master of Science in Applied Data Intelligence from San José State University is
+a strategic investment in your future. At San José State University, our Financial
+Aid and Scholarship Office helps you navigate the cost of graduate study.
+Whether you are exploring scholarships through the Department of Applied Data Science,
+reviewing federal and state aid options or preparing your
+FAFSA
+®, our team ensures you understand your eligibility and works with you to create a
+practical plan to achieve your academic goals.
+The College of Graduate Studies has also dedicated a
+Funding Opportunities
+page for additional funding resources.
+Financial Aid
+Embrace Your Data-Driven Future at SJSU
+Earn your Master of Science in Applied Data Intelligence and make real-world change
+happen. With the data engineering, artificial intelligence and computational analytics
+skills you gain, you’re ready to create intelligent systems, find solutions and lead
+innovation across industries.
+Take the next step toward San José State University.
+Apply to SJSU
+MSADI Program Frequently Asked Questions
+Want to learn more about our MS in Applied Data Intelligence degree?
+Explore our FAQs
+page to get detailed information about admission requirements, program structure,
+course work and more, and find the answers you need to make an informed decision.
+What is Applied Data Intelligence?
+Applied Data Intelligence uses data, analytics and emerging technologies like artificial
+intelligence to solve real-world problems and inform decision-making. It goes beyond
+collecting data and discerning patterns to interpreting insights, building predictive
+models and applying findings to improve business strategy, operations and outcomes.
+This interdisciplinary field blends technical skills with critical thinking to turn
+complex information into actionable solutions.
+Department of Applied Data Science
+Contact Us
+Email:
+ms-applied-data-intelligence@sjsu.edu
+Visit Office
+Interdisciplinary Science Building
+One Washington Square
+San Jose, CA 95192-0126
+Last Updated Jul 13, 2026

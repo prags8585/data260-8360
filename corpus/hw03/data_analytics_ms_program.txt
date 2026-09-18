@@ -1,0 +1,96 @@
+Program: Data Analytics, MS - San José State University
+Source: https://catalog.sjsu.edu/preview_program.php?catoid=13&poid=7675
+
+Data Analytics, MS
+
+Admissions Requirements
+Requirements for Advancement to Candidacy
+Requirements for Graduation
+Master's Requirements (30 units)
+Program Learning Outcomes
+
+The Master of Science in Data Analytics, offered by the Department of Applied Data Science, is developed in partnership with industry experts targeting students from diverse academic and professional backgrounds. Students receive the advanced education necessary to apply analytics to solve real-world problems by immersing them in the full data analytics process lifecycle.
+
+Students learn how to build portfolios of data analytics projects by leveraging the interrelationship between domain data knowledge and emerging information technologies. Students advance their knowledge and skills through the integration of:
+
+Identifying domain-specific problems, defining requirements, and establishing measurable organizational objectives.
+Performing data exploration, preparation, visualization, and governance.
+Applying programming, statistics, database, data mining, and machine learning technologies to build models for descriptive, diagnostic, predictive, and prescriptive data analytics.
+Engaging in the development, validation, and monitoring of data analytics systems to meet requirements and objectives.
+
+Today most organizations treat analytics as a strategic asset, and analytics is central to many functional roles and skills. This program prepares students for a career in data analytics in almost all industry domains. Potential career roles for graduates include data analyst, data administrator, business intelligence analyst, and information research scientist.
+
+The program is offered in both regular and special sessions.
+
+Admissions Requirements
+Admission to University
+
+Candidates must apply through the CSU admissions portal, Cal State Apply, and meet all university admission requirements.
+
+In addition to holding a bachelor's degree, international applicants (or applicants who earned their degrees in a country where the primary language is not English) must achieve a minimum English-language proficiency test score as indicated on the Graduate Program Test Requirements webpage at GAPE.
+
+Admission to Program
+
+Candidates must meet all university admission requirements. Students can be admitted in either classified or conditionally classified standing. To be admitted to classified standing, the successful applicant must have earned a bachelor's degree from a regionally accredited institution and achieved a GPA of at least 3.0 (on a 4.0 scale) in the bachelor's degree institution or in the last 60 semester or 90 quarter units of all coursework. Also required is at least one semester each of college calculus, statistics, and a programming course.
+
+Admission to Conditionally Classified Standing
+
+An applicant might be conditionally admitted to the program with a marginal deficiency in the above requirements. The individual admission notification will explain the required terms and conditions for attaining Classified standing.
+
+Requirements for Advancement to Candidacy
+
+The university requirements for advancement to candidacy for the master's degree are outlined in the Graduate Policies and Procedures section. Candidacy includes successful completion of the Graduation Writing Assessment Requirement (GWAR), described in this catalog. DATA 270 is a class of data analytics processes and satisfies the GWAR for this program.
+
+Requirements for Graduation
+University Graduation Requirements
+
+Students must complete all residency, curriculum, unit, GPA, and culminating experience requirements as outlined in the Graduation Requirements section of the Graduate Policies and Procedures.
+
+MS - Data Analytics Graduation Requirements
+
+This is an interdisciplinary program consisting of 10 courses with both in-person and online modes of instruction. As shown below, each of the 6 core, 2 elective, and 2 thesis or project courses is 3 semester units.
+
+Graduation Writing Assessment Requirement
+
+At SJSU, students must pass the Graduation Writing Assessment Requirement (GWAR).
+
+Culminating Experience (Plan A or Plan B)
+
+All students must complete one of the following culminating experience options as part of their 30-unit program requirement.
+
+Plan A (Thesis)
+
+Students opting to complete a master's thesis will take the DATA 299A and DATA 299B as a two-course sequence. The student is responsible for securing the commitment of a full-time tenured or tenure-track faculty member who agrees to serve as the thesis committee chair. The student must also secure the commitments of two additional university faculty members, one of whom must be a full-time tenured or tenure-track faculty member, to serve as the student's thesis committee. The student must write a thesis proposal and have it approved by the thesis committee and pass the DATA 299A course before enrolling in DATA 299B. The thesis must meet university requirements as stipulated in this catalog and in the SJSU Master's Thesis and Doctoral Dissertation Guidelines. It will be written under the guidance of the candidate's thesis committee chair with the assistance of the thesis committee.
+
+Plan B (Project)
+
+The graduate project is a research or development effort performed by a team of students on a topic chosen by mutual agreement between an advisor and the team. The choice of project topic must also be approved by the instructor of DATA 298A. DATA 298A is the first part of the master's project in which students develop a comprehensive plan and preliminary design of a data analytics project. DATA 298B is the second part of the master's project course in which each student completes an in-depth written project to achieve the program outcomes and satisfy the program's culminating experience requirement.
+
+Master's Requirements (30 units)
+Core Courses (18 units)
+DATA 220 - Mathematical Methods for Data Analytics 3 unit(s)
+DATA 225 - Database Systems for Analytics 3 unit(s)
+DATA 230 - Data Visualization 3 unit(s)
+DATA 240 - Data Mining and Analytics 3 unit(s)
+DATA 245 - Machine Learning Technologies 3 unit(s)
+DATA 270 - Data Analytics Processes 3 unit(s) (GWAR)
+
+Electives (6 units)
+
+Six units 200-level elective courses selected in consultation with the graduate advisor.
+
+Culminating Experience (6 units)
+
+Complete One Plan:
+
+Plan A (Thesis) (6 units)
+DATA 299A - MSDA Thesis I 3 unit(s)
+DATA 299B - MSDA Thesis II 3 unit(s)
+
+Plan B (Project) (6 units)
+DATA 298A - MSDA Project I 3 unit(s)
+DATA 298B - MSDA Project II 3 unit(s)
+
+Total Units Required (30 units)
+
+Upon completion of the degree requirements, the student must have achieved minimum candidacy and SJSU Cumulative grade point averages of 3.0 in order to graduate.

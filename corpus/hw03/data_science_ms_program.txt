@@ -1,0 +1,88 @@
+Program: Data Science, MS - San José State University
+Source: https://catalog.sjsu.edu/preview_program.php?catoid=17&poid=14075
+
+Data Science, MS
+
+Admissions Requirements
+Advancement to Candidacy
+Requirements for Graduation
+Master's Requirements (36 units)
+Program Learning Outcomes
+
+The Master of Science in Data Science program, jointly offered by the Department of Computer Science and Department of Mathematics and Statistics, provides students with a Bachelor's degree in the sciences or engineering with foundational knowledge, experience, and skills that are crucial for a data science career. It features a multidisciplinary curriculum in applied math, statistics, computer science, and their intersection - machine learning. Its rigorous, balanced coursework provides students with strong mathematical, computing, and data skills, as well as project experience. Graduates of this program will have the necessary theoretical knowledge, practical data analysis and coding skills for solving complex real-world problems based on massive amounts of data and also meet the qualifications for various data scientist positions in industry and government.
+
+Admission Requirements
+
+Candidates must meet all of the university admission requirements. Students can be admitted in either classified or conditionally classified standing.
+
+To be admitted to classified standing, applicants must have earned a Bachelor's degree in the sciences or engineering from a regionally accredited institution with a minimum GPA of 3.0 (based on a 4.0 scale), and have completed all program prerequisites listed below. Two to three letters of recommendation are also required. The GRE General Test score (when available) should be submitted along with the packet and it will be used to compare and rank applicants. To enter this program with classified standing, a student must have passed the following prerequisites courses (with a C- or better OR the listed required grade below):
+
+Three semesters college-level calculus courses - differential calculus (e.g., MATH 30 at SJSU), integral calculus (e.g., MATH 31 at SJSU), and a multivariable calculus course (e.g., MATH 32 at SJSU), with a grade of B or better on the multivariable calculus course.
+A linear algebra course (e.g., MATH 39 at SJSU), with a grade of B or better.
+A discrete math course (e.g., MATH 42 or CS 42 at SJSU).
+An upper-division calculus-based statistics course (e.g., MATH 161A at SJSU), with a grade of B or better.
+A probability theory course (e.g., MATH 163 at SJSU), with a grade of C or better.
+Two CS introductory courses on programming and data structures (e.g., CS 46A and CS 46B at SJSU).
+An upper division data structures and algorithms course (e.g., CS 146 at SJSU), with a grade of B or better.
+An advanced course in object-oriented programming (e.g., CS 151 or CMPE 135 at SJSU) or two semesters of statistical programming coursework, (e.g., MATH 167R and MATH 167PS at SJSU).
+
+Applicants from countries in which the native language is not English must submit TOEFL scores. Minimum TOEFL scores acceptable for admission are 575 (Paper-based), 240 (Computer-based), or 90 (Internet-based).
+
+Advancement to Candidacy
+
+Students may advance to candidacy after completing all admission conditions and all prerequisites for the culminating experience including the Graduation Writing Assessment Requirement (GWAR).
+
+Requirements for Graduation
+University Graduation Requirements
+
+Students must complete all residency, curriculum, unit, GPA, and culminating experience requirements as outlined in the Graduation Requirements section of the Graduate Policies and Procedures.
+
+Master's Requirements (36 units)
+Core Courses (27 units)
+CS 156 - Introduction to Artificial Intelligence 3 unit(s)
+CS 157A - Introduction to Database Management Systems 3 unit(s)
+CS 200W - Graduate Technical Writing 3 unit(s) (GWAR)
+CS 274 - Topics in Web Intelligence 3 unit(s)
+MATH 164 - Mathematical Statistics 3 unit(s)
+MATH 261A - Regression Theory and Methods 3 unit(s)
+MATH 250 - Mathematical Data Visualization 3 unit(s)
+MATH 252 - Cluster Analysis 3 unit(s)
+
+Complete one course from:
+
+MATH 251 - Statistical and Machine Learning Classification 3 unit(s)
+CS 271 - Topics in Machine Learning 3 unit(s)
+
+Elective Course (3 units)
+
+The elective can be selected from the list of courses offered in the Department of Computer Science and Department of Mathematics and Statistics and requires approval from the program coordinator.
+
+Overall, students must take at least 4 MATH courses and 4 CS courses, not counting the writing course (CS 200W) and the project/thesis courses (CS 297/MATH 297A, CS 298/MATH 298).
+
+Culminating Experience (6 units)
+
+Program departments are required to certify when Plan A or Plan B has been completed satisfactorily via the Verification of Culminating Experience form.
+
+Both plans require two semesters of enrollment in 6-unit coursework in order to conduct the proposed project or thesis study. The student is responsible for securing the commitment of a full-time tenured or tenure-track faculty member who agrees to serve as his or her advisor. The student must also secure the commitments of two additional members, one of whom must be a full-time tenured or tenure-track faculty member, to serve as the student's committee. Topics and committee selections must be approved by the MS Data Science Coordinator. Either plan requires writing a manuscript in a formal format describing original data science research, which is submitted for review by the student's committee. In addition, the student must successfully pass a comprehensive oral examination by the student's committee based on the conducted project or thesis study.
+
+Plan A (Thesis)
+MATH 297A - Preparation for Writing Project, Research Project or Thesis 3 unit(s) or
+CS 297 - Preparation for Writing Project or Thesis 3 unit(s)
+
+and
+
+CS 299 - Master's Thesis 3 unit(s) or
+MATH 299 - Master's Thesis 1-4 unit(s)
+
+Plan B (Project)
+MATH 297A - Preparation for Writing Project, Research Project or Thesis 3 unit(s) or
+CS 297 - Preparation for Writing Project or Thesis 3 unit(s)
+
+and
+
+CS 298 - Master's Writing Project 3 unit(s) or
+MATH 298 - Special Study 1-4 unit(s)
+
+Total Units Required (36 units)
+
+Students who enter the program having already completed courses equivalent in level and content to any of those required for the degree may be allowed to substitute an appropriate alternative course upon advanced approval by the MS Data Science Coordinator. The maximum number of upper-division undergraduate units that can be applied toward the master's degree is 9.

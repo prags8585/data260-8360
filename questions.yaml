@@ -1,0 +1,56 @@
+# HW3 Part 2 — five domain questions (DOMAIN_ID=0, Campus Course Catalogue and Enrolment).
+# Committed BEFORE running the graded retrieval comparison, per the assignment
+# instructions, so these expected answers are not rewritten after seeing output.
+
+questions:
+  - id: q1
+    question: >
+      What SJSU cumulative GPA must graduate students maintain to remain in
+      good academic standing, and what happens if a graduate student's term
+      GPA falls below that while already on probation?
+    expected_answer: >
+      3.0 cumulative GPA. A graduate student already on academic probation
+      who fails to earn a 3.0 term GPA in any subsequent semester (with
+      cumulative GPA still below 3.0) is academically disqualified.
+    expected_source_file: grades_policy.txt
+    single_source: false
+    note: >
+      This fact also appears in graduate_policies_procedures.txt and
+      masters_requirements.txt -- a general cross-cutting policy, not
+      confined to one document.
+
+  - id: q2
+    question: >
+      Which specific course satisfies the Graduation Writing Assessment
+      Requirement (GWAR) for the MS in Data Analytics program at SJSU?
+    expected_answer: "DATA 270 (Data Analytics Processes)."
+    expected_source_file: data_analytics_ms_program.txt
+    single_source: true
+
+  - id: q3
+    question: >
+      What are the two specialization tracks in SJSU's MS in Applied Data
+      Intelligence program, and name one elective course unique to the Data
+      Engineering specialization.
+    expected_answer: >
+      Analytics Technologies and Data Engineering. Data Engineering
+      electives include DATA 226 (Data Warehousing and Pipeline
+      Development), DATA 236 (Distributed Systems for Data Engineering),
+      and DATA 266 (Generative Models Applications).
+    expected_source_file: applied_data_intelligence_ms_program.txt
+    single_source: true
+
+  - id: q4
+    question: >
+      What is SJSU's late registration fee for adding a class after the
+      census date?
+    expected_answer: "$200.00."
+    expected_source_file: registration_and_attendance.txt
+    single_source: true
+
+  - id: q5
+    question: >
+      What was SJSU's Enrollment Census Date for Fall 2022?
+    expected_answer: "September 16, 2022."
+    expected_source_file: academic_calendar.txt
+    single_source: true

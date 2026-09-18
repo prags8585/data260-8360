@@ -1,0 +1,88 @@
+{
+  "domain_id": 0,
+  "domain": "Campus Course Catalogue and Enrolment",
+  "total_bytes": 207022,
+  "file_count": 16,
+  "files": [
+    {
+      "filename": "corpus/hw03/academic_calendar.txt",
+      "byte_size": 2180,
+      "sha256": "e514c8e52700102d980b8eabbe3295adacc26ff0a3acc80ac1ca27afc2ab70c6"
+    },
+    {
+      "filename": "corpus/hw03/adding_dropping_classes.txt",
+      "byte_size": 5854,
+      "sha256": "fe4027e8cb2a538f858d5bcd4e3935dc52130cb03647a7fa62cfa954c0f23ed5"
+    },
+    {
+      "filename": "corpus/hw03/applied_data_intelligence_ms_program.txt",
+      "byte_size": 7411,
+      "sha256": "53b4a97826479fc7f0ac1a28dc330a687d4dd7550f686c129afcb8fde2ac8805"
+    },
+    {
+      "filename": "corpus/hw03/course_credit_numbering.txt",
+      "byte_size": 11944,
+      "sha256": "70e98e95230a380b08e48501c0cd326491d42cec5339afe3f4be4f486ee45b94"
+    },
+    {
+      "filename": "corpus/hw03/data_analytics_ms_program.txt",
+      "byte_size": 6846,
+      "sha256": "dd1498fc7eca828091f115e0a17d68da7826a08719e84a3a4ae601c45a895db7"
+    },
+    {
+      "filename": "corpus/hw03/data_science_ms_program.txt",
+      "byte_size": 6611,
+      "sha256": "03badf9db0fe6e0a7dd159096f820fe308d7135a9104dc1fb1763b912065e7eb"
+    },
+    {
+      "filename": "corpus/hw03/general_education_overview.txt",
+      "byte_size": 1414,
+      "sha256": "c3043d9bffa53567b9d474f8bd0b624f33b70094772b406c34e76d4f080b381e"
+    },
+    {
+      "filename": "corpus/hw03/general_education_requirements_full.txt",
+      "byte_size": 20199,
+      "sha256": "bf5c7e21349c82e319d2ee24dee001aec39f7ca209aa8c7e8a91e0f24bbb32cd"
+    },
+    {
+      "filename": "corpus/hw03/grades_policy.txt",
+      "byte_size": 14997,
+      "sha256": "cef6e593895a7fbbd74ca2e0aa61658fd8e38d5ad90eed18e0dedb3bd9c2a093"
+    },
+    {
+      "filename": "corpus/hw03/graduate_policies_procedures.txt",
+      "byte_size": 26739,
+      "sha256": "088df84694465093d261f7832d7543a7641c6a1da17d748068aadd5ccd15685e"
+    },
+    {
+      "filename": "corpus/hw03/masters_requirements.txt",
+      "byte_size": 15165,
+      "sha256": "9473c8b54abb24135cbc72c209638955f117c2551d0b44cddbb343d62e4b7f9d"
+    },
+    {
+      "filename": "corpus/hw03/msda_curriculum_courses.txt",
+      "byte_size": 10828,
+      "sha256": "afe9ab9ca67e04070e2bcf76bf7d687d43c7778951c9b16efdc5091e4b974345"
+    },
+    {
+      "filename": "corpus/hw03/msds_admission_requirements.txt",
+      "byte_size": 2258,
+      "sha256": "a81d4f60e1be8eb3aa3f0e4c042b72af1456242348cdf1d33f7f1bceed2b3dff"
+    },
+    {
+      "filename": "corpus/hw03/msds_faq.txt",
+      "byte_size": 22939,
+      "sha256": "620de83ab3b5c12ff7e7cdeb3ef6c3fe37ba388badaf7ba5767d3ddd4dee3de9"
+    },
+    {
+      "filename": "corpus/hw03/registration_and_attendance.txt",
+      "byte_size": 22719,
+      "sha256": "0c9f370670b009d366716d43871bec7101f98a6a55ee4bb2be0990feac6a9d51"
+    },
+    {
+      "filename": "corpus/hw03/undergraduate_policies_procedures.txt",
+      "byte_size": 28918,
+      "sha256": "c2758cb997c36866f79855dd764449727819e32aebc5207dd473f026176842da"
+    }
+  ]
+}
