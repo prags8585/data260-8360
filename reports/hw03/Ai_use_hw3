@@ -17,3 +17,5 @@ the requirement.
 ## 4. What you changed and why it works now
 
 Added a server-side `_LOGGED_OUT_BEFORE` epoch keyed by username: `/login` stamps a `login_time` into the session, `/logout` records the current time against that user, and `get_current_user()` rejects any session whose `login_time` predates the user's most recent logout — even if the cookie's signature is still valid. Re-ran the same replay test after the fix: the same pre-logout cookie now gets redirected to `/login` instead of reaching the dashboard, and a second real test (login, wait 65 seconds past the 60-second idle timeout, retry) confirms the idle-timeout path independently. Both are captured as real `curl` transcripts in `reports/hw03/RUN_LOG.txt`, not just asserted.
+
+##5 . Used Ai ( claude) to push my vscode files to my repo in simple and easy way.
