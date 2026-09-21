@@ -21,13 +21,13 @@ with sync_playwright() as p:
     page.goto(f"{BASE}/login")
     page.screenshot(path=OUT / "login_page.png")
 
-    page.fill("#username", "instructor")
+    page.fill("#username", "karthik")
     page.fill("#password", "wrongpassword")
     page.click("button[type=submit]")
     page.wait_for_load_state("networkidle")
     page.screenshot(path=OUT / "login_invalid_alert.png")
 
-    page.fill("#username", "instructor")
+    page.fill("#username", "karthik")
     page.fill("#password", "data260")
     page.click("button[type=submit]")
     page.wait_for_load_state("networkidle")

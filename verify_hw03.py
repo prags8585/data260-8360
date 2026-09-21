@@ -91,7 +91,7 @@ def fastapi_https_smoke_test():
 
         login = subprocess.run(
             ["curl", "-sk", "-D", "-", "-o", "/dev/null", "-X", "POST",
-             f"https://127.0.0.1:{PORT_BASE}/login", "-d", "username=instructor&password=data260"],
+             f"https://127.0.0.1:{PORT_BASE}/login", "-d", "username=karthik&password=data260"],
             capture_output=True, text=True, timeout=10,
         ).stdout
         has_secure_cookie = all(attr in login.lower() for attr in ["secure", "httponly", "samesite"])

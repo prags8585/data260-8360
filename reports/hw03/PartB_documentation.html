@@ -1,0 +1,243 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>HW3 Part B</title><style>
+    body{font-family:Arial,Helvetica,sans-serif;font-size:10.5pt;line-height:1.4;color:#111}
+    h1{font-size:18pt;margin:0 0 4px} h2{font-size:14pt;border-bottom:2px solid #222;padding-bottom:3px;margin-top:26px;page-break-after:avoid}
+    h3{font-size:11.5pt;margin:14px 0 4px;page-break-after:avoid} p{margin:6px 0} .sub{color:#555;margin-bottom:14px}
+    code{font-family:Menlo,Consolas,monospace;font-size:9pt;background:#f0f0f0;padding:0 3px}
+    pre{white-space:pre-wrap;word-wrap:break-word;border-radius:4px;padding:8px 10px;margin:6px 0;font-family:Menlo,Consolas,monospace}
+    pre.code{background:#f6f6f6;border:1px solid #ccc;font-size:8pt} pre.term{background:#1e1e1e;color:#e6e6e6;font-size:7pt;line-height:1.35}
+    table.t{border-collapse:collapse;width:100%;margin:8px 0} table.t th{background:#111;color:#fff;font-size:9pt}
+    table.t th,table.t td{border:1px solid #333;padding:5px 7px;text-align:left;font-size:9.5pt} table.small{width:auto}
+    .lbl{font-weight:bold;margin-top:10px} .note{font-size:9pt;color:#444} .box{border:1px solid #999;background:#fafafa;padding:8px 12px}
+    </style></head><body>
+<h1>HW3 Part B: Three Chunking Techniques, Retrieval-Only</h1>
+<div class="sub">DATA-260 · Karthik Pragada · DOMAIN_ID 0 (Campus Course Catalogue and Enrolment)</div>
+
+<h2>0. Shared setup</h2>
+<p><b>Corpus:</b> 16 public SJSU pages, 207,022 bytes (<code>corpus/hw03/</code>; see SOURCES.md and CORPUS_MANIFEST.json).
+<b>Embedding model:</b> <code>sentence-transformers/all-MiniLM-L6-v2</code> (384 dimensions, local, from HuggingFace), used for all three techniques
+and for the semantic splitter. <b>Vector store:</b> in-memory <code>SimpleVectorStore</code>. <b>Questions:</b> the five in <code>questions.yaml</code>
+(committed before any retrieval was run). <b>Top-k:</b> 5.</p>
+<p>Settings used (from <code>rag_chunking_comparison.py</code>):</p><pre class="code">EMBED_MODEL_NAME = &quot;sentence-transformers/all-MiniLM-L6-v2&quot;
+TOP_K = 5
+TOKEN_CHUNK_SIZE = 256
+TOKEN_CHUNK_OVERLAP = 32
+SEMANTIC_BUFFER_SIZE = 1
+SEMANTIC_BREAKPOINT_PERCENTILE = 95
+SENTENCE_WINDOW_SIZE = 3</pre>
+<h3>The retrieval-only function (shared by all three techniques)</h3>
+<p>Given an index, a query and k, <code>retrieve_and_analyze</code> (1) embeds the query and reports its dimension and first 8 values;
+(2) retrieves the top-k nodes and records the retriever's <b>store score</b>; (3) <b>re-embeds each returned chunk's text explicitly</b> and computes
+the cosine similarity to the query vector; (4) records chunk length and a 160-character preview; (5) prints the shapes of the query vector and the stacked
+document vectors; and (6) times the similarity search only. Every retrieved row is saved to <code>reports/hw03/raw/</code> as JSON and CSV.</p>
+<pre class="code">def cosine_sim(a: np.ndarray, b: np.ndarray) -&gt; float:
+    return float(np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b)))
+
+def retrieve_and_analyze(index, embed_model, technique: str, question_id: str, query: str, k: int = TOP_K, verbose: bool = True):
+    query_vec = np.array(embed_model.get_query_embedding(query))
+
+    retriever = index.as_retriever(similarity_top_k=k)
+    start = time.perf_counter()
+    retrieved = retriever.retrieve(query)
+    latency_ms = (time.perf_counter() - start) * 1000
+
+    doc_vecs = []
+    rows = []
+    for rank, node_with_score in enumerate(retrieved, start=1):
+        node = node_with_score.node
+        chunk_text = node.get_content()
+        doc_vec = np.array(embed_model.get_text_embedding(chunk_text))
+        doc_vecs.append(doc_vec)
+        sim = cosine_sim(query_vec, doc_vec)
+        rows.append({
+            &quot;rank&quot;: rank,
+            &quot;store_score&quot;: round(float(node_with_score.score), 6) if node_with_score.score is not None else None,
+            &quot;cosine_sim&quot;: round(sim, 6),
+            &quot;chunk_len&quot;: len(chunk_text),
+            &quot;source_file&quot;: node.metadata.get(&quot;file_name&quot;),
+            &quot;preview&quot;: chunk_text[:160].replace(&quot;\n&quot;, &quot; &quot;),
+        })
+
+    doc_matrix = np.stack(doc_vecs) if doc_vecs else np.zeros((0, len(query_vec)))
+
+    if verbose:
+        print(f&quot;\n=== [{technique}] {question_id}: {query.strip()[:80]} ===&quot;)
+        print(f&quot;query embedding dim: {query_vec.shape[0]}, first 8 values: {query_vec[:8].round(4).tolist()}&quot;)
+        print(f&quot;query vector shape: {query_vec.shape}, stacked doc vectors shape: {doc_matrix.shape}&quot;)
+        print(f&quot;{&#x27;rank&#x27;:&lt;5}{&#x27;store_score&#x27;:&lt;13}{&#x27;cosine_sim&#x27;:&lt;12}{&#x27;chunk_len&#x27;:&lt;10}{&#x27;source_file&#x27;:&lt;45}preview&quot;)
+        for r in rows:
+            print(f&quot;{r[&#x27;rank&#x27;]:&lt;5}{str(r[&#x27;store_score&#x27;]):&lt;13}{r[&#x27;cosine_sim&#x27;]:&lt;12}{r[&#x27;chunk_len&#x27;]:&lt;10}{str(r[&#x27;source_file&#x27;]):&lt;45}{r[&#x27;preview&#x27;]}&quot;)
+        print(f&quot;retrieval latency: {latency_ms:.2f} ms&quot;)
+
+    return {
+        &quot;technique&quot;: technique,
+        &quot;question_id&quot;: question_id,
+        &quot;query&quot;: query,
+        &quot;query_embed_dim&quot;: int(query_vec.shape[0]),
+        &quot;query_embed_first8&quot;: query_vec[:8].round(6).tolist(),
+        &quot;latency_ms&quot;: round(latency_ms, 3),
+        &quot;results&quot;: rows,
+    }</pre>
+
+<h2>Token chunking</h2>
+<h3>1. Chunking</h3>
+<p>Splits the text every 256 tokens with a 32-token (12.5%) overlap. The size keeps each chunk on roughly one policy or requirement, and the overlap means a fact that straddles a boundary still appears whole in at least one chunk. It ignores meaning: boundaries fall wherever the token count lands.</p>
+<pre class="code">def build_token_index(docs, embed_model):
+    splitter = TokenTextSplitter(chunk_size=TOKEN_CHUNK_SIZE, chunk_overlap=TOKEN_CHUNK_OVERLAP)
+    nodes = splitter.get_nodes_from_documents(docs)
+    index = VectorStoreIndex(nodes, embed_model=embed_model)
+    return index, nodes</pre>
+<table class="t small"><tr><th>Chunks</th><th>Avg length</th><th>Min</th><th>Median</th><th>Max</th></tr>
+<tr><td>204</td><td>1158.2 chars</td><td>174</td><td>1218</td><td>1530</td></tr></table>
+<p class="lbl">A real chunk from this technique: the first one containing the $200.00 late-fee fact
+(from <code>registration_and_attendance.txt</code>, 1275 characters, shortened here):</p>
+<pre class="term">department that offers the course. Permission numbers become &#x27;used&#x27; only after a successful enrollment request.
+
+Adding Classes on the First Day of Instruction
+
+At the first class meeting, Group 3 graduating students shall have top priority for any available spaces. An impartial procedure (such as a lottery or random selection) shall be used to choose, from among the graduating seniors, those who will fill available spaces. Automated waitlists run through the first nine days of the semester for most courses. Permission numbers will be required to add courses after that date (University Policy F20-1).
+
+Adding Classes after the Last Day to Add: before the Census date, students can submit the Pre-census Late Enrollment petition form to the Registrar&#x27;s office (valid through census date per University Policy F09-2). After census date, students can petition for a late add using the Post-Census ...</pre>
+
+<h3>2. Indexing (in memory)</h3>
+<p>The nodes are loaded into a LlamaIndex <code>VectorStoreIndex</code> with no external store configured, so LlamaIndex uses its default
+in-memory <code>SimpleVectorStore</code>. Nothing is persisted or sent anywhere. This is the last line of the builder above:
+<code>index = VectorStoreIndex(nodes, embed_model=embed_model)</code>.</p>
+<h3>3. Retrieval-only output for the shared question (q3)</h3>
+<p>The retrieval function (documented once above) run on this technique's index. The table lists rank, store score, recomputed cosine,
+chunk length, source file and a 160-character preview.</p>
+<pre class="term">=== [token] q3: What are the two specialization tracks in SJSU&#x27;s MS in Applied Data Intelligence ===
+query embedding dim: 384, first 8 values: [-0.0274, -0.0687, -0.022, 0.0218, 0.0002, -0.0398, -0.0296, 0.0243]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.675474     0.636141    1326      msda_curriculum_courses.txt                  use, and evaluate applied data intelligence technologies and tools. Apply Necessary Skills Apply effective oral and written communication skills necessary to pr
+2    0.667953     0.644114    1434      applied_data_intelligence_ms_program.txt     Program: Applied Data Intelligence, MS - San José State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=17&amp;poid=13784  Applied Data Intel
+3    0.666494     0.653941    1362      data_science_ms_program.txt                  Program: Data Science, MS - San José State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=17&amp;poid=14075  Data Science, MS  Admissions Re
+4    0.660618     0.636305    1005      msda_curriculum_courses.txt                  Program Frequently Asked Questions Want to learn more about our MS in Applied Data Intelligence degree? Explore our FAQs page to get detailed information about 
+5    0.656676     0.622502    1393      msda_curriculum_courses.txt                  data into actionable insights, and step confidently into advanced roles across technology, business and research. Apply Now Request Information Why Earn Your Ap
+retrieval latency: 7.51 ms</pre>
+
+<h2>Semantic chunking</h2>
+<h3>1. Chunking</h3>
+<p>Embeds each sentence (buffer_size=1) with the same MiniLM model and starts a new chunk only where the embedding distance to the next sentence is in the top 5% (breakpoint_percentile_threshold=95). Chunks follow topic changes, so they are few and large, and their size varies with the text.</p>
+<pre class="code">def build_semantic_index(docs, embed_model):
+    splitter = SemanticSplitterNodeParser(
+        buffer_size=SEMANTIC_BUFFER_SIZE,
+        breakpoint_percentile_threshold=SEMANTIC_BREAKPOINT_PERCENTILE,
+        embed_model=embed_model,
+    )
+    nodes = splitter.get_nodes_from_documents(docs)
+    index = VectorStoreIndex(nodes, embed_model=embed_model)
+    return index, nodes</pre>
+<table class="t small"><tr><th>Chunks</th><th>Avg length</th><th>Min</th><th>Median</th><th>Max</th></tr>
+<tr><td>85</td><td>2434.5 chars</td><td>32</td><td>2133</td><td>7851</td></tr></table>
+<p class="lbl">A real chunk from this technique: the first one containing the $200.00 late-fee fact
+(from <code>registration_and_attendance.txt</code>, 5390 characters, shortened here):</p>
+<pre class="term">Select the correct term. Choose the class you wish to add.
+
+Two ways to select a class: if you know the Class Number, type the 5 digit Class Number and click Enter; or click the green &quot;Search Button&quot; (make sure the Course Career is set to Graduate or Undergraduate) and click &quot;Select Class&quot; to place it in your shopping cart.
+
+Once you have chosen a class, a &quot;Class Enrollment Options&quot; page will appear. Verify the course, enter permission number if required, select any related component classes, and click okay. The Add Classes page will appear showing your classes in your shopping cart. You must click &quot;Finish Enrolling&quot; to actually add the class.
+
+Component Classes: if the course has related components attached (e.g., lab, seminar), the system will prompt you to select the one you wish to add.
+
+Department or Instructor Consent: classes designated &quot;Department Consent Required&quot; require a Perm ...</pre>
+
+<h3>2. Indexing (in memory)</h3>
+<p>The nodes are loaded into a LlamaIndex <code>VectorStoreIndex</code> with no external store configured, so LlamaIndex uses its default
+in-memory <code>SimpleVectorStore</code>. Nothing is persisted or sent anywhere. This is the last line of the builder above:
+<code>index = VectorStoreIndex(nodes, embed_model=embed_model)</code>.</p>
+<h3>3. Retrieval-only output for the shared question (q3)</h3>
+<p>The retrieval function (documented once above) run on this technique's index. The table lists rank, store score, recomputed cosine,
+chunk length, source file and a 160-character preview.</p>
+<pre class="term">=== [semantic] q3: What are the two specialization tracks in SJSU&#x27;s MS in Applied Data Intelligence ===
+query embedding dim: 384, first 8 values: [-0.0274, -0.0687, -0.022, 0.0218, 0.0002, -0.0398, -0.0296, 0.0243]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.668653     0.6847      3777      msda_curriculum_courses.txt                  MS in Applied Data Intelligence | Department of Applied Data Science Skip to main content Master of Science in Applied Data Intelligence Transform Data Into Imp
+2    0.667953     0.640085    2423      applied_data_intelligence_ms_program.txt     Program: Applied Data Intelligence, MS - San José State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=17&amp;poid=13784  Applied Data Intel
+3    0.659107     0.655045    1249      data_science_ms_program.txt                  Program: Data Science, MS - San José State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=17&amp;poid=14075  Data Science, MS  Admissions Re
+4    0.656215     0.637509    3421      msda_curriculum_courses.txt                  Entertainment Waymo World Bank Learn more about what alumni from SJSU’s MS in Applied Data Intelligence - formerly the MS in Data Analytics - have accomplished.
+5    0.626916     0.602787    2397      data_analytics_ms_program.txt                Program: Data Analytics, MS - San José State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=13&amp;poid=7675  Data Analytics, MS  Admissions
+retrieval latency: 5.38 ms</pre>
+
+<h2>Sentence-window chunking</h2>
+<h3>1. Chunking</h3>
+<p>Makes every sentence its own node and stores the three sentences on each side in the node's `window` metadata (window_size=3). Only the single sentence is embedded and searched; the window is kept so surrounding context could be supplied later. Nodes are very small and numerous.</p>
+<pre class="code">def build_sentence_window_index(docs, embed_model):
+    splitter = SentenceWindowNodeParser.from_defaults(
+        window_size=SENTENCE_WINDOW_SIZE,
+        window_metadata_key=&quot;window&quot;,
+        original_text_metadata_key=&quot;original_text&quot;,
+    )
+    nodes = splitter.get_nodes_from_documents(docs)
+    index = VectorStoreIndex(nodes, embed_model=embed_model)
+    return index, nodes</pre>
+<table class="t small"><tr><th>Chunks</th><th>Avg length</th><th>Min</th><th>Median</th><th>Max</th></tr>
+<tr><td>1307</td><td>158.3 chars</td><td>3</td><td>124</td><td>4408</td></tr></table>
+<p class="lbl">A real chunk from this technique: the first one containing the $200.00 late-fee fact
+(from <code>registration_and_attendance.txt</code>, 241 characters):</p>
+<pre class="term">Late Fee Assessed
+
+Students registering for classes after census are assessed a late registration fee of $200.00, which begins after census for any classes added (includes Retroactive Adds, which begin the first day after instruction ends). </pre>
+<p class="lbl">Its <code>window</code> metadata (the 3 sentences either side, stored but not embedded):</p><pre class="term">Permission numbers will be required to add courses after that date (University Policy F20-1).
+
+ Adding Classes after the Last Day to Add: before the Census date, students can submit the Pre-census Late Enrollment petition form to the Registrar&#x27;s office (valid through census date per University Policy F09-2).  After census date, students can petition for a late add using the Post-Census Late Enrollment form.
+
+ Late Fee Assessed
+
+Students registering for classes after census are assessed a late registration fee of $200.00, which begins after census for any classes added (includes Retroactive Adds, which begin the first day after instruction ends).  Students in the Step to College programs are not required to pay the late registration fee.
+
+ Waitlisting
+
+SJSU has &quot;waitlisting&quot; for all classes.  Waitlisting puts you in line to get a space when a class is full (closed class), should a space become available. </pre>
+<h3>2. Indexing (in memory)</h3>
+<p>The nodes are loaded into a LlamaIndex <code>VectorStoreIndex</code> with no external store configured, so LlamaIndex uses its default
+in-memory <code>SimpleVectorStore</code>. Nothing is persisted or sent anywhere. This is the last line of the builder above:
+<code>index = VectorStoreIndex(nodes, embed_model=embed_model)</code>.</p>
+<h3>3. Retrieval-only output for the shared question (q3)</h3>
+<p>The retrieval function (documented once above) run on this technique's index. The table lists rank, store score, recomputed cosine,
+chunk length, source file and a 160-character preview.</p>
+<pre class="term">=== [sentence_window] q3: What are the two specialization tracks in SJSU&#x27;s MS in Applied Data Intelligence ===
+query embedding dim: 384, first 8 values: [-0.0274, -0.0687, -0.022, 0.0218, 0.0002, -0.0398, -0.0296, 0.0243]
+query vector shape: (384,), stacked doc vectors shape: (5, 384)
+rank store_score  cosine_sim  chunk_len source_file                                  preview
+1    0.724425     0.645132    161       msda_curriculum_courses.txt                  Entertainment Waymo World Bank Learn more about what alumni from SJSU’s MS in Applied Data Intelligence - formerly the MS in Data Analytics - have accomplished.
+2    0.724354     0.645212    154       msda_curriculum_courses.txt                  SJSU’s Master of Science in Applied Data Intelligence elevates your technical proficiency and professional leadership, preparing you to drive innovation. 
+3    0.712977     0.695679    124       msda_curriculum_courses.txt                  Apply to SJSU MSADI Program Frequently Asked Questions Want to learn more about our MS in Applied Data Intelligence degree? 
+4    0.704737     0.609269    146       msda_curriculum_courses.txt                  Financial Aid Embrace Your Data-Driven Future at SJSU Earn your Master of Science in Applied Data Intelligence and make real-world change happen. 
+5    0.690282     0.707374    551       applied_data_intelligence_ms_program.txt     Program: Applied Data Intelligence, MS - San José State University Source: https://catalog.sjsu.edu/preview_program.php?catoid=17&amp;poid=13784  Applied Data Intel
+retrieval latency: 16.55 ms</pre>
+
+
+<h2>4. Comparison</h2>
+<h3>Retrieval quality (5 questions, k = 5)</h3>
+<table class="t"><tr><th>Technique</th><th>Chunks</th><th>Avg chunk length</th><th>Top-1 cosine</th><th>Mean@k cosine</th><th>Recall@k</th><th>Mean retrieval latency (ms)</th></tr><tr><td>Token</td><td>204</td><td>1158.2 chars</td><td>0.7004</td><td>0.6412</td><td>0.80</td><td>7.91</td></tr><tr><td>Semantic</td><td>85</td><td>2434.5 chars</td><td>0.666</td><td>0.6011</td><td>0.80</td><td>5.25</td></tr><tr><td>Sentence-window</td><td>1307</td><td>158.3 chars</td><td>0.7646</td><td>0.6883</td><td>0.80</td><td>15.83</td></tr></table>
+<p class="note">Top-1 cosine is the highest cosine among the top-5 chunks, averaged over the questions. Recall@k is file-level: a hit means the expected source
+file appears anywhere in the top 5. Latency covers the similarity search only and varies by machine.</p>
+<h3>Answer-level check (was the answer text itself retrieved?)</h3>
+<p>Recall@k only checks the file, so this supplementary check (<code>scripts/answer_level_check.py</code>) asks whether any top-5 chunk contains the expected
+answer text. Each cell is the rank of the first chunk that does; "-" means none did.</p>
+<table class="t"><tr><th>Technique</th><th>q1</th><th>q2</th><th>q3</th><th>q4</th><th>q5</th><th>Answered in top 5</th></tr><tr><td>Token</td><td>1</td><td>3</td><td>-</td><td>1</td><td>1</td><td><b>4/5</b></td></tr><tr><td>Semantic</td><td>2</td><td>3</td><td>-</td><td>-</td><td>1</td><td><b>3/5</b></td></tr><tr><td>Sentence-window</td><td>-</td><td>-</td><td>-</td><td>1</td><td>1</td><td><b>2/5</b></td></tr></table>
+<p class="note">q1 requires two marker strings in one chunk, which disadvantages single-sentence nodes; q2, q4 and q5 use a single marker.</p>
+
+<h3>A confidently scored retrieval that does not contain the answer</h3>
+<div class="box"><p>For <b>q3</b> (the two specialization tracks of the MS in Applied Data Intelligence), <b>no technique</b> retrieved a chunk containing the answer.
+Under Sentence-window the top result has the highest store score of the whole run (0.7244): <i>"Entertainment Waymo World Bank Learn more about what
+alumni from SJSU's MS in Applied Data Intelligence - formerly the MS in Data Analytics - have accomplished."</i> It is an alumni-employer fragment with no
+specialization or elective in it. The program's own page does appear (rank 5) but only as its opening text, not the section that lists the specializations.</p>
+<p>The embedding most likely rated it similar because it repeats the query's proper noun, "MS in Applied Data Intelligence". A single short sentence has little
+other context, so that name dominates the match. The marketing page repeats the program name often, and its text was not fully cleaned when the corpus was collected.</p></div>
+
+<h2>5. Observations</h2>
+<p>Sentence-window has the highest cosine scores (top-1 0.7646, mean@k 0.6883) but retrieved a chunk containing the answer
+for only 2 of 5 questions, against 4 for Token and 3 for Semantic. High similarity did not mean a useful chunk: single-sentence nodes carry little context, so shared proper
+nouns dominate the match, and near-identical boilerplate repeated across the three program pages (for example the GWAR sentence) outranked the sentence naming DATA 270 in q2.
+Semantic chunks are the largest (2434.5 characters on average), which likely dilutes a single fact such as the $200.00 fee in q4 inside a long registration page.</p>
+<p>Recall@k is 0.80 for all three because of q1: the 3.0 GPA rule appears in three documents, and every technique retrieved <code>graduate_policies_procedures.txt</code>, a valid
+source that the single expected-file label counted as a miss. q3 failed for every technique. With only five questions these differences are indicative, not conclusive.</p>
+
+<h2>6. Conclusion</h2>
+<p><b>Token chunking (256 tokens, 32 overlap) is the best choice for this corpus.</b> It retrieved a chunk containing the answer for 4 of 5 questions, against 3 for Semantic and
+2 for Sentence-window, even though Sentence-window had the highest cosine scores, so cosine alone was misleading here. Its mean latency of 7.91 ms is well
+below Sentence-window's 15.83 ms and close to Semantic's 5.25 ms. The result rests on five questions, and q3 failed for all three techniques.</p>
+</body></html>

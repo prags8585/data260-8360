@@ -1,16 +1,4 @@
 #!/usr/bin/env python3
-"""HW3 Part 2: compare three LlamaIndex chunking techniques (Token, Semantic,
-Sentence-window) on a retrieval-only RAG pipeline over the DOMAIN_ID=0 corpus.
-
-For each technique: chunk the corpus, build an in-memory VectorStoreIndex
-(SimpleVectorStore) with a local HuggingFace sentence embedding model, then
-for each of the 5 questions in questions.yaml run retrieval and record, per
-retrieved chunk: store_score, an explicitly recomputed cosine similarity
-between the query embedding and that chunk's embedding, chunk length, and a
-160-char preview. Saves raw per-query/per-technique records to raw/, and a
-machine-computed summary table matching the report's required metrics.
-"""
-
 import argparse
 import json
 import time
@@ -34,23 +22,13 @@ RAW_DIR.mkdir(parents=True, exist_ok=True)
 EMBED_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 TOP_K = 5
 
-# Token chunking: 256 tokens per chunk is small enough to keep chunks focused
-# on a single policy/requirement, with 32 tokens (12.5%) overlap so a fact
-# split across a chunk boundary is still whole in at least one chunk.
 TOKEN_CHUNK_SIZE = 256
 TOKEN_CHUNK_OVERLAP = 32
 
-# Semantic: buffer_size=1 groups single sentences before measuring embedding
-# distance between groups; breakpoint_percentile_threshold=95 (the LlamaIndex
-# default) only splits where the semantic distance to the next group is in
-# the top 5% most dissimilar -- i.e. splits only at strong topic changes.
+
 SEMANTIC_BUFFER_SIZE = 1
 SEMANTIC_BREAKPOINT_PERCENTILE = 95
 
-# Sentence-window: each node is a single sentence; window=3 attaches the 3
-# sentences before and after as metadata, so embedding happens on a precise
-# sentence but generation-time context (not used here, retrieval-only) would
-# still see the surrounding paragraph.
 SENTENCE_WINDOW_SIZE = 3
 
 
@@ -173,6 +151,7 @@ def main():
 
     all_records = []
     summary = {}
+    chunk_stats_by_technique = {}
 
     for technique, builder in builders.items():
         print(f"\n{'=' * 70}\nTECHNIQUE: {technique}\n{'=' * 70}")
@@ -180,6 +159,7 @@ def main():
         index, nodes = builder(docs, embed_model)
         build_ms = (time.perf_counter() - t0) * 1000
         stats = chunk_stats(nodes)
+        chunk_stats_by_technique[technique] = stats
         print(f"Chunked into {stats['n_chunks']} nodes (avg len {stats['avg_chunk_len']} chars) in {build_ms:.0f} ms")
 
         technique_records = []
@@ -222,6 +202,7 @@ def main():
                 writer.writerow([rec["technique"], rec["question_id"], r["rank"], r["store_score"], r["cosine_sim"], r["chunk_len"], r["source_file"], rec["expected_source_file"], rec["recall_hit"], rec["latency_ms"], r["preview"]])
     print(f"Saved flat CSV to {csv_path}")
 
+    (RAW_DIR / "chunk_stats.json").write_text(json.dumps(chunk_stats_by_technique, indent=2))
     summary_path = RAW_DIR / "summary.json"
     summary_path.write_text(json.dumps(summary, indent=2))
     print(f"\n{'=' * 70}\nSUMMARY\n{'=' * 70}")

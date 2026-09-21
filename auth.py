@@ -1,10 +1,3 @@
-"""HW3 Part 1: authentication router for the Course Catalogue app.
-
-Owns login/logout/session-state logic as its own APIRouter so main.py's
-home route can stay auth-aware (via get_current_user) without duplicating
-this logic. Session storage is Starlette's SessionMiddleware (configured
-in main.py); this module only reads/writes request.session.
-"""
 
 import time
 
@@ -16,18 +9,11 @@ router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
 # Single hardcoded demo user -- no real user database for this assignment.
-DEMO_USERNAME = "instructor"
+DEMO_USERNAME = "karthik"
 DEMO_PASSWORD = "data260"
 
 IDLE_TIMEOUT_SECONDS = 60
 
-# Starlette's SessionMiddleware is a pure client-side signed cookie -- the
-# server never sees the old cookie again once a new one is issued, so a
-# copied pre-logout cookie would otherwise replay successfully forever
-# (the signature is still valid; the server just has no memory of
-# "logged out"). This server-side epoch closes that gap: any cookie whose
-# login_time predates the user's last logout is rejected on sight, even
-# though its signature checks out.
 _LOGGED_OUT_BEFORE: dict[str, float] = {}
 
 

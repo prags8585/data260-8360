@@ -92,7 +92,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout certs/localhost-key.pem \
 uvicorn main:app --host 0.0.0.0 --port 8260 \
     --ssl-keyfile certs/localhost-key.pem --ssl-certfile certs/localhost-cert.pem
 open https://localhost:8260
-# demo user: instructor / data260
+# demo user: karthik / data260
 
 # Part 2 -- re-fetch the domain corpus (already committed under corpus/hw03/,
 # only needed to regenerate it from scratch)
