@@ -1,0 +1,19 @@
+# AI_USE.md — DATA-260 Homework 3
+
+## 1. What did you use an AI assistant for, and what did you do yourself?
+
+I used claude to get help and direction for this assignment's design decisions — how to reconcile Part 1's required Home/Login/Dashboard/Logout router with the existing HW1/2 Course Catalogue app, using which I designed how to source and scope the Part 2 domain corpus (chose to have the assistant fetch real SJSU catalog/policy pages for the Campus Course Catalogue domain and the credential model for the demo login (a single hardcoded user rather than a full user database). I Implemented under that direction: `auth.py` and the Bootstrap-styled `login.html`/, `dashboard.html` templates for Part 1, `rag_chunking_comparison.py` for Part 2 (Token/Semantic/Sentence-window chunking, in-memory `VectorStoreIndex`, retrieval-only comparison against `questions.yaml`), the corpus-fetching script, and the rubric-required companion files (`SOURCES.md`,`CORPUS_MANIFEST.json`, `METRICS.md`, `RUN_LOG.txt`, `verify_hw03.py`).
+
+## 2. One AI-produced output that was wrong/unsuitable, or one thing you independently verified
+
+The session's own real-cookie test caught a genuine implementation gap: the first pass at `auth.py` used Starlette's default `SessionMiddleware` directly, which stores the entire session as a signed client-side cookie with no server-side record. Logging out only tells the *current* browser to overwrite its cookie — it does nothing to a copy of the pre-logout cookie value. A `curl` test that replayed the exact pre-logout cookie against `/dashboard` got `HTTP 200` instead of being rejected, which directly
+contradicts the assignment's requirement to "prove that an expired or logged-out session cannot be reused to reach /dashboard."
+
+## 3. How you detected the problem or verified the result
+
+Ran the actual login -> capture cookie -> logout -> replay the same cookie sequence with `curl` (not just eyeballing the code) and got back a `200 OK` from `/dashboard` on the replayed request, which is observably wrong given
+the requirement.
+
+## 4. What you changed and why it works now
+
+Added a server-side `_LOGGED_OUT_BEFORE` epoch keyed by username: `/login` stamps a `login_time` into the session, `/logout` records the current time against that user, and `get_current_user()` rejects any session whose `login_time` predates the user's most recent logout — even if the cookie's signature is still valid. Re-ran the same replay test after the fix: the same pre-logout cookie now gets redirected to `/login` instead of reaching the dashboard, and a second real test (login, wait 65 seconds past the 60-second idle timeout, retry) confirms the idle-timeout path independently. Both are captured as real `curl` transcripts in `reports/hw03/RUN_LOG.txt`, not just asserted.
