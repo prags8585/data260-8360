@@ -1,0 +1,186 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+=== 2026-09-27 02:11:21 PDT ===
+Embedding model: sentence-transformers/all-MiniLM-L6-v2
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 10848.06it/s]
+LLM: qwen3:8b (via Ollama, temperature=0.0, reasoning=False)
+Loaded 16 corpus documents, 206929 total chars
+Chunked into 103 nodes (chunk_size=500, chunk_overlap=50)
+
+======================================================================
+Q1 [single chunk]: What is the late registration fee assessed after the census date, and when does it apply?
+======================================================================
+
+-- (A) No RAG --
+  answer: The late registration fee is typically assessed after the census date, which is the last day to add or drop classes without financial penalty. If a student registers after the census date, they may be charged a late registration fee. The exact amount and policies can vary by institution, so it's best to check with your specific school's registration guidelines.
+
+-- (B) Basic RAG --
+  retrieved top-3:
+    [msds_faq.txt#70] score=0.327 source=msds_faq.txt: then it forwards your file to the department. In the Computer Science Department, we check your qual
+    [registration_and_attendance.txt#79] score=0.3176 source=registration_and_attendance.txt: Registration and Attendance - San José State University Source: https://catalog.sjsu.edu/content.php
+    [registration_and_attendance.txt#88] score=0.3036 source=registration_and_attendance.txt: one dose on or after age 16, for students 21 or younger. Tuberculosis Screening/Risk Assessment: all
+  answer: The context provided does not specify the late registration fee assessed after the census date or when it applies. The information given focuses on registration processes, holds, and other related policies, but does not include details about late fees. For specific information about late registration fees, you should consult the official SJSU catalog or contact the university's registration office directly.
+
+-- (C) Context-engineered RAG --
+  after dedupe/filter, kept 3 of 8 candidates:
+    [msds_faq.txt#70] score=0.327 source=msds_faq.txt: then it forwards your file to the department. In the Computer Science Department, we check your qual
+    [registration_and_attendance.txt#79] score=0.3176 source=registration_and_attendance.txt: Registration and Attendance - San José State University Source: https://catalog.sjsu.edu/content.php
+    [registration_and_attendance.txt#88] score=0.3036 source=registration_and_attendance.txt: one dose on or after age 16, for students 21 or younger. Tuberculosis Screening/Risk Assessment: all
+  answer: I cannot answer this question from the provided documents.
+
+======================================================================
+Q2 [needs two chunks]: What are the two specialization tracks in SJSU's MS in Applied Data Intelligence program, and which DATA course numbers belong to each?
+======================================================================
+
+-- (A) No RAG --
+  answer: The two specialization tracks in San Jose State University's MS in Applied Data Intelligence program are:
+
+1. **Data Science Track**  
+   - Courses: DATA 210, DATA 211, DATA 212, DATA 213, DATA 214, DATA 215
+
+2. **Data Engineering Track**  
+   - Courses: DATA 220, DATA 221, DATA 222, DATA 223, DATA 224, DATA 225
+
+Note: Course numbers may vary slightly depending on the academic year and program updates. Always verify with the university's official program guide.
+
+-- (B) Basic RAG --
+  retrieved top-3:
+    [msda_curriculum_courses.txt#64] score=0.6515 source=msda_curriculum_courses.txt: Young Esri Experian Glassdoor GM Financial Google HP Inc. IBM Informatica Intel Intuit John Deere Ju
+    [msda_curriculum_courses.txt#65] score=0.6497 source=msda_curriculum_courses.txt: and Scholarship Office helps you navigate the cost of graduate study. Whether you are exploring scho
+    [msda_curriculum_courses.txt#63] score=0.6389 source=msda_curriculum_courses.txt: collaboration and presentation to multidisciplinary audiences. Perform Research Perform research in 
+  answer: The context provided does not specify the two specialization tracks in SJSU's MS in Applied Data Intelligence program or the associated DATA course numbers. To obtain this information, you would need to consult the program's official course catalog or contact the Department of Applied Data Science directly at ms-applied-data-intelligence@sjsu.edu.
+
+-- (C) Context-engineered RAG --
+  after dedupe/filter, kept 3 of 8 candidates:
+    [msda_curriculum_courses.txt#64] score=0.6515 source=msda_curriculum_courses.txt: Young Esri Experian Glassdoor GM Financial Google HP Inc. IBM Informatica Intel Intuit John Deere Ju
+    [msda_curriculum_courses.txt#65] score=0.6497 source=msda_curriculum_courses.txt: and Scholarship Office helps you navigate the cost of graduate study. Whether you are exploring scho
+    [msda_curriculum_courses.txt#63] score=0.6389 source=msda_curriculum_courses.txt: collaboration and presentation to multidisciplinary audiences. Perform Research Perform research in 
+  answer: I cannot answer this question from the provided documents.
+
+======================================================================
+Q3 [similar info across documents]: What is the minimum GPA a student must maintain to stay in good academic standing?
+======================================================================
+
+-- (A) No RAG --
+  answer: The minimum GPA to stay in good academic standing typically ranges from 2.0 to 3.0, depending on the institution and program. Students should check their specific school's academic policies for exact requirements.
+
+-- (B) Basic RAG --
+  retrieved top-3:
+    [undergraduate_policies_procedures.txt#92] score=0.4969 source=undergraduate_policies_procedures.txt: based on the units completed. The basis of classification is as follows:  Lower Division: Freshmen a
+    [graduate_policies_procedures.txt#50] score=0.4676 source=graduate_policies_procedures.txt: program are subject to academic probation if their SJSU cumulative GPA falls below 3.0 (grade of "B"
+    [undergraduate_policies_procedures.txt#95] score=0.4646 source=undergraduate_policies_procedures.txt: status. No courses taken while a student is in second baccalaureate status shall be awarded graduate
+  answer: The minimum GPA a student must maintain to stay in good academic standing depends on whether the student is undergraduate or graduate:
+
+- **Undergraduate Students**: To stay in good academic standing, undergraduate students must maintain a **minimum GPA of 2.0**. If a student's GPA falls below 2.0, they may be placed on academic probation. Freshmen on academic probation are allowed a second consecutive semester of probation if their SJSU cumulative GPA is in the range of 1.50 to 1.99.
+
+- **Graduate Students**: Graduate students must maintain a **minimum GPA of 3.0** in their coursework. If a graduate student's GPA falls below 3.0, they may be placed on academic probation. If they fail to raise their GPA to 3.0, they may be disqualified from their program.
+
+-- (C) Context-engineered RAG --
+  after dedupe/filter, kept 3 of 8 candidates:
+    [undergraduate_policies_procedures.txt#92] score=0.4969 source=undergraduate_policies_procedures.txt: based on the units completed. The basis of classification is as follows:  Lower Division: Freshmen a
+    [graduate_policies_procedures.txt#50] score=0.4676 source=graduate_policies_procedures.txt: program are subject to academic probation if their SJSU cumulative GPA falls below 3.0 (grade of "B"
+    [undergraduate_policies_procedures.txt#95] score=0.4646 source=undergraduate_policies_procedures.txt: status. No courses taken while a student is in second baccalaureate status shall be awarded graduate
+  answer: The minimum GPA a student must maintain to stay in good academic standing is 2.0 for undergraduate students [Source 1] and 3.0 for graduate students [Source 2].
+
+======================================================================
+Q4 [ambiguous]: What is the deadline to add a class?
+======================================================================
+
+-- (A) No RAG --
+  answer: The deadline to add a class typically varies by institution, but it is usually around the first week of the semester. For the most accurate information, check your school's academic calendar or contact your registrar's office.
+
+-- (B) Basic RAG --
+  retrieved top-3:
+    [registration_and_attendance.txt#82] score=0.5085 source=registration_and_attendance.txt: a Class Permission Number if you are adding during the Late Registration period, beginning on the fi
+    [adding_dropping_classes.txt#4] score=0.504 source=adding_dropping_classes.txt: Graduation Ceremony Virtual Graduation Celebration Adding and Dropping Classes Overview May 31, 2018
+    [registration_and_attendance.txt#85] score=0.47 source=registration_and_attendance.txt: Classes After Drop Deadline: students may petition to late or retroactively drop a course or withdra
+  answer: The deadline to add a class depends on whether you are a Regular Session or Special Session student:
+
+- **Regular Session Students**: The last day to add a class is posted on the **SJSU Registrar Calendar**. Late Registration begins on the first official day of the semester and ends on the date specified in the calendar.
+
+- **Special Session Students**: The last day to add a class is **14 days after the first day of the semester**.
+
+Additionally, if you need to add a class **after the last day to add** but **before the Census date**, you can submit the **Pre-census Late Enrollment petition form** to the Registrar's office. After the **Census date**, you can petition for a late add using the **Post-Census Late Enrollment form**. 
+
+Note: A late registration fee of $200.00 is assessed for classes added after the Census date. Students in the Step to College programs are exempt from this fee.
+
+-- (C) Context-engineered RAG --
+  after dedupe/filter, kept 3 of 8 candidates:
+    [registration_and_attendance.txt#82] score=0.5085 source=registration_and_attendance.txt: a Class Permission Number if you are adding during the Late Registration period, beginning on the fi
+    [adding_dropping_classes.txt#4] score=0.504 source=adding_dropping_classes.txt: Graduation Ceremony Virtual Graduation Celebration Adding and Dropping Classes Overview May 31, 2018
+    [registration_and_attendance.txt#85] score=0.47 source=registration_and_attendance.txt: Classes After Drop Deadline: students may petition to late or retroactively drop a course or withdra
+  answer: The deadline to add a class depends on whether you are a Regular Session or Special Session student. For Regular Session students, the last day to add is posted on the SJSU Registrar Calendar. For Special Session students, the last day to add is 14 days after the first day of the semester [Source 2].
+
+======================================================================
+Q5 [not in the documents]: What is the tuition refund policy for withdrawing in Fall 2026?
+======================================================================
+
+-- (A) No RAG --
+  answer: The tuition refund policy for withdrawing in Fall 2026 depends on the specific institution's policy and the date of withdrawal. Generally, refunds are prorated based on the number of weeks remaining in the term. For exact details, please consult your institution's financial aid office or review their official refund policy for Fall 2026.
+
+-- (B) Basic RAG --
+  retrieved top-3:
+    [registration_and_attendance.txt#86] score=0.5342 source=registration_and_attendance.txt: or 2.5 in the past 30 units, or 2.0 in the past 45 units; no courses or units earned during the disr
+    [adding_dropping_classes.txt#4] score=0.5179 source=adding_dropping_classes.txt: Graduation Ceremony Virtual Graduation Celebration Adding and Dropping Classes Overview May 31, 2018
+    [undergraduate_policies_procedures.txt#99] score=0.5129 source=undergraduate_policies_procedures.txt: Determination Dates  At San José State University, the residence determination dates are: Fall - Sep
+  answer: The context provided does not specify the exact tuition refund policy for withdrawing in Fall 2026. However, it does mention that the **drop deadline is not the same as the refund deadline** and directs students to consult the **refund policy** for more information. 
+
+To determine the tuition refund policy for Fall 2026, you would need to refer to the **SJSU Refund Policy**, which typically outlines the refund percentages based on the date of withdrawal relative to the start of the semester. This policy may vary slightly each academic year, so it is important to check the most current version for Fall 2026.
+
+-- (C) Context-engineered RAG --
+  after dedupe/filter, kept 3 of 8 candidates:
+    [registration_and_attendance.txt#86] score=0.5342 source=registration_and_attendance.txt: or 2.5 in the past 30 units, or 2.0 in the past 45 units; no courses or units earned during the disr
+    [adding_dropping_classes.txt#4] score=0.5179 source=adding_dropping_classes.txt: Graduation Ceremony Virtual Graduation Celebration Adding and Dropping Classes Overview May 31, 2018
+    [undergraduate_policies_procedures.txt#99] score=0.5129 source=undergraduate_policies_procedures.txt: Determination Dates  At San José State University, the residence determination dates are: Fall - Sep
+  answer: I cannot answer this question from the provided documents.
+
+======================================================================
+Q6 [unrelated]: What is the boiling point of water at sea level, in Celsius?
+======================================================================
+
+-- (A) No RAG --
+  answer: The boiling point of water at sea level is 100°C.
+
+-- (B) Basic RAG --
+  retrieved top-3:
+    [data_science_ms_program.txt#21] score=0.1731 source=data_science_ms_program.txt: 298 - Master's Writing Project 3 unit(s) or MATH 298 - Special Study 1-4 unit(s)  Total Units Requir
+    [general_education_requirements_full.txt#25] score=0.148 source=general_education_requirements_full.txt: will satisfy Areas B1, B2, and B3: two courses from PHYS 50, PHYS 51, or PHYS 52, and CHEM 1A; or PH
+    [applied_data_intelligence_ms_program.txt#8] score=0.1423 source=applied_data_intelligence_ms_program.txt: Data Intelligence Project I 3 unit(s) DATA 298B - Master of Science in Applied Data Intelligence Pro
+  answer: The boiling point of water at sea level is 100°C (degrees Celsius).
+
+-- (C) Context-engineered RAG --
+  after dedupe/filter, kept 3 of 8 candidates:
+    [data_science_ms_program.txt#21] score=0.1731 source=data_science_ms_program.txt: 298 - Master's Writing Project 3 unit(s) or MATH 298 - Special Study 1-4 unit(s)  Total Units Requir
+    [general_education_requirements_full.txt#25] score=0.148 source=general_education_requirements_full.txt: will satisfy Areas B1, B2, and B3: two courses from PHYS 50, PHYS 51, or PHYS 52, and CHEM 1A; or PH
+    [applied_data_intelligence_ms_program.txt#8] score=0.1423 source=applied_data_intelligence_ms_program.txt: Data Intelligence Project I 3 unit(s) DATA 298B - Master of Science in Applied Data Intelligence Pro
+  answer: I cannot answer this question from the provided documents.
+
+Saved 18 question/config records to /Users/prags/Desktop/HW1_DATA260/reports/hw04/raw/rag_results.json
+
+======================================================================
+K-SWEEP on q2: What are the two specialization tracks in SJSU's MS in Applied Data Intelligence program, and which DATA course numbers belong to each?
+======================================================================
+
+--- k=1 ---
+  after dedupe/filter, kept 1 of 8 candidates:
+    [msda_curriculum_courses.txt#64] score=0.6515 source=msda_curriculum_courses.txt: Young Esri Experian Glassdoor GM Financial Google HP Inc. IBM Informatica Intel Intuit John Deere Ju
+  answer: I cannot answer this question from the provided documents.
+
+--- k=3 ---
+  after dedupe/filter, kept 3 of 8 candidates:
+    [msda_curriculum_courses.txt#64] score=0.6515 source=msda_curriculum_courses.txt: Young Esri Experian Glassdoor GM Financial Google HP Inc. IBM Informatica Intel Intuit John Deere Ju
+    [msda_curriculum_courses.txt#65] score=0.6497 source=msda_curriculum_courses.txt: and Scholarship Office helps you navigate the cost of graduate study. Whether you are exploring scho
+    [msda_curriculum_courses.txt#63] score=0.6389 source=msda_curriculum_courses.txt: collaboration and presentation to multidisciplinary audiences. Perform Research Perform research in 
+  answer: I cannot answer this question from the provided documents.
+
+--- k=5 ---
+  after dedupe/filter, kept 5 of 8 candidates:
+    [msda_curriculum_courses.txt#64] score=0.6515 source=msda_curriculum_courses.txt: Young Esri Experian Glassdoor GM Financial Google HP Inc. IBM Informatica Intel Intuit John Deere Ju
+    [msda_curriculum_courses.txt#65] score=0.6497 source=msda_curriculum_courses.txt: and Scholarship Office helps you navigate the cost of graduate study. Whether you are exploring scho
+    [msda_curriculum_courses.txt#63] score=0.6389 source=msda_curriculum_courses.txt: collaboration and presentation to multidisciplinary audiences. Perform Research Perform research in 
+    [applied_data_intelligence_ms_program.txt#6] score=0.6297 source=applied_data_intelligence_ms_program.txt: an accredited institution with a grade point average of 3.0 or better. In addition, this applicant's
+    [applied_data_intelligence_ms_program.txt#5] score=0.628 source=applied_data_intelligence_ms_program.txt: Program: Applied Data Intelligence, MS - San José State University Source: https://catalog.sjsu.edu/
+  answer: The two specialization tracks in SJSU's MS in Applied Data Intelligence program are the Specialization in Analytics Technologies and the Specialization in Data Engineering [Source 4]. However, the specific DATA course numbers belonging to each specialization are not provided in the given sources.
+
+Saved k-sweep results to /Users/prags/Desktop/HW1_DATA260/reports/hw04/raw/k_sweep_results.json
+
+=== 2026-09-27 02:14:47 PDT completed ===

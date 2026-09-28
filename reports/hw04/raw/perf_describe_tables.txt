@@ -1,0 +1,14 @@
+Field	Type	Null	Key	Default	Extra
+id	int	NO	PRI	NULL	auto_increment
+course_title	varchar(255)	NO		NULL	
+course_code	varchar(64)	NO		NULL	
+department	varchar(64)	NO		NULL	
+Field	Type	Null	Key	Default	Extra
+id	int	NO	PRI	NULL	auto_increment
+course_id	int	NO	MUL	NULL	
+rating	int	NO		NULL	
+comment	varchar(255)	NO		NULL	
+perf_courses_count
+5000
+perf_course_reviews_count
+200

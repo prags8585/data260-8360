@@ -1,0 +1,48 @@
+$ curl -sD - "http://localhost:8260/api/perf/courses?page=1&page_size=10&mode=naive"
+HTTP/1.1 200 OK
+x-sql-query-count: 11
+count=10
+ first row (no reviewed course on this page):
+   {'id': 1, 'courseTitle': 'Foundations of Software Engineering', 'courseCode': 'STAT-253-00000', 'department': 'Engineering', 'reviews': []}
+  ... (truncated, full page has 10 rows)
+
+$ curl -sD - "http://localhost:8260/api/perf/courses?page=1&page_size=10&mode=fixed"
+HTTP/1.1 200 OK
+x-sql-query-count: 2
+count=10
+ first row (no reviewed course on this page):
+   {'id': 1, 'courseTitle': 'Foundations of Software Engineering', 'courseCode': 'STAT-253-00000', 'department': 'Engineering', 'reviews': []}
+  ... (truncated, full page has 10 rows)
+
+$ curl -sD - "http://localhost:8260/api/perf/courses?page=1&page_size=50&mode=naive"
+HTTP/1.1 200 OK
+x-sql-query-count: 51
+count=50
+ one row with a review attached (proves the join/related data is present):
+   {'id': 21, 'courseTitle': 'Introduction to Algorithms', 'courseCode': 'MATH-292-00020', 'department': 'Business', 'reviews': [{'rating': 4, 'comment': 'Workload was heavy but worth it.'}]}
+  ... (truncated, full page has 50 rows)
+
+$ curl -sD - "http://localhost:8260/api/perf/courses?page=1&page_size=50&mode=fixed"
+HTTP/1.1 200 OK
+x-sql-query-count: 2
+count=50
+ one row with a review attached (proves the join/related data is present):
+   {'id': 21, 'courseTitle': 'Introduction to Algorithms', 'courseCode': 'MATH-292-00020', 'department': 'Business', 'reviews': [{'rating': 4, 'comment': 'Workload was heavy but worth it.'}]}
+  ... (truncated, full page has 50 rows)
+
+$ curl -sD - "http://localhost:8260/api/perf/courses?page=1&page_size=200&mode=naive"
+HTTP/1.1 200 OK
+x-sql-query-count: 201
+count=200
+ one row with a review attached (proves the join/related data is present):
+   {'id': 21, 'courseTitle': 'Introduction to Algorithms', 'courseCode': 'MATH-292-00020', 'department': 'Business', 'reviews': [{'rating': 4, 'comment': 'Workload was heavy but worth it.'}]}
+  ... (truncated, full page has 200 rows)
+
+$ curl -sD - "http://localhost:8260/api/perf/courses?page=1&page_size=200&mode=fixed"
+HTTP/1.1 200 OK
+x-sql-query-count: 2
+count=200
+ one row with a review attached (proves the join/related data is present):
+   {'id': 21, 'courseTitle': 'Introduction to Algorithms', 'courseCode': 'MATH-292-00020', 'department': 'Business', 'reviews': [{'rating': 4, 'comment': 'Workload was heavy but worth it.'}]}
+  ... (truncated, full page has 200 rows)
+

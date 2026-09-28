@@ -1,0 +1,4 @@
+Creating tables on mysql+pymysql://root:***@localhost:3306/s8360_rel ...
+Tables ready: perf_courses, perf_course_reviews
+perf_courses already has 5000 rows (>= 5000); skipping course seed.
+perf_course_reviews already has 200 rows (>= 200); skipping review seed.

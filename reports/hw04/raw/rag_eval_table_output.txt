@@ -1,0 +1,27 @@
+Q   Config        Retrieval  Answer  Grounded  Refused ok  
+q1  No RAG        n/a        no      n/a       n/a         
+q1  Basic RAG     yes        no      n/a       n/a         
+q1  Context-eng.  yes        no      yes       n/a         
+q2  No RAG        n/a        no      n/a       n/a         
+q2  Basic RAG     no         no      n/a       n/a         
+q2  Context-eng.  no         no      yes       n/a         
+q3  No RAG        n/a        yes     n/a       n/a         
+q3  Basic RAG     yes        yes     n/a       n/a         
+q3  Context-eng.  yes        yes     yes       n/a         
+q4  No RAG        n/a        n/a     n/a       n/a         
+q4  Basic RAG     yes        n/a     n/a       n/a         
+q4  Context-eng.  yes        n/a     yes       n/a         
+q5  No RAG        n/a        n/a     n/a       no          
+q5  Basic RAG     n/a        n/a     n/a       no          
+q5  Context-eng.  n/a        n/a     yes       yes         
+q6  No RAG        n/a        n/a     n/a       no          
+q6  Basic RAG     n/a        n/a     n/a       no          
+q6  Context-eng.  n/a        n/a     yes       yes         
+
+=== Summary by configuration ===
+Config        Accuracy %  Faithfulness %  Format-compliance % Robustness (Q5/Q6 refusal) %
+No RAG        33.3        None            None                0.0
+Basic RAG     33.3        None            None                0.0
+Context-eng.  33.3        100.0           33.3                100.0
+
+Saved /Users/prags/Desktop/HW1_DATA260/reports/hw04/raw/rag_evaluation_table.json and /Users/prags/Desktop/HW1_DATA260/reports/hw04/raw/rag_summary_metrics.json

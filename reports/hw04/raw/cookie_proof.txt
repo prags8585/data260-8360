@@ -1,0 +1,7 @@
+=== Set-Cookie header on login (curl -v) ===
+> POST /api/auth/login HTTP/1.1
+< HTTP/1.1 200 OK
+< set-cookie: s8360_api_session=poj2_s4Jd7BTFenWrWD1YflEmAfPG22glWhW3rQeocE; HttpOnly; Max-Age=86400; Path=/; SameSite=lax
+
+=== cookie jar (what curl actually stored) ===
+#HttpOnly_localhost	FALSE	/	FALSE	1790582680	s8360_api_session	poj2_s4Jd7BTFenWrWD1YflEmAfPG22glWhW3rQeocE

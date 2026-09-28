@@ -1,0 +1,164 @@
+[
+  {
+    "question_id": "q1",
+    "category": "single chunk",
+    "config": "A_no_rag",
+    "correct_retrieval": null,
+    "correct_answer": false,
+    "grounded": null,
+    "refused_when_needed": null
+  },
+  {
+    "question_id": "q1",
+    "category": "single chunk",
+    "config": "B_basic_rag",
+    "correct_retrieval": true,
+    "correct_answer": false,
+    "grounded": null,
+    "refused_when_needed": null
+  },
+  {
+    "question_id": "q1",
+    "category": "single chunk",
+    "config": "C_context_engineered",
+    "correct_retrieval": true,
+    "correct_answer": false,
+    "grounded": true,
+    "refused_when_needed": null
+  },
+  {
+    "question_id": "q2",
+    "category": "needs two chunks",
+    "config": "A_no_rag",
+    "correct_retrieval": null,
+    "correct_answer": false,
+    "grounded": null,
+    "refused_when_needed": null
+  },
+  {
+    "question_id": "q2",
+    "category": "needs two chunks",
+    "config": "B_basic_rag",
+    "correct_retrieval": false,
+    "correct_answer": false,
+    "grounded": null,
+    "refused_when_needed": null
+  },
+  {
+    "question_id": "q2",
+    "category": "needs two chunks",
+    "config": "C_context_engineered",
+    "correct_retrieval": false,
+    "correct_answer": false,
+    "grounded": true,
+    "refused_when_needed": null
+  },
+  {
+    "question_id": "q3",
+    "category": "similar info across documents",
+    "config": "A_no_rag",
+    "correct_retrieval": null,
+    "correct_answer": true,
+    "grounded": null,
+    "refused_when_needed": null
+  },
+  {
+    "question_id": "q3",
+    "category": "similar info across documents",
+    "config": "B_basic_rag",
+    "correct_retrieval": true,
+    "correct_answer": true,
+    "grounded": null,
+    "refused_when_needed": null
+  },
+  {
+    "question_id": "q3",
+    "category": "similar info across documents",
+    "config": "C_context_engineered",
+    "correct_retrieval": true,
+    "correct_answer": true,
+    "grounded": true,
+    "refused_when_needed": null
+  },
+  {
+    "question_id": "q4",
+    "category": "ambiguous",
+    "config": "A_no_rag",
+    "correct_retrieval": null,
+    "correct_answer": null,
+    "grounded": null,
+    "refused_when_needed": null
+  },
+  {
+    "question_id": "q4",
+    "category": "ambiguous",
+    "config": "B_basic_rag",
+    "correct_retrieval": true,
+    "correct_answer": null,
+    "grounded": null,
+    "refused_when_needed": null
+  },
+  {
+    "question_id": "q4",
+    "category": "ambiguous",
+    "config": "C_context_engineered",
+    "correct_retrieval": true,
+    "correct_answer": null,
+    "grounded": true,
+    "refused_when_needed": null
+  },
+  {
+    "question_id": "q5",
+    "category": "not in the documents",
+    "config": "A_no_rag",
+    "correct_retrieval": null,
+    "correct_answer": null,
+    "grounded": null,
+    "refused_when_needed": false
+  },
+  {
+    "question_id": "q5",
+    "category": "not in the documents",
+    "config": "B_basic_rag",
+    "correct_retrieval": null,
+    "correct_answer": null,
+    "grounded": null,
+    "refused_when_needed": false
+  },
+  {
+    "question_id": "q5",
+    "category": "not in the documents",
+    "config": "C_context_engineered",
+    "correct_retrieval": null,
+    "correct_answer": null,
+    "grounded": true,
+    "refused_when_needed": true
+  },
+  {
+    "question_id": "q6",
+    "category": "unrelated",
+    "config": "A_no_rag",
+    "correct_retrieval": null,
+    "correct_answer": null,
+    "grounded": null,
+    "refused_when_needed": false
+  },
+  {
+    "question_id": "q6",
+    "category": "unrelated",
+    "config": "B_basic_rag",
+    "correct_retrieval": null,
+    "correct_answer": null,
+    "grounded": null,
+    "refused_when_needed": false
+  },
+  {
+    "question_id": "q6",
+    "category": "unrelated",
+    "config": "C_context_engineered",
+    "correct_retrieval": null,
+    "correct_answer": null,
+    "grounded": true,
+    "refused_when_needed": true
+  }
+]

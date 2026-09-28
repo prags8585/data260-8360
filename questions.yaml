@@ -1,6 +1,4 @@
-# HW3 Part 2 — five domain questions (DOMAIN_ID=0, Campus Course Catalogue and Enrolment).
-# Committed BEFORE running the graded retrieval comparison, per the assignment
-# instructions, so these expected answers are not rewritten after seeing output.
+
 
 questions:
   - id: q1

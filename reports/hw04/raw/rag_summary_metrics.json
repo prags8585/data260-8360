@@ -1,0 +1,20 @@
+{
+  "No RAG": {
+    "accuracy_pct": 33.3,
+    "faithfulness_pct": null,
+    "format_compliance_pct": null,
+    "robustness_pct": 0.0
+  },
+  "Basic RAG": {
+    "accuracy_pct": 33.3,
+    "faithfulness_pct": null,
+    "format_compliance_pct": null,
+    "robustness_pct": 0.0
+  },
+  "Context-eng.": {
+    "accuracy_pct": 33.3,
+    "faithfulness_pct": 100.0,
+    "format_compliance_pct": 33.3,
+    "robustness_pct": 100.0
+  }
+}

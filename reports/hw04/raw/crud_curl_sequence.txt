@@ -1,0 +1,38 @@
+=== 2026-09-27 01:05:11 PDT ===
+
+$ curl -s -o /dev/null -w 'HTTP %{http_code}
+' http://localhost:8260/api/courses  # (A) no cookie -> unauthorized
+HTTP 401
+
+
+$ curl -s -c /tmp/hw4_crud_jar.txt -X POST http://localhost:8260/api/auth/signup -H 'Content-Type: application/json' -d '{"firstName":"Doc","lastName":"Demo","email":"hw4.curl.demo2@sjsu.edu","password":"demopass123","confirmPassword":"demopass123"}'  # (B) signup
+{"email":"hw4.curl.demo2@sjsu.edu"}
+
+$ curl -s -b /tmp/hw4_crud_jar.txt -c /tmp/hw4_crud_jar.txt -X POST http://localhost:8260/api/auth/logout  # log out of the signup session
+{"ok":true}
+
+$ curl -s -c /tmp/hw4_crud_jar.txt -X POST http://localhost:8260/api/auth/login -H 'Content-Type: application/json' -d '{"email":"karthik.pragada@sjsu.edu","password":"data260"}'  # (C) login
+{"email":"karthik.pragada@sjsu.edu"}
+
+$ curl -s -b /tmp/hw4_crud_jar.txt http://localhost:8260/api/auth/me  # (D) me
+{"email":"karthik.pragada@sjsu.edu"}
+
+$ curl -s -b /tmp/hw4_crud_jar.txt http://localhost:8260/api/courses  # (E) list
+[{"id":1,"courseTitle":"Introduction to Distributed Systems","courseCode":"DATA-260","email":"karthik.pragada@sjsu.edu","description":"Consensus, replication, partitioning, and fault tolerance in distributed systems.","department":"Data Science"},{"id":2,"courseTitle":"Machine Learning Foundations","courseCode":"DATA-245","email":"karthik.pragada@sjsu.edu","description":"Supervised and unsupervised learning, model evaluation, and feature engineering.","department":"Data Science"},{"id":3,"courseTitle":"Database Systems","courseCode":"CS-157A","email":"karthik.pragada@sjsu.edu","description":"Relational modeling, SQL, transactions, and indexing.","department":"Computer Science"},{"id":7,"courseTitle":"Cloud Computing","courseCode":"DATA-270","email":"","description":"","department":""}]
+
+$ curl -s -b /tmp/hw4_crud_jar.txt http://localhost:8260/api/courses/1  # (F) get by id
+{"id":1,"courseTitle":"Introduction to Distributed Systems","courseCode":"DATA-260","email":"karthik.pragada@sjsu.edu","description":"Consensus, replication, partitioning, and fault tolerance in distributed systems.","department":"Data Science"}
+
+$ curl -s -b $JAR -X POST http://localhost:8260/api/courses -H 'Content-Type: application/json' -d '{"courseTitle":"Cloud Computing","courseCode":"DATA-270"}'  # (G) create
+{"id":8,"courseTitle":"Cloud Computing","courseCode":"DATA-270","email":"","description":"","department":""}
+
+
+$ curl -s -b /tmp/hw4_crud_jar.txt -X PUT http://localhost:8260/api/courses/8 -H 'Content-Type: application/json' -d '{"courseTitle":"Cloud Computing Systems","courseCode":"DATA-270"}'  # (H) update the course just created (id=8)
+{"id":8,"courseTitle":"Cloud Computing Systems","courseCode":"DATA-270","email":"","description":"","department":""}
+
+$ curl -s -b /tmp/hw4_crud_jar.txt -X DELETE http://localhost:8260/api/courses/8  # (I) delete the same course
+{"ok":true}
+
+$ curl -s -b /tmp/hw4_crud_jar.txt -X POST http://localhost:8260/api/auth/logout  # (J) logout
+{"ok":true}
+

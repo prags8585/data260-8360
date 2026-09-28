@@ -18,11 +18,6 @@ _LOGGED_OUT_BEFORE: dict[str, float] = {}
 
 
 def get_current_user(request: Request) -> str | None:
-    """Returns the logged-in username, or None if not logged in, the
-    session has been idle past IDLE_TIMEOUT_SECONDS, or this specific
-    cookie was issued before the user's most recent logout (a replayed,
-    already-logged-out cookie). Either failure clears the session
-    server-side on the spot, so the same cookie can't be reused again."""
     user = request.session.get("user")
     if not user:
         return None

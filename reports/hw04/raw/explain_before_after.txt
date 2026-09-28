@@ -1,0 +1,21 @@
+=== The query the 'fixed' N+1 solution runs for a page (course_id IN (...)) ===
+$ EXPLAIN SELECT * FROM perf_course_reviews WHERE course_id IN (1,2,3,4,5,6,7,8,9,10);
+id	select_type	table	partitions	type	possible_keys	key	key_len	ref	rows	filtered	Extra
+1	SIMPLE	perf_course_reviews	NULL	ALL	NULL	NULL	NULL	NULL	200	50.00	Using where
+
+=== BEFORE index: SHOW INDEX (no index on course_id yet) ===
+Table	Non_unique	Key_name	Seq_in_index	Column_name	Collation	Cardinality	Sub_part	Packed	Null	Index_type	Comment	Index_comment	Visible	Expression
+perf_course_reviews	0	PRIMARY	1	id	A	200	NULL	NULL		BTREE			YES	NULL
+
+$ CREATE INDEX idx_perf_course_reviews_course_id ON perf_course_reviews(course_id);
+(no output = success)
+
+=== AFTER index: SHOW INDEX ===
+Table	Non_unique	Key_name	Seq_in_index	Column_name	Collation	Cardinality	Sub_part	Packed	Null	Index_type	Comment	Index_comment	Visible	Expression
+perf_course_reviews	0	PRIMARY	1	id	A	200	NULL	NULL		BTREE			YES	NULL
+perf_course_reviews	1	idx_perf_course_reviews_course_id	1	course_id	A	194	NULL	NULL		BTREE			YES	NULL
+
+=== Same query, EXPLAIN after the index ===
+$ EXPLAIN SELECT * FROM perf_course_reviews WHERE course_id IN (1,2,3,4,5,6,7,8,9,10);
+id	select_type	table	partitions	type	possible_keys	key	key_len	ref	rows	filtered	Extra
+1	SIMPLE	perf_course_reviews	NULL	range	idx_perf_course_reviews_course_id	idx_perf_course_reviews_course_id	4	NULL	10	100.00	Using index condition

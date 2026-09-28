@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""Supplementary check: for each technique and question, does any top-5
-retrieved chunk actually contain the expected answer text (not just come
-from the expected file)? Marker strings are taken from questions.yaml's
-expected answers. Prints the rank of the first answering chunk, or '-'."""
-
 import yaml
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 

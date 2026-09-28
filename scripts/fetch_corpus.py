@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""Fetches the HW3 Part 2 domain corpus: real public SJSU pages relevant
-to the Campus Course Catalogue domain (DOMAIN_ID=0), extracts clean
-visible text (not an AI summary), and saves one .txt per source to
-corpus/hw03/. Also prints byte sizes for CORPUS_MANIFEST.json."""
-
 import sys
 import time
 import urllib.request

@@ -3,14 +3,31 @@ import asyncio
 import os
 
 from fastapi import FastAPI, Form, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.middleware.sessions import SessionMiddleware
 
+import api
 import auth
+import courses_store as store
+import perf_api
 
 app = FastAPI()
+app.add_middleware(
+    # HW4 Part 1: allows the React dev server (Vite, default port 5173) to
+    # call the JSON API in api.py with the session cookie attached. The
+    # server-rendered Jinja app doesn't need this -- it's same-origin.
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.add_middleware(
     SessionMiddleware,
     secret_key=os.environ.get("SESSION_SECRET", "s8360-hw3-dev-secret-do-not-use-in-prod"),
@@ -24,47 +41,23 @@ app.add_middleware(
     https_only=os.environ.get("SESSION_HTTPS_ONLY", "true").lower() != "false",
 )
 app.include_router(auth.router)
+app.include_router(api.router)
+app.include_router(perf_api.router)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-COURSES: list[dict] = [
-    {
-        "id": 1,
-        "courseTitle": "Introduction to Distributed Systems",
-        "courseCode": "DATA-260",
-        "email": "karthik.pragada@sjsu.edu",
-        "description": "Consensus, replication, partitioning, and fault tolerance in distributed systems.",
-        "department": "Data Science",
-    },
-    {
-        "id": 2,
-        "courseTitle": "Machine Learning Foundations",
-        "courseCode": "DATA-245",
-        "email": "karthik.pragada@sjsu.edu",
-        "description": "Supervised and unsupervised learning, model evaluation, and feature engineering.",
-        "department": "Data Science",
-    },
-    {
-        "id": 3,
-        "courseTitle": "Database Systems",
-        "courseCode": "CS-157A",
-        "email": "karthik.pragada@sjsu.edu",
-        "description": "Relational modeling, SQL, transactions, and indexing.",
-        "department": "Computer Science",
-    },
-]
-_next_id = 4
+# The Course list itself now lives in courses_store.py, shared with the
+# HW4 Part 1 JSON API (api.py) so the Jinja app and the React client read
+# and write the same data instead of two separate copies.
+COURSES = store.COURSES
 
 
 def _get_next_id() -> int:
-    global _next_id
-    course_id = _next_id
-    _next_id += 1
-    return course_id
+    return store.get_next_id()
 
 
 def _find_by_id(course_id: int) -> dict | None:
-    return next((c for c in COURSES if c["id"] == course_id), None)
+    return store.find_by_id(course_id)
 
 
 @app.get("/")

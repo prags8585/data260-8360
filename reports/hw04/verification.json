@@ -1,0 +1,260 @@
+{
+  "homework": "HW4",
+  "sid4": 8360,
+  "commit_hash": "34a450fb10cea767d6621a62a9bf81b73cb6fbc9",
+  "model": "qwen3:8b (Ollama) + sentence-transformers/all-MiniLM-L6-v2",
+  "seed": 8360,
+  "verify_seed": 268360,
+  "timestamp": "2026-09-28T21:13:12.790667+00:00",
+  "checks": [
+    {
+      "name": "frontend/src/components/Login.jsx exists",
+      "passed": true,
+      "detail": "found: frontend/src/components/Login.jsx"
+    },
+    {
+      "name": "frontend/src/components/Signup.jsx exists",
+      "passed": true,
+      "detail": "found: frontend/src/components/Signup.jsx"
+    },
+    {
+      "name": "frontend/src/components/Home.jsx exists",
+      "passed": true,
+      "detail": "found: frontend/src/components/Home.jsx"
+    },
+    {
+      "name": "frontend/src/components/CreateRecord.jsx exists",
+      "passed": true,
+      "detail": "found: frontend/src/components/CreateRecord.jsx"
+    },
+    {
+      "name": "frontend/src/components/UpdateRecord.jsx exists",
+      "passed": true,
+      "detail": "found: frontend/src/components/UpdateRecord.jsx"
+    },
+    {
+      "name": "frontend/src/components/DeleteRecord.jsx exists",
+      "passed": true,
+      "detail": "found: frontend/src/components/DeleteRecord.jsx"
+    },
+    {
+      "name": "frontend/src/components/RequireAuth.jsx exists",
+      "passed": true,
+      "detail": "found: frontend/src/components/RequireAuth.jsx"
+    },
+    {
+      "name": "frontend/src/api.js exists",
+      "passed": true,
+      "detail": "found: frontend/src/api.js"
+    },
+    {
+      "name": "frontend/src/context/AuthContext.jsx exists",
+      "passed": true,
+      "detail": "found: frontend/src/context/AuthContext.jsx"
+    },
+    {
+      "name": "frontend/src/App.jsx exists",
+      "passed": true,
+      "detail": "found: frontend/src/App.jsx"
+    },
+    {
+      "name": "db.py exists",
+      "passed": true,
+      "detail": "found: db.py"
+    },
+    {
+      "name": "db.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: db.py"
+    },
+    {
+      "name": "db.py names the connection variable db_session_basede26 (assignment's exact requirement)",
+      "passed": true,
+      "detail": "text check on db.py"
+    },
+    {
+      "name": "models.py exists (Course, User, Session)",
+      "passed": true,
+      "detail": "found: models.py"
+    },
+    {
+      "name": "models.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: models.py"
+    },
+    {
+      "name": "crud.py exists",
+      "passed": true,
+      "detail": "found: crud.py"
+    },
+    {
+      "name": "crud.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: crud.py"
+    },
+    {
+      "name": "api.py exists (JSON auth + course CRUD)",
+      "passed": true,
+      "detail": "found: api.py"
+    },
+    {
+      "name": "api.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: api.py"
+    },
+    {
+      "name": "docker-compose.yml exists (MySQL 8.0, s8360_rel)",
+      "passed": true,
+      "detail": "found: docker-compose.yml"
+    },
+    {
+      "name": "scripts/init_db.py exists",
+      "passed": true,
+      "detail": "found: scripts/init_db.py"
+    },
+    {
+      "name": "scripts/init_db.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: scripts/init_db.py"
+    },
+    {
+      "name": "MySQL container reachable (docker exec)",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "courses/users/sessions/perf_courses/perf_course_reviews tables all exist",
+      "passed": true,
+      "detail": "present: ['courses', 'perf_course_reviews', 'perf_courses', 'sessions', 'users']"
+    },
+    {
+      "name": "perf_models.py exists (PerfCourse, PerfCourseReview)",
+      "passed": true,
+      "detail": "found: perf_models.py"
+    },
+    {
+      "name": "perf_models.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: perf_models.py"
+    },
+    {
+      "name": "perf_api.py exists (naive + fixed endpoints)",
+      "passed": true,
+      "detail": "found: perf_api.py"
+    },
+    {
+      "name": "perf_api.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: perf_api.py"
+    },
+    {
+      "name": "scripts/seed_perf_data.py exists",
+      "passed": true,
+      "detail": "found: scripts/seed_perf_data.py"
+    },
+    {
+      "name": "scripts/seed_perf_data.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: scripts/seed_perf_data.py"
+    },
+    {
+      "name": "scripts/measure_n_plus_1.py exists",
+      "passed": true,
+      "detail": "found: scripts/measure_n_plus_1.py"
+    },
+    {
+      "name": "scripts/measure_n_plus_1.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: scripts/measure_n_plus_1.py"
+    },
+    {
+      "name": "perf_courses seeded to >= 5,000 rows",
+      "passed": true,
+      "detail": "perf_courses has 5000 rows (need >= 5000)"
+    },
+    {
+      "name": "perf_course_reviews seeded to >= 200 rows",
+      "passed": true,
+      "detail": "perf_course_reviews has 200 rows (need >= 200)"
+    },
+    {
+      "name": "reports/hw04/raw/n_plus_1_records.json exists and has 180 rows (3 sizes x 2 modes x 30)",
+      "passed": true,
+      "detail": "180 records"
+    },
+    {
+      "name": "n_plus_1_summary.json: naive=page_size+1, fixed=2, for all 3 page sizes",
+      "passed": true,
+      "detail": "10: naive=11 fixed=2; 50: naive=51 fixed=2; 200: naive=201 fixed=2"
+    },
+    {
+      "name": "reports/hw04/raw/explain_before_after.txt exists (EXPLAIN evidence)",
+      "passed": true,
+      "detail": "found: reports/hw04/raw/explain_before_after.txt"
+    },
+    {
+      "name": "rag.py exists",
+      "passed": true,
+      "detail": "found: rag.py"
+    },
+    {
+      "name": "rag.py valid syntax",
+      "passed": true,
+      "detail": "valid Python syntax: rag.py"
+    },
+    {
+      "name": "corpus/hw03 has >= 5 documents",
+      "passed": true,
+      "detail": "16 .txt files"
+    },
+    {
+      "name": "reports/hw04/raw/rag_results.json exists with 18 records (6 questions x 3 configs)",
+      "passed": true,
+      "detail": "18 records"
+    },
+    {
+      "name": "Q5 and Q6 are refused under context-engineered RAG (assignment requirement)",
+      "passed": true,
+      "detail": "2/2 refused as required"
+    },
+    {
+      "name": "reports/hw04/raw/k_sweep_results.json exists with k=1,3,5",
+      "passed": true,
+      "detail": "k values: [1, 3, 5]"
+    },
+    {
+      "name": "reports/hw04/raw/rag_evaluation_table.json exists",
+      "passed": true,
+      "detail": "found: reports/hw04/raw/rag_evaluation_table.json"
+    },
+    {
+      "name": "reports/hw04/raw/rag_summary_metrics.json exists",
+      "passed": true,
+      "detail": "found: reports/hw04/raw/rag_summary_metrics.json"
+    },
+    {
+      "name": "Live backend on PORT_BASE (8260): auth-gated CRUD + N+1 endpoints behave correctly",
+      "passed": true,
+      "detail": "unauth->401: True; login+list courses ok: True; naive(11) > fixed(2) SQL stmts: True"
+    },
+    {
+      "name": "reports/hw04/RUN_LOG.txt exists and non-empty",
+      "passed": true,
+      "detail": "reports/hw04/RUN_LOG.txt"
+    },
+    {
+      "name": "reports/hw04/METRICS.md exists",
+      "passed": true,
+      "detail": "found: reports/hw04/METRICS.md"
+    },
+    {
+      "name": "reports/hw04/AI_USE.md exists",
+      "passed": true,
+      "detail": "found: reports/hw04/AI_USE.md"
+    }
+  ],
+  "passed": 49,
+  "failed": 0,
+  "total": 49,
+  "overall": "PASS"
+}

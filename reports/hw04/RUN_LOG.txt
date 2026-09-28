@@ -1,0 +1,301 @@
+=== HW4 RUN_LOG.txt -- DATA-260, SID4 8360, DOMAIN_ID 0 ===
+Real console/terminal output for the runs that produced the reported results.
+Part 4's RAG pipeline run is kept in its own file, reports/hw04/RAG_RUN_LOG.txt,
+due to its size (18KB, 18 question/config runs + the k-sweep).
+
+############################################################
+# PART 2 -- MySQL persistence + server-side sessions
+############################################################
+
+--- Login response: Set-Cookie header (HttpOnly proof) ---
+=== Set-Cookie header on login (curl -v) ===
+> POST /api/auth/login HTTP/1.1
+< HTTP/1.1 200 OK
+< set-cookie: s8360_api_session=poj2_s4Jd7BTFenWrWD1YflEmAfPG22glWhW3rQeocE; HttpOnly; Max-Age=86400; Path=/; SameSite=lax
+
+=== cookie jar (what curl actually stored) ===
+#HttpOnly_localhost	FALSE	/	FALSE	1790582680	s8360_api_session	poj2_s4Jd7BTFenWrWD1YflEmAfPG22glWhW3rQeocE
+
+--- Cookie token paired with its row in the sessions table ---
+cookie token: poj2_s4Jd7BTFenWrWD1YflEmAfPG22glWhW3rQeocE
+
+=== matching row in sessions table ===
+*************************** 1. row ***************************
+        id: poj2_s4Jd7BTFenWrWD1YflEmAfPG22glWhW3rQeocE
+   user_id: 1
+created_at: 2026-09-27 08:04:40
+expires_at: 2026-09-28 08:04:40
+
+--- Table structure (DESCRIBE, from MySQL) ---
+Field	Type	Null	Key	Default	Extra
+id	int	NO	PRI	NULL	auto_increment
+course_title	varchar(255)	NO		NULL	
+course_code	varchar(64)	NO		NULL	
+email	varchar(255)	NO		NULL	
+description	text	NO		NULL	
+department	varchar(64)	NO		NULL	
+Field	Type	Null	Key	Default	Extra
+id	int	NO	PRI	NULL	auto_increment
+name	varchar(255)	NO		NULL	
+email	varchar(255)	NO	UNI	NULL	
+password_hash	varchar(255)	NO		NULL	
+Field	Type	Null	Key	Default	Extra
+id	varchar(64)	NO	PRI	NULL	
+user_id	int	NO	MUL	NULL	
+created_at	datetime	NO		NULL	
+expires_at	datetime	NO		NULL	
+
+--- Full CRUD sequence: signup, login, me, list, get, create, update, delete, logout, and the unauthorized case ---
+=== 2026-09-27 01:05:11 PDT ===
+
+$ curl -s -o /dev/null -w 'HTTP %{http_code}
+' http://localhost:8260/api/courses  # (A) no cookie -> unauthorized
+HTTP 401
+
+
+$ curl -s -c /tmp/hw4_crud_jar.txt -X POST http://localhost:8260/api/auth/signup -H 'Content-Type: application/json' -d '{"firstName":"Doc","lastName":"Demo","email":"hw4.curl.demo2@sjsu.edu","password":"demopass123","confirmPassword":"demopass123"}'  # (B) signup
+{"email":"hw4.curl.demo2@sjsu.edu"}
+
+$ curl -s -b /tmp/hw4_crud_jar.txt -c /tmp/hw4_crud_jar.txt -X POST http://localhost:8260/api/auth/logout  # log out of the signup session
+{"ok":true}
+
+$ curl -s -c /tmp/hw4_crud_jar.txt -X POST http://localhost:8260/api/auth/login -H 'Content-Type: application/json' -d '{"email":"karthik.pragada@sjsu.edu","password":"data260"}'  # (C) login
+{"email":"karthik.pragada@sjsu.edu"}
+
+$ curl -s -b /tmp/hw4_crud_jar.txt http://localhost:8260/api/auth/me  # (D) me
+{"email":"karthik.pragada@sjsu.edu"}
+
+$ curl -s -b /tmp/hw4_crud_jar.txt http://localhost:8260/api/courses  # (E) list
+[{"id":1,"courseTitle":"Introduction to Distributed Systems","courseCode":"DATA-260","email":"karthik.pragada@sjsu.edu","description":"Consensus, replication, partitioning, and fault tolerance in distributed systems.","department":"Data Science"},{"id":2,"courseTitle":"Machine Learning Foundations","courseCode":"DATA-245","email":"karthik.pragada@sjsu.edu","description":"Supervised and unsupervised learning, model evaluation, and feature engineering.","department":"Data Science"},{"id":3,"courseTitle":"Database Systems","courseCode":"CS-157A","email":"karthik.pragada@sjsu.edu","description":"Relational modeling, SQL, transactions, and indexing.","department":"Computer Science"},{"id":7,"courseTitle":"Cloud Computing","courseCode":"DATA-270","email":"","description":"","department":""}]
+
+$ curl -s -b /tmp/hw4_crud_jar.txt http://localhost:8260/api/courses/1  # (F) get by id
+{"id":1,"courseTitle":"Introduction to Distributed Systems","courseCode":"DATA-260","email":"karthik.pragada@sjsu.edu","description":"Consensus, replication, partitioning, and fault tolerance in distributed systems.","department":"Data Science"}
+
+$ curl -s -b $JAR -X POST http://localhost:8260/api/courses -H 'Content-Type: application/json' -d '{"courseTitle":"Cloud Computing","courseCode":"DATA-270"}'  # (G) create
+{"id":8,"courseTitle":"Cloud Computing","courseCode":"DATA-270","email":"","description":"","department":""}
+
+
+$ curl -s -b /tmp/hw4_crud_jar.txt -X PUT http://localhost:8260/api/courses/8 -H 'Content-Type: application/json' -d '{"courseTitle":"Cloud Computing Systems","courseCode":"DATA-270"}'  # (H) update the course just created (id=8)
+{"id":8,"courseTitle":"Cloud Computing Systems","courseCode":"DATA-270","email":"","description":"","department":""}
+
+$ curl -s -b /tmp/hw4_crud_jar.txt -X DELETE http://localhost:8260/api/courses/8  # (I) delete the same course
+{"ok":true}
+
+$ curl -s -b /tmp/hw4_crud_jar.txt -X POST http://localhost:8260/api/auth/logout  # (J) logout
+{"ok":true}
+
+
+############################################################
+# PART 3 -- N+1 measurement and query tuning
+############################################################
+
+--- Seed script run (idempotent; this run found the data already seeded) ---
+Creating tables on mysql+pymysql://root:***@localhost:3306/s8360_rel ...
+Tables ready: perf_courses, perf_course_reviews
+perf_courses already has 5000 rows (>= 5000); skipping course seed.
+perf_course_reviews already has 200 rows (>= 200); skipping review seed.
+
+--- Table structure and row counts (perf_courses, perf_course_reviews) ---
+Field	Type	Null	Key	Default	Extra
+id	int	NO	PRI	NULL	auto_increment
+course_title	varchar(255)	NO		NULL	
+course_code	varchar(64)	NO		NULL	
+department	varchar(64)	NO		NULL	
+Field	Type	Null	Key	Default	Extra
+id	int	NO	PRI	NULL	auto_increment
+course_id	int	NO	MUL	NULL	
+rating	int	NO		NULL	
+comment	varchar(255)	NO		NULL	
+perf_courses_count
+5000
+perf_course_reviews_count
+200
+
+--- measure_n_plus_1.py: 180 requests (3 page sizes x 2 modes x 30 each) ---
+$ python scripts/measure_n_plus_1.py
+
+10 / naive:
+  sql_stmts=11 (constant)  p50=22.07ms  p95=27.28ms  p99=39.74ms
+
+10 / fixed:
+  sql_stmts=2 (constant)  p50=8.10ms  p95=12.75ms  p99=13.06ms
+
+50 / naive:
+  sql_stmts=51 (constant)  p50=14.98ms  p95=77.12ms  p99=83.55ms
+
+50 / fixed:
+  sql_stmts=2 (constant)  p50=3.46ms  p95=3.98ms  p99=4.14ms
+
+200 / naive:
+  sql_stmts=201 (constant)  p50=47.85ms  p95=50.27ms  p99=66.83ms
+
+200 / fixed:
+  sql_stmts=2 (constant)  p50=5.30ms  p95=5.94ms  p99=6.33ms
+
+Saved 180 raw records to reports/hw04/raw/n_plus_1_records.json and reports/hw04/raw/n_plus_1_records.csv
+
+Page size   Version   SQL stmts/req   p50 (ms)    p95 (ms)    p99 (ms)
+10          naive     11              22.07       27.28       39.74
+10          fixed     2               8.1         12.75       13.06
+50          naive     51              14.98       77.12       83.55
+50          fixed     2               3.46        3.98        4.14
+200         naive     201             47.85       50.27       66.83
+200         fixed     2               5.3         5.94        6.33
+
+Speed-up (naive p50 / fixed p50) by page size:
+  page_size=10: naive 22.07ms / fixed 8.1ms = 2.72x faster
+  page_size=50: naive 14.98ms / fixed 3.46ms = 4.33x faster
+  page_size=200: naive 47.85ms / fixed 5.3ms = 9.03x faster
+
+--- EXPLAIN before/after adding the index ---
+=== The query the 'fixed' N+1 solution runs for a page (course_id IN (...)) ===
+$ EXPLAIN SELECT * FROM perf_course_reviews WHERE course_id IN (1,2,3,4,5,6,7,8,9,10);
+id	select_type	table	partitions	type	possible_keys	key	key_len	ref	rows	filtered	Extra
+1	SIMPLE	perf_course_reviews	NULL	ALL	NULL	NULL	NULL	NULL	200	50.00	Using where
+
+=== BEFORE index: SHOW INDEX (no index on course_id yet) ===
+Table	Non_unique	Key_name	Seq_in_index	Column_name	Collation	Cardinality	Sub_part	Packed	Null	Index_type	Comment	Index_comment	Visible	Expression
+perf_course_reviews	0	PRIMARY	1	id	A	200	NULL	NULL		BTREE			YES	NULL
+
+$ CREATE INDEX idx_perf_course_reviews_course_id ON perf_course_reviews(course_id);
+(no output = success)
+
+=== AFTER index: SHOW INDEX ===
+Table	Non_unique	Key_name	Seq_in_index	Column_name	Collation	Cardinality	Sub_part	Packed	Null	Index_type	Comment	Index_comment	Visible	Expression
+perf_course_reviews	0	PRIMARY	1	id	A	200	NULL	NULL		BTREE			YES	NULL
+perf_course_reviews	1	idx_perf_course_reviews_course_id	1	course_id	A	194	NULL	NULL		BTREE			YES	NULL
+
+=== Same query, EXPLAIN after the index ===
+$ EXPLAIN SELECT * FROM perf_course_reviews WHERE course_id IN (1,2,3,4,5,6,7,8,9,10);
+id	select_type	table	partitions	type	possible_keys	key	key_len	ref	rows	filtered	Extra
+1	SIMPLE	perf_course_reviews	NULL	range	idx_perf_course_reviews_course_id	idx_perf_course_reviews_course_id	4	NULL	10	100.00	Using index condition
+
+--- API evidence for both versions, at each page size (curl; see reports/hw04/ Postman screenshots for the literal deliverable) ---
+$ curl -sD - "http://localhost:8260/api/perf/courses?page=1&page_size=10&mode=naive"
+HTTP/1.1 200 OK
+x-sql-query-count: 11
+count=10
+ first row (no reviewed course on this page):
+   {'id': 1, 'courseTitle': 'Foundations of Software Engineering', 'courseCode': 'STAT-253-00000', 'department': 'Engineering', 'reviews': []}
+  ... (truncated, full page has 10 rows)
+
+$ curl -sD - "http://localhost:8260/api/perf/courses?page=1&page_size=10&mode=fixed"
+HTTP/1.1 200 OK
+x-sql-query-count: 2
+count=10
+ first row (no reviewed course on this page):
+   {'id': 1, 'courseTitle': 'Foundations of Software Engineering', 'courseCode': 'STAT-253-00000', 'department': 'Engineering', 'reviews': []}
+  ... (truncated, full page has 10 rows)
+
+$ curl -sD - "http://localhost:8260/api/perf/courses?page=1&page_size=50&mode=naive"
+HTTP/1.1 200 OK
+x-sql-query-count: 51
+count=50
+ one row with a review attached (proves the join/related data is present):
+   {'id': 21, 'courseTitle': 'Introduction to Algorithms', 'courseCode': 'MATH-292-00020', 'department': 'Business', 'reviews': [{'rating': 4, 'comment': 'Workload was heavy but worth it.'}]}
+  ... (truncated, full page has 50 rows)
+
+$ curl -sD - "http://localhost:8260/api/perf/courses?page=1&page_size=50&mode=fixed"
+HTTP/1.1 200 OK
+x-sql-query-count: 2
+count=50
+ one row with a review attached (proves the join/related data is present):
+   {'id': 21, 'courseTitle': 'Introduction to Algorithms', 'courseCode': 'MATH-292-00020', 'department': 'Business', 'reviews': [{'rating': 4, 'comment': 'Workload was heavy but worth it.'}]}
+  ... (truncated, full page has 50 rows)
+
+$ curl -sD - "http://localhost:8260/api/perf/courses?page=1&page_size=200&mode=naive"
+HTTP/1.1 200 OK
+x-sql-query-count: 201
+count=200
+ one row with a review attached (proves the join/related data is present):
+   {'id': 21, 'courseTitle': 'Introduction to Algorithms', 'courseCode': 'MATH-292-00020', 'department': 'Business', 'reviews': [{'rating': 4, 'comment': 'Workload was heavy but worth it.'}]}
+  ... (truncated, full page has 200 rows)
+
+$ curl -sD - "http://localhost:8260/api/perf/courses?page=1&page_size=200&mode=fixed"
+HTTP/1.1 200 OK
+x-sql-query-count: 2
+count=200
+ one row with a review attached (proves the join/related data is present):
+   {'id': 21, 'courseTitle': 'Introduction to Algorithms', 'courseCode': 'MATH-292-00020', 'department': 'Business', 'reviews': [{'rating': 4, 'comment': 'Workload was heavy but worth it.'}]}
+  ... (truncated, full page has 200 rows)
+
+
+--- Project folder structure ---
+.
+./AGENT.md
+./CORPUS_MANIFEST.json
+./DOMAIN_SCHEMA.md
+./Dockerfile
+./README.md
+./SOURCES.md
+./agent_graph.py
+./agents_demo.py
+./api.py
+./auth.py
+./corpus
+./corpus/hw03
+./courses_store.py
+./crud.py
+./db.py
+./docker-compose.yml
+./frontend
+./frontend/.env
+./frontend/.oxlintrc.json
+./frontend/README.md
+./frontend/index.html
+./frontend/package-lock.json
+./frontend/package.json
+./frontend/public
+./frontend/src
+./frontend/vite.config.js
+./hw1_client.py
+./main.py
+./models.py
+./questions.yaml
+./rag_chunking_comparison.py
+./recompute_summary.py
+./reports
+./reports/hw01
+./reports/hw02
+./reports/hw03
+./reports/hw04
+./requirements.txt
+./run_nondeterminism.py
+./run_schema_experiment.py
+./scripts
+./scripts/answer_level_check.py
+./scripts/build_partb_doc.py
+./scripts/capture_auth_screenshots.py
+./scripts/capture_hw4_screenshots.py
+./scripts/fetch_corpus.py
+./scripts/init_db.py
+./src
+./src/model_client.py
+./static
+./static/script.js
+./static/style.css
+./templates
+./templates/dashboard.html
+./templates/index.html
+./templates/login.html
+./verify_hw01.py
+./verify_hw02.py
+./verify_hw03.py
+
+./frontend/src (expanded):
+frontend/src/App.css
+frontend/src/App.jsx
+frontend/src/api.js
+frontend/src/assets/hero.png
+frontend/src/assets/react.svg
+frontend/src/assets/vite.svg
+frontend/src/components/CreateRecord.jsx
+frontend/src/components/DeleteRecord.jsx
+frontend/src/components/Home.jsx
+frontend/src/components/Login.jsx
+frontend/src/components/RequireAuth.jsx
+frontend/src/components/Signup.jsx
+frontend/src/components/UpdateRecord.jsx
+frontend/src/context/AuthContext.jsx
+frontend/src/index.css
+frontend/src/main.jsx

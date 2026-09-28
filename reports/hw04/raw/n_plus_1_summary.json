@@ -1,0 +1,50 @@
+{
+  "10_naive": {
+    "page_size": 10,
+    "mode": "naive",
+    "sql_stmts_per_req": 11,
+    "p50_ms": 22.07,
+    "p95_ms": 27.28,
+    "p99_ms": 39.74
+  },
+  "10_fixed": {
+    "page_size": 10,
+    "mode": "fixed",
+    "sql_stmts_per_req": 2,
+    "p50_ms": 8.1,
+    "p95_ms": 12.75,
+    "p99_ms": 13.06
+  },
+  "50_naive": {
+    "page_size": 50,
+    "mode": "naive",
+    "sql_stmts_per_req": 51,
+    "p50_ms": 14.98,
+    "p95_ms": 77.12,
+    "p99_ms": 83.55
+  },
+  "50_fixed": {
+    "page_size": 50,
+    "mode": "fixed",
+    "sql_stmts_per_req": 2,
+    "p50_ms": 3.46,
+    "p95_ms": 3.98,
+    "p99_ms": 4.14
+  },
+  "200_naive": {
+    "page_size": 200,
+    "mode": "naive",
+    "sql_stmts_per_req": 201,
+    "p50_ms": 47.85,
+    "p95_ms": 50.27,
+    "p99_ms": 66.83
+  },
+  "200_fixed": {
+    "page_size": 200,
+    "mode": "fixed",
+    "sql_stmts_per_req": 2,
+    "p50_ms": 5.3,
+    "p95_ms": 5.94,
+    "p99_ms": 6.33
+  }
+}

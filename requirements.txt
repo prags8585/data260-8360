@@ -4,3 +4,7 @@ jinja2
 python-multipart
 langchain-ollama
 langchain-core
+sqlalchemy
+pymysql
+cryptography
+bcrypt
