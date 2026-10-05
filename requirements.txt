@@ -8,3 +8,6 @@ sqlalchemy
 pymysql
 cryptography
 bcrypt
+mcp[cli]<2
+httpx
+requests

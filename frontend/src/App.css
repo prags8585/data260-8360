@@ -316,3 +316,43 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.seats {
+  display: inline-block;
+  background: #ecfdf5;
+  color: #047857;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  margin-left: 0.4rem;
+}
+
+.card select {
+  padding: 0.6rem 0.75rem;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: white;
+}
+
+.row-actions .delete-btn {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  color: #9f1239;
+  background: var(--danger-soft);
+}
+
+.row-actions .delete-btn:hover {
+  background: #fecdd3;
+}
+
+.card button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

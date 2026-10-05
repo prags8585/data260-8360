@@ -1,32 +1,55 @@
-import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { clearError, fetchCourses, updateCourse } from "../store/coursesSlice";
+import { fetchInstructors } from "../store/instructorsSlice";
 
-export default function UpdateRecord({ onUpdate }) {
-  const location = useLocation();
+// "Select by ID": pick a course from the ID dropdown, its current values
+// load from Redux state into the form, and Save dispatches updateCourse.
+export default function UpdateRecord() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const record = location.state?.record;
-
-  const [courseTitle, setCourseTitle] = useState(record?.courseTitle || "");
-  const [courseCode, setCourseCode] = useState(record?.courseCode || "");
+  const [params] = useSearchParams();
+  const courses = useSelector((state) => state.courses.items);
+  const instructors = useSelector((state) => state.instructors.items);
+  const [selectedId, setSelectedId] = useState(params.get("id") || "");
+  const [form, setForm] = useState({ courseTitle: "", courseCode: "", seatsAvailable: 0, instructorId: "" });
   const [error, setError] = useState("");
 
-  if (!record) {
-    return (
-      <div className="card">
-        <p>No course selected to update.</p>
-        <Link to="/">Back to courses</Link>
-      </div>
-    );
-  }
+  useEffect(() => {
+    dispatch(clearError());
+    dispatch(fetchCourses());
+    dispatch(fetchInstructors());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const course = courses.find((c) => String(c.id) === String(selectedId));
+    if (course) {
+      setForm({
+        courseTitle: course.courseTitle,
+        courseCode: course.courseCode,
+        seatsAvailable: course.seatsAvailable,
+        instructorId: course.instructorId,
+      });
+    }
+  }, [selectedId, courses]);
+
+  const set = (field) => (e) => setForm({ ...form, [field]: e.target.value });
 
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
+    const payload = {
+      id: Number(selectedId),
+      ...form,
+      seatsAvailable: Number(form.seatsAvailable),
+      instructorId: Number(form.instructorId),
+    };
     try {
-      await onUpdate(record.id, { courseTitle, courseCode });
+      await dispatch(updateCourse(payload)).unwrap();
       navigate("/");
-    } catch (err) {
-      setError(err.message || "Could not update course.");
+    } catch (message) {
+      setError(String(message));
     }
   }
 
@@ -36,14 +59,42 @@ export default function UpdateRecord({ onUpdate }) {
       {error && <div className="alert-error">{error}</div>}
       <form onSubmit={handleSubmit}>
         <label>
+          Course ID
+          <select value={selectedId} onChange={(e) => setSelectedId(e.target.value)} required>
+            <option value="">Select a course by ID…</option>
+            {courses.map((c) => (
+              <option key={c.id} value={c.id}>
+                #{c.id} — {c.courseCode}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
           Course Title
-          <input value={courseTitle} onChange={(e) => setCourseTitle(e.target.value)} required />
+          <input value={form.courseTitle} onChange={set("courseTitle")} required />
         </label>
         <label>
           Course Code
-          <input value={courseCode} onChange={(e) => setCourseCode(e.target.value)} required />
+          <input value={form.courseCode} onChange={set("courseCode")} required />
         </label>
-        <button type="submit">Save Changes</button>
+        <label>
+          Seats Available
+          <input type="number" min="0" value={form.seatsAvailable} onChange={set("seatsAvailable")} required />
+        </label>
+        <label>
+          Instructor
+          <select value={form.instructorId} onChange={set("instructorId")} required>
+            <option value="">Select an instructor…</option>
+            {instructors.map((i) => (
+              <option key={i.id} value={i.id}>
+                {i.name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <button type="submit" disabled={!selectedId}>
+          Save Changes
+        </button>
       </form>
     </div>
   );

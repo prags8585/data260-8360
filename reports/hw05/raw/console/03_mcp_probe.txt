@@ -1,0 +1,22 @@
+=== 2026-10-05 14:53:13 PDT ===
+== meals server (TheMealDB) ==
+  [meals] search_meals_by_name({"query": "Arrabiata", "limit": 3}) isError=False -> {"id": "52771", "name": "Spicy Arrabiata Penne", "area": "Italian", "category": "Vegetarian", "thumb": "https:
+  [meals] search_meals_by_name({"query": "zzzxxyy", "limit": 5}) isError=False -> {"results": [], "message": "no matches"}
+  [meals] search_meals_by_name({"query": "Arrabiata", "limit": 99}) isError=True -> Error executing tool search_meals_by_name: 1 validation error for search_meals_by_nameArguments
+limit
+  Input 
+  [meals] meals_by_ingredient({"ingredient": "chicken", "limit": 5}) isError=False -> {"id": "52940", "name": "Brown Stew Chicken", "thumb": "https://www.themealdb.com/images/media/meals/sypxpx151
+  [meals] random_meal({}) isError=False -> {"id": "52944", "name": "Escovitch Fish", "category": "Seafood", "area": "Jamaican", "instructions": "Rinse fi
+  [meals] meal_details({"id": 52771}) isError=False -> {"id": "52771", "name": "Spicy Arrabiata Penne", "category": "Vegetarian", "area": "Italian", "instructions": 
+  [meals] meal_details({"id": 0}) isError=False -> {"results": [], "message": "no matches"}
+== domain server (s8360_rel) ==
+  [campus] search_courses({"query": "database", "limit": 5}) isError=False -> {"ok": true, "data": {"count": 1, "courses": [{"id": 3, "courseCode": "CS-157A", "courseTitle": "Database Syst
+  [campus] search_courses({"query": "", "limit": 5}) isError=False -> {"ok": false, "data": null, "error": "query must be a non-empty string"}
+  [campus] course_detail({"course_id": 1}) isError=False -> {"ok": true, "data": {"id": 1, "courseCode": "DATA-260", "courseTitle": "Introduction to Distributed Systems",
+  [campus] course_detail({"course_id": -3}) isError=False -> {"ok": false, "data": null, "error": "course_id must be a positive integer"}
+  [campus] course_detail({"course_id": 9999}) isError=False -> {"ok": false, "data": null, "error": "course 9999 not found"}
+  [campus] course_stats({"group_by": "department"}) isError=False -> {"ok": true, "data": {"group_by": "department", "groups": [{"group": "Computer Science", "courses": 1, "totalS
+  [campus] course_stats({"group_by": "instructor"}) isError=False -> {"ok": true, "data": {"group_by": "instructor", "groups": [{"group": "Dr. Elena Rossi", "courses": 1, "totalSe
+  [campus] course_stats({"group_by": "color"}) isError=False -> {"ok": false, "data": null, "error": "group_by must be one of: department, instructor"}
+tools -> meals: ['search_meals_by_name', 'meals_by_ingredient', 'random_meal', 'meal_details']  campus: ['search_courses', 'course_detail', 'course_stats']
+saved to /Users/prags/Desktop/HW1_DATA260/reports/hw05/raw/mcp_inspector

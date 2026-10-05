@@ -1,0 +1,8 @@
+--- ALLOWED ---
+execute_tool('search_courses', {'query': 'database', 'limit': 5})
+{"ok": true, "data": {"count": 1, "courses": [{"id": 3, "courseCode": "CS-157A", "courseTitle": "Database Systems", "department": "Computer Science", "seatsAvailable": 45, "instructorName": "Dr. Marcus Lee"}]}, "error": null}
+
+--- BLOCKED ---
+execute_tool('search_courses', {'query': 'student password', 'limit': 5})
+{"ok": false, "data": null, "error": "blocked by safety rule (sensitive-data): the query asks for 'password', which is private personal data and is not available through the course catalogue"}
+

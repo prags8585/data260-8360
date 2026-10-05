@@ -1,0 +1,15 @@
+=== 2026-10-05 14:53:18 PDT ===
+PASS  test_search_valid
+PASS  test_search_rejects_empty_query
+PASS  test_search_rejects_limit_out_of_range
+PASS  test_detail_valid
+PASS  test_detail_rejects_negative_and_unknown_id
+PASS  test_stats_valid
+PASS  test_stats_rejects_bad_group_by
+PASS  test_execute_tool_never_raises_on_bad_calls
+PASS  test_retry_recovers_after_transient_failure
+PASS  test_retry_gives_up_cleanly
+PASS  test_safety_rule_blocks_sensitive_query
+PASS  test_run_agent_stops_at_max_steps
+
+12/12 tests passed

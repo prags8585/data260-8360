@@ -1,0 +1,27 @@
+=== 2026-10-05 14:53:12 PDT ===
+[OK  ] GET    /instructors                                  -> 401 (expected 401)  no cookie -> unauthorized
+[OK  ] POST   /auth/login                                   -> 200 (expected 200)  login
+[OK  ] POST   /instructors                                  -> 201 (expected 201)  create instructor
+[OK  ] GET    /instructors?page=1&page_size=2               -> 200 (expected 200)  list instructors (page 1, size 2)
+[OK  ] GET    /instructors/6                                -> 200 (expected 200)  get instructor
+[OK  ] PUT    /instructors/6                                -> 200 (expected 200)  update instructor
+[OK  ] GET    /instructors/9999                             -> 404 (expected 404)  instructor not found
+[OK  ] POST   /instructors                                  -> 422 (expected 422)  bad email format -> validation error
+[OK  ] POST   /instructors                                  -> 409 (expected 409)  duplicate email -> constraint violation
+[OK  ] GET    /instructors?page=1&page_size=500             -> 422 (expected 422)  page_size out of range -> validation error
+[OK  ] POST   /courses                                      -> 201 (expected 201)  create course
+[OK  ] GET    /courses                                      -> 200 (expected 200)  list courses
+[OK  ] GET    /courses/12                                   -> 200 (expected 200)  get course
+[OK  ] PUT    /courses/12                                   -> 200 (expected 200)  update course
+[OK  ] GET    /courses/9999                                 -> 404 (expected 404)  course not found
+[OK  ] POST   /courses                                      -> 422 (expected 422)  bad course code format -> validation error
+[OK  ] POST   /courses                                      -> 422 (expected 422)  negative seats -> validation error
+[OK  ] POST   /courses                                      -> 409 (expected 409)  duplicate course code -> constraint violation
+[OK  ] POST   /courses                                      -> 404 (expected 404)  unknown instructor -> not found
+[OK  ] GET    /instructors/6/courses                        -> 200 (expected 200)  relationship: courses taught by instructor
+[OK  ] DELETE /instructors/6                                -> 409 (expected 409)  delete instructor that still has courses -> blocked
+[OK  ] DELETE /courses/12                                   -> 204 (expected 204)  delete course
+[OK  ] DELETE /instructors/6                                -> 204 (expected 204)  delete instructor (no courses left)
+[OK  ] GET    /instructors/6                                -> 404 (expected 404)  deleted instructor is gone
+
+24/24 API checks passed -> /Users/prags/Desktop/HW1_DATA260/reports/hw05/raw/api_demo_calls.json

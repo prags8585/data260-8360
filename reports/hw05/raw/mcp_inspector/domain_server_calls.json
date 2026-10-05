@@ -1,0 +1,229 @@
+{
+  "server_file": "domain_server.py",
+  "tools": [
+    {
+      "name": "search_courses",
+      "description": "Search the catalogue by course title, code or department (case-insensitive). limit is 1-50.",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "limit": {
+            "default": 10,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "search_coursesArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "course_detail",
+      "description": "Full detail for one course by numeric id, including its instructor and seats available.",
+      "inputSchema": {
+        "properties": {
+          "course_id": {
+            "title": "Course Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "course_id"
+        ],
+        "title": "course_detailArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "course_stats",
+      "description": "Aggregate: number of courses and total seats available, grouped by 'department' or 'instructor'.",
+      "inputSchema": {
+        "properties": {
+          "group_by": {
+            "default": "department",
+            "title": "Group By",
+            "type": "string"
+          }
+        },
+        "title": "course_statsArguments",
+        "type": "object"
+      }
+    }
+  ],
+  "calls": [
+    {
+      "tool": "search_courses",
+      "input": {
+        "query": "database",
+        "limit": 5
+      },
+      "note": "valid",
+      "isError": false,
+      "output": {
+        "ok": true,
+        "data": {
+          "count": 1,
+          "courses": [
+            {
+              "id": 3,
+              "courseCode": "CS-157A",
+              "courseTitle": "Database Systems",
+              "department": "Computer Science",
+              "seatsAvailable": 45,
+              "instructorName": "Dr. Marcus Lee"
+            }
+          ]
+        },
+        "error": null
+      }
+    },
+    {
+      "tool": "search_courses",
+      "input": {
+        "query": "",
+        "limit": 5
+      },
+      "note": "invalid: empty query",
+      "isError": false,
+      "output": {
+        "ok": false,
+        "data": null,
+        "error": "query must be a non-empty string"
+      }
+    },
+    {
+      "tool": "course_detail",
+      "input": {
+        "course_id": 1
+      },
+      "note": "valid",
+      "isError": false,
+      "output": {
+        "ok": true,
+        "data": {
+          "id": 1,
+          "courseCode": "DATA-260",
+          "courseTitle": "Introduction to Distributed Systems",
+          "department": "Data Science",
+          "seatsAvailable": 40,
+          "instructorName": "Dr. Priya Nair",
+          "description": "Consensus, replication, partitioning, and fault tolerance in distributed systems.",
+          "instructor": {
+            "name": "Dr. Priya Nair",
+            "department": "Data Science"
+          }
+        },
+        "error": null
+      }
+    },
+    {
+      "tool": "course_detail",
+      "input": {
+        "course_id": -3
+      },
+      "note": "invalid: not a positive integer",
+      "isError": false,
+      "output": {
+        "ok": false,
+        "data": null,
+        "error": "course_id must be a positive integer"
+      }
+    },
+    {
+      "tool": "course_detail",
+      "input": {
+        "course_id": 9999
+      },
+      "note": "invalid: unknown id",
+      "isError": false,
+      "output": {
+        "ok": false,
+        "data": null,
+        "error": "course 9999 not found"
+      }
+    },
+    {
+      "tool": "course_stats",
+      "input": {
+        "group_by": "department"
+      },
+      "note": "valid",
+      "isError": false,
+      "output": {
+        "ok": true,
+        "data": {
+          "group_by": "department",
+          "groups": [
+            {
+              "group": "Computer Science",
+              "courses": 1,
+              "totalSeats": 45
+            },
+            {
+              "group": "Data Science",
+              "courses": 2,
+              "totalSeats": 75
+            }
+          ],
+          "totalCourses": 3,
+          "totalSeats": 120
+        },
+        "error": null
+      }
+    },
+    {
+      "tool": "course_stats",
+      "input": {
+        "group_by": "instructor"
+      },
+      "note": "valid",
+      "isError": false,
+      "output": {
+        "ok": true,
+        "data": {
+          "group_by": "instructor",
+          "groups": [
+            {
+              "group": "Dr. Elena Rossi",
+              "courses": 1,
+              "totalSeats": 35
+            },
+            {
+              "group": "Dr. Marcus Lee",
+              "courses": 1,
+              "totalSeats": 45
+            },
+            {
+              "group": "Dr. Priya Nair",
+              "courses": 1,
+              "totalSeats": 40
+            }
+          ],
+          "totalCourses": 3,
+          "totalSeats": 120
+        },
+        "error": null
+      }
+    },
+    {
+      "tool": "course_stats",
+      "input": {
+        "group_by": "color"
+      },
+      "note": "invalid: unsupported group_by",
+      "isError": false,
+      "output": {
+        "ok": false,
+        "data": null,
+        "error": "group_by must be one of: department, instructor"
+      }
+    }
+  ],
+  "server_name": "campus"
+}

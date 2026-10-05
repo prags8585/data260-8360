@@ -11,6 +11,7 @@ from starlette.middleware.sessions import SessionMiddleware
 
 import api
 import auth
+import catalog_api
 import courses_store as store
 import perf_api
 
@@ -42,6 +43,7 @@ app.add_middleware(
 )
 app.include_router(auth.router)
 app.include_router(api.router)
+app.include_router(catalog_api.router)
 app.include_router(perf_api.router)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")

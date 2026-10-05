@@ -1,0 +1,23 @@
+[
+  {
+    "scenario": "1. success on the first attempt",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "elapsed_ms": 0.2
+  },
+  {
+    "scenario": "2. failure on the first attempt, success after a retry",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "elapsed_ms": 54.4
+  },
+  {
+    "scenario": "3. failure after all allowed retries -> clean error result",
+    "attempts": 3,
+    "ok": false,
+    "error": "storage unavailable after 3 attempts: TransientError: connection reset (attempt 3)",
+    "elapsed_ms": 160.6
+  }
+]

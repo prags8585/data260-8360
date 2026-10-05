@@ -1,0 +1,540 @@
+[
+  {
+    "label": "no cookie -> unauthorized",
+    "method": "GET",
+    "url": "http://localhost:8260/api/instructors",
+    "request_body": null,
+    "status": 401,
+    "expected": 401,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "detail": "Login required"
+    }
+  },
+  {
+    "label": "login",
+    "method": "POST",
+    "url": "http://localhost:8260/api/auth/login",
+    "request_body": {
+      "email": "karthik.pragada@sjsu.edu",
+      "password": "data260"
+    },
+    "status": 200,
+    "expected": 200,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "email": "karthik.pragada@sjsu.edu"
+    }
+  },
+  {
+    "label": "create instructor",
+    "method": "POST",
+    "url": "http://localhost:8260/api/instructors",
+    "request_body": {
+      "name": "Dr. Ada Byron",
+      "department": "Computer Science",
+      "email": "ada.byron@campus.example.edu"
+    },
+    "status": 201,
+    "expected": 201,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "id": 6,
+      "name": "Dr. Ada Byron",
+      "department": "Computer Science",
+      "email": "ada.byron@campus.example.edu",
+      "createdAt": "2026-10-05T21:53:13",
+      "updatedAt": "2026-10-05T21:53:13"
+    }
+  },
+  {
+    "label": "list instructors (page 1, size 2)",
+    "method": "GET",
+    "url": "http://localhost:8260/api/instructors?page=1&page_size=2",
+    "request_body": null,
+    "status": 200,
+    "expected": 200,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "items": [
+        {
+          "id": 1,
+          "name": "Dr. Priya Nair",
+          "department": "Data Science",
+          "email": "priya.nair@campus.example.edu",
+          "createdAt": "2026-10-05T21:25:33",
+          "updatedAt": "2026-10-05T21:25:33"
+        },
+        {
+          "id": 2,
+          "name": "Dr. Marcus Lee",
+          "department": "Computer Science",
+          "email": "marcus.lee@campus.example.edu",
+          "createdAt": "2026-10-05T21:25:33",
+          "updatedAt": "2026-10-05T21:25:33"
+        }
+      ],
+      "total": 5,
+      "page": 1,
+      "pageSize": 2,
+      "pages": 3
+    }
+  },
+  {
+    "label": "get instructor",
+    "method": "GET",
+    "url": "http://localhost:8260/api/instructors/6",
+    "request_body": null,
+    "status": 200,
+    "expected": 200,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "id": 6,
+      "name": "Dr. Ada Byron",
+      "department": "Computer Science",
+      "email": "ada.byron@campus.example.edu",
+      "createdAt": "2026-10-05T21:53:13",
+      "updatedAt": "2026-10-05T21:53:13"
+    }
+  },
+  {
+    "label": "update instructor",
+    "method": "PUT",
+    "url": "http://localhost:8260/api/instructors/6",
+    "request_body": {
+      "name": "Dr. Ada Byron-Lovelace",
+      "department": "Computer Science",
+      "email": "ada.byron@campus.example.edu"
+    },
+    "status": 200,
+    "expected": 200,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "id": 6,
+      "name": "Dr. Ada Byron-Lovelace",
+      "department": "Computer Science",
+      "email": "ada.byron@campus.example.edu",
+      "createdAt": "2026-10-05T21:53:13",
+      "updatedAt": "2026-10-05T21:53:13"
+    }
+  },
+  {
+    "label": "instructor not found",
+    "method": "GET",
+    "url": "http://localhost:8260/api/instructors/9999",
+    "request_body": null,
+    "status": 404,
+    "expected": 404,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "detail": "Instructor 9999 not found"
+    }
+  },
+  {
+    "label": "bad email format -> validation error",
+    "method": "POST",
+    "url": "http://localhost:8260/api/instructors",
+    "request_body": {
+      "name": "Dr. Bad Email",
+      "department": "X",
+      "email": "not-an-email"
+    },
+    "status": 422,
+    "expected": 422,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "detail": [
+        {
+          "type": "string_pattern_mismatch",
+          "loc": [
+            "body",
+            "email"
+          ],
+          "msg": "String should match pattern '^[A-Za-z0-9._%+\\-]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,}$'",
+          "input": "not-an-email",
+          "ctx": {
+            "pattern": "^[A-Za-z0-9._%+\\-]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,}$"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "label": "duplicate email -> constraint violation",
+    "method": "POST",
+    "url": "http://localhost:8260/api/instructors",
+    "request_body": {
+      "name": "Dr. Copy",
+      "department": "X",
+      "email": "priya.nair@campus.example.edu"
+    },
+    "status": 409,
+    "expected": 409,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "detail": "An instructor with email priya.nair@campus.example.edu already exists"
+    }
+  },
+  {
+    "label": "page_size out of range -> validation error",
+    "method": "GET",
+    "url": "http://localhost:8260/api/instructors?page=1&page_size=500",
+    "request_body": null,
+    "status": 422,
+    "expected": 422,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "detail": [
+        {
+          "type": "less_than_equal",
+          "loc": [
+            "query",
+            "page_size"
+          ],
+          "msg": "Input should be less than or equal to 100",
+          "input": "500",
+          "ctx": {
+            "le": 100
+          }
+        }
+      ]
+    }
+  },
+  {
+    "label": "create course",
+    "method": "POST",
+    "url": "http://localhost:8260/api/courses",
+    "request_body": {
+      "courseTitle": "Cloud Computing",
+      "courseCode": "DATA-270",
+      "seatsAvailable": 25,
+      "instructorId": 6
+    },
+    "status": 201,
+    "expected": 201,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "id": 12,
+      "courseTitle": "Cloud Computing",
+      "courseCode": "DATA-270",
+      "email": "",
+      "description": "",
+      "department": "",
+      "seatsAvailable": 25,
+      "instructorId": 6,
+      "instructorName": "Dr. Ada Byron-Lovelace",
+      "createdAt": "2026-10-05T21:53:13",
+      "updatedAt": "2026-10-05T21:53:13"
+    }
+  },
+  {
+    "label": "list courses",
+    "method": "GET",
+    "url": "http://localhost:8260/api/courses",
+    "request_body": null,
+    "status": 200,
+    "expected": 200,
+    "pass": true,
+    "x_total_count": "4",
+    "response_body": [
+      {
+        "id": 1,
+        "courseTitle": "Introduction to Distributed Systems",
+        "courseCode": "DATA-260",
+        "email": "karthik.pragada@sjsu.edu",
+        "description": "Consensus, replication, partitioning, and fault tolerance in distributed systems.",
+        "department": "Data Science",
+        "seatsAvailable": 40,
+        "instructorId": 1,
+        "instructorName": "Dr. Priya Nair",
+        "createdAt": "2026-10-05T21:25:33",
+        "updatedAt": "2026-10-05T21:25:33"
+      },
+      {
+        "id": 2,
+        "courseTitle": "Machine Learning Foundations",
+        "courseCode": "DATA-245",
+        "email": "karthik.pragada@sjsu.edu",
+        "description": "Supervised and unsupervised learning, model evaluation, and feature engineering.",
+        "department": "Data Science",
+        "seatsAvailable": 35,
+        "instructorId": 3,
+        "instructorName": "Dr. Elena Rossi",
+        "createdAt": "2026-10-05T21:25:33",
+        "updatedAt": "2026-10-05T21:25:33"
+      },
+      {
+        "id": 3,
+        "courseTitle": "Database Systems",
+        "courseCode": "CS-157A",
+        "email": "karthik.pragada@sjsu.edu",
+        "description": "Relational modeling, SQL, transactions, and indexing.",
+        "department": "Computer Science",
+        "seatsAvailable": 45,
+        "instructorId": 2,
+        "instructorName": "Dr. Marcus Lee",
+        "createdAt": "2026-10-05T21:25:33",
+        "updatedAt": "2026-10-05T21:25:33"
+      },
+      {
+        "id": 12,
+        "courseTitle": "Cloud Computing",
+        "courseCode": "DATA-270",
+        "email": "",
+        "description": "",
+        "department": "",
+        "seatsAvailable": 25,
+        "instructorId": 6,
+        "instructorName": "Dr. Ada Byron-Lovelace",
+        "createdAt": "2026-10-05T21:53:13",
+        "updatedAt": "2026-10-05T21:53:13"
+      }
+    ]
+  },
+  {
+    "label": "get course",
+    "method": "GET",
+    "url": "http://localhost:8260/api/courses/12",
+    "request_body": null,
+    "status": 200,
+    "expected": 200,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "id": 12,
+      "courseTitle": "Cloud Computing",
+      "courseCode": "DATA-270",
+      "email": "",
+      "description": "",
+      "department": "",
+      "seatsAvailable": 25,
+      "instructorId": 6,
+      "instructorName": "Dr. Ada Byron-Lovelace",
+      "createdAt": "2026-10-05T21:53:13",
+      "updatedAt": "2026-10-05T21:53:13"
+    }
+  },
+  {
+    "label": "update course",
+    "method": "PUT",
+    "url": "http://localhost:8260/api/courses/12",
+    "request_body": {
+      "courseTitle": "Cloud Computing Systems",
+      "courseCode": "DATA-270",
+      "seatsAvailable": 20,
+      "instructorId": 6
+    },
+    "status": 200,
+    "expected": 200,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "id": 12,
+      "courseTitle": "Cloud Computing Systems",
+      "courseCode": "DATA-270",
+      "email": "",
+      "description": "",
+      "department": "",
+      "seatsAvailable": 20,
+      "instructorId": 6,
+      "instructorName": "Dr. Ada Byron-Lovelace",
+      "createdAt": "2026-10-05T21:53:13",
+      "updatedAt": "2026-10-05T21:53:13"
+    }
+  },
+  {
+    "label": "course not found",
+    "method": "GET",
+    "url": "http://localhost:8260/api/courses/9999",
+    "request_body": null,
+    "status": 404,
+    "expected": 404,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "detail": "Course 9999 not found"
+    }
+  },
+  {
+    "label": "bad course code format -> validation error",
+    "method": "POST",
+    "url": "http://localhost:8260/api/courses",
+    "request_body": {
+      "courseTitle": "Bad Code",
+      "courseCode": "data 270",
+      "seatsAvailable": 10,
+      "instructorId": 6
+    },
+    "status": 422,
+    "expected": 422,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "detail": [
+        {
+          "type": "string_pattern_mismatch",
+          "loc": [
+            "body",
+            "courseCode"
+          ],
+          "msg": "String should match pattern '^[A-Z]{2,5}-\\d{2,3}[A-Z]?$'",
+          "input": "data 270",
+          "ctx": {
+            "pattern": "^[A-Z]{2,5}-\\d{2,3}[A-Z]?$"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "label": "negative seats -> validation error",
+    "method": "POST",
+    "url": "http://localhost:8260/api/courses",
+    "request_body": {
+      "courseTitle": "Neg Seats",
+      "courseCode": "DATA-271",
+      "seatsAvailable": -5,
+      "instructorId": 6
+    },
+    "status": 422,
+    "expected": 422,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "detail": [
+        {
+          "type": "greater_than_equal",
+          "loc": [
+            "body",
+            "seatsAvailable"
+          ],
+          "msg": "Input should be greater than or equal to 0",
+          "input": -5,
+          "ctx": {
+            "ge": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "label": "duplicate course code -> constraint violation",
+    "method": "POST",
+    "url": "http://localhost:8260/api/courses",
+    "request_body": {
+      "courseTitle": "Dup",
+      "courseCode": "DATA-260",
+      "seatsAvailable": 10,
+      "instructorId": 6
+    },
+    "status": 409,
+    "expected": 409,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "detail": "A course with code DATA-260 already exists"
+    }
+  },
+  {
+    "label": "unknown instructor -> not found",
+    "method": "POST",
+    "url": "http://localhost:8260/api/courses",
+    "request_body": {
+      "courseTitle": "Orphan",
+      "courseCode": "DATA-272",
+      "seatsAvailable": 10,
+      "instructorId": 9999
+    },
+    "status": 404,
+    "expected": 404,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "detail": "Instructor 9999 not found"
+    }
+  },
+  {
+    "label": "relationship: courses taught by instructor",
+    "method": "GET",
+    "url": "http://localhost:8260/api/instructors/6/courses",
+    "request_body": null,
+    "status": 200,
+    "expected": 200,
+    "pass": true,
+    "x_total_count": "1",
+    "response_body": [
+      {
+        "id": 12,
+        "courseTitle": "Cloud Computing Systems",
+        "courseCode": "DATA-270",
+        "email": "",
+        "description": "",
+        "department": "",
+        "seatsAvailable": 20,
+        "instructorId": 6,
+        "instructorName": "Dr. Ada Byron-Lovelace",
+        "createdAt": "2026-10-05T21:53:13",
+        "updatedAt": "2026-10-05T21:53:13"
+      }
+    ]
+  },
+  {
+    "label": "delete instructor that still has courses -> blocked",
+    "method": "DELETE",
+    "url": "http://localhost:8260/api/instructors/6",
+    "request_body": null,
+    "status": 409,
+    "expected": 409,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "detail": "Instructor 6 still has 1 course(s); reassign or delete them first"
+    }
+  },
+  {
+    "label": "delete course",
+    "method": "DELETE",
+    "url": "http://localhost:8260/api/courses/12",
+    "request_body": null,
+    "status": 204,
+    "expected": 204,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": null
+  },
+  {
+    "label": "delete instructor (no courses left)",
+    "method": "DELETE",
+    "url": "http://localhost:8260/api/instructors/6",
+    "request_body": null,
+    "status": 204,
+    "expected": 204,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": null
+  },
+  {
+    "label": "deleted instructor is gone",
+    "method": "GET",
+    "url": "http://localhost:8260/api/instructors/6",
+    "request_body": null,
+    "status": 404,
+    "expected": 404,
+    "pass": true,
+    "x_total_count": null,
+    "response_body": {
+      "detail": "Instructor 6 not found"
+    }
+  }
+]

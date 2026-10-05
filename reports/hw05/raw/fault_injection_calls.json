@@ -1,0 +1,1352 @@
+[
+  {
+    "failure_rate": 0.0,
+    "call": 1,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 5.795
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 2,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 5.899
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 3,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 12.511
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 4,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 7.119
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 5,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 7.016
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 6,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 6.793
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 7,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 8.983
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 8,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 7.253
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 9,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 5.833
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 10,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 8.06
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 11,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 5.735
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 12,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 5.549
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 13,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 7.418
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 14,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 5.367
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 15,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 6.724
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 16,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 5.542
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 17,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 6.83
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 18,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 6.806
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 19,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 8.127
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 20,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 7.206
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 21,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.569
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 22,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 8.694
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 23,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 5.557
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 24,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.709
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 25,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.623
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 26,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 8.456
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 27,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.778
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 28,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 9.569
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 29,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 6.082
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 30,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 7.319
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 31,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 8.393
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 32,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 6.243
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 33,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 6.366
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 34,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 6.428
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 35,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.013
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 36,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.779
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 37,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.026
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 38,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.752
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 39,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.236
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 40,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 6.359
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 41,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.762
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 42,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.195
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 43,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.077
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 44,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 5.79
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 45,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.784
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 46,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.808
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 47,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.584
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 48,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.825
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 49,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.617
+  },
+  {
+    "failure_rate": 0.0,
+    "call": 50,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.135
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 1,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.538
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 2,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 1.923
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 3,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 1.956
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 4,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.797
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 5,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 1.877
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 6,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 1.815
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 7,
+    "tool": "search_courses",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 58.108
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 8,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.176
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 9,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.033
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 10,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.584
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 11,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.086
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 12,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.148
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 13,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.413
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 14,
+    "tool": "course_detail",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 58.285
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 15,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.029
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 16,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.306
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 17,
+    "tool": "course_detail",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 60.638
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 18,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.667
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 19,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.309
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 20,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.091
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 21,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.166
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 22,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.333
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 23,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.037
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 24,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.981
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 25,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.458
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 26,
+    "tool": "course_detail",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 58.27
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 27,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.833
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 28,
+    "tool": "search_courses",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 59.946
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 29,
+    "tool": "course_detail",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 60.228
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 30,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.117
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 31,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.324
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 32,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.473
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 33,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.406
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 34,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.663
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 35,
+    "tool": "course_detail",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 60.631
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 36,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.599
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 37,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.049
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 38,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.531
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 39,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.16
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 40,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 6.014
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 41,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.957
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 42,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.36
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 43,
+    "tool": "search_courses",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 64.45
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 44,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 6.299
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 45,
+    "tool": "course_stats",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 61.492
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 46,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.405
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 47,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.765
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 48,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.699
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 49,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 5.512
+  },
+  {
+    "failure_rate": 0.2,
+    "call": 50,
+    "tool": "course_detail",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 61.005
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 1,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.793
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 2,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.336
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 3,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.93
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 4,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 5.245
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 5,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.258
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 6,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.342
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 7,
+    "tool": "search_courses",
+    "attempts": 3,
+    "ok": false,
+    "error": "storage unavailable after 3 attempts: TransientError: injected fault",
+    "latency_ms": 157.678
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 8,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.669
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 9,
+    "tool": "course_stats",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 60.569
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 10,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.527
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 11,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.05
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 12,
+    "tool": "course_stats",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 60.329
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 13,
+    "tool": "search_courses",
+    "attempts": 3,
+    "ok": false,
+    "error": "storage unavailable after 3 attempts: TransientError: injected fault",
+    "latency_ms": 160.474
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 14,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.447
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 15,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.495
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 16,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.999
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 17,
+    "tool": "course_detail",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 58.557
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 18,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.367
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 19,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.213
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 20,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.572
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 21,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 6.065
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 22,
+    "tool": "search_courses",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 57.727
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 23,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.051
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 24,
+    "tool": "course_stats",
+    "attempts": 3,
+    "ok": false,
+    "error": "storage unavailable after 3 attempts: TransientError: injected fault",
+    "latency_ms": 159.901
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 25,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.873
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 26,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.57
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 27,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.215
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 28,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.468
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 29,
+    "tool": "course_detail",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 58.858
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 30,
+    "tool": "course_stats",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 59.144
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 31,
+    "tool": "search_courses",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 56.657
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 32,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.214
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 33,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.654
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 34,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 4.063
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 35,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.686
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 36,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.464
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 37,
+    "tool": "search_courses",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 58.465
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 38,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.656
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 39,
+    "tool": "course_stats",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 56.383
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 40,
+    "tool": "search_courses",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.252
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 41,
+    "tool": "course_detail",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 58.159
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 42,
+    "tool": "course_stats",
+    "attempts": 3,
+    "ok": true,
+    "error": null,
+    "latency_ms": 157.128
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 43,
+    "tool": "search_courses",
+    "attempts": 3,
+    "ok": true,
+    "error": null,
+    "latency_ms": 159.648
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 44,
+    "tool": "course_detail",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 57.022
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 45,
+    "tool": "course_stats",
+    "attempts": 2,
+    "ok": true,
+    "error": null,
+    "latency_ms": 53.695
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 46,
+    "tool": "search_courses",
+    "attempts": 3,
+    "ok": true,
+    "error": null,
+    "latency_ms": 158.412
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 47,
+    "tool": "course_detail",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 3.131
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 48,
+    "tool": "course_stats",
+    "attempts": 1,
+    "ok": true,
+    "error": null,
+    "latency_ms": 2.268
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 49,
+    "tool": "search_courses",
+    "attempts": 3,
+    "ok": false,
+    "error": "storage unavailable after 3 attempts: TransientError: injected fault",
+    "latency_ms": 156.446
+  },
+  {
+    "failure_rate": 0.5,
+    "call": 50,
+    "tool": "course_detail",
+    "attempts": 3,
+    "ok": false,
+    "error": "storage unavailable after 3 attempts: TransientError: injected fault",
+    "latency_ms": 157.256
+  }
+]

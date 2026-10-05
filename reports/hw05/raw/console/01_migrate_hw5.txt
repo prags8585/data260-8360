@@ -1,0 +1,6 @@
+=== 2026-10-05 14:53:11 PDT ===
+HW5 migration on mysql+pymysql://root:***@localhost:3306/s8360_rel
+  - instructors table ready
+  - seeded 0 new instructor(s)
+  - back-filled instructor_id on 0 existing course(s)
+Migration complete.

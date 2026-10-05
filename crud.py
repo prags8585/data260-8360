@@ -2,10 +2,10 @@ import datetime
 import secrets
 
 import bcrypt
-from sqlalchemy import select
-from sqlalchemy.orm import Session as OrmSession
+from sqlalchemy import func, select
+from sqlalchemy.orm import Session as OrmSession, joinedload
 
-from models import Course, Session as SessionModel, User
+from models import Course, Instructor, Session as SessionModel, User
 
 SESSION_TTL_SECONDS = 24 * 60 * 60
 
@@ -67,30 +67,88 @@ def delete_session(db: OrmSession, token: str) -> None:
         db.commit()
 
 
-# --- courses 
+# --- instructors ---------------------------------------------------------
 
-def list_courses(db: OrmSession) -> list[Course]:
-    return list(db.scalars(select(Course).order_by(Course.id)))
+def list_instructors(db: OrmSession, page: int, page_size: int) -> tuple[list[Instructor], int]:
+    total = db.scalar(select(func.count()).select_from(Instructor)) or 0
+    rows = db.scalars(
+        select(Instructor).order_by(Instructor.id).offset((page - 1) * page_size).limit(page_size)
+    )
+    return list(rows), total
+
+
+def get_instructor(db: OrmSession, instructor_id: int) -> Instructor | None:
+    return db.get(Instructor, instructor_id)
+
+
+def get_instructor_by_email(db: OrmSession, email: str) -> Instructor | None:
+    return db.scalar(select(Instructor).where(Instructor.email == email))
+
+
+def create_instructor(db: OrmSession, name: str, department: str, email: str) -> Instructor:
+    instructor = Instructor(name=name, department=department, email=email)
+    db.add(instructor)
+    db.commit()
+    db.refresh(instructor)
+    return instructor
+
+
+def update_instructor(db: OrmSession, instructor: Instructor, name: str, department: str, email: str) -> Instructor:
+    instructor.name = name
+    instructor.department = department
+    instructor.email = email
+    db.commit()
+    db.refresh(instructor)
+    return instructor
+
+
+def count_courses_for_instructor(db: OrmSession, instructor_id: int) -> int:
+    return db.scalar(select(func.count()).select_from(Course).where(Course.instructor_id == instructor_id)) or 0
+
+
+def delete_instructor(db: OrmSession, instructor: Instructor) -> None:
+    db.delete(instructor)
+    db.commit()
+
+
+# --- courses -------------------------------------------------------------
+
+def list_courses(db: OrmSession, skip: int = 0, limit: int = 100, instructor_id: int | None = None):
+    query = select(Course).options(joinedload(Course.instructor)).order_by(Course.id)
+    count = select(func.count()).select_from(Course)
+    if instructor_id is not None:
+        query = query.where(Course.instructor_id == instructor_id)
+        count = count.where(Course.instructor_id == instructor_id)
+    total = db.scalar(count) or 0
+    return list(db.scalars(query.offset(skip).limit(limit))), total
 
 
 def get_course(db: OrmSession, course_id: int) -> Course | None:
-    return db.get(Course, course_id)
+    return db.scalar(select(Course).options(joinedload(Course.instructor)).where(Course.id == course_id))
 
 
-def create_course(db: OrmSession, course_title: str, course_code: str) -> Course:
-    course = Course(course_title=course_title, course_code=course_code, email="", description="", department="")
+def get_course_by_code(db: OrmSession, course_code: str) -> Course | None:
+    return db.scalar(select(Course).where(Course.course_code == course_code))
+
+
+def create_course(db: OrmSession, course_title: str, course_code: str, seats_available: int, instructor_id: int) -> Course:
+    course = Course(
+        course_title=course_title, course_code=course_code, email="", description="", department="",
+        seats_available=seats_available, instructor_id=instructor_id,
+    )
     db.add(course)
     db.commit()
-    db.refresh(course)
-    return course
+    return get_course(db, course.id)
 
 
-def update_course(db: OrmSession, course: Course, course_title: str, course_code: str) -> Course:
+def update_course(db: OrmSession, course: Course, course_title: str, course_code: str, seats_available: int, instructor_id: int) -> Course:
     course.course_title = course_title
     course.course_code = course_code
+    course.seats_available = seats_available
+    course.instructor_id = instructor_id
     db.commit()
-    db.refresh(course)
-    return course
+    db.expire(course)
+    return get_course(db, course.id)
 
 
 def delete_course(db: OrmSession, course: Course) -> None:

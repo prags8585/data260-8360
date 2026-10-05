@@ -1,0 +1,314 @@
+{
+  "server_file": "meals_server.py",
+  "tools": [
+    {
+      "name": "search_meals_by_name",
+      "description": "Search meals by name (e.g. \"Arrabiata\"). Returns up to `limit` meals with id, name, area, category, thumb.",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "limit": {
+            "default": 5,
+            "maximum": 25,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "search_meals_by_nameArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "meals_by_ingredient",
+      "description": "List meals that use a main ingredient (e.g. \"chicken\"). Returns small cards: id, name, thumb.",
+      "inputSchema": {
+        "properties": {
+          "ingredient": {
+            "title": "Ingredient",
+            "type": "string"
+          },
+          "limit": {
+            "default": 12,
+            "maximum": 25,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "ingredient"
+        ],
+        "title": "meals_by_ingredientArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "random_meal",
+      "description": "Look up one random meal. Same shape as meal_details.",
+      "inputSchema": {
+        "properties": {},
+        "title": "random_mealArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "meal_details",
+      "description": "Full recipe for a meal id (e.g. 52771): instructions, image, source, youtube, ingredients with measures.",
+      "inputSchema": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "title": "Id"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "meal_detailsArguments",
+        "type": "object"
+      }
+    }
+  ],
+  "calls": [
+    {
+      "tool": "search_meals_by_name",
+      "input": {
+        "query": "Arrabiata",
+        "limit": 3
+      },
+      "note": "valid",
+      "isError": false,
+      "output": {
+        "id": "52771",
+        "name": "Spicy Arrabiata Penne",
+        "area": "Italian",
+        "category": "Vegetarian",
+        "thumb": "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"
+      }
+    },
+    {
+      "tool": "search_meals_by_name",
+      "input": {
+        "query": "zzzxxyy",
+        "limit": 5
+      },
+      "note": "no results",
+      "isError": false,
+      "output": {
+        "results": [],
+        "message": "no matches"
+      }
+    },
+    {
+      "tool": "search_meals_by_name",
+      "input": {
+        "query": "Arrabiata",
+        "limit": 99
+      },
+      "note": "invalid: limit out of range",
+      "isError": true,
+      "output": "Error executing tool search_meals_by_name: 1 validation error for search_meals_by_nameArguments\nlimit\n  Input should be less than or equal to 25 [type=less_than_equal, input_value=99, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.13/v/less_than_equal"
+    },
+    {
+      "tool": "meals_by_ingredient",
+      "input": {
+        "ingredient": "chicken",
+        "limit": 5
+      },
+      "note": "valid",
+      "isError": false,
+      "output": [
+        {
+          "id": "52940",
+          "name": "Brown Stew Chicken",
+          "thumb": "https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg"
+        },
+        {
+          "id": "53161",
+          "name": "Chicken & chorizo rice pot",
+          "thumb": "https://www.themealdb.com/images/media/meals/fk80jp1763280767.jpg"
+        },
+        {
+          "id": "52846",
+          "name": "Chicken & mushroom Hotpot",
+          "thumb": "https://www.themealdb.com/images/media/meals/uuuspp1511297945.jpg"
+        },
+        {
+          "id": "52796",
+          "name": "Chicken Alfredo Primavera",
+          "thumb": "https://www.themealdb.com/images/media/meals/syqypv1486981727.jpg"
+        },
+        {
+          "id": "52934",
+          "name": "Chicken Basquaise",
+          "thumb": "https://www.themealdb.com/images/media/meals/wruvqv1511880994.jpg"
+        }
+      ]
+    },
+    {
+      "tool": "random_meal",
+      "input": {},
+      "note": "valid",
+      "isError": false,
+      "output": {
+        "id": "52944",
+        "name": "Escovitch Fish",
+        "category": "Seafood",
+        "area": "Jamaican",
+        "instructions": "Rinse fish; rub with lemon or lime, seasoned with salt and pepper or use your favorite seasoning. I used creole seasoning. Set aside or place in the oven to keep it warm until sauce is ready.\r\n\r\nIn large skillet heat oil over medium heat, until hot, add the fish, cook each side- for about 5-7 minutes until cooked through and crispy on both sides. Remove fish and set aside. Drain oil and leave about 2-3 tablespoons of oil\r\nAdd, bay leave, garlic and ginger, stir-fry for about a minute making sure the garlic does not burn\r\nThen add onion, bell peppers, thyme, scotch bonnet, sugar, all spice-continue stirring for about 2-3 minutes. Add vinegar, mix an adjust salt and pepper according to preference. Let it simmer for about 2 more minutes. \r\n\r\nDiscard bay leave, thyme spring and serve over fish with a side of this bammy. You may make the sauce about 2 days in advance.",
+        "image": "https://www.themealdb.com/images/media/meals/1520084413.jpg",
+        "source": "https://www.africanbites.com/jamaican-escovitched-fish/",
+        "youtube": "https://www.youtube.com/watch?v=nF6DOtGE6k8",
+        "ingredients": [
+          {
+            "name": "Red Snapper",
+            "measure": "2 Pounds"
+          },
+          {
+            "name": "Vegetable Oil",
+            "measure": "1/2 cup"
+          },
+          {
+            "name": "Garlic",
+            "measure": "1 clove peeled crushed"
+          },
+          {
+            "name": "Ginger",
+            "measure": "1/2 tsp"
+          },
+          {
+            "name": "Thyme",
+            "measure": "2 sprigs"
+          },
+          {
+            "name": "Bay Leaf",
+            "measure": "1"
+          },
+          {
+            "name": "Red Pepper",
+            "measure": "0.5"
+          },
+          {
+            "name": "Yellow Pepper",
+            "measure": "0.5"
+          },
+          {
+            "name": "Onion",
+            "measure": "1 sliced"
+          },
+          {
+            "name": "Carrots",
+            "measure": "1 chopped"
+          },
+          {
+            "name": "Sugar",
+            "measure": "1 tbs"
+          },
+          {
+            "name": "Allspice",
+            "measure": "1/2 tsp"
+          },
+          {
+            "name": "Worcestershire Sauce",
+            "measure": "1 tsp"
+          },
+          {
+            "name": "Scotch Bonnet",
+            "measure": "1"
+          },
+          {
+            "name": "Lime",
+            "measure": "1"
+          },
+          {
+            "name": "Malt Vinegar",
+            "measure": "3/4 cup"
+          },
+          {
+            "name": "Pepper",
+            "measure": "pinch"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "meal_details",
+      "input": {
+        "id": 52771
+      },
+      "note": "valid",
+      "isError": false,
+      "output": {
+        "id": "52771",
+        "name": "Spicy Arrabiata Penne",
+        "category": "Vegetarian",
+        "area": "Italian",
+        "instructions": "Bring a large pot of water to a boil. Add kosher salt to the boiling water, then add the pasta. Cook according to the package instructions, about 9 minutes.\r\nIn a large skillet over medium-high heat, add the olive oil and heat until the oil starts to shimmer. Add the garlic and cook, stirring, until fragrant, 1 to 2 minutes. Add the chopped tomatoes, red chile flakes, Italian seasoning and salt and pepper to taste. Bring to a boil and cook for 5 minutes. Remove from the heat and add the chopped basil.\r\nDrain the pasta and add it to the sauce. Garnish with Parmigiano-Reggiano flakes and more basil and serve warm.",
+        "image": "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
+        "source": null,
+        "youtube": "https://www.youtube.com/watch?v=1IszT_guI08",
+        "ingredients": [
+          {
+            "name": "penne rigate",
+            "measure": "1 pound"
+          },
+          {
+            "name": "olive oil",
+            "measure": "1/4 cup"
+          },
+          {
+            "name": "garlic",
+            "measure": "3 cloves"
+          },
+          {
+            "name": "chopped tomatoes",
+            "measure": "1 tin"
+          },
+          {
+            "name": "red chilli flakes",
+            "measure": "1/2 teaspoon"
+          },
+          {
+            "name": "italian seasoning",
+            "measure": "1/2 teaspoon"
+          },
+          {
+            "name": "basil",
+            "measure": "6 leaves"
+          },
+          {
+            "name": "Parmigiano-Reggiano",
+            "measure": "sprinkling"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "meal_details",
+      "input": {
+        "id": 0
+      },
+      "note": "no results",
+      "isError": false,
+      "output": {
+        "results": [],
+        "message": "no matches"
+      }
+    }
+  ],
+  "server_name": "meals"
+}

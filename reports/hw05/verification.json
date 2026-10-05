@@ -1,0 +1,170 @@
+{
+  "homework": "HW5",
+  "sid4": 8360,
+  "commit_hash": "36e24e9ff285d896450fd3273878062fd198bae9",
+  "model": "qwen3:8b (Ollama) for the Part 5 agent",
+  "seed": 8360,
+  "verify_seed": 268360,
+  "timestamp": "2026-10-05T22:04:20.335477+00:00",
+  "checks": [
+    {
+      "name": "models.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: models.py"
+    },
+    {
+      "name": "schemas.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: schemas.py"
+    },
+    {
+      "name": "crud.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: crud.py"
+    },
+    {
+      "name": "catalog_api.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: catalog_api.py"
+    },
+    {
+      "name": "meals_server.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: meals_server.py"
+    },
+    {
+      "name": "domain_server.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: domain_server.py"
+    },
+    {
+      "name": "domain_tools.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: domain_tools.py"
+    },
+    {
+      "name": "resilience.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: resilience.py"
+    },
+    {
+      "name": "execute_tool.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: execute_tool.py"
+    },
+    {
+      "name": "agent.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: agent.py"
+    },
+    {
+      "name": "tests_hw5.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: tests_hw5.py"
+    },
+    {
+      "name": "scripts/migrate_hw5.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: scripts/migrate_hw5.py"
+    },
+    {
+      "name": "scripts/hw5_resilience_demo.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: scripts/hw5_resilience_demo.py"
+    },
+    {
+      "name": "scripts/hw5_agent_scenarios.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: scripts/hw5_agent_scenarios.py"
+    },
+    {
+      "name": "frontend/src/store/index.js exists",
+      "passed": true,
+      "detail": "found: frontend/src/store/index.js"
+    },
+    {
+      "name": "frontend/src/store/coursesSlice.js exists",
+      "passed": true,
+      "detail": "found: frontend/src/store/coursesSlice.js"
+    },
+    {
+      "name": "frontend/src/store/client.js exists",
+      "passed": true,
+      "detail": "found: frontend/src/store/client.js"
+    },
+    {
+      "name": "coursesSlice defines the four thunks (fetch/create/update/delete)",
+      "passed": true,
+      "detail": "text check on coursesSlice.js"
+    },
+    {
+      "name": "FastAPI on PORT_BASE (8260): auth, paginated list, relationship query, 404/422/409 behaviour",
+      "passed": true,
+      "detail": "unauth=401 login=200 paged-list ok=True relationship rows=1 bad-email=422 bad-code=422 missing=404 delete-with-courses=409"
+    },
+    {
+      "name": "meals MCP server starts over STDIO, lists 4 tools, answers a tool call",
+      "passed": true,
+      "detail": "4 tools listed: ['meal_details', 'meals_by_ingredient', 'random_meal', 'search_meals_by_name']; out-of-range limit rejected with a tool error: True"
+    },
+    {
+      "name": "domain MCP server starts over STDIO, lists 3 tools, returns {ok,data,error}",
+      "passed": true,
+      "detail": "3 tools listed: ['course_detail', 'course_stats', 'search_courses']; course_stats envelope ok=True, error=None"
+    },
+    {
+      "name": "reports/hw05/raw/fault_injection_calls.json has 150 records (3 rates x 50)",
+      "passed": true,
+      "detail": "150 records"
+    },
+    {
+      "name": "fault-injection summary covers 0%/20%/50% and was reproducible under VERIFY_SEED",
+      "passed": true,
+      "detail": "verify_seed=268360"
+    },
+    {
+      "name": "VERIFY_SEED replay matches the saved raw failure sequence",
+      "passed": true,
+      "detail": "seed replay reproduces the saved failure counts at 20% and 50%"
+    },
+    {
+      "name": "agent_runs.jsonl: >= 4 runs and all three stop reasons logged",
+      "passed": true,
+      "detail": "7 runs; stop reasons seen: ['final_answer', 'max_steps', 'safety_block']"
+    },
+    {
+      "name": "offline test runner (no DB / network / LLM) passes",
+      "passed": true,
+      "detail": "12/12 tests passed"
+    },
+    {
+      "name": "reports/hw05/RUN_LOG.txt exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw05/RUN_LOG.txt"
+    },
+    {
+      "name": "reports/hw05/METRICS.md exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw05/METRICS.md"
+    },
+    {
+      "name": "reports/hw05/AI_USE.md exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw05/AI_USE.md"
+    },
+    {
+      "name": "reports/hw05/REFLECTION.md exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw05/REFLECTION.md"
+    },
+    {
+      "name": "reports/hw05/Pragada_HW5.pdf exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw05/Pragada_HW5.pdf"
+    }
+  ],
+  "passed": 31,
+  "failed": 0,
+  "total": 31,
+  "overall": "PASS"
+}

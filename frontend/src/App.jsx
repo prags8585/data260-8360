@@ -1,9 +1,7 @@
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
-import { api } from "./api";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import CreateRecord from "./components/CreateRecord";
-import DeleteRecord from "./components/DeleteRecord";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import RequireAuth from "./components/RequireAuth";
@@ -42,13 +40,6 @@ function Nav() {
 }
 
 function AppRoutes() {
-  // The mutating calls are lifted up here and passed down as props to the
-  // Create/Update/Delete route components, per the assignment's
-  // "should accept props to add/update/delete the record".
-  const createRecord = (course) => api.createCourse(course);
-  const updateRecord = (id, course) => api.updateCourse(id, course);
-  const deleteRecord = (id) => api.deleteCourse(id);
-
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -58,7 +49,7 @@ function AppRoutes() {
         path="/create"
         element={
           <RequireAuth>
-            <CreateRecord onCreate={createRecord} />
+            <CreateRecord />
           </RequireAuth>
         }
       />
@@ -66,15 +57,7 @@ function AppRoutes() {
         path="/update"
         element={
           <RequireAuth>
-            <UpdateRecord onUpdate={updateRecord} />
-          </RequireAuth>
-        }
-      />
-      <Route
-        path="/delete"
-        element={
-          <RequireAuth>
-            <DeleteRecord onDelete={deleteRecord} />
+            <UpdateRecord />
           </RequireAuth>
         }
       />

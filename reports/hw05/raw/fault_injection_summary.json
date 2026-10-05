@@ -1,0 +1,43 @@
+{
+  "verify_seed": 268360,
+  "policy": {
+    "max_attempts": 3,
+    "timeout_s": 1.0,
+    "base_delay_s": 0.05,
+    "backoff_factor": 2.0,
+    "max_delay_s": 0.5
+  },
+  "reproducible": true,
+  "rows": [
+    {
+      "injected_failure_rate": "0%",
+      "calls": 50,
+      "successes": 50,
+      "success_rate_pct": 100.0,
+      "mean_latency_ms": 5.84,
+      "p99_latency_ms": 11.07,
+      "faults_injected": 0,
+      "retried_calls": 0
+    },
+    {
+      "injected_failure_rate": "20%",
+      "calls": 50,
+      "successes": 50,
+      "success_rate_pct": 100.0,
+      "mean_latency_ms": 14.76,
+      "p99_latency_ms": 63.0,
+      "faults_injected": 10,
+      "retried_calls": 10
+    },
+    {
+      "injected_failure_rate": "50%",
+      "calls": 50,
+      "successes": 45,
+      "success_rate_pct": 90.0,
+      "mean_latency_ms": 41.29,
+      "p99_latency_ms": 160.19,
+      "faults_injected": 33,
+      "retried_calls": 20
+    }
+  ]
+}

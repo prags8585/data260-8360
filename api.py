@@ -23,11 +23,6 @@ class SignupBody(BaseModel):
     confirmPassword: str
 
 
-class CourseBody(BaseModel):
-    courseTitle: str
-    courseCode: str
-
-
 def require_session(request: Request, db: OrmSession = Depends(get_db)):
     token = request.cookies.get(SESSION_COOKIE)
     if not token:
@@ -98,44 +93,3 @@ def logout(request: Request, response: Response, db: OrmSession = Depends(get_db
 @router.get("/auth/me")
 def me(user=Depends(require_session)):
     return {"email": user.email}
-
-
-@router.get("/courses")
-def list_courses(db: OrmSession = Depends(get_db), _user=Depends(require_session)):
-    return [c.as_dict() for c in crud.list_courses(db)]
-
-
-@router.get("/courses/{course_id}")
-def get_course(course_id: int, db: OrmSession = Depends(get_db), _user=Depends(require_session)):
-    course = crud.get_course(db, course_id)
-    if course is None:
-        raise HTTPException(status_code=404, detail="Course not found")
-    return course.as_dict()
-
-
-@router.post("/courses", status_code=201)
-def create_course(body: CourseBody, db: OrmSession = Depends(get_db), _user=Depends(require_session)):
-    if not body.courseTitle.strip() or not body.courseCode.strip():
-        raise HTTPException(status_code=422, detail="courseTitle and courseCode are required")
-    course = crud.create_course(db, body.courseTitle.strip(), body.courseCode.strip())
-    return course.as_dict()
-
-
-@router.put("/courses/{course_id}")
-def update_course(course_id: int, body: CourseBody, db: OrmSession = Depends(get_db), _user=Depends(require_session)):
-    course = crud.get_course(db, course_id)
-    if course is None:
-        raise HTTPException(status_code=404, detail="Course not found")
-    if not body.courseTitle.strip() or not body.courseCode.strip():
-        raise HTTPException(status_code=422, detail="courseTitle and courseCode are required")
-    course = crud.update_course(db, course, body.courseTitle.strip(), body.courseCode.strip())
-    return course.as_dict()
-
-
-@router.delete("/courses/{course_id}")
-def delete_course(course_id: int, db: OrmSession = Depends(get_db), _user=Depends(require_session)):
-    course = crud.get_course(db, course_id)
-    if course is None:
-        raise HTTPException(status_code=404, detail="Course not found")
-    crud.delete_course(db, course)
-    return {"ok": True}
