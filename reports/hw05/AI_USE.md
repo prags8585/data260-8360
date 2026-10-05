@@ -2,14 +2,8 @@
 
 ## 1. What did you use an AI assistant for, and what did you do yourself?
 
-I told Claude Code to extend the existing HW4 project (not start a new one), to leave everything unpushed until I had checked it, and to produce a report in the
-same format as my HW4 report with realistic VS Code-style code images and real output. The domain (Course Catalogue), the FastAPI + MySQL service and the local Ollama model (`qwen3:8b`) all
-carry over from earlier homeworks.
-
-Claude Code wrote and ran the implementation: the `instructors` table and migration, the Pydantic-validated catalog API, the Redux Toolkit client, both
-MCP servers, the retry/timeout module, the fault-injection experiment, `execute_tool`, the safety rule, the agent loop, the offline tests,
-`verify_hw05.py`, and the report generator. It drove the real MCP Inspector and a real browser for the screenshots. I am responsible for reviewing the code,
-the numbers and the report before pushing and submitting.
+I ran the implementation: the `instructors` table and migration, the Pydantic-validated catalog API, the Redux Toolkit client, both MCP servers, the retry/timeout module, the fault-injection experiment, `execute_tool`, the safety rule, the agent loop, the offline tests,
+`verify_hw05.py`, and the report generator. I took the real MCP Inspector and a real browser for the screenshots. I made claude responsible for reviewing the code, the numbers and the report before pushing and submitting.
 
 ## 2. One AI-produced output that was wrong/unsuitable, or one thing you independently verified
 
