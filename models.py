@@ -1,10 +1,4 @@
-"""SQLAlchemy models for the s8360_rel database.
 
-HW4: Course (primary entity), User, Session (auth tables).
-HW5 Part 1: adds Instructor (the related entity) and extends Course with
-a unique course_code, a numeric seats_available field (default 30), a
-foreign key to the instructor, and created_at/updated_at timestamps.
-"""
 
 import datetime
 

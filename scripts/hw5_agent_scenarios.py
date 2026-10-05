@@ -1,12 +1,4 @@
 #!/usr/bin/env python3
-"""HW5 Part 5 IV: runs the agent with the local Ollama model (qwen3:8b) on five
-scenarios against the real MySQL-backed tools, logging every step to
-reports/hw05/raw/agent_runs.jsonl and printing step count / stop reason /
-tool-call count per scenario.
-
-Usage: python scripts/hw5_agent_scenarios.py
-"""
-
 import json
 import logging
 import sys

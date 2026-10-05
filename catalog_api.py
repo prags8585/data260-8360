@@ -1,15 +1,4 @@
-"""HW5 Part 1 -- catalog API: Instructor (related entity) and Course
-(primary entity) CRUD, plus the relationship query.
 
-Status codes used:
-  200 OK / 201 Created / 204 No Content   success
-  401                                     no valid session cookie
-  404                                     instructor / course (or referenced instructor) not found
-  409                                     constraint violation: duplicate unique value, or deleting an
-                                          instructor that still has courses
-  422                                     request validation (Pydantic / query params), incl. the
-                                          email and course-code formats
-"""
 
 import math
 

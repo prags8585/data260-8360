@@ -1,13 +1,4 @@
 #!/usr/bin/env python3
-"""HW5 Part 1: walks every catalog endpoint (success + each error class)
-against the live backend and saves each request/response pair to
-reports/hw05/raw/api_demo_calls.json. Cleans up everything it creates.
-
-Requires: backend on PORT_BASE (SESSION_HTTPS_ONLY=false), MySQL up,
-scripts/migrate_hw5.py already applied.
-
-Usage: python scripts/hw5_api_demo.py
-"""
 
 import json
 from pathlib import Path

@@ -1,18 +1,4 @@
-"""HW5 Part 5: agent loop around execute_tool.
 
-run_agent(user_input, model, max_steps) repeatedly asks the model for ONE
-JSON action:
-
-    {"action": "tool",  "name": "...", "inputs": {...}}   -> run via execute_tool
-    {"action": "final", "answer": "..."}                   -> stop
-
-The harness owns the turn counter, the max_steps ceiling and the log:
-every step is appended to agent_runs.jsonl, ending with one "stop" record
-whose stop_reason is one of
-    final_answer  the model answered
-    safety_block  execute_tool refused a call under the safety rule (run halts)
-    max_steps     the step ceiling was reached without a final answer
-"""
 
 import json
 import logging

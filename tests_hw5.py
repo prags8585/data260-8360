@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""HW5 offline test runner (Parts 4 + 5): plain assert statements, PASS/FAIL per
-test and a final X/Y summary. No database, network, API key or LLM:
-the repository is an in-memory fixture and the model is a MockModel.
 
-Run: python tests_hw5.py
-"""
 
 import json
 import logging

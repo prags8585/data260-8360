@@ -1,16 +1,5 @@
 #!/usr/bin/env python3
-"""HW5 Part 1 schema migration (idempotent).
 
-Takes the HW4 database to the HW5 schema:
-  1. creates the new `instructors` table
-  2. seeds the starter instructors
-  3. adds seats_available / instructor_id / created_at / updated_at to
-     `courses` and back-fills instructor_id for existing rows
-  4. makes instructor_id NOT NULL, adds the ON DELETE RESTRICT foreign key
-     and the UNIQUE constraint on course_code
-
-Usage: PYTHONPATH=. python scripts/migrate_hw5.py
-"""
 
 import sys
 from pathlib import Path

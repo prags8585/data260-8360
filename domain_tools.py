@@ -1,18 +1,4 @@
-"""Domain tool layer over the <PREFIX>_rel (s8360_rel) course catalogue.
 
-Three tools -- search, detail lookup, one aggregate -- all returning the
-same response envelope used by the MCP server (Part 2B) and by
-execute_tool (Part 4):
-
-    {"ok": bool, "data": <payload or None>, "error": <message or None>}
-
-error is None on success; data is None on failure. Nothing here raises
-for bad input or storage trouble: validation problems and storage errors
-both come back as {"ok": False, ...}.
-
-All logging goes to stderr (never stdout): the MCP STDIO transport uses
-stdout for JSON-RPC, so any stray print would corrupt the stream.
-"""
 
 import logging
 import sys

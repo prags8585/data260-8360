@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""HW5 smoke test (make verify-hw05).
 
-Starts the real system and checks that the basic things work across all five
-parts. Behavioural checks only, never exact wording. Only writes
-reports/hw05/verification.json (and a temp cookie jar); never modifies
-application code. Needs MySQL up (docker compose up -d) and the HW5 migration
-applied. If the backend is already on PORT_BASE it is reused.
-"""
 
 import asyncio
 import json

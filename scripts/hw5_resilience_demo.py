@@ -1,15 +1,5 @@
 #!/usr/bin/env python3
-"""HW5 Part 3: (a) the three retry scenarios and (b) the 150-call fault-injection
-experiment (0% / 20% / 50% injected failure rates x 50 calls, seeded by VERIFY_SEED).
 
-Faults are injected into the REAL MySQL-backed repository: before each storage
-attempt a seeded RNG decides whether to raise a TransientError. The RNG is
-re-seeded with VERIFY_SEED for every rate, so the same seed reproduces the exact
-same success/failure sequence on every run (checked below by running it twice).
-
-Writes reports/hw05/raw/fault_injection_calls.{json,csv} and fault_injection_summary.json.
-Usage: python scripts/hw5_resilience_demo.py
-"""
 
 import csv
 import json

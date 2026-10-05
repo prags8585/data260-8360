@@ -1,21 +1,5 @@
 #!/usr/bin/env python3
-"""HW5 Part 2A: TheMealDB tutorial MCP server (FastMCP over STDIO).
 
-Four tools over https://www.themealdb.com/api/json/v1/1/ (public test key 1):
-  search_meals_by_name(query, limit=5)     -> [{id, name, area, category, thumb}]
-  meals_by_ingredient(ingredient, limit=12) -> [{id, name, thumb}]
-  random_meal()                             -> meal_details shape
-  meal_details(id)                          -> {id, name, category, area, instructions,
-                                                image, source, youtube, ingredients[{name, measure}]}
-
-"meals": null from the API  -> {"results": [], "message": "no matches"}
-Network / JSON failures     -> raised, so the MCP client (Inspector) shows a clean error.
-
-STDIO rule: never write to stdout (it carries the JSON-RPC stream). All
-logging goes to stderr.
-
-Run + debug:  mcp dev meals_server.py
-"""
 
 import logging
 import sys

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""HW5 Part 5 I: one allowed and one blocked execute_tool call against the real database."""
 import logging, sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))

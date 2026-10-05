@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
-"""HW5 Part 2B: domain MCP server over the s8360_rel course catalogue.
 
-Exactly three tools -- search, detail lookup, one aggregate -- all
-answering with the same envelope {ok, data, error} (error is null on
-success). Storage calls go through ResilientRepo (timeouts + bounded
-exponential backoff, Part 3). STDIO rule: logs go to stderr, never stdout.
-
-Run + debug:  mcp dev domain_server.py
-"""
 
 import domain_tools
 from domain_tools import default_repo

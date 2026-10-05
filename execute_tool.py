@@ -1,17 +1,4 @@
-"""HW5 Part 4/5: the single safe entry point the agent uses for every tool call.
 
-    execute_tool(name, inputs, repo=None) -> JSON string of {"ok", "data", "error"}
-
-Reuses the envelope from Part 2B. It never raises: unknown tools, bad inputs,
-storage failures and safety-rule violations all come back as
-{"ok": false, "data": null, "error": "..."}.
-
-Part 5 safety rule (SENSITIVE_DATA_RULE): this is a course-catalogue and
-enrolment assistant, so a search that asks for private personal data
-(passwords, SSNs, payment cards, phone numbers, ...) is refused before it
-reaches storage -- the catalogue holds none of it, and an agent must not be
-nudged into hunting for it.
-"""
 
 import json
 import logging
