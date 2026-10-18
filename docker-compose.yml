@@ -11,5 +11,15 @@ services:
     volumes:
       - s8360_mysql_data:/var/lib/mysql
 
+  mongo:
+    image: mongo:7.0
+    container_name: s8360-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - s8360_mongo_data:/data/db
+
 volumes:
   s8360_mysql_data:
+  s8360_mongo_data:

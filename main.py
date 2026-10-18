@@ -14,6 +14,7 @@ import auth
 import catalog_api
 import courses_store as store
 import perf_api
+from docdb import server as docdb_server
 
 app = FastAPI()
 app.add_middleware(
@@ -45,6 +46,7 @@ app.include_router(auth.router)
 app.include_router(api.router)
 app.include_router(catalog_api.router)
 app.include_router(perf_api.router)
+docdb_server.register(app)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 

@@ -1,0 +1,179 @@
+=== 2026-10-18 13:31:44  ===  file-based memory demo (scratch dir reports/hw06/raw/memory_consolidation/session)
+
+======== /help ========
+Available commands:
+/memory   show the current file-based memory (AGENT.md + MEMORY.md)
+/compact  consolidate MEMORY.md (merge duplicates, resolve contradictions) and report line counts before and after
+/dream    extract durable facts from the recent conversation and add them to MEMORY.md
+/help     show this help
+
+======== /memory  (original) ========
+--- AGENT.md (34 lines) ---
+# AGENT.md
+
+Durable project and agent instructions. This file is loaded into the system prompt together with MEMORY.md.
+
+## Project description
+1. This repository is the DATA-260 Campus Course Catalogue service (domain entity: Course, DOMAIN_ID 0); it grows homework by homework in one codebase, never in a copy.
+2. The service exposes a FastAPI backend on PORT_BASE 8260 with a React client in `frontend/`; per-homework evidence lives under `reports/hwNN/`.
+
+## Technology stack
+3. Python 3.12 with FastAPI, Pydantic v2, SQLAlchemy (MySQL `s8360_rel`) and PyMongo (MongoDB `s8360_doc`).
+4. The local LLM is `qwen3:8b` served by Ollama, always reached through `src/model_client.py`.
+
+## Coding conventions
+5. Every function signature has type hints for all parameters and the return value.
+6. Keep each function at 30 lines or fewer and give it one responsibility.
+7. Use snake_case names; library modules log with `logging` and never call `print` (scripts under `scripts/` may print).
+
+## Testing approach
+8. Every new function gets an assert-based test in `tests_hw6.py` that runs offline: no network, no database, no LLM.
+
+## Prohibited actions
+9. Never write secrets, passwords or API keys into source files or logs.
+10. Never overwrite or delete `MEMORY.md` without writing a backup copy first.
+11. Never use `eval()` or `exec()`.
+
+## Code review output format (from HW1)
+When asked to review code, respond using **only a bullet-point list**.
+
+Rules:
+- Every line of your response must start with `-`.
+- No introductory sentence, no summary paragraph, no closing remarks.
+- No prose outside of bullets. No headings.
+- Each bullet should state one specific issue or observation, concisely (one line each where possible).
+- If the code has no issues, respond with a single bullet saying so -- do not pad with unnecessary bullets.
+
+--- MEMORY.md (50 entries, 55 lines, last consolidated 2026-10-10T08:00:00+00:00) ---
+# MEMORY.md
+<!-- last-consolidated: 2026-10-10T08:00:00Z -->
+<!-- Format: - (YYYY-MM-DD) topic: value -->
+
+## User profile
+- (2026-09-01) name: Maya Chen
+- (2026-09-01) major: Data Science
+- (2026-09-02) name: Maya Chen
+- (2026-09-02) theme: dark mode
+- (2026-09-02) year: second-year transfer student
+- (2026-09-03) graduation: May 2028
+- (2026-09-04) favorite_course: DATA-245 Machine Learning Foundations
+- (2026-09-05) advisor: Dr. Elena Rossi
+- (2026-09-05) class_time: morning
+- (2026-09-06) work_hours: 12 hours per week at the campus library
+- (2026-09-08) major: Data Science
+- (2026-09-09) name: Maya Chen
+- (2026-09-10) favorite_course: DATA-245 Machine Learning Foundations
+- (2026-09-12) class_time: morning
+- (2026-09-14) major: Data Science
+- (2026-09-15) name: Maya Chen
+- (2026-09-16) favorite_course: DATA-245 Machine Learning Foundations
+- (2026-09-18) theme: light mode
+- (2026-09-19) class_time: morning
+- (2026-09-22) graduation: December 2027
+- (2026-09-24) work_hours: 20 hours per week, summer break only
+- (2026-09-25) advisor: Dr. Marcus Lee
+
+## Project facts
+- (2026-09-01) backend_port: 8260
+- (2026-09-01) database: MySQL s8360_rel
+- (2026-09-02) model: qwen3:8b via Ollama
+- (2026-09-02) frontend_dev_port: 5173
+- (2026-09-03) backend_port: 8260
+- (2026-09-04) database_port: 3306
+- (2026-09-05) database: MySQL s8360_rel
+- (2026-09-07) backend_port: 8260
+- (2026-09-08) model: qwen3:8b via Ollama
+- (2026-09-09) mongo_database: s8360_doc
+- (2026-09-10) embedding_model: all-MiniLM-L6-v2
+- (2026-09-11) backend_port: 8260
+- (2026-09-14) mongo_port: 27017
+- (2026-09-20) database_port: 3307, temporary test container only
+
+## Notes
+- (2026-09-03) short_term_window: last 12 messages
+- (2026-09-04) summary_trigger: every 5 user messages
+- (2026-09-06) episodic_top_k: 3
+- (2026-09-07) reply_limit: 160 tokens
+- (2026-09-09) temperature: 0
+- (2026-09-10) tokenizer_proxy: cl100k_base
+- (2026-09-12) probe_count: 5
+- (2026-09-13) conversation_length: 30 messages
+- (2026-09-17) consolidation_limit: 40 lines
+- (2026-09-19) consolidation_age: 24 hours
+
+======== consolidation check ========
+needs_consolidation -> True: 50 non-empty, non-comment lines (> 40)
+
+======== /compact ========
+/compact: MEMORY.md consolidated.
+  lines   : 55 -> 39
+  entries : 50 -> 35 (non-empty, non-comment)
+  merged 14 duplicate fact(s); resolved 5 contradiction(s) (2 flagged NEEDS REVIEW); backup written to MEMORY.md.bak
+needs_consolidation after /compact -> False: 35 lines, consolidated 0.0 h ago
+
+======== /memory  (consolidated) ========
+--- MEMORY.md (35 entries, 39 lines, last consolidated 2026-10-18T20:31:44+00:00) ---
+# MEMORY.md
+<!-- last-consolidated: 2026-10-18T20:31:44Z -->
+<!-- Format: - (YYYY-MM-DD) topic: value  | consolidated by file_memory.consolidate() -->
+
+## Facts
+- (2026-09-25) advisor: Dr. Marcus Lee
+- (2026-09-11) backend_port: 8260 (x4)
+- (2026-09-19) class_time: morning (x3)
+- (2026-09-19) consolidation_age: 24 hours
+- (2026-09-17) consolidation_limit: 40 lines
+- (2026-09-13) conversation_length: 30 messages
+- (2026-09-05) database: MySQL s8360_rel (x2)
+- (2026-09-20) database_port: 3307, temporary test container only
+- (2026-09-10) embedding_model: all-MiniLM-L6-v2
+- (2026-09-06) episodic_top_k: 3
+- (2026-09-16) favorite_course: DATA-245 Machine Learning Foundations (x3)
+- (2026-09-02) frontend_dev_port: 5173
+- (2026-09-22) graduation: December 2027
+- (2026-09-14) major: Data Science (x3)
+- (2026-09-08) model: qwen3:8b via Ollama (x2)
+- (2026-09-09) mongo_database: s8360_doc
+- (2026-09-14) mongo_port: 27017
+- (2026-09-15) name: Maya Chen (x4)
+- (2026-09-12) probe_count: 5
+- (2026-09-07) reply_limit: 160 tokens
+- (2026-09-03) short_term_window: last 12 messages
+- (2026-09-04) summary_trigger: every 5 user messages
+- (2026-09-09) temperature: 0
+- (2026-09-18) theme: light mode
+- (2026-09-10) tokenizer_proxy: cl100k_base
+- (2026-09-24) work_hours: 20 hours per week, summer break only
+- (2026-09-02) year: second-year transfer student
+
+## Resolved contradictions (older values kept for audit)
+- theme: kept "light mode" (2026-09-18); superseded "dark mode" (2026-09-02)
+- graduation: kept "December 2027" (2026-09-22); superseded "May 2028" (2026-09-03)
+- advisor: kept "Dr. Marcus Lee" (2026-09-25); superseded "Dr. Elena Rossi" (2026-09-05)
+- work_hours: kept "20 hours per week, summer break only" (2026-09-24); superseded "12 hours per week at the campus library" (2026-09-06) [NEEDS REVIEW: newer value looks qualified]
+- database_port: kept "3307, temporary test container only" (2026-09-20); superseded "3306" (2026-09-04) [NEEDS REVIEW: newer value looks qualified]
+
+======== chat that relies on MEMORY.md in the system prompt ========
+user      : Which port does my backend run on, and who is my academic advisor?
+assistant : - Your backend runs on port 8260.
+- Your academic advisor is Dr. Marcus Lee.
+
+user      : Which port is my database listening on?
+assistant : - Your database is listening on port 3307, which is a temporary test container only.
+
+
+======== /dream ========
+/dream: 2 candidate fact(s), 2 added to MEMORY.md
+- (2026-10-18) favorite_course: DATA-260
+- (2026-10-18) preferred_lab_time: afternoon
+
+======== audit of the resolved contradictions (vs. what is actually true) ========
+  [CORRECT  ] theme          kept 'light mode'                                         truth 'light mode'  (not flagged)
+  [CORRECT  ] graduation     kept 'December 2027'                                      truth 'December 2027'  (not flagged)
+  [CORRECT  ] advisor        kept 'Dr. Marcus Lee'                                     truth 'Dr. Marcus Lee'  (not flagged)
+  [INCORRECT] work_hours     kept '20 hours per week, summer break only'               truth '12 hours per week at the campus library'  (flagged NEEDS REVIEW)
+  [INCORRECT] database_port  kept '3307, temporary test container only'                truth '3306'  (flagged NEEDS REVIEW)
+
+2 of 5 contradictions resolved incorrectly by 'most recent wins'; 2 of those were flagged NEEDS REVIEW by the qualifier heuristic
+
+repository MEMORY.md set to the consolidated version (39 lines)

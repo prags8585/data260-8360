@@ -1,0 +1,446 @@
+[
+  {
+    "label": "create (status defaults to 'open')",
+    "method": "POST",
+    "path": "/api/course-docs",
+    "request_body": {
+      "title": "Introduction to Distributed Systems",
+      "description": "Consensus, replication and fault tolerance.",
+      "category": "Data Science",
+      "start_date": "2027-01-26T09:00:00Z"
+    },
+    "status": 201,
+    "expected": 201,
+    "pass": true,
+    "response_body": {
+      "id": "6ad52ca5b7d87d733d9d738b",
+      "title": "Introduction to Distributed Systems",
+      "description": "Consensus, replication and fault tolerance.",
+      "status": "open",
+      "category": "Data Science",
+      "start_date": "2027-01-26T09:00:00Z",
+      "created_at": "2026-10-18T20:31:33.770732Z",
+      "updated_at": "2026-10-18T20:31:33.770732Z"
+    }
+  },
+  {
+    "label": "create a second document",
+    "method": "POST",
+    "path": "/api/course-docs",
+    "request_body": {
+      "title": "Database Systems",
+      "status": "waitlist",
+      "category": "Computer Science",
+      "start_date": "2027-01-27T10:30:00Z"
+    },
+    "status": 201,
+    "expected": 201,
+    "pass": true,
+    "response_body": {
+      "id": "6ad52ca5b7d87d733d9d738c",
+      "title": "Database Systems",
+      "description": null,
+      "status": "waitlist",
+      "category": "Computer Science",
+      "start_date": "2027-01-27T10:30:00Z",
+      "created_at": "2026-10-18T20:31:33.775512Z",
+      "updated_at": "2026-10-18T20:31:33.775512Z"
+    }
+  },
+  {
+    "label": "list all",
+    "method": "GET",
+    "path": "/api/course-docs",
+    "request_body": null,
+    "status": 200,
+    "expected": 200,
+    "pass": true,
+    "response_body": [
+      {
+        "id": "6acde34a5623c47602c605ce",
+        "title": "Introduction to Distributed Systems",
+        "description": "Consensus, replication and fault tolerance.",
+        "status": "open",
+        "category": "Computer Science",
+        "start_date": "2027-01-26T09:00:00Z",
+        "created_at": "2026-10-13T07:52:42.600000Z",
+        "updated_at": "2026-10-13T07:52:42.600000Z"
+      },
+      {
+        "id": "6acde34a5623c47602c605cf",
+        "title": "Machine Learning Foundations",
+        "description": "Supervised learning, evaluation and model selection.",
+        "status": "waitlist",
+        "category": "Data Science",
+        "start_date": "2027-01-27T10:30:00Z",
+        "created_at": "2026-10-13T07:52:42.605000Z",
+        "updated_at": "2026-10-13T07:52:42.605000Z"
+      },
+      {
+        "id": "6acde34a5623c47602c605d0",
+        "title": "Database Systems",
+        "description": "Relational design, indexing and transactions.",
+        "status": "open",
+        "category": "Computer Science",
+        "start_date": "2027-01-28T13:00:00Z",
+        "created_at": "2026-10-13T07:52:42.607000Z",
+        "updated_at": "2026-10-13T07:52:42.607000Z"
+      },
+      {
+        "id": "6acde34a5623c47602c605d1",
+        "title": "Cloud Computing",
+        "description": null,
+        "status": "open",
+        "category": "Engineering",
+        "start_date": "2027-02-02T09:00:00Z",
+        "created_at": "2026-10-13T07:52:42.610000Z",
+        "updated_at": "2026-10-13T07:52:42.610000Z"
+      },
+      {
+        "id": "6ad52ca5b7d87d733d9d738b",
+        "title": "Introduction to Distributed Systems",
+        "description": "Consensus, replication and fault tolerance.",
+        "status": "open",
+        "category": "Data Science",
+        "start_date": "2027-01-26T09:00:00Z",
+        "created_at": "2026-10-18T20:31:33.770000Z",
+        "updated_at": "2026-10-18T20:31:33.770000Z"
+      },
+      {
+        "id": "6ad52ca5b7d87d733d9d738c",
+        "title": "Database Systems",
+        "description": null,
+        "status": "waitlist",
+        "category": "Computer Science",
+        "start_date": "2027-01-27T10:30:00Z",
+        "created_at": "2026-10-18T20:31:33.775000Z",
+        "updated_at": "2026-10-18T20:31:33.775000Z"
+      }
+    ]
+  },
+  {
+    "label": "list filtered (category=Data Science)",
+    "method": "GET",
+    "path": "/api/course-docs?category=Data%20Science",
+    "request_body": null,
+    "status": 200,
+    "expected": 200,
+    "pass": true,
+    "response_body": [
+      {
+        "id": "6acde34a5623c47602c605cf",
+        "title": "Machine Learning Foundations",
+        "description": "Supervised learning, evaluation and model selection.",
+        "status": "waitlist",
+        "category": "Data Science",
+        "start_date": "2027-01-27T10:30:00Z",
+        "created_at": "2026-10-13T07:52:42.605000Z",
+        "updated_at": "2026-10-13T07:52:42.605000Z"
+      },
+      {
+        "id": "6ad52ca5b7d87d733d9d738b",
+        "title": "Introduction to Distributed Systems",
+        "description": "Consensus, replication and fault tolerance.",
+        "status": "open",
+        "category": "Data Science",
+        "start_date": "2027-01-26T09:00:00Z",
+        "created_at": "2026-10-18T20:31:33.770000Z",
+        "updated_at": "2026-10-18T20:31:33.770000Z"
+      }
+    ]
+  },
+  {
+    "label": "get one by id",
+    "method": "GET",
+    "path": "/api/course-docs/6ad52ca5b7d87d733d9d738b",
+    "request_body": null,
+    "status": 200,
+    "expected": 200,
+    "pass": true,
+    "response_body": {
+      "id": "6ad52ca5b7d87d733d9d738b",
+      "title": "Introduction to Distributed Systems",
+      "description": "Consensus, replication and fault tolerance.",
+      "status": "open",
+      "category": "Data Science",
+      "start_date": "2027-01-26T09:00:00Z",
+      "created_at": "2026-10-18T20:31:33.770000Z",
+      "updated_at": "2026-10-18T20:31:33.770000Z"
+    }
+  },
+  {
+    "label": "update (PUT) status + title",
+    "method": "PUT",
+    "path": "/api/course-docs/6ad52ca5b7d87d733d9d738b",
+    "request_body": {
+      "title": "Distributed Systems (Updated)",
+      "description": "Consensus, replication and fault tolerance.",
+      "category": "Data Science",
+      "start_date": "2027-01-26T09:00:00Z",
+      "status": "closed"
+    },
+    "status": 200,
+    "expected": 200,
+    "pass": true,
+    "response_body": {
+      "id": "6ad52ca5b7d87d733d9d738b",
+      "title": "Distributed Systems (Updated)",
+      "description": "Consensus, replication and fault tolerance.",
+      "status": "closed",
+      "category": "Data Science",
+      "start_date": "2027-01-26T09:00:00Z",
+      "created_at": "2026-10-18T20:31:33.770000Z",
+      "updated_at": "2026-10-18T20:31:33.786000Z"
+    }
+  },
+  {
+    "label": "missing required field (title)",
+    "method": "POST",
+    "path": "/api/course-docs",
+    "request_body": {
+      "category": "Data Science",
+      "start_date": "2027-01-26T09:00:00Z"
+    },
+    "status": 422,
+    "expected": 422,
+    "pass": true,
+    "response_body": {
+      "detail": [
+        {
+          "type": "missing",
+          "loc": [
+            "body",
+            "title"
+          ],
+          "msg": "Field required",
+          "input": {
+            "category": "Data Science",
+            "start_date": "2027-01-26T09:00:00Z"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "label": "invalid enum value (category)",
+    "method": "POST",
+    "path": "/api/course-docs",
+    "request_body": {
+      "title": "Introduction to Distributed Systems",
+      "description": "Consensus, replication and fault tolerance.",
+      "category": "Poetry",
+      "start_date": "2027-01-26T09:00:00Z"
+    },
+    "status": 422,
+    "expected": 422,
+    "pass": true,
+    "response_body": {
+      "detail": [
+        {
+          "type": "enum",
+          "loc": [
+            "body",
+            "category"
+          ],
+          "msg": "Input should be 'Computer Science', 'Data Science', 'Business' or 'Engineering'",
+          "input": "Poetry",
+          "ctx": {
+            "expected": "'Computer Science', 'Data Science', 'Business' or 'Engineering'"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "label": "invalid enum value (status)",
+    "method": "POST",
+    "path": "/api/course-docs",
+    "request_body": {
+      "title": "Introduction to Distributed Systems",
+      "description": "Consensus, replication and fault tolerance.",
+      "category": "Data Science",
+      "start_date": "2027-01-26T09:00:00Z",
+      "status": "archived"
+    },
+    "status": 422,
+    "expected": 422,
+    "pass": true,
+    "response_body": {
+      "detail": [
+        {
+          "type": "enum",
+          "loc": [
+            "body",
+            "status"
+          ],
+          "msg": "Input should be 'open', 'waitlist' or 'closed'",
+          "input": "archived",
+          "ctx": {
+            "expected": "'open', 'waitlist' or 'closed'"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "label": "wrong data type (title is a number)",
+    "method": "POST",
+    "path": "/api/course-docs",
+    "request_body": {
+      "title": 12345,
+      "description": "Consensus, replication and fault tolerance.",
+      "category": "Data Science",
+      "start_date": "2027-01-26T09:00:00Z"
+    },
+    "status": 422,
+    "expected": 422,
+    "pass": true,
+    "response_body": {
+      "detail": [
+        {
+          "type": "string_type",
+          "loc": [
+            "body",
+            "title"
+          ],
+          "msg": "Input should be a valid string",
+          "input": 12345
+        }
+      ]
+    }
+  },
+  {
+    "label": "incorrect date format",
+    "method": "POST",
+    "path": "/api/course-docs",
+    "request_body": {
+      "title": "Introduction to Distributed Systems",
+      "description": "Consensus, replication and fault tolerance.",
+      "category": "Data Science",
+      "start_date": "next tuesday"
+    },
+    "status": 422,
+    "expected": 422,
+    "pass": true,
+    "response_body": {
+      "detail": [
+        {
+          "type": "datetime_from_date_parsing",
+          "loc": [
+            "body",
+            "start_date"
+          ],
+          "msg": "Input should be a valid datetime or date, invalid character in year",
+          "input": "next tuesday",
+          "ctx": {
+            "error": "invalid character in year"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "label": "title longer than 100 characters",
+    "method": "POST",
+    "path": "/api/course-docs",
+    "request_body": {
+      "title": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "description": "Consensus, replication and fault tolerance.",
+      "category": "Data Science",
+      "start_date": "2027-01-26T09:00:00Z"
+    },
+    "status": 422,
+    "expected": 422,
+    "pass": true,
+    "response_body": {
+      "detail": [
+        {
+          "type": "string_too_long",
+          "loc": [
+            "body",
+            "title"
+          ],
+          "msg": "String should have at most 100 characters",
+          "input": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "ctx": {
+            "max_length": 100
+          }
+        }
+      ]
+    }
+  },
+  {
+    "label": "unknown extra field rejected",
+    "method": "POST",
+    "path": "/api/course-docs",
+    "request_body": {
+      "title": "Introduction to Distributed Systems",
+      "description": "Consensus, replication and fault tolerance.",
+      "category": "Data Science",
+      "start_date": "2027-01-26T09:00:00Z",
+      "credits": 3
+    },
+    "status": 422,
+    "expected": 422,
+    "pass": true,
+    "response_body": {
+      "detail": [
+        {
+          "type": "extra_forbidden",
+          "loc": [
+            "body",
+            "credits"
+          ],
+          "msg": "Extra inputs are not permitted",
+          "input": 3
+        }
+      ]
+    }
+  },
+  {
+    "label": "unknown id -> not found",
+    "method": "GET",
+    "path": "/api/course-docs/6acddcfa5623c47602c60000",
+    "request_body": null,
+    "status": 404,
+    "expected": 404,
+    "pass": true,
+    "response_body": {
+      "detail": "Course document 6acddcfa5623c47602c60000 not found"
+    }
+  },
+  {
+    "label": "malformed id",
+    "method": "GET",
+    "path": "/api/course-docs/not-an-object-id",
+    "request_body": null,
+    "status": 422,
+    "expected": 422,
+    "pass": true,
+    "response_body": {
+      "detail": "'not-an-object-id' is not a valid document id (expected 24 hex characters)"
+    }
+  },
+  {
+    "label": "delete -> 204",
+    "method": "DELETE",
+    "path": "/api/course-docs/6ad52ca5b7d87d733d9d738b",
+    "request_body": null,
+    "status": 204,
+    "expected": 204,
+    "pass": true,
+    "response_body": null
+  },
+  {
+    "label": "deleted document is gone",
+    "method": "GET",
+    "path": "/api/course-docs/6ad52ca5b7d87d733d9d738b",
+    "request_body": null,
+    "status": 404,
+    "expected": 404,
+    "pass": true,
+    "response_body": {
+      "detail": "Course document 6ad52ca5b7d87d733d9d738b not found"
+    }
+  }
+]

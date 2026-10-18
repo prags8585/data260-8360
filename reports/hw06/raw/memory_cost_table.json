@@ -1,0 +1,65 @@
+{
+  "pricing": {
+    "input_per_million_usd": 1.0,
+    "output_per_million_usd": 5.0
+  },
+  "conversations": 10000,
+  "turns_per_conversation": 30,
+  "quality_tolerance": 0.5,
+  "best": "N4",
+  "worst": "N30",
+  "rows": [
+    {
+      "setting": "N4",
+      "mean_probe_quality": 5,
+      "input_tokens_per_turn": 649.0,
+      "output_tokens_per_turn": 93.6,
+      "total_input_tokens_M": 194.7,
+      "total_output_tokens_M": 28.08,
+      "input_cost_usd": 194.7,
+      "output_cost_usd": 140.4,
+      "total_cost_usd": 335.1,
+      "chat_calls_only_cost_usd": 192.84,
+      "role": "best"
+    },
+    {
+      "setting": "N12",
+      "mean_probe_quality": 5,
+      "input_tokens_per_turn": 906.3,
+      "output_tokens_per_turn": 95.1,
+      "total_input_tokens_M": 271.89,
+      "total_output_tokens_M": 28.53,
+      "input_cost_usd": 271.89,
+      "output_cost_usd": 142.65,
+      "total_cost_usd": 414.54,
+      "chat_calls_only_cost_usd": 271.56,
+      "role": ""
+    },
+    {
+      "setting": "N30",
+      "mean_probe_quality": 5,
+      "input_tokens_per_turn": 1307.3,
+      "output_tokens_per_turn": 95.5,
+      "total_input_tokens_M": 392.19,
+      "total_output_tokens_M": 28.65,
+      "input_cost_usd": 392.19,
+      "output_cost_usd": 143.25,
+      "total_cost_usd": 535.44,
+      "chat_calls_only_cost_usd": 391.71,
+      "role": "worst"
+    },
+    {
+      "setting": "compress_N12",
+      "mean_probe_quality": 5,
+      "input_tokens_per_turn": 788.1,
+      "output_tokens_per_turn": 91.6,
+      "total_input_tokens_M": 236.43,
+      "total_output_tokens_M": 27.48,
+      "input_cost_usd": 236.43,
+      "output_cost_usd": 137.4,
+      "total_cost_usd": 373.83,
+      "chat_calls_only_cost_usd": 232.86,
+      "role": ""
+    }
+  ]
+}

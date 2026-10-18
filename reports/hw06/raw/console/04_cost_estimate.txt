@@ -1,0 +1,10 @@
+10,000 conversations x 30 turns = 300,000 turns; $1.0/M input, $5.0/M output
+Setting       Quality  In tok/turn  Out tok/turn  Input $   Output $  Total $   Role
+N4            5        649.0        93.6          194.7     140.4     335.1     best
+N12           5        906.3        95.1          271.89    142.65    414.54    
+N30           5        1307.3       95.5          392.19    143.25    535.44    worst
+compress_N12  5        788.1        91.6          236.43    137.4     373.83    
+
+best  = N4  (cheapest within 0.5 of top quality 5)
+worst = N30  (highest cost)
+saving best vs worst: $200.34 (37.4%)

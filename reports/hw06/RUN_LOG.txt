@@ -1,0 +1,723 @@
+# RUN_LOG.txt - DATA-260 Homework 6 (Karthik Pragada, SID4 8360, PORT_BASE 8260)
+# Real console output captured on a MacBook Air (Apple M4, 16 GB), MongoDB 7.0 in Docker, Ollama qwen3:8b.
+# Each block was produced by the command shown above it; timestamps are in the block headers or log lines.
+
+====================================================================================================
+## Part 1 - course-document CRUD and validation tests
+$ python scripts/hw6_part1_demo.py
+====================================================================================================
+[OK  ] POST   /api/course-docs                             -> 201 (expected 201)  create (status defaults to 'open')
+[OK  ] POST   /api/course-docs                             -> 201 (expected 201)  create a second document
+[OK  ] GET    /api/course-docs                             -> 200 (expected 200)  list all
+[OK  ] GET    /api/course-docs?category=Data%20Science     -> 200 (expected 200)  list filtered (category=Data Science)
+[OK  ] GET    /api/course-docs/6ad52ca5b7d87d733d9d738b    -> 200 (expected 200)  get one by id
+[OK  ] PUT    /api/course-docs/6ad52ca5b7d87d733d9d738b    -> 200 (expected 200)  update (PUT) status + title
+--- validation and error handling ---
+[OK  ] POST   /api/course-docs                             -> 422 (expected 422)  missing required field (title)
+[OK  ] POST   /api/course-docs                             -> 422 (expected 422)  invalid enum value (category)
+[OK  ] POST   /api/course-docs                             -> 422 (expected 422)  invalid enum value (status)
+[OK  ] POST   /api/course-docs                             -> 422 (expected 422)  wrong data type (title is a number)
+[OK  ] POST   /api/course-docs                             -> 422 (expected 422)  incorrect date format
+[OK  ] POST   /api/course-docs                             -> 422 (expected 422)  title longer than 100 characters
+[OK  ] POST   /api/course-docs                             -> 422 (expected 422)  unknown extra field rejected
+[OK  ] GET    /api/course-docs/6acddcfa5623c47602c60000    -> 404 (expected 404)  unknown id -> not found
+[OK  ] GET    /api/course-docs/not-an-object-id            -> 422 (expected 422)  malformed id
+--- delete ---
+[OK  ] DELETE /api/course-docs/6ad52ca5b7d87d733d9d738b    -> 204 (expected 204)  delete -> 204
+[OK  ] GET    /api/course-docs/6ad52ca5b7d87d733d9d738b    -> 404 (expected 404)  deleted document is gone
+
+17/17 Part 1 API checks passed -> /Users/prags/Desktop/HW1_DATA260/reports/hw06/raw/part1_api_calls.json
+
+====================================================================================================
+## Part 1 - sample data
+$ POST sample course documents through the API
+====================================================================================================
+201 6acde34a5623c47602c605ce Introduction to Distributed Systems | status = open
+201 6acde34a5623c47602c605cf Machine Learning Foundations | status = waitlist
+201 6acde34a5623c47602c605d0 Database Systems | status = open
+201 6acde34a5623c47602c605d1 Cloud Computing | status = open
+
+====================================================================================================
+## Parts 1-2 - mongosh evidence (validators, sample data, memory collections)
+$ python scripts/hw6_mongosh_evidence.py
+====================================================================================================
+=== 2026-10-18 13:31:34 ===  mongosh evidence (s8360-mongo, database s8360_doc)
+
+## show collections
+$ mongosh s8360_doc --eval 'db.getCollectionNames().sort()'
+[ 'course_documents', 'episodes', 'messages', 'summaries' ]
+
+## course_documents: sample data
+$ mongosh s8360_doc --eval 'db.course_documents.find({}, {title:1, status:1, category:1, start_date:1, created_at:1}).sort({created_at:1})'
+[
+  {
+    _id: ObjectId('6acde34a5623c47602c605ce'),
+    title: 'Introduction to Distributed Systems',
+    status: 'open',
+    category: 'Computer Science',
+    start_date: ISODate('2027-01-26T09:00:00.000Z'),
+    created_at: ISODate('2026-10-13T07:52:42.600Z')
+  },
+  {
+    _id: ObjectId('6acde34a5623c47602c605cf'),
+    title: 'Machine Learning Foundations',
+    status: 'waitlist',
+    category: 'Data Science',
+    start_date: ISODate('2027-01-27T10:30:00.000Z'),
+    created_at: ISODate('2026-10-13T07:52:42.605Z')
+  },
+  {
+    _id: ObjectId('6acde34a5623c47602c605d0'),
+    title: 'Database Systems',
+    status: 'open',
+    category: 'Computer Science',
+    start_date: ISODate('2027-01-28T13:00:00.000Z'),
+    created_at: ISODate('2026-10-13T07:52:42.607Z')
+  },
+  {
+    _id: ObjectId('6acde34a5623c47602c605d1'),
+    title: 'Cloud Computing',
+    status: 'open',
+    category: 'Engineering',
+    start_date: ISODate('2027-02-02T09:00:00.000Z'),
+    created_at: ISODate('2026-10-13T07:52:42.610Z')
+  }
+]
+
+## course_documents: validator
+$ mongosh s8360_doc --eval 'db.getCollectionInfos({name:"course_documents"})[0].options'
+{
+  validator: {
+    '$jsonSchema': {
+      bsonType: 'object',
+      required: [
+        'title',
+        'status',
+        'category',
+        'start_date',
+        'created_at',
+        'updated_at'
+      ],
+      additionalProperties: false,
+      properties: {
+        _id: { bsonType: 'objectId' },
+        title: { bsonType: 'string', minLength: 1, maxLength: 100 },
+        description: { bsonType: [ 'string', 'null' ], maxLength: 1000 },
+        status: { enum: [ 'open', 'waitlist', 'closed' ] },
+        category: {
+          enum: [
+            'Computer Science',
+            'Data Science',
+            'Business',
+            'Engineering'
+          ]
+        },
+        start_date: { bsonType: 'date' },
+        created_at: { bsonType: 'date' },
+        updated_at: { bsonType: 'date' }
+      }
+    }
+  },
+  validationLevel: 'strict',
+  validationAction: 'error'
+}
+
+## course_documents: invalid insert is rejected by the database
+$ mongosh s8360_doc --eval 'try { db.course_documents.insertOne({title:"Bad", status:"archived", category:"Art", start_date:new Date()}) } catch (e) { print("MongoServerError code " + e.code + ": " + e.message) }'
+MongoServerError code 121: Document failed validation
+
+## messages: last 4 for the demo user
+$ mongosh s8360_doc --eval 'db.messages.find({user_id:"karthik_demo"}, {_id:0, session_id:1, role:1, content:1, created_at:1}).sort({created_at:-1}).limit(4)'
+[
+  {
+    session_id: 'demo-session',
+    role: 'assistant',
+    content: 'Karthik is a graduate student in the MS Data Analytics program who prefers evening classes due to a morning internship and is working on a data engineering focus. He plans to graduate in December 2026 and is currently enrolled in DATA-260.',
+    created_at: ISODate('2026-10-13T07:52:28.950Z')
+  },
+  {
+    session_id: 'demo-session',
+    role: 'user',
+    content: 'Summarize what you know about me in two sentences.',
+    created_at: ISODate('2026-10-13T07:52:22.470Z')
+  },
+  {
+    session_id: 'demo-session',
+    role: 'assistant',
+    content: 'You prefer evening classes due to your morning internship. This aligns well with your data engineering focus and schedule. Would you like help finding evening courses that fit your interests?',
+    created_at: ISODate('2026-10-13T07:52:20.818Z')
+  },
+  {
+    session_id: 'demo-session',
+    role: 'user',
+    content: 'Do I prefer morning or evening classes?',
+    created_at: ISODate('2026-10-13T07:52:15.288Z')
+  }
+]
+
+## summaries: session + lifetime summaries
+$ mongosh s8360_doc --eval 'db.summaries.find({user_id:"karthik_demo"}, {_id:0, scope:1, session_id:1, text:1, created_at:1})'
+[
+  {
+    session_id: 'demo-session',
+    scope: 'session',
+    text: '- Karthik is a graduate student in the MS Data Analytics program.  \n' +
+      '- He is currently taking and enjoying DATA-260.  \n' +
+      '- His academic advisor is Dr. Priya Nair.  \n' +
+      '- He plans to graduate in December 2026.  \n' +
+      '- He prefers evening classes due to a morning internship.',
+    created_at: ISODate('2026-10-13T07:52:15.219Z')
+  },
+  {
+    session_id: 'demo-session',
+    scope: 'session',
+    text: '- Karthik is a graduate student in the MS Data Analytics program.  \n' +
+      '- He is currently taking and enjoying DATA-260.  \n' +
+      '- His academic advisor is Dr. Priya Nair.  \n' +
+      '- He lives in San Jose and commutes by Caltrain.  \n' +
+      '- He prefers evening classes due to a morning internship.',
+    created_at: ISODate('2026-10-13T07:51:30.644Z')
+  }
+]
+
+## episodes: extracted facts (embedding vectors hidden, length shown)
+$ mongosh s8360_doc --eval 'db.episodes.aggregate([{$match:{user_id:"karthik_demo"}}, {$project:{_id:0, fact:1, importance:1, embedding_dims:{$size:"$embedding"}}}, {$limit:5}])'
+[
+  {
+    fact: 'User is asking about class time preference',
+    importance: 0.8,
+    embedding_dims: 384
+  },
+  {
+    fact: 'User asked about favorite course',
+    importance: 0.8,
+    embedding_dims: 384
+  },
+  {
+    fact: 'User has a project demo next Friday',
+    importance: 0.9,
+    embedding_dims: 384
+  },
+  {
+    fact: "User wants to know their advisor's name",
+    importance: 0.9,
+    embedding_dims: 384
+  },
+  {
+    fact: 'User plans to graduate in December 2026',
+    importance: 0.9,
+    embedding_dims: 384
+  }
+]
+
+## collection sizes
+$ mongosh s8360_doc --eval 'db.getCollectionNames().sort().map(n => n + ": " + db[n].countDocuments())'
+[
+  'course_documents: 4',
+  'episodes: 85',
+  'messages: 306',
+  'summaries: 38'
+]
+
+====================================================================================================
+## Part 2 - 12-message chat session through static/chat.html
+$ python scripts/hw6_part2_demo.py
+====================================================================================================
+=== 2026-10-13 00:51:00 ===  chat page demo, user_id=karthik_demo session_id=demo-session
+[ 1] user: Hi! I'm Karthik, a graduate student in the MS Data Analytics program.
+     bot : Hello, Karthik! Welcome to the MS Data Analytics program. How can I assist you with your academic planning?
+     memory: window=0 facts=0 prompt=86 completion=25 latency=3693 ms
+[ 2] user: I'm taking DATA-260 this semester and it is my favorite course so far.
+     bot : That's great to hear, Karthik! DATA-260 is a foundational course that often sparks interest in data analytics.
+     memory: window=2 facts=1 prompt=160 completion=41 latency=5529 ms
+[ 3] user: My academic advisor is Dr. Priya Nair.
+     bot : Nice to meet Dr. Priya Nair! DATA-260 sounds like a strong start for your MS Data Analytics journey. Would you
+     memory: window=4 facts=3 prompt=245 completion=39 latency=4311 ms
+[ 4] user: I live in San Jose and I commute by Caltrain.
+     bot : That's convenient—San Jose is a great location for accessing tech resources. Since you're enjoying DATA-260, w
+     memory: window=6 facts=3 prompt=305 completion=40 latency=5152 ms
+[ 5] user: I prefer evening classes because I have a morning internship.
+     bot : Evening classes are a great fit for your schedule! Since you're enjoying DATA-260, would you like help plannin
+     memory: window=8 facts=3 prompt=363 completion=36 latency=9429 ms
+[ 6] user: Which courses should I look at for a data engineering focus?
+     bot : For a data engineering focus, consider courses like DATA-340 (Data Engineering Fundamentals), DATA-350 (Big Da
+     memory: window=10 facts=3 prompt=497 completion=73 latency=8242 ms
+[ 7] user: I plan to graduate in December 2026.
+     bot : With your goal to graduate in December 2026, you’ll need to complete approximately 30 units over the next two 
+     memory: window=12 facts=3 prompt=586 completion=64 latency=6073 ms
+[ 8] user: Can you remind me who my advisor is?
+     bot : Your academic advisor is Dr. Priya Nair. She can help guide you toward your data engineering focus and ensure 
+     memory: window=12 facts=3 prompt=621 completion=48 latency=7906 ms
+[ 9] user: I have a project demo next Friday for the memory homework.
+     bot : Your project demo for the memory homework is next Friday—good luck! Since you're interested in data engineerin
+     memory: window=12 facts=3 prompt=618 completion=46 latency=7739 ms
+[10] user: What was my favorite course again?
+     bot : Your favorite course is DATA-260, which aligns well with your interest in data engineering. Since you prefer e
+     memory: window=12 facts=3 prompt=618 completion=47 latency=14387 ms
+[11] user: Do I prefer morning or evening classes?
+     bot : You prefer evening classes due to your morning internship. This aligns well with your data engineering focus a
+     memory: window=12 facts=3 prompt=616 completion=35 latency=7146 ms
+[12] user: Summarize what you know about me in two sentences.
+     bot : Karthik is a graduate student in the MS Data Analytics program who prefers evening classes due to a morning in
+     memory: window=12 facts=3 prompt=620 completion=54 latency=6973 ms
+
+GET /api/memory/karthik_demo: 16 messages, session summary=yes, lifetime summary=no, 13 episodic facts
+GET /api/aggregate/karthik_demo: daily=[{'date': '2026-10-13', 'messages': 24, 'user_messages': 12, 'assistant_messages': 12}] total=24
+saved -> /Users/prags/Desktop/HW1_DATA260/reports/hw06/raw
+
+====================================================================================================
+## Part 3 - SHORT_TERM_N sweep (4 / 12 / 30), compression policy, 5 probes
+$ python scripts/hw6_memory_experiment.py
+====================================================================================================
+=== 2026-10-13 00:27:09 PDT ===  30-message conversation, 5 probes, backend http://localhost:8260
+
+=== setting N4  {'short_term_n': 4, 'policy': 'none'}  user=exp-N4-1791876431 ===
+  turn  1  prompt=  81  window=   0  latency=  5255.9 ms
+  turn  2  prompt= 173  window=  57  latency=  5536.7 ms
+  turn  3  prompt= 249  window= 114  latency=  4827.6 ms
+  turn  4  prompt= 254  window= 112  latency=  5765.9 ms
+  turn  5  prompt= 261  window= 117  latency= 12451.5 ms
+  turn  6  prompt= 362  window= 125  latency=  6820.1 ms
+  turn  7  prompt= 368  window= 127  latency=  4127.2 ms
+  turn  8  prompt= 356  window= 122  latency=  4407.8 ms
+  turn  9  prompt= 350  window= 116  latency=  4333.9 ms
+  turn 10  prompt= 349  window= 119  latency= 12134.6 ms
+  turn 11  prompt= 365  window= 118  latency=  5570.8 ms
+  turn 12  prompt= 369  window= 122  latency=  4592.1 ms
+  turn 13  prompt= 376  window= 129  latency=  3736.4 ms
+  turn 14  prompt= 358  window= 115  latency=  4655.9 ms
+  turn 15  prompt= 359  window= 116  latency= 18705.5 ms
+  turn 16  prompt= 460  window= 113  latency=  6578.2 ms
+  turn 17  prompt= 451  window=  99  latency=  3580.3 ms
+  turn 18  prompt= 451  window= 102  latency=  3905.7 ms
+  turn 19  prompt= 450  window= 106  latency=  4025.0 ms
+  turn 20  prompt= 460  window= 109  latency= 14028.3 ms
+  turn 21  prompt= 466  window= 120  latency=  4716.5 ms
+  turn 22  prompt= 471  window= 125  latency=  4673.1 ms
+  turn 23  prompt= 476  window= 121  latency=  4279.5 ms
+  turn 24  prompt= 469  window= 122  latency=  4200.4 ms
+  turn 25  prompt= 466  window= 113  latency= 14056.3 ms
+  turn 26  prompt= 474  window= 109  latency=  5504.6 ms
+  turn 27  prompt= 483  window= 124  latency=  4880.5 ms
+  turn 28  prompt= 496  window= 137  latency=  4696.1 ms
+  turn 29  prompt= 490  window= 128  latency=  4997.3 ms
+  turn 30  prompt= 485  window= 126  latency= 25295.0 ms
+  probe p1_name              score=5  reply="Your name is Maya Chen. You're majoring in Data Science and are taking DATA-245 Machine Le"
+  probe p2_favorite_course   score=5  reply="Your favorite course so far is DATA-245 Machine Learning Foundations. You're also looking "
+  probe p3_advisor           score=5  reply='Your academic advisor is Dr. Elena Rossi. She recommended taking Database Systems to compl'
+  probe p4_class_time        score=5  reply='You prefer morning classes because you have work in the afternoon. Would you like help sch'
+  probe p5_graduation        score=5  reply='You plan to graduate in May 2028. Would you like help planning your remaining courses to s'
+  -> N4: mean prompt 389.3 tok/turn, mean latency 7078.0 ms, probe quality 5
+
+=== setting N12  {'short_term_n': 12, 'policy': 'none'}  user=exp-N12-1791876675 ===
+  turn  1  prompt=  81  window=   0  latency=  5666.3 ms
+  turn  2  prompt= 173  window=  57  latency=  5262.6 ms
+  turn  3  prompt= 249  window= 114  latency=  4800.5 ms
+  turn  4  prompt= 321  window= 169  latency=  4552.5 ms
+  turn  5  prompt= 381  window= 221  latency=  9488.8 ms
+  turn  6  prompt= 529  window= 273  latency=  8259.4 ms
+  turn  7  prompt= 613  window= 343  latency=  3991.5 ms
+  turn  8  prompt= 611  window= 346  latency=  6814.1 ms
+  turn  9  prompt= 614  window= 343  latency=  7378.4 ms
+  turn 10  prompt= 617  window= 351  latency= 16298.0 ms
+  turn 11  prompt= 665  window= 367  latency=  7857.5 ms
+  turn 12  prompt= 678  window= 379  latency=  8723.5 ms
+  turn 13  prompt= 685  window= 386  latency=  7415.4 ms
+  turn 14  prompt= 681  window= 384  latency=  7690.6 ms
+  turn 15  prompt= 685  window= 388  latency= 25131.8 ms
+  turn 16  prompt= 788  window= 382  latency=  9838.8 ms
+  turn 17  prompt= 781  window= 369  latency=  6585.5 ms
+  turn 18  prompt= 778  window= 369  latency=  7068.4 ms
+  turn 19  prompt= 763  window= 360  latency=  6816.6 ms
+  turn 20  prompt= 774  window= 362  latency= 16527.4 ms
+  turn 21  prompt= 761  window= 368  latency=  7521.0 ms
+  turn 22  prompt= 771  window= 378  latency=  6826.3 ms
+  turn 23  prompt= 785  window= 383  latency=  6900.9 ms
+  turn 24  prompt= 778  window= 386  latency=  6803.1 ms
+  turn 25  prompt= 775  window= 377  latency= 17604.9 ms
+  turn 26  prompt= 788  window= 384  latency=  8223.9 ms
+  turn 27  prompt= 803  window= 403  latency=  7170.2 ms
+  turn 28  prompt= 801  window= 399  latency=  7343.6 ms
+  turn 29  prompt= 806  window= 403  latency=  7011.7 ms
+  turn 30  prompt= 790  window= 391  latency= 27847.1 ms
+  probe p1_name              score=5  reply="Your name is Maya Chen. You're a second-year Data Science major with a favorite course in "
+  probe p2_favorite_course   score=5  reply="Your favorite course is DATA-245 Machine Learning Foundations. Since you're looking for st"
+  probe p3_advisor           score=5  reply='Your academic advisor is Dr. Elena Rossi. She recommended you take Database Systems next, '
+  probe p4_class_time        score=5  reply="You prefer morning classes due to your afternoon work schedule. Since you're planning for "
+  probe p5_graduation        score=5  reply='You plan to graduate in May 2028. With your Data Science major and current course progress'
+  -> N12: mean prompt 644.2 tok/turn, mean latency 9314.0 ms, probe quality 5
+
+=== setting N30  {'short_term_n': 30, 'policy': 'none'}  user=exp-N30-1791877003 ===
+  turn  1  prompt=  81  window=   0  latency=  6186.2 ms
+  turn  2  prompt= 173  window=  57  latency=  5700.0 ms
+  turn  3  prompt= 249  window= 114  latency=  5448.9 ms
+  turn  4  prompt= 321  window= 169  latency=  4914.7 ms
+  turn  5  prompt= 381  window= 221  latency=  9246.7 ms
+  turn  6  prompt= 529  window= 273  latency=  6117.1 ms
+  turn  7  prompt= 613  window= 343  latency=  4297.5 ms
+  turn  8  prompt= 678  window= 403  latency=  4124.8 ms
+  turn  9  prompt= 747  window= 456  latency=  4990.3 ms
+  turn 10  prompt= 824  window= 524  latency= 12603.2 ms
+  turn 11  prompt= 931  window= 587  latency= 10003.8 ms
+  turn 12  prompt=1006  window= 648  latency=  4727.0 ms
+  turn 13  prompt=1080  window= 710  latency=  4387.2 ms
+  turn 14  prompt=1147  window= 769  latency=  4612.7 ms
+  turn 15  prompt=1219  window= 829  latency= 22182.2 ms
+  turn 16  prompt=1398  window= 887  latency= 14819.7 ms
+  turn 17  prompt=1407  window= 890  latency= 13120.2 ms
+  turn 18  prompt=1407  window= 893  latency= 13559.4 ms
+  turn 19  prompt=1408  window= 902  latency= 13522.3 ms
+  turn 20  prompt=1422  window= 907  latency= 25969.9 ms
+  turn 21  prompt=1423  window= 923  latency= 14605.6 ms
+  turn 22  prompt=1421  window= 923  latency= 13559.8 ms
+  turn 23  prompt=1423  window= 916  latency= 14296.3 ms
+  turn 24  prompt=1422  window= 925  latency= 14369.8 ms
+  turn 25  prompt=1425  window= 925  latency= 24878.6 ms
+  turn 26  prompt=1427  window= 923  latency= 14083.0 ms
+  turn 27  prompt=1431  window= 935  latency= 14589.8 ms
+  turn 28  prompt=1449  window= 951  latency= 14504.6 ms
+  turn 29  prompt=1450  window= 951  latency= 14364.9 ms
+  turn 30  prompt=1449  window= 956  latency= 35517.0 ms
+  probe p1_name              score=5  reply="Your name is Maya Chen. You're a second-year transfer student majoring in Data Science, an"
+  probe p2_favorite_course   score=5  reply="Your favorite course so far is DATA-245 Machine Learning Foundations. Since you're looking"
+  probe p3_advisor           score=5  reply='Your academic advisor is Dr. Elena Rossi. She recommended Database Systems as part of your'
+  probe p4_class_time        score=5  reply="You prefer morning classes due to your afternoon work schedule. Since you're also consider"
+  probe p5_graduation        score=5  reply="You plan to graduate in May 2028. Since you're planning next semester and have completed D"
+  -> N30: mean prompt 1044.7 tok/turn, mean latency 12176.8 ms, probe quality 5
+
+=== setting compress_N12  {'short_term_n': 12, 'policy': 'compress'}  user=exp-compress_N12-1791877449 ===
+  turn  1  prompt=  81  window=   0  latency=  6118.6 ms
+  turn  2  prompt= 173  window=  57  latency=  5773.5 ms
+  turn  3  prompt= 249  window= 114  latency=  5328.4 ms
+  turn  4  prompt= 281  window= 129  latency=  5300.6 ms
+  turn  5  prompt= 295  window= 135  latency= 11228.6 ms
+  turn  6  prompt= 415  window= 162  latency=  6889.9 ms
+  turn  7  prompt= 450  window= 185  latency=  4627.9 ms
+  turn  8  prompt= 445  window= 185  latency=  5483.5 ms
+  turn  9  prompt= 453  window= 187  latency=  6199.8 ms
+  turn 10  prompt= 469  window= 206  latency= 14617.4 ms
+  turn 11  prompt= 511  window= 231  latency=  7020.2 ms
+  turn 12  prompt= 518  window= 236  latency=  6448.4 ms
+  turn 13  prompt= 531  window= 249  latency=  5954.5 ms
+  turn 14  prompt= 533  window= 253  latency=  6358.2 ms
+  turn 15  prompt= 533  window= 251  latency= 24261.7 ms
+  turn 16  prompt= 663  window= 252  latency=  9798.4 ms
+  turn 17  prompt= 674  window= 255  latency=  6222.3 ms
+  turn 18  prompt= 673  window= 259  latency=  6425.9 ms
+  turn 19  prompt= 663  window= 257  latency=  6043.0 ms
+  turn 20  prompt= 663  window= 250  latency= 17947.4 ms
+  turn 21  prompt= 655  window= 253  latency=  6861.6 ms
+  turn 22  prompt= 663  window= 259  latency=  6219.2 ms
+  turn 23  prompt= 676  window= 263  latency=  6249.5 ms
+  turn 24  prompt= 659  window= 257  latency=  6254.9 ms
+  turn 25  prompt= 662  window= 254  latency= 16187.8 ms
+  turn 26  prompt= 674  window= 261  latency=  6913.8 ms
+  turn 27  prompt= 668  window= 263  latency=  5899.1 ms
+  turn 28  prompt= 669  window= 262  latency=  5662.9 ms
+  turn 29  prompt= 658  window= 250  latency=  5082.9 ms
+  turn 30  prompt= 635  window= 231  latency= 25743.7 ms
+  probe p1_name              score=5  reply="Your name is Maya Chen. You're a second-year Data Science major with a favorite course in "
+  probe p2_favorite_course   score=5  reply="Your favorite course so far is DATA-245 Machine Learning Foundations. You're also looking "
+  probe p3_advisor           score=5  reply='Your academic advisor is Dr. Elena Rossi. She can help you plan your Data Science major co'
+  probe p4_class_time        score=5  reply='You prefer morning classes because you have work in the afternoon. Let me know if you need'
+  probe p5_graduation        score=5  reply='You plan to graduate in May 2028. Let me know if you need help planning your final semeste'
+  -> compress_N12: mean prompt 529.7 tok/turn, mean latency 8637.5 ms, probe quality 5
+
+Setting       Prompt tok/turn  Latency ms  Probe quality
+N4            389.3            7078.0      5
+N12           644.2            9314.0      5
+N30           1044.7           12176.8     5
+compress_N12  529.7            8637.5      5
+saved -> /Users/prags/Desktop/HW1_DATA260/reports/hw06/raw
+
+====================================================================================================
+## Part 3 - cost of 10,000 x 30-turn conversations
+$ python scripts/hw6_cost_estimate.py
+====================================================================================================
+10,000 conversations x 30 turns = 300,000 turns; $1.0/M input, $5.0/M output
+Setting       Quality  In tok/turn  Out tok/turn  Input $   Output $  Total $   Role
+N4            5        649.0        93.6          194.7     140.4     335.1     best
+N12           5        906.3        95.1          271.89    142.65    414.54    
+N30           5        1307.3       95.5          392.19    143.25    535.44    worst
+compress_N12  5        788.1        91.6          236.43    137.4     373.83    
+
+best  = N4  (cheapest within 0.5 of top quality 5)
+worst = N30  (highest cost)
+saving best vs worst: $200.34 (37.4%)
+
+====================================================================================================
+## Part 4 - /help, /memory, /compact, chat, /dream, contradiction audit
+$ python scripts/hw6_file_memory_demo.py
+====================================================================================================
+=== 2026-10-18 13:31:44  ===  file-based memory demo (scratch dir reports/hw06/raw/memory_consolidation/session)
+
+======== /help ========
+Available commands:
+/memory   show the current file-based memory (AGENT.md + MEMORY.md)
+/compact  consolidate MEMORY.md (merge duplicates, resolve contradictions) and report line counts before and after
+/dream    extract durable facts from the recent conversation and add them to MEMORY.md
+/help     show this help
+
+======== /memory  (original) ========
+--- AGENT.md (34 lines) ---
+# AGENT.md
+
+Durable project and agent instructions. This file is loaded into the system prompt together with MEMORY.md.
+
+## Project description
+1. This repository is the DATA-260 Campus Course Catalogue service (domain entity: Course, DOMAIN_ID 0); it grows homework by homework in one codebase, never in a copy.
+2. The service exposes a FastAPI backend on PORT_BASE 8260 with a React client in `frontend/`; per-homework evidence lives under `reports/hwNN/`.
+
+## Technology stack
+3. Python 3.12 with FastAPI, Pydantic v2, SQLAlchemy (MySQL `s8360_rel`) and PyMongo (MongoDB `s8360_doc`).
+4. The local LLM is `qwen3:8b` served by Ollama, always reached through `src/model_client.py`.
+
+## Coding conventions
+5. Every function signature has type hints for all parameters and the return value.
+6. Keep each function at 30 lines or fewer and give it one responsibility.
+7. Use snake_case names; library modules log with `logging` and never call `print` (scripts under `scripts/` may print).
+
+## Testing approach
+8. Every new function gets an assert-based test in `tests_hw6.py` that runs offline: no network, no database, no LLM.
+
+## Prohibited actions
+9. Never write secrets, passwords or API keys into source files or logs.
+10. Never overwrite or delete `MEMORY.md` without writing a backup copy first.
+11. Never use `eval()` or `exec()`.
+
+## Code review output format (from HW1)
+When asked to review code, respond using **only a bullet-point list**.
+
+Rules:
+- Every line of your response must start with `-`.
+- No introductory sentence, no summary paragraph, no closing remarks.
+- No prose outside of bullets. No headings.
+- Each bullet should state one specific issue or observation, concisely (one line each where possible).
+- If the code has no issues, respond with a single bullet saying so -- do not pad with unnecessary bullets.
+
+--- MEMORY.md (50 entries, 55 lines, last consolidated 2026-10-10T08:00:00+00:00) ---
+# MEMORY.md
+<!-- last-consolidated: 2026-10-10T08:00:00Z -->
+<!-- Format: - (YYYY-MM-DD) topic: value -->
+
+## User profile
+- (2026-09-01) name: Maya Chen
+- (2026-09-01) major: Data Science
+- (2026-09-02) name: Maya Chen
+- (2026-09-02) theme: dark mode
+- (2026-09-02) year: second-year transfer student
+- (2026-09-03) graduation: May 2028
+- (2026-09-04) favorite_course: DATA-245 Machine Learning Foundations
+- (2026-09-05) advisor: Dr. Elena Rossi
+- (2026-09-05) class_time: morning
+- (2026-09-06) work_hours: 12 hours per week at the campus library
+- (2026-09-08) major: Data Science
+- (2026-09-09) name: Maya Chen
+- (2026-09-10) favorite_course: DATA-245 Machine Learning Foundations
+- (2026-09-12) class_time: morning
+- (2026-09-14) major: Data Science
+- (2026-09-15) name: Maya Chen
+- (2026-09-16) favorite_course: DATA-245 Machine Learning Foundations
+- (2026-09-18) theme: light mode
+- (2026-09-19) class_time: morning
+- (2026-09-22) graduation: December 2027
+- (2026-09-24) work_hours: 20 hours per week, summer break only
+- (2026-09-25) advisor: Dr. Marcus Lee
+
+## Project facts
+- (2026-09-01) backend_port: 8260
+- (2026-09-01) database: MySQL s8360_rel
+- (2026-09-02) model: qwen3:8b via Ollama
+- (2026-09-02) frontend_dev_port: 5173
+- (2026-09-03) backend_port: 8260
+- (2026-09-04) database_port: 3306
+- (2026-09-05) database: MySQL s8360_rel
+- (2026-09-07) backend_port: 8260
+- (2026-09-08) model: qwen3:8b via Ollama
+- (2026-09-09) mongo_database: s8360_doc
+- (2026-09-10) embedding_model: all-MiniLM-L6-v2
+- (2026-09-11) backend_port: 8260
+- (2026-09-14) mongo_port: 27017
+- (2026-09-20) database_port: 3307, temporary test container only
+
+## Notes
+- (2026-09-03) short_term_window: last 12 messages
+- (2026-09-04) summary_trigger: every 5 user messages
+- (2026-09-06) episodic_top_k: 3
+- (2026-09-07) reply_limit: 160 tokens
+- (2026-09-09) temperature: 0
+- (2026-09-10) tokenizer_proxy: cl100k_base
+- (2026-09-12) probe_count: 5
+- (2026-09-13) conversation_length: 30 messages
+- (2026-09-17) consolidation_limit: 40 lines
+- (2026-09-19) consolidation_age: 24 hours
+
+======== consolidation check ========
+needs_consolidation -> True: 50 non-empty, non-comment lines (> 40)
+
+======== /compact ========
+/compact: MEMORY.md consolidated.
+  lines   : 55 -> 39
+  entries : 50 -> 35 (non-empty, non-comment)
+  merged 14 duplicate fact(s); resolved 5 contradiction(s) (2 flagged NEEDS REVIEW); backup written to MEMORY.md.bak
+needs_consolidation after /compact -> False: 35 lines, consolidated 0.0 h ago
+
+======== /memory  (consolidated) ========
+--- MEMORY.md (35 entries, 39 lines, last consolidated 2026-10-18T20:31:44+00:00) ---
+# MEMORY.md
+<!-- last-consolidated: 2026-10-18T20:31:44Z -->
+<!-- Format: - (YYYY-MM-DD) topic: value  | consolidated by file_memory.consolidate() -->
+
+## Facts
+- (2026-09-25) advisor: Dr. Marcus Lee
+- (2026-09-11) backend_port: 8260 (x4)
+- (2026-09-19) class_time: morning (x3)
+- (2026-09-19) consolidation_age: 24 hours
+- (2026-09-17) consolidation_limit: 40 lines
+- (2026-09-13) conversation_length: 30 messages
+- (2026-09-05) database: MySQL s8360_rel (x2)
+- (2026-09-20) database_port: 3307, temporary test container only
+- (2026-09-10) embedding_model: all-MiniLM-L6-v2
+- (2026-09-06) episodic_top_k: 3
+- (2026-09-16) favorite_course: DATA-245 Machine Learning Foundations (x3)
+- (2026-09-02) frontend_dev_port: 5173
+- (2026-09-22) graduation: December 2027
+- (2026-09-14) major: Data Science (x3)
+- (2026-09-08) model: qwen3:8b via Ollama (x2)
+- (2026-09-09) mongo_database: s8360_doc
+- (2026-09-14) mongo_port: 27017
+- (2026-09-15) name: Maya Chen (x4)
+- (2026-09-12) probe_count: 5
+- (2026-09-07) reply_limit: 160 tokens
+- (2026-09-03) short_term_window: last 12 messages
+- (2026-09-04) summary_trigger: every 5 user messages
+- (2026-09-09) temperature: 0
+- (2026-09-18) theme: light mode
+- (2026-09-10) tokenizer_proxy: cl100k_base
+- (2026-09-24) work_hours: 20 hours per week, summer break only
+- (2026-09-02) year: second-year transfer student
+
+## Resolved contradictions (older values kept for audit)
+- theme: kept "light mode" (2026-09-18); superseded "dark mode" (2026-09-02)
+- graduation: kept "December 2027" (2026-09-22); superseded "May 2028" (2026-09-03)
+- advisor: kept "Dr. Marcus Lee" (2026-09-25); superseded "Dr. Elena Rossi" (2026-09-05)
+- work_hours: kept "20 hours per week, summer break only" (2026-09-24); superseded "12 hours per week at the campus library" (2026-09-06) [NEEDS REVIEW: newer value looks qualified]
+- database_port: kept "3307, temporary test container only" (2026-09-20); superseded "3306" (2026-09-04) [NEEDS REVIEW: newer value looks qualified]
+
+======== chat that relies on MEMORY.md in the system prompt ========
+user      : Which port does my backend run on, and who is my academic advisor?
+assistant : - Your backend runs on port 8260.
+- Your academic advisor is Dr. Marcus Lee.
+
+user      : Which port is my database listening on?
+assistant : - Your database is listening on port 3307, which is a temporary test container only.
+
+
+======== /dream ========
+/dream: 2 candidate fact(s), 2 added to MEMORY.md
+- (2026-10-18) favorite_course: DATA-260
+- (2026-10-18) preferred_lab_time: afternoon
+
+======== audit of the resolved contradictions (vs. what is actually true) ========
+  [CORRECT  ] theme          kept 'light mode'                                         truth 'light mode'  (not flagged)
+  [CORRECT  ] graduation     kept 'December 2027'                                      truth 'December 2027'  (not flagged)
+  [CORRECT  ] advisor        kept 'Dr. Marcus Lee'                                     truth 'Dr. Marcus Lee'  (not flagged)
+  [INCORRECT] work_hours     kept '20 hours per week, summer break only'               truth '12 hours per week at the campus library'  (flagged NEEDS REVIEW)
+  [INCORRECT] database_port  kept '3307, temporary test container only'                truth '3306'  (flagged NEEDS REVIEW)
+
+2 of 5 contradictions resolved incorrectly by 'most recent wins'; 2 of those were flagged NEEDS REVIEW by the qualifier heuristic
+
+repository MEMORY.md set to the consolidated version (39 lines)
+
+====================================================================================================
+## Part 4 - function checked against AGENT.md
+$ python scripts/check_agent_md.py
+====================================================================================================
+Checking file_memory.py::memory_health_report against AGENT.md (lines 84-94)
+  [PASS] #5 type hints on every parameter and the return value -- untyped params: none; return annotation: dict
+  [PASS] #6 function is 30 lines or fewer -- 11 lines
+  [PASS] #7 snake_case function name -- memory_health_report
+  [PASS] #7 no print() inside the function -- calls: ['count_memory_lines', 'len', 'needs_consolidation', 'read_last_consolidated', 'round']
+  [PASS] #11 no eval()/exec() -- none called
+  [PASS] #7 module has no print() call (library module) -- file_memory.py
+  [PASS] #8 an assert-based test exists for the function -- tests_hw6.py::test_memory_health_report
+  [PASS] #8 the test file imports nothing that needs network/DB/LLM -- forbidden imports found: none
+  [PASS] #9 no hard-coded secrets in the module -- pattern scan
+  [PASS] #10 file_memory.cmd_compact writes a backup before overwriting MEMORY.md -- backup copy precedes write_text
+
+10/10 AGENT.md checks passed
+
+====================================================================================================
+## Offline tests
+$ python tests_hw6.py
+====================================================================================================
+PASS  test_commands_help_and_unknown
+PASS  test_compress_policy_shortens_old_assistant_turns_only
+PASS  test_consolidation_merges_duplicates_and_resolves_contradictions
+PASS  test_consolidation_of_the_55_line_memory_file
+PASS  test_consolidation_required_over_40_lines
+PASS  test_consolidation_required_when_stamp_older_than_24h
+PASS  test_count_ignores_blank_and_comment_lines
+PASS  test_fact_parser_limits_and_clamps
+PASS  test_memory_health_report
+PASS  test_memory_health_report_handles_missing_stamp
+PASS  test_prompt_assembly_order_and_components
+PASS  test_summarization_trigger_every_m_user_messages
+PASS  test_system_prompt_contains_both_files
+
+13/13 tests passed
+
+====================================================================================================
+## Part 4 - persistence after restart
+$ python scripts/hw6_restart_check.py
+====================================================================================================
+=== 2026-10-18 13:32:08 ===  persistence after restart
+MongoDB memory, server process #1: pid=40510 messages(last)=16 episodic_facts=13 total_messages=24 session_summary=True
+server process #1 (pid 40510) stopped
+MongoDB memory, server process #2: pid=40518 messages(last)=16 episodic_facts=13 total_messages=24 session_summary=True
+identical after restart: True
+file memory, new interpreter: {'entries': 35, 'total_lines': 39, 'last_consolidated': '2026-10-18T20:31:44+00:00', 'age_hours': 0.0, 'needs_consolidation': False, 'reason': '35 lines, consolidated 0.0 h ago'}
+
+====================================================================================================
+## Smoke test (writes reports/hw06/verification.json)
+$ python verify_hw06.py
+====================================================================================================
+  [OK  ] docdb/config.py exists and has valid Python syntax -- valid syntax: docdb/config.py
+  [OK  ] docdb/mongo.py exists and has valid Python syntax -- valid syntax: docdb/mongo.py
+  [OK  ] docdb/schemas.py exists and has valid Python syntax -- valid syntax: docdb/schemas.py
+  [OK  ] docdb/routes.py exists and has valid Python syntax -- valid syntax: docdb/routes.py
+  [OK  ] docdb/server.py exists and has valid Python syntax -- valid syntax: docdb/server.py
+  [OK  ] agent_memory/service.py exists and has valid Python syntax -- valid syntax: agent_memory/service.py
+  [OK  ] agent_memory/routes.py exists and has valid Python syntax -- valid syntax: agent_memory/routes.py
+  [OK  ] agent_memory/store.py exists and has valid Python syntax -- valid syntax: agent_memory/store.py
+  [OK  ] agent_memory/episodes.py exists and has valid Python syntax -- valid syntax: agent_memory/episodes.py
+  [OK  ] agent_memory/summaries.py exists and has valid Python syntax -- valid syntax: agent_memory/summaries.py
+  [OK  ] agent_memory/policies.py exists and has valid Python syntax -- valid syntax: agent_memory/policies.py
+  [OK  ] agent_memory/prompt.py exists and has valid Python syntax -- valid syntax: agent_memory/prompt.py
+  [OK  ] agent_memory/usage_log.py exists and has valid Python syntax -- valid syntax: agent_memory/usage_log.py
+  [OK  ] file_memory.py exists and has valid Python syntax -- valid syntax: file_memory.py
+  [OK  ] file_memory_agent.py exists and has valid Python syntax -- valid syntax: file_memory_agent.py
+  [OK  ] tests_hw6.py exists and has valid Python syntax -- valid syntax: tests_hw6.py
+  [OK  ] scripts/check_agent_md.py exists and has valid Python syntax -- valid syntax: scripts/check_agent_md.py
+  [OK  ] scripts/hw6_memory_experiment.py exists and has valid Python syntax -- valid syntax: scripts/hw6_memory_experiment.py
+  [OK  ] scripts/hw6_cost_estimate.py exists and has valid Python syntax -- valid syntax: scripts/hw6_cost_estimate.py
+  [OK  ] Part 1: course-document CRUD + validation errors on PORT_BASE 8260 -- {'create': 201, 'default_status': 'open', 'get': 200, 'update': 200, 'missing_title': 422, 'bad_enum': 422, 'wrong_type': 422, 'not_found': 404, 'delete': 204}
+  [OK  ] Part 2: POST /api/chat + GET /api/memory + GET /api/aggregate with component token counts -- chat=200 reply_chars=121 prompt_tokens=80 components=['current_message', 'episodic_facts', 'long_term_summary', 'short_term_window', 'system_primer'] memory=200 aggregate=200
+  [OK  ] MongoDB s8360_doc has the four collections and the validator rejects an invalid insert -- collections=['course_documents', 'episodes', 'messages', 'summaries'], $jsonSchema validator=True, invalid insert rejected by MongoDB=True
+  [OK  ] memory_probes.yaml has 5 probes and a 1-5 rubric -- 5 probes, rubric keys=[1, 2, 3, 4, 5]
+  [OK  ] short-term sweep covers N=4/12/30 + compression with 30 turns each (raw per-turn data) -- settings=['N4', 'N12', 'N30', 'compress_N12'], per-turn rows in csv=120
+  [OK  ] cost table (10,000 x 30 turns) identifies best and worst settings -- 4 settings, best=N4, worst=N30
+  [OK  ] 55-line MEMORY.md consolidates to < 40 lines (>= 3 duplicates, >= 3 contradictions, idempotent) -- 55 -> 39 lines; 14 duplicates merged, 5 contradictions resolved; idempotent=True
+  [OK  ] AGENT.md has >= 5 instructions across >= 3 categories -- 11 numbered instructions under 6 headings
+  [OK  ] function written under AGENT.md passes the compliance checker -- 10/10 AGENT.md checks passed
+  [OK  ] offline test runner (no DB / network / LLM) passes -- 13/13 tests passed
+  [OK  ] reports/hw06/RUN_LOG.txt exists and is non-empty -- reports/hw06/RUN_LOG.txt
+  [OK  ] reports/hw06/METRICS.md exists and is non-empty -- reports/hw06/METRICS.md
+  [OK  ] reports/hw06/AI_USE.md exists and is non-empty -- reports/hw06/AI_USE.md
+  [OK  ] reports/hw06/Pragada_HW6.pdf exists and is non-empty -- reports/hw06/Pragada_HW6.pdf
+  [OK  ] reports/hw06/raw/memory_consolidation/MEMORY.consolidated.md exists and is non-empty -- reports/hw06/raw/memory_consolidation/MEMORY.consolidated.md
+  [OK  ] reports/hw06/raw/memory_probes_scoring.json exists and is non-empty -- reports/hw06/raw/memory_probes_scoring.json
+  [OK  ] reports/hw06/raw/chat_usage_log.csv exists and is non-empty -- reports/hw06/raw/chat_usage_log.csv
+
+36/36 checks passed.
+Wrote reports/hw06/verification.json

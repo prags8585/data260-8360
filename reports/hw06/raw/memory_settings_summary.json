@@ -1,0 +1,70 @@
+[
+  {
+    "setting": "N4",
+    "mean_prompt_tokens_per_turn": 389.3,
+    "mean_completion_tokens_per_turn": 50.7,
+    "mean_overhead_prompt_tokens_per_turn": 259.7,
+    "mean_overhead_completion_tokens_per_turn": 42.9,
+    "mean_window_tokens_per_turn": 112.1,
+    "mean_latency_ms": 7078.0,
+    "mean_probe_quality": 5,
+    "probe_scores": {
+      "p1_name": 5,
+      "p2_favorite_course": 5,
+      "p3_advisor": 5,
+      "p4_class_time": 5,
+      "p5_graduation": 5
+    }
+  },
+  {
+    "setting": "N12",
+    "mean_prompt_tokens_per_turn": 644.2,
+    "mean_completion_tokens_per_turn": 52.2,
+    "mean_overhead_prompt_tokens_per_turn": 262.1,
+    "mean_overhead_completion_tokens_per_turn": 42.9,
+    "mean_window_tokens_per_turn": 327.8,
+    "mean_latency_ms": 9314.0,
+    "mean_probe_quality": 5,
+    "probe_scores": {
+      "p1_name": 5,
+      "p2_favorite_course": 5,
+      "p3_advisor": 5,
+      "p4_class_time": 5,
+      "p5_graduation": 5
+    }
+  },
+  {
+    "setting": "N30",
+    "mean_prompt_tokens_per_turn": 1044.7,
+    "mean_completion_tokens_per_turn": 52.2,
+    "mean_overhead_prompt_tokens_per_turn": 262.6,
+    "mean_overhead_completion_tokens_per_turn": 43.3,
+    "mean_window_tokens_per_turn": 663.7,
+    "mean_latency_ms": 12176.8,
+    "mean_probe_quality": 5,
+    "probe_scores": {
+      "p1_name": 5,
+      "p2_favorite_course": 5,
+      "p3_advisor": 5,
+      "p4_class_time": 5,
+      "p5_graduation": 5
+    }
+  },
+  {
+    "setting": "compress_N12",
+    "mean_prompt_tokens_per_turn": 529.7,
+    "mean_completion_tokens_per_turn": 49.3,
+    "mean_overhead_prompt_tokens_per_turn": 258.4,
+    "mean_overhead_completion_tokens_per_turn": 42.3,
+    "mean_window_tokens_per_turn": 213.5,
+    "mean_latency_ms": 8637.5,
+    "mean_probe_quality": 5,
+    "probe_scores": {
+      "p1_name": 5,
+      "p2_favorite_course": 5,
+      "p3_advisor": 5,
+      "p4_class_time": 5,
+      "p5_graduation": 5
+    }
+  }
+]

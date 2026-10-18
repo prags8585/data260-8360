@@ -1,0 +1,65 @@
+# HW6 Part 3 -- memory probes. Written BEFORE any experiment was run.
+#
+# After each 30-message conversation (see memory_conversation.yaml) the same five
+# questions are asked in the same session. Facts were stated by the user in
+# messages 1-6 (name, favourite course, class-time preference, graduation) and
+# message 20 (advisor), so a small short-term window cannot see them.
+#
+# Scoring is deterministic (scripts/hw6_memory_experiment.py, score_probe):
+#   each probe has `expected` = a list of elements; an element is satisfied when
+#   the reply contains ANY of its alternative strings (case-insensitive).
+#   f = satisfied elements / total elements.
+
+rubric:
+  5: "Every expected element is present (f = 1.0)."
+  4: "At least half of the expected elements are present (0.5 <= f < 1.0)."
+  3: "Some, but fewer than half, of the expected elements are present (0 < f < 0.5)."
+  2: "No expected element, but the reply honestly says it does not know / asks the user to repeat."
+  1: "No expected element and no honest 'I do not know': a wrong or unrelated answer."
+
+unknown_phrases:
+  - "don't know"
+  - "do not know"
+  - "haven't told"
+  - "have not told"
+  - "not sure"
+  - "don't have"
+  - "do not have"
+  - "no information"
+  - "didn't mention"
+  - "did not mention"
+  - "can't recall"
+  - "cannot recall"
+  - "could you tell"
+  - "please let me know"
+  - "i'm not aware"
+
+probes:
+  - id: p1_name
+    question: "What is my name?"
+    fact_stated_in_message: 1
+    expected:
+      - ["Maya"]
+      - ["Chen"]
+  - id: p2_favorite_course
+    question: "Which course did I say was my favorite so far?"
+    fact_stated_in_message: 3
+    expected:
+      - ["DATA-245", "DATA 245", "Machine Learning"]
+  - id: p3_advisor
+    question: "Who is my academic advisor?"
+    fact_stated_in_message: 20
+    expected:
+      - ["Rossi"]
+      - ["Elena"]
+  - id: p4_class_time
+    question: "What time of day do I prefer to take classes?"
+    fact_stated_in_message: 4
+    expected:
+      - ["morning"]
+  - id: p5_graduation
+    question: "When do I plan to graduate?"
+    fact_stated_in_message: 6
+    expected:
+      - ["2028"]
+      - ["May"]

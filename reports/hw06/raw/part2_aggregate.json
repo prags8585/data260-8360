@@ -1,0 +1,26 @@
+{
+  "user_id": "karthik_demo",
+  "daily_message_counts": [
+    {
+      "date": "2026-10-13",
+      "messages": 24,
+      "user_messages": 12,
+      "assistant_messages": 12
+    }
+  ],
+  "total_messages": 24,
+  "recent_summaries": [
+    {
+      "scope": "session",
+      "session_id": "demo-session",
+      "text": "- Karthik is a graduate student in the MS Data Analytics program.  \n- He is currently taking and enjoying DATA-260.  \n- His academic advisor is Dr. Priya Nair.  \n- He plans to graduate in December 2026.  \n- He prefers evening classes due to a morning internship.",
+      "created_at": "2026-10-13T07:52:15.219000+00:00"
+    },
+    {
+      "scope": "session",
+      "session_id": "demo-session",
+      "text": "- Karthik is a graduate student in the MS Data Analytics program.  \n- He is currently taking and enjoying DATA-260.  \n- His academic advisor is Dr. Priya Nair.  \n- He lives in San Jose and commutes by Caltrain.  \n- He prefers evening classes due to a morning internship.",
+      "created_at": "2026-10-13T07:51:30.644000+00:00"
+    }
+  ]
+}

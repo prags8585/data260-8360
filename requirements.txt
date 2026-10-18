@@ -11,3 +11,9 @@ bcrypt
 mcp[cli]<2
 httpx
 requests
+pymongo
+pyyaml
+tiktoken
+numpy
+sentence-transformers
+playwright  # only for scripts/hw6_part2_demo.py (chat page screenshot)

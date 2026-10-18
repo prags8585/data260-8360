@@ -1,0 +1,6 @@
+=== 2026-10-18 13:32:08 ===  persistence after restart
+MongoDB memory, server process #1: pid=40510 messages(last)=16 episodic_facts=13 total_messages=24 session_summary=True
+server process #1 (pid 40510) stopped
+MongoDB memory, server process #2: pid=40518 messages(last)=16 episodic_facts=13 total_messages=24 session_summary=True
+identical after restart: True
+file memory, new interpreter: {'entries': 35, 'total_lines': 39, 'last_consolidated': '2026-10-18T20:31:44+00:00', 'age_hours': 0.0, 'needs_consolidation': False, 'reason': '35 lines, consolidated 0.0 h ago'}

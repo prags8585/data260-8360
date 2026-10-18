@@ -1,0 +1,5 @@
+setting,mean_probe_quality,input_tokens_per_turn,output_tokens_per_turn,total_input_tokens_M,total_output_tokens_M,input_cost_usd,output_cost_usd,total_cost_usd,chat_calls_only_cost_usd,role
+N4,5,649.0,93.6,194.7,28.08,194.7,140.4,335.1,192.84,best
+N12,5,906.3,95.1,271.89,28.53,271.89,142.65,414.54,271.56,
+N30,5,1307.3,95.5,392.19,28.65,392.19,143.25,535.44,391.71,worst
+compress_N12,5,788.1,91.6,236.43,27.48,236.43,137.4,373.83,232.86,

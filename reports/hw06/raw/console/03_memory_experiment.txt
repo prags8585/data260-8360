@@ -1,0 +1,160 @@
+=== 2026-10-13 00:27:09 PDT ===  30-message conversation, 5 probes, backend http://localhost:8260
+
+=== setting N4  {'short_term_n': 4, 'policy': 'none'}  user=exp-N4-1791876431 ===
+  turn  1  prompt=  81  window=   0  latency=  5255.9 ms
+  turn  2  prompt= 173  window=  57  latency=  5536.7 ms
+  turn  3  prompt= 249  window= 114  latency=  4827.6 ms
+  turn  4  prompt= 254  window= 112  latency=  5765.9 ms
+  turn  5  prompt= 261  window= 117  latency= 12451.5 ms
+  turn  6  prompt= 362  window= 125  latency=  6820.1 ms
+  turn  7  prompt= 368  window= 127  latency=  4127.2 ms
+  turn  8  prompt= 356  window= 122  latency=  4407.8 ms
+  turn  9  prompt= 350  window= 116  latency=  4333.9 ms
+  turn 10  prompt= 349  window= 119  latency= 12134.6 ms
+  turn 11  prompt= 365  window= 118  latency=  5570.8 ms
+  turn 12  prompt= 369  window= 122  latency=  4592.1 ms
+  turn 13  prompt= 376  window= 129  latency=  3736.4 ms
+  turn 14  prompt= 358  window= 115  latency=  4655.9 ms
+  turn 15  prompt= 359  window= 116  latency= 18705.5 ms
+  turn 16  prompt= 460  window= 113  latency=  6578.2 ms
+  turn 17  prompt= 451  window=  99  latency=  3580.3 ms
+  turn 18  prompt= 451  window= 102  latency=  3905.7 ms
+  turn 19  prompt= 450  window= 106  latency=  4025.0 ms
+  turn 20  prompt= 460  window= 109  latency= 14028.3 ms
+  turn 21  prompt= 466  window= 120  latency=  4716.5 ms
+  turn 22  prompt= 471  window= 125  latency=  4673.1 ms
+  turn 23  prompt= 476  window= 121  latency=  4279.5 ms
+  turn 24  prompt= 469  window= 122  latency=  4200.4 ms
+  turn 25  prompt= 466  window= 113  latency= 14056.3 ms
+  turn 26  prompt= 474  window= 109  latency=  5504.6 ms
+  turn 27  prompt= 483  window= 124  latency=  4880.5 ms
+  turn 28  prompt= 496  window= 137  latency=  4696.1 ms
+  turn 29  prompt= 490  window= 128  latency=  4997.3 ms
+  turn 30  prompt= 485  window= 126  latency= 25295.0 ms
+  probe p1_name              score=5  reply="Your name is Maya Chen. You're majoring in Data Science and are taking DATA-245 Machine Le"
+  probe p2_favorite_course   score=5  reply="Your favorite course so far is DATA-245 Machine Learning Foundations. You're also looking "
+  probe p3_advisor           score=5  reply='Your academic advisor is Dr. Elena Rossi. She recommended taking Database Systems to compl'
+  probe p4_class_time        score=5  reply='You prefer morning classes because you have work in the afternoon. Would you like help sch'
+  probe p5_graduation        score=5  reply='You plan to graduate in May 2028. Would you like help planning your remaining courses to s'
+  -> N4: mean prompt 389.3 tok/turn, mean latency 7078.0 ms, probe quality 5
+
+=== setting N12  {'short_term_n': 12, 'policy': 'none'}  user=exp-N12-1791876675 ===
+  turn  1  prompt=  81  window=   0  latency=  5666.3 ms
+  turn  2  prompt= 173  window=  57  latency=  5262.6 ms
+  turn  3  prompt= 249  window= 114  latency=  4800.5 ms
+  turn  4  prompt= 321  window= 169  latency=  4552.5 ms
+  turn  5  prompt= 381  window= 221  latency=  9488.8 ms
+  turn  6  prompt= 529  window= 273  latency=  8259.4 ms
+  turn  7  prompt= 613  window= 343  latency=  3991.5 ms
+  turn  8  prompt= 611  window= 346  latency=  6814.1 ms
+  turn  9  prompt= 614  window= 343  latency=  7378.4 ms
+  turn 10  prompt= 617  window= 351  latency= 16298.0 ms
+  turn 11  prompt= 665  window= 367  latency=  7857.5 ms
+  turn 12  prompt= 678  window= 379  latency=  8723.5 ms
+  turn 13  prompt= 685  window= 386  latency=  7415.4 ms
+  turn 14  prompt= 681  window= 384  latency=  7690.6 ms
+  turn 15  prompt= 685  window= 388  latency= 25131.8 ms
+  turn 16  prompt= 788  window= 382  latency=  9838.8 ms
+  turn 17  prompt= 781  window= 369  latency=  6585.5 ms
+  turn 18  prompt= 778  window= 369  latency=  7068.4 ms
+  turn 19  prompt= 763  window= 360  latency=  6816.6 ms
+  turn 20  prompt= 774  window= 362  latency= 16527.4 ms
+  turn 21  prompt= 761  window= 368  latency=  7521.0 ms
+  turn 22  prompt= 771  window= 378  latency=  6826.3 ms
+  turn 23  prompt= 785  window= 383  latency=  6900.9 ms
+  turn 24  prompt= 778  window= 386  latency=  6803.1 ms
+  turn 25  prompt= 775  window= 377  latency= 17604.9 ms
+  turn 26  prompt= 788  window= 384  latency=  8223.9 ms
+  turn 27  prompt= 803  window= 403  latency=  7170.2 ms
+  turn 28  prompt= 801  window= 399  latency=  7343.6 ms
+  turn 29  prompt= 806  window= 403  latency=  7011.7 ms
+  turn 30  prompt= 790  window= 391  latency= 27847.1 ms
+  probe p1_name              score=5  reply="Your name is Maya Chen. You're a second-year Data Science major with a favorite course in "
+  probe p2_favorite_course   score=5  reply="Your favorite course is DATA-245 Machine Learning Foundations. Since you're looking for st"
+  probe p3_advisor           score=5  reply='Your academic advisor is Dr. Elena Rossi. She recommended you take Database Systems next, '
+  probe p4_class_time        score=5  reply="You prefer morning classes due to your afternoon work schedule. Since you're planning for "
+  probe p5_graduation        score=5  reply='You plan to graduate in May 2028. With your Data Science major and current course progress'
+  -> N12: mean prompt 644.2 tok/turn, mean latency 9314.0 ms, probe quality 5
+
+=== setting N30  {'short_term_n': 30, 'policy': 'none'}  user=exp-N30-1791877003 ===
+  turn  1  prompt=  81  window=   0  latency=  6186.2 ms
+  turn  2  prompt= 173  window=  57  latency=  5700.0 ms
+  turn  3  prompt= 249  window= 114  latency=  5448.9 ms
+  turn  4  prompt= 321  window= 169  latency=  4914.7 ms
+  turn  5  prompt= 381  window= 221  latency=  9246.7 ms
+  turn  6  prompt= 529  window= 273  latency=  6117.1 ms
+  turn  7  prompt= 613  window= 343  latency=  4297.5 ms
+  turn  8  prompt= 678  window= 403  latency=  4124.8 ms
+  turn  9  prompt= 747  window= 456  latency=  4990.3 ms
+  turn 10  prompt= 824  window= 524  latency= 12603.2 ms
+  turn 11  prompt= 931  window= 587  latency= 10003.8 ms
+  turn 12  prompt=1006  window= 648  latency=  4727.0 ms
+  turn 13  prompt=1080  window= 710  latency=  4387.2 ms
+  turn 14  prompt=1147  window= 769  latency=  4612.7 ms
+  turn 15  prompt=1219  window= 829  latency= 22182.2 ms
+  turn 16  prompt=1398  window= 887  latency= 14819.7 ms
+  turn 17  prompt=1407  window= 890  latency= 13120.2 ms
+  turn 18  prompt=1407  window= 893  latency= 13559.4 ms
+  turn 19  prompt=1408  window= 902  latency= 13522.3 ms
+  turn 20  prompt=1422  window= 907  latency= 25969.9 ms
+  turn 21  prompt=1423  window= 923  latency= 14605.6 ms
+  turn 22  prompt=1421  window= 923  latency= 13559.8 ms
+  turn 23  prompt=1423  window= 916  latency= 14296.3 ms
+  turn 24  prompt=1422  window= 925  latency= 14369.8 ms
+  turn 25  prompt=1425  window= 925  latency= 24878.6 ms
+  turn 26  prompt=1427  window= 923  latency= 14083.0 ms
+  turn 27  prompt=1431  window= 935  latency= 14589.8 ms
+  turn 28  prompt=1449  window= 951  latency= 14504.6 ms
+  turn 29  prompt=1450  window= 951  latency= 14364.9 ms
+  turn 30  prompt=1449  window= 956  latency= 35517.0 ms
+  probe p1_name              score=5  reply="Your name is Maya Chen. You're a second-year transfer student majoring in Data Science, an"
+  probe p2_favorite_course   score=5  reply="Your favorite course so far is DATA-245 Machine Learning Foundations. Since you're looking"
+  probe p3_advisor           score=5  reply='Your academic advisor is Dr. Elena Rossi. She recommended Database Systems as part of your'
+  probe p4_class_time        score=5  reply="You prefer morning classes due to your afternoon work schedule. Since you're also consider"
+  probe p5_graduation        score=5  reply="You plan to graduate in May 2028. Since you're planning next semester and have completed D"
+  -> N30: mean prompt 1044.7 tok/turn, mean latency 12176.8 ms, probe quality 5
+
+=== setting compress_N12  {'short_term_n': 12, 'policy': 'compress'}  user=exp-compress_N12-1791877449 ===
+  turn  1  prompt=  81  window=   0  latency=  6118.6 ms
+  turn  2  prompt= 173  window=  57  latency=  5773.5 ms
+  turn  3  prompt= 249  window= 114  latency=  5328.4 ms
+  turn  4  prompt= 281  window= 129  latency=  5300.6 ms
+  turn  5  prompt= 295  window= 135  latency= 11228.6 ms
+  turn  6  prompt= 415  window= 162  latency=  6889.9 ms
+  turn  7  prompt= 450  window= 185  latency=  4627.9 ms
+  turn  8  prompt= 445  window= 185  latency=  5483.5 ms
+  turn  9  prompt= 453  window= 187  latency=  6199.8 ms
+  turn 10  prompt= 469  window= 206  latency= 14617.4 ms
+  turn 11  prompt= 511  window= 231  latency=  7020.2 ms
+  turn 12  prompt= 518  window= 236  latency=  6448.4 ms
+  turn 13  prompt= 531  window= 249  latency=  5954.5 ms
+  turn 14  prompt= 533  window= 253  latency=  6358.2 ms
+  turn 15  prompt= 533  window= 251  latency= 24261.7 ms
+  turn 16  prompt= 663  window= 252  latency=  9798.4 ms
+  turn 17  prompt= 674  window= 255  latency=  6222.3 ms
+  turn 18  prompt= 673  window= 259  latency=  6425.9 ms
+  turn 19  prompt= 663  window= 257  latency=  6043.0 ms
+  turn 20  prompt= 663  window= 250  latency= 17947.4 ms
+  turn 21  prompt= 655  window= 253  latency=  6861.6 ms
+  turn 22  prompt= 663  window= 259  latency=  6219.2 ms
+  turn 23  prompt= 676  window= 263  latency=  6249.5 ms
+  turn 24  prompt= 659  window= 257  latency=  6254.9 ms
+  turn 25  prompt= 662  window= 254  latency= 16187.8 ms
+  turn 26  prompt= 674  window= 261  latency=  6913.8 ms
+  turn 27  prompt= 668  window= 263  latency=  5899.1 ms
+  turn 28  prompt= 669  window= 262  latency=  5662.9 ms
+  turn 29  prompt= 658  window= 250  latency=  5082.9 ms
+  turn 30  prompt= 635  window= 231  latency= 25743.7 ms
+  probe p1_name              score=5  reply="Your name is Maya Chen. You're a second-year Data Science major with a favorite course in "
+  probe p2_favorite_course   score=5  reply="Your favorite course so far is DATA-245 Machine Learning Foundations. You're also looking "
+  probe p3_advisor           score=5  reply='Your academic advisor is Dr. Elena Rossi. She can help you plan your Data Science major co'
+  probe p4_class_time        score=5  reply='You prefer morning classes because you have work in the afternoon. Let me know if you need'
+  probe p5_graduation        score=5  reply='You plan to graduate in May 2028. Let me know if you need help planning your final semeste'
+  -> compress_N12: mean prompt 529.7 tok/turn, mean latency 8637.5 ms, probe quality 5
+
+Setting       Prompt tok/turn  Latency ms  Probe quality
+N4            389.3            7078.0      5
+N12           644.2            9314.0      5
+N30           1044.7           12176.8     5
+compress_N12  529.7            8637.5      5
+saved -> /Users/prags/Desktop/HW1_DATA260/reports/hw06/raw

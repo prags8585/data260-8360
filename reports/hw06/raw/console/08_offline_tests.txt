@@ -1,0 +1,15 @@
+PASS  test_commands_help_and_unknown
+PASS  test_compress_policy_shortens_old_assistant_turns_only
+PASS  test_consolidation_merges_duplicates_and_resolves_contradictions
+PASS  test_consolidation_of_the_55_line_memory_file
+PASS  test_consolidation_required_over_40_lines
+PASS  test_consolidation_required_when_stamp_older_than_24h
+PASS  test_count_ignores_blank_and_comment_lines
+PASS  test_fact_parser_limits_and_clamps
+PASS  test_memory_health_report
+PASS  test_memory_health_report_handles_missing_stamp
+PASS  test_prompt_assembly_order_and_components
+PASS  test_summarization_trigger_every_m_user_messages
+PASS  test_system_prompt_contains_both_files
+
+13/13 tests passed

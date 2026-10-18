@@ -14,10 +14,16 @@ class CompletionResult:
 
 class ModelClient:
 
-    def __init__(self, model: str = "qwen3:8b", temperature: float = 0.0):
+    def __init__(self, model: str = "qwen3:8b", temperature: float = 0.0,
+                 num_predict: Optional[int] = None, json_mode: bool = False):
         self.model = model
         self.temperature = temperature
-        self._llm = ChatOllama(model=model, temperature=temperature, reasoning=False)
+        extra = {}
+        if num_predict:
+            extra["num_predict"] = num_predict
+        if json_mode:
+            extra["format"] = "json"
+        self._llm = ChatOllama(model=model, temperature=temperature, reasoning=False, **extra)
 
         self.turn_count = 0
         self.cumulative_input_tokens = 0

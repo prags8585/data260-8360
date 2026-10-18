@@ -1,0 +1,354 @@
+[
+  {
+    "setting": "N4",
+    "probe_id": "p1_name",
+    "question": "What is my name?",
+    "reply": "Your name is Maya Chen. You're majoring in Data Science and are taking DATA-245 Machine Learning Foundations. Would you like help with anything related to your courses or schedule?",
+    "elements_hit": [
+      true,
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 503,
+    "episodic_facts": [
+      "User's name is Maya Chen",
+      "Advisor is Dr. Elena Rossi",
+      "Favorite course is DATA-245 Machine Learning Foundations"
+    ]
+  },
+  {
+    "setting": "N4",
+    "probe_id": "p2_favorite_course",
+    "question": "Which course did I say was my favorite so far?",
+    "reply": "Your favorite course so far is DATA-245 Machine Learning Foundations. You're also looking for study groups on data courses and planning your next semester. Would you like help finding study partners or scheduling?",
+    "elements_hit": [
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 486,
+    "episodic_facts": [
+      "Favorite course is DATA-245 Machine Learning Foundations",
+      "User is looking for study groups on data courses",
+      "User is planning next semester"
+    ]
+  },
+  {
+    "setting": "N4",
+    "probe_id": "p3_advisor",
+    "question": "Who is my academic advisor?",
+    "reply": "Your academic advisor is Dr. Elena Rossi. She recommended taking Database Systems to complement your Machine Learning interests. Would you like help planning your next semester?",
+    "elements_hit": [
+      true,
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 479,
+    "episodic_facts": [
+      "Advisor is Dr. Elena Rossi",
+      "User will graduate in May 2028",
+      "User is majoring in Data Science"
+    ]
+  },
+  {
+    "setting": "N4",
+    "probe_id": "p4_class_time",
+    "question": "What time of day do I prefer to take classes?",
+    "reply": "You prefer morning classes because you have work in the afternoon. Would you like help scheduling your next semester's classes?",
+    "elements_hit": [
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 476,
+    "episodic_facts": [
+      "User prefers morning classes due to afternoon work.",
+      "Asking about favorite course so far",
+      "User is asking about spring class registration timing"
+    ]
+  },
+  {
+    "setting": "N4",
+    "probe_id": "p5_graduation",
+    "question": "When do I plan to graduate?",
+    "reply": "You plan to graduate in May 2028. Would you like help planning your remaining courses to stay on track?",
+    "elements_hit": [
+      true,
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 453,
+    "episodic_facts": [
+      "User will graduate in May 2028",
+      "User is planning next semester",
+      "Asking about favorite course so far"
+    ]
+  },
+  {
+    "setting": "N12",
+    "probe_id": "p1_name",
+    "question": "What is my name?",
+    "reply": "Your name is Maya Chen. You're a second-year Data Science major with a favorite course in DATA-245 Machine Learning Foundations. Would you like help with anything else?",
+    "elements_hit": [
+      true,
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 798,
+    "episodic_facts": [
+      "User's name is Maya Chen",
+      "Advisor is Dr. Elena Rossi",
+      "Favorite course is DATA-245 Machine Learning Foundations"
+    ]
+  },
+  {
+    "setting": "N12",
+    "probe_id": "p2_favorite_course",
+    "question": "Which course did I say was my favorite so far?",
+    "reply": "Your favorite course is DATA-245 Machine Learning Foundations. Since you're looking for study groups on data courses, consider connecting with classmates from that class or related subjects. Would you like help finding a study group?",
+    "elements_hit": [
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 778,
+    "episodic_facts": [
+      "Favorite course is DATA-245 Machine Learning Foundations",
+      "User is looking for study groups on data courses",
+      "User is planning next semester"
+    ]
+  },
+  {
+    "setting": "N12",
+    "probe_id": "p3_advisor",
+    "question": "Who is my academic advisor?",
+    "reply": "Your academic advisor is Dr. Elena Rossi. She recommended you take Database Systems next, and she can help guide your Data Science major toward graduation in May 2028. Would you like to schedule a meeting with her?",
+    "elements_hit": [
+      true,
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 741,
+    "episodic_facts": [
+      "Advisor is Dr. Elena Rossi",
+      "User will graduate in May 2028",
+      "User is majoring in Data Science"
+    ]
+  },
+  {
+    "setting": "N12",
+    "probe_id": "p4_class_time",
+    "question": "What time of day do I prefer to take classes?",
+    "reply": "You prefer morning classes due to your afternoon work schedule. Since you're planning for spring registration, consider block scheduling to maximize your morning availability. Would you like help with class timing strategies?",
+    "elements_hit": [
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 734,
+    "episodic_facts": [
+      "User prefers morning classes due to afternoon work.",
+      "Asking about favorite course so far",
+      "User is asking about spring class registration timing"
+    ]
+  },
+  {
+    "setting": "N12",
+    "probe_id": "p5_graduation",
+    "question": "When do I plan to graduate?",
+    "reply": "You plan to graduate in May 2028. With your Data Science major and current course progress, you're on track to complete your degree on time. Would you like help ensuring your schedule stays aligned with graduation requirements?",
+    "elements_hit": [
+      true,
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 711,
+    "episodic_facts": [
+      "User will graduate in May 2028",
+      "User is planning next semester",
+      "Asking about favorite course so far"
+    ]
+  },
+  {
+    "setting": "N30",
+    "probe_id": "p1_name",
+    "question": "What is my name?",
+    "reply": "Your name is Maya Chen. You're a second-year transfer student majoring in Data Science, and you've already completed DATA-245 Machine Learning Foundations. Would you like to continue planning your course schedule?",
+    "elements_hit": [
+      true,
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 1469,
+    "episodic_facts": [
+      "User's name is Maya Chen",
+      "Advisor is Dr. Elena Rossi",
+      "Favorite course is DATA-245 Machine Learning Foundations"
+    ]
+  },
+  {
+    "setting": "N30",
+    "probe_id": "p2_favorite_course",
+    "question": "Which course did I say was my favorite so far?",
+    "reply": "Your favorite course so far is DATA-245 Machine Learning Foundations. Since you're looking for study groups on data courses, I can help you connect with peers who took that class. Would you like assistance finding a study group?",
+    "elements_hit": [
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 1465,
+    "episodic_facts": [
+      "Favorite course is DATA-245 Machine Learning Foundations",
+      "User is looking for study groups on data courses",
+      "User is planning next semester"
+    ]
+  },
+  {
+    "setting": "N30",
+    "probe_id": "p3_advisor",
+    "question": "Who is my academic advisor?",
+    "reply": "Your academic advisor is Dr. Elena Rossi. She recommended Database Systems as part of your course plan for your Data Science major. Would you like help discussing your course schedule with her?",
+    "elements_hit": [
+      true,
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 1456,
+    "episodic_facts": [
+      "Advisor is Dr. Elena Rossi",
+      "User will graduate in May 2028",
+      "User is majoring in Data Science"
+    ]
+  },
+  {
+    "setting": "N30",
+    "probe_id": "p4_class_time",
+    "question": "What time of day do I prefer to take classes?",
+    "reply": "You prefer morning classes due to your afternoon work schedule. Since you're also considering spring class registration, I can help you plan your schedule around your preferred times. Would you like assistance with registration timing?",
+    "elements_hit": [
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 1438,
+    "episodic_facts": [
+      "User prefers morning classes due to afternoon work.",
+      "Asking about favorite course so far",
+      "User is asking about spring class registration timing"
+    ]
+  },
+  {
+    "setting": "N30",
+    "probe_id": "p5_graduation",
+    "question": "When do I plan to graduate?",
+    "reply": "You plan to graduate in May 2028. Since you're planning next semester and have completed DATA-245, let's ensure your course schedule stays on track for graduation. Would you like help finalizing your plan?",
+    "elements_hit": [
+      true,
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 1427,
+    "episodic_facts": [
+      "User will graduate in May 2028",
+      "User is planning next semester",
+      "Asking about favorite course so far"
+    ]
+  },
+  {
+    "setting": "compress_N12",
+    "probe_id": "p1_name",
+    "question": "What is my name?",
+    "reply": "Your name is Maya Chen. You're a second-year Data Science major with a favorite course in machine learning. Let me know if you need help with your schedule!",
+    "elements_hit": [
+      true,
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 635,
+    "episodic_facts": [
+      "User's name is Maya Chen",
+      "Advisor is Dr. Elena Rossi",
+      "Favorite course is DATA-245 Machine Learning Foundations"
+    ]
+  },
+  {
+    "setting": "compress_N12",
+    "probe_id": "p2_favorite_course",
+    "question": "Which course did I say was my favorite so far?",
+    "reply": "Your favorite course so far is DATA-245 Machine Learning Foundations. You're also looking for study groups on data courses and planning your next semester. Let me know if you need help!",
+    "elements_hit": [
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 634,
+    "episodic_facts": [
+      "Favorite course is DATA-245 Machine Learning Foundations",
+      "User is looking for study groups on data courses",
+      "User is planning next semester"
+    ]
+  },
+  {
+    "setting": "compress_N12",
+    "probe_id": "p3_advisor",
+    "question": "Who is my academic advisor?",
+    "reply": "Your academic advisor is Dr. Elena Rossi. She can help you plan your Data Science major courses and ensure you stay on track to graduate in May 2028. Let me know if you need assistance!",
+    "elements_hit": [
+      true,
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 605,
+    "episodic_facts": [
+      "Advisor is Dr. Elena Rossi",
+      "User will graduate in May 2028",
+      "User is majoring in Data Science"
+    ]
+  },
+  {
+    "setting": "compress_N12",
+    "probe_id": "p4_class_time",
+    "question": "What time of day do I prefer to take classes?",
+    "reply": "You prefer morning classes because you have work in the afternoon. Let me know if you need help with class scheduling!",
+    "elements_hit": [
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 597,
+    "episodic_facts": [
+      "User prefers morning classes due to afternoon work.",
+      "Asking about favorite course so far",
+      "User is asking about spring class registration timing"
+    ]
+  },
+  {
+    "setting": "compress_N12",
+    "probe_id": "p5_graduation",
+    "question": "When do I plan to graduate?",
+    "reply": "You plan to graduate in May 2028. Let me know if you need help planning your final semester!",
+    "elements_hit": [
+      true,
+      true
+    ],
+    "fraction": 1.0,
+    "score": 5,
+    "prompt_tokens": 566,
+    "episodic_facts": [
+      "User will graduate in May 2028",
+      "User is planning next semester",
+      "Asking about favorite course so far"
+    ]
+  }
+]

@@ -1,0 +1,21 @@
+[OK  ] POST   /api/course-docs                             -> 201 (expected 201)  create (status defaults to 'open')
+[OK  ] POST   /api/course-docs                             -> 201 (expected 201)  create a second document
+[OK  ] GET    /api/course-docs                             -> 200 (expected 200)  list all
+[OK  ] GET    /api/course-docs?category=Data%20Science     -> 200 (expected 200)  list filtered (category=Data Science)
+[OK  ] GET    /api/course-docs/6ad52ca5b7d87d733d9d738b    -> 200 (expected 200)  get one by id
+[OK  ] PUT    /api/course-docs/6ad52ca5b7d87d733d9d738b    -> 200 (expected 200)  update (PUT) status + title
+--- validation and error handling ---
+[OK  ] POST   /api/course-docs                             -> 422 (expected 422)  missing required field (title)
+[OK  ] POST   /api/course-docs                             -> 422 (expected 422)  invalid enum value (category)
+[OK  ] POST   /api/course-docs                             -> 422 (expected 422)  invalid enum value (status)
+[OK  ] POST   /api/course-docs                             -> 422 (expected 422)  wrong data type (title is a number)
+[OK  ] POST   /api/course-docs                             -> 422 (expected 422)  incorrect date format
+[OK  ] POST   /api/course-docs                             -> 422 (expected 422)  title longer than 100 characters
+[OK  ] POST   /api/course-docs                             -> 422 (expected 422)  unknown extra field rejected
+[OK  ] GET    /api/course-docs/6acddcfa5623c47602c60000    -> 404 (expected 404)  unknown id -> not found
+[OK  ] GET    /api/course-docs/not-an-object-id            -> 422 (expected 422)  malformed id
+--- delete ---
+[OK  ] DELETE /api/course-docs/6ad52ca5b7d87d733d9d738b    -> 204 (expected 204)  delete -> 204
+[OK  ] GET    /api/course-docs/6ad52ca5b7d87d733d9d738b    -> 404 (expected 404)  deleted document is gone
+
+17/17 Part 1 API checks passed -> /Users/prags/Desktop/HW1_DATA260/reports/hw06/raw/part1_api_calls.json

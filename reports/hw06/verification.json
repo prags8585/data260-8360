@@ -1,0 +1,195 @@
+{
+  "homework": "HW6",
+  "sid4": 8360,
+  "commit_hash": "be22b4f49a03a26a92820d20947eff1f5c9d3de3",
+  "model": "qwen3:8b (Ollama), temperature 0",
+  "seed": 8360,
+  "verify_seed": 268360,
+  "timestamp": "2026-10-18T20:35:02.195771+00:00",
+  "checks": [
+    {
+      "name": "docdb/config.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: docdb/config.py"
+    },
+    {
+      "name": "docdb/mongo.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: docdb/mongo.py"
+    },
+    {
+      "name": "docdb/schemas.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: docdb/schemas.py"
+    },
+    {
+      "name": "docdb/routes.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: docdb/routes.py"
+    },
+    {
+      "name": "docdb/server.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: docdb/server.py"
+    },
+    {
+      "name": "agent_memory/service.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: agent_memory/service.py"
+    },
+    {
+      "name": "agent_memory/routes.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: agent_memory/routes.py"
+    },
+    {
+      "name": "agent_memory/store.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: agent_memory/store.py"
+    },
+    {
+      "name": "agent_memory/episodes.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: agent_memory/episodes.py"
+    },
+    {
+      "name": "agent_memory/summaries.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: agent_memory/summaries.py"
+    },
+    {
+      "name": "agent_memory/policies.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: agent_memory/policies.py"
+    },
+    {
+      "name": "agent_memory/prompt.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: agent_memory/prompt.py"
+    },
+    {
+      "name": "agent_memory/usage_log.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: agent_memory/usage_log.py"
+    },
+    {
+      "name": "file_memory.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: file_memory.py"
+    },
+    {
+      "name": "file_memory_agent.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: file_memory_agent.py"
+    },
+    {
+      "name": "tests_hw6.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: tests_hw6.py"
+    },
+    {
+      "name": "scripts/check_agent_md.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: scripts/check_agent_md.py"
+    },
+    {
+      "name": "scripts/hw6_memory_experiment.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: scripts/hw6_memory_experiment.py"
+    },
+    {
+      "name": "scripts/hw6_cost_estimate.py exists and has valid Python syntax",
+      "passed": true,
+      "detail": "valid syntax: scripts/hw6_cost_estimate.py"
+    },
+    {
+      "name": "Part 1: course-document CRUD + validation errors on PORT_BASE 8260",
+      "passed": true,
+      "detail": "{'create': 201, 'default_status': 'open', 'get': 200, 'update': 200, 'missing_title': 422, 'bad_enum': 422, 'wrong_type': 422, 'not_found': 404, 'delete': 204}"
+    },
+    {
+      "name": "Part 2: POST /api/chat + GET /api/memory + GET /api/aggregate with component token counts",
+      "passed": true,
+      "detail": "chat=200 reply_chars=121 prompt_tokens=80 components=['current_message', 'episodic_facts', 'long_term_summary', 'short_term_window', 'system_primer'] memory=200 aggregate=200"
+    },
+    {
+      "name": "MongoDB s8360_doc has the four collections and the validator rejects an invalid insert",
+      "passed": true,
+      "detail": "collections=['course_documents', 'episodes', 'messages', 'summaries'], $jsonSchema validator=True, invalid insert rejected by MongoDB=True"
+    },
+    {
+      "name": "memory_probes.yaml has 5 probes and a 1-5 rubric",
+      "passed": true,
+      "detail": "5 probes, rubric keys=[1, 2, 3, 4, 5]"
+    },
+    {
+      "name": "short-term sweep covers N=4/12/30 + compression with 30 turns each (raw per-turn data)",
+      "passed": true,
+      "detail": "settings=['N4', 'N12', 'N30', 'compress_N12'], per-turn rows in csv=120"
+    },
+    {
+      "name": "cost table (10,000 x 30 turns) identifies best and worst settings",
+      "passed": true,
+      "detail": "4 settings, best=N4, worst=N30"
+    },
+    {
+      "name": "55-line MEMORY.md consolidates to < 40 lines (>= 3 duplicates, >= 3 contradictions, idempotent)",
+      "passed": true,
+      "detail": "55 -> 39 lines; 14 duplicates merged, 5 contradictions resolved; idempotent=True"
+    },
+    {
+      "name": "AGENT.md has >= 5 instructions across >= 3 categories",
+      "passed": true,
+      "detail": "11 numbered instructions under 6 headings"
+    },
+    {
+      "name": "function written under AGENT.md passes the compliance checker",
+      "passed": true,
+      "detail": "10/10 AGENT.md checks passed"
+    },
+    {
+      "name": "offline test runner (no DB / network / LLM) passes",
+      "passed": true,
+      "detail": "13/13 tests passed"
+    },
+    {
+      "name": "reports/hw06/RUN_LOG.txt exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw06/RUN_LOG.txt"
+    },
+    {
+      "name": "reports/hw06/METRICS.md exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw06/METRICS.md"
+    },
+    {
+      "name": "reports/hw06/AI_USE.md exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw06/AI_USE.md"
+    },
+    {
+      "name": "reports/hw06/Pragada_HW6.pdf exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw06/Pragada_HW6.pdf"
+    },
+    {
+      "name": "reports/hw06/raw/memory_consolidation/MEMORY.consolidated.md exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw06/raw/memory_consolidation/MEMORY.consolidated.md"
+    },
+    {
+      "name": "reports/hw06/raw/memory_probes_scoring.json exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw06/raw/memory_probes_scoring.json"
+    },
+    {
+      "name": "reports/hw06/raw/chat_usage_log.csv exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw06/raw/chat_usage_log.csv"
+    }
+  ],
+  "passed": 36,
+  "failed": 0,
+  "total": 36,
+  "overall": "PASS"
+}

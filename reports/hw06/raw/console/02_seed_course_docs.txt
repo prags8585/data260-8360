@@ -1,0 +1,4 @@
+201 6acde34a5623c47602c605ce Introduction to Distributed Systems | status = open
+201 6acde34a5623c47602c605cf Machine Learning Foundations | status = waitlist
+201 6acde34a5623c47602c605d0 Database Systems | status = open
+201 6acde34a5623c47602c605d1 Cloud Computing | status = open

@@ -1,0 +1,39 @@
+  [OK  ] docdb/config.py exists and has valid Python syntax -- valid syntax: docdb/config.py
+  [OK  ] docdb/mongo.py exists and has valid Python syntax -- valid syntax: docdb/mongo.py
+  [OK  ] docdb/schemas.py exists and has valid Python syntax -- valid syntax: docdb/schemas.py
+  [OK  ] docdb/routes.py exists and has valid Python syntax -- valid syntax: docdb/routes.py
+  [OK  ] docdb/server.py exists and has valid Python syntax -- valid syntax: docdb/server.py
+  [OK  ] agent_memory/service.py exists and has valid Python syntax -- valid syntax: agent_memory/service.py
+  [OK  ] agent_memory/routes.py exists and has valid Python syntax -- valid syntax: agent_memory/routes.py
+  [OK  ] agent_memory/store.py exists and has valid Python syntax -- valid syntax: agent_memory/store.py
+  [OK  ] agent_memory/episodes.py exists and has valid Python syntax -- valid syntax: agent_memory/episodes.py
+  [OK  ] agent_memory/summaries.py exists and has valid Python syntax -- valid syntax: agent_memory/summaries.py
+  [OK  ] agent_memory/policies.py exists and has valid Python syntax -- valid syntax: agent_memory/policies.py
+  [OK  ] agent_memory/prompt.py exists and has valid Python syntax -- valid syntax: agent_memory/prompt.py
+  [OK  ] agent_memory/usage_log.py exists and has valid Python syntax -- valid syntax: agent_memory/usage_log.py
+  [OK  ] file_memory.py exists and has valid Python syntax -- valid syntax: file_memory.py
+  [OK  ] file_memory_agent.py exists and has valid Python syntax -- valid syntax: file_memory_agent.py
+  [OK  ] tests_hw6.py exists and has valid Python syntax -- valid syntax: tests_hw6.py
+  [OK  ] scripts/check_agent_md.py exists and has valid Python syntax -- valid syntax: scripts/check_agent_md.py
+  [OK  ] scripts/hw6_memory_experiment.py exists and has valid Python syntax -- valid syntax: scripts/hw6_memory_experiment.py
+  [OK  ] scripts/hw6_cost_estimate.py exists and has valid Python syntax -- valid syntax: scripts/hw6_cost_estimate.py
+  [OK  ] Part 1: course-document CRUD + validation errors on PORT_BASE 8260 -- {'create': 201, 'default_status': 'open', 'get': 200, 'update': 200, 'missing_title': 422, 'bad_enum': 422, 'wrong_type': 422, 'not_found': 404, 'delete': 204}
+  [OK  ] Part 2: POST /api/chat + GET /api/memory + GET /api/aggregate with component token counts -- chat=200 reply_chars=121 prompt_tokens=80 components=['current_message', 'episodic_facts', 'long_term_summary', 'short_term_window', 'system_primer'] memory=200 aggregate=200
+  [OK  ] MongoDB s8360_doc has the four collections and the validator rejects an invalid insert -- collections=['course_documents', 'episodes', 'messages', 'summaries'], $jsonSchema validator=True, invalid insert rejected by MongoDB=True
+  [OK  ] memory_probes.yaml has 5 probes and a 1-5 rubric -- 5 probes, rubric keys=[1, 2, 3, 4, 5]
+  [OK  ] short-term sweep covers N=4/12/30 + compression with 30 turns each (raw per-turn data) -- settings=['N4', 'N12', 'N30', 'compress_N12'], per-turn rows in csv=120
+  [OK  ] cost table (10,000 x 30 turns) identifies best and worst settings -- 4 settings, best=N4, worst=N30
+  [OK  ] 55-line MEMORY.md consolidates to < 40 lines (>= 3 duplicates, >= 3 contradictions, idempotent) -- 55 -> 39 lines; 14 duplicates merged, 5 contradictions resolved; idempotent=True
+  [OK  ] AGENT.md has >= 5 instructions across >= 3 categories -- 11 numbered instructions under 6 headings
+  [OK  ] function written under AGENT.md passes the compliance checker -- 10/10 AGENT.md checks passed
+  [OK  ] offline test runner (no DB / network / LLM) passes -- 13/13 tests passed
+  [OK  ] reports/hw06/RUN_LOG.txt exists and is non-empty -- reports/hw06/RUN_LOG.txt
+  [OK  ] reports/hw06/METRICS.md exists and is non-empty -- reports/hw06/METRICS.md
+  [OK  ] reports/hw06/AI_USE.md exists and is non-empty -- reports/hw06/AI_USE.md
+  [OK  ] reports/hw06/Pragada_HW6.pdf exists and is non-empty -- reports/hw06/Pragada_HW6.pdf
+  [OK  ] reports/hw06/raw/memory_consolidation/MEMORY.consolidated.md exists and is non-empty -- reports/hw06/raw/memory_consolidation/MEMORY.consolidated.md
+  [OK  ] reports/hw06/raw/memory_probes_scoring.json exists and is non-empty -- reports/hw06/raw/memory_probes_scoring.json
+  [OK  ] reports/hw06/raw/chat_usage_log.csv exists and is non-empty -- reports/hw06/raw/chat_usage_log.csv
+
+36/36 checks passed.
+Wrote reports/hw06/verification.json

@@ -1,0 +1,41 @@
+=== 2026-10-13 00:51:00 ===  chat page demo, user_id=karthik_demo session_id=demo-session
+[ 1] user: Hi! I'm Karthik, a graduate student in the MS Data Analytics program.
+     bot : Hello, Karthik! Welcome to the MS Data Analytics program. How can I assist you with your academic planning?
+     memory: window=0 facts=0 prompt=86 completion=25 latency=3693 ms
+[ 2] user: I'm taking DATA-260 this semester and it is my favorite course so far.
+     bot : That's great to hear, Karthik! DATA-260 is a foundational course that often sparks interest in data analytics.
+     memory: window=2 facts=1 prompt=160 completion=41 latency=5529 ms
+[ 3] user: My academic advisor is Dr. Priya Nair.
+     bot : Nice to meet Dr. Priya Nair! DATA-260 sounds like a strong start for your MS Data Analytics journey. Would you
+     memory: window=4 facts=3 prompt=245 completion=39 latency=4311 ms
+[ 4] user: I live in San Jose and I commute by Caltrain.
+     bot : That's convenient—San Jose is a great location for accessing tech resources. Since you're enjoying DATA-260, w
+     memory: window=6 facts=3 prompt=305 completion=40 latency=5152 ms
+[ 5] user: I prefer evening classes because I have a morning internship.
+     bot : Evening classes are a great fit for your schedule! Since you're enjoying DATA-260, would you like help plannin
+     memory: window=8 facts=3 prompt=363 completion=36 latency=9429 ms
+[ 6] user: Which courses should I look at for a data engineering focus?
+     bot : For a data engineering focus, consider courses like DATA-340 (Data Engineering Fundamentals), DATA-350 (Big Da
+     memory: window=10 facts=3 prompt=497 completion=73 latency=8242 ms
+[ 7] user: I plan to graduate in December 2026.
+     bot : With your goal to graduate in December 2026, you’ll need to complete approximately 30 units over the next two 
+     memory: window=12 facts=3 prompt=586 completion=64 latency=6073 ms
+[ 8] user: Can you remind me who my advisor is?
+     bot : Your academic advisor is Dr. Priya Nair. She can help guide you toward your data engineering focus and ensure 
+     memory: window=12 facts=3 prompt=621 completion=48 latency=7906 ms
+[ 9] user: I have a project demo next Friday for the memory homework.
+     bot : Your project demo for the memory homework is next Friday—good luck! Since you're interested in data engineerin
+     memory: window=12 facts=3 prompt=618 completion=46 latency=7739 ms
+[10] user: What was my favorite course again?
+     bot : Your favorite course is DATA-260, which aligns well with your interest in data engineering. Since you prefer e
+     memory: window=12 facts=3 prompt=618 completion=47 latency=14387 ms
+[11] user: Do I prefer morning or evening classes?
+     bot : You prefer evening classes due to your morning internship. This aligns well with your data engineering focus a
+     memory: window=12 facts=3 prompt=616 completion=35 latency=7146 ms
+[12] user: Summarize what you know about me in two sentences.
+     bot : Karthik is a graduate student in the MS Data Analytics program who prefers evening classes due to a morning in
+     memory: window=12 facts=3 prompt=620 completion=54 latency=6973 ms
+
+GET /api/memory/karthik_demo: 16 messages, session summary=yes, lifetime summary=no, 13 episodic facts
+GET /api/aggregate/karthik_demo: daily=[{'date': '2026-10-13', 'messages': 24, 'user_messages': 12, 'assistant_messages': 12}] total=24
+saved -> /Users/prags/Desktop/HW1_DATA260/reports/hw06/raw

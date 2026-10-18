@@ -1,0 +1,177 @@
+=== 2026-10-18 13:31:34 ===  mongosh evidence (s8360-mongo, database s8360_doc)
+
+## show collections
+$ mongosh s8360_doc --eval 'db.getCollectionNames().sort()'
+[ 'course_documents', 'episodes', 'messages', 'summaries' ]
+
+## course_documents: sample data
+$ mongosh s8360_doc --eval 'db.course_documents.find({}, {title:1, status:1, category:1, start_date:1, created_at:1}).sort({created_at:1})'
+[
+  {
+    _id: ObjectId('6acde34a5623c47602c605ce'),
+    title: 'Introduction to Distributed Systems',
+    status: 'open',
+    category: 'Computer Science',
+    start_date: ISODate('2027-01-26T09:00:00.000Z'),
+    created_at: ISODate('2026-10-13T07:52:42.600Z')
+  },
+  {
+    _id: ObjectId('6acde34a5623c47602c605cf'),
+    title: 'Machine Learning Foundations',
+    status: 'waitlist',
+    category: 'Data Science',
+    start_date: ISODate('2027-01-27T10:30:00.000Z'),
+    created_at: ISODate('2026-10-13T07:52:42.605Z')
+  },
+  {
+    _id: ObjectId('6acde34a5623c47602c605d0'),
+    title: 'Database Systems',
+    status: 'open',
+    category: 'Computer Science',
+    start_date: ISODate('2027-01-28T13:00:00.000Z'),
+    created_at: ISODate('2026-10-13T07:52:42.607Z')
+  },
+  {
+    _id: ObjectId('6acde34a5623c47602c605d1'),
+    title: 'Cloud Computing',
+    status: 'open',
+    category: 'Engineering',
+    start_date: ISODate('2027-02-02T09:00:00.000Z'),
+    created_at: ISODate('2026-10-13T07:52:42.610Z')
+  }
+]
+
+## course_documents: validator
+$ mongosh s8360_doc --eval 'db.getCollectionInfos({name:"course_documents"})[0].options'
+{
+  validator: {
+    '$jsonSchema': {
+      bsonType: 'object',
+      required: [
+        'title',
+        'status',
+        'category',
+        'start_date',
+        'created_at',
+        'updated_at'
+      ],
+      additionalProperties: false,
+      properties: {
+        _id: { bsonType: 'objectId' },
+        title: { bsonType: 'string', minLength: 1, maxLength: 100 },
+        description: { bsonType: [ 'string', 'null' ], maxLength: 1000 },
+        status: { enum: [ 'open', 'waitlist', 'closed' ] },
+        category: {
+          enum: [
+            'Computer Science',
+            'Data Science',
+            'Business',
+            'Engineering'
+          ]
+        },
+        start_date: { bsonType: 'date' },
+        created_at: { bsonType: 'date' },
+        updated_at: { bsonType: 'date' }
+      }
+    }
+  },
+  validationLevel: 'strict',
+  validationAction: 'error'
+}
+
+## course_documents: invalid insert is rejected by the database
+$ mongosh s8360_doc --eval 'try { db.course_documents.insertOne({title:"Bad", status:"archived", category:"Art", start_date:new Date()}) } catch (e) { print("MongoServerError code " + e.code + ": " + e.message) }'
+MongoServerError code 121: Document failed validation
+
+## messages: last 4 for the demo user
+$ mongosh s8360_doc --eval 'db.messages.find({user_id:"karthik_demo"}, {_id:0, session_id:1, role:1, content:1, created_at:1}).sort({created_at:-1}).limit(4)'
+[
+  {
+    session_id: 'demo-session',
+    role: 'assistant',
+    content: 'Karthik is a graduate student in the MS Data Analytics program who prefers evening classes due to a morning internship and is working on a data engineering focus. He plans to graduate in December 2026 and is currently enrolled in DATA-260.',
+    created_at: ISODate('2026-10-13T07:52:28.950Z')
+  },
+  {
+    session_id: 'demo-session',
+    role: 'user',
+    content: 'Summarize what you know about me in two sentences.',
+    created_at: ISODate('2026-10-13T07:52:22.470Z')
+  },
+  {
+    session_id: 'demo-session',
+    role: 'assistant',
+    content: 'You prefer evening classes due to your morning internship. This aligns well with your data engineering focus and schedule. Would you like help finding evening courses that fit your interests?',
+    created_at: ISODate('2026-10-13T07:52:20.818Z')
+  },
+  {
+    session_id: 'demo-session',
+    role: 'user',
+    content: 'Do I prefer morning or evening classes?',
+    created_at: ISODate('2026-10-13T07:52:15.288Z')
+  }
+]
+
+## summaries: session + lifetime summaries
+$ mongosh s8360_doc --eval 'db.summaries.find({user_id:"karthik_demo"}, {_id:0, scope:1, session_id:1, text:1, created_at:1})'
+[
+  {
+    session_id: 'demo-session',
+    scope: 'session',
+    text: '- Karthik is a graduate student in the MS Data Analytics program.  \n' +
+      '- He is currently taking and enjoying DATA-260.  \n' +
+      '- His academic advisor is Dr. Priya Nair.  \n' +
+      '- He plans to graduate in December 2026.  \n' +
+      '- He prefers evening classes due to a morning internship.',
+    created_at: ISODate('2026-10-13T07:52:15.219Z')
+  },
+  {
+    session_id: 'demo-session',
+    scope: 'session',
+    text: '- Karthik is a graduate student in the MS Data Analytics program.  \n' +
+      '- He is currently taking and enjoying DATA-260.  \n' +
+      '- His academic advisor is Dr. Priya Nair.  \n' +
+      '- He lives in San Jose and commutes by Caltrain.  \n' +
+      '- He prefers evening classes due to a morning internship.',
+    created_at: ISODate('2026-10-13T07:51:30.644Z')
+  }
+]
+
+## episodes: extracted facts (embedding vectors hidden, length shown)
+$ mongosh s8360_doc --eval 'db.episodes.aggregate([{$match:{user_id:"karthik_demo"}}, {$project:{_id:0, fact:1, importance:1, embedding_dims:{$size:"$embedding"}}}, {$limit:5}])'
+[
+  {
+    fact: 'User is asking about class time preference',
+    importance: 0.8,
+    embedding_dims: 384
+  },
+  {
+    fact: 'User asked about favorite course',
+    importance: 0.8,
+    embedding_dims: 384
+  },
+  {
+    fact: 'User has a project demo next Friday',
+    importance: 0.9,
+    embedding_dims: 384
+  },
+  {
+    fact: "User wants to know their advisor's name",
+    importance: 0.9,
+    embedding_dims: 384
+  },
+  {
+    fact: 'User plans to graduate in December 2026',
+    importance: 0.9,
+    embedding_dims: 384
+  }
+]
+
+## collection sizes
+$ mongosh s8360_doc --eval 'db.getCollectionNames().sort().map(n => n + ": " + db[n].countDocuments())'
+[
+  'course_documents: 4',
+  'episodes: 85',
+  'messages: 306',
+  'summaries: 38'
+]

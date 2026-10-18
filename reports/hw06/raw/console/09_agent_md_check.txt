@@ -1,0 +1,13 @@
+Checking file_memory.py::memory_health_report against AGENT.md (lines 84-94)
+  [PASS] #5 type hints on every parameter and the return value -- untyped params: none; return annotation: dict
+  [PASS] #6 function is 30 lines or fewer -- 11 lines
+  [PASS] #7 snake_case function name -- memory_health_report
+  [PASS] #7 no print() inside the function -- calls: ['count_memory_lines', 'len', 'needs_consolidation', 'read_last_consolidated', 'round']
+  [PASS] #11 no eval()/exec() -- none called
+  [PASS] #7 module has no print() call (library module) -- file_memory.py
+  [PASS] #8 an assert-based test exists for the function -- tests_hw6.py::test_memory_health_report
+  [PASS] #8 the test file imports nothing that needs network/DB/LLM -- forbidden imports found: none
+  [PASS] #9 no hard-coded secrets in the module -- pattern scan
+  [PASS] #10 file_memory.cmd_compact writes a backup before overwriting MEMORY.md -- backup copy precedes write_text
+
+10/10 AGENT.md checks passed

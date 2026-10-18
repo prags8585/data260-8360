@@ -1,0 +1,64 @@
+{
+  "lines_before": 55,
+  "lines_after": 39,
+  "entries_before": 50,
+  "entries_after": 35,
+  "duplicates_merged": 14,
+  "audit": [
+    {
+      "topic": "theme",
+      "kept": "light mode",
+      "kept_date": "2026-09-18",
+      "superseded": "dark mode",
+      "superseded_date": "2026-09-02",
+      "rule": "most recent entry wins",
+      "needs_review": false,
+      "ground_truth": "light mode",
+      "resolved_correctly": true
+    },
+    {
+      "topic": "graduation",
+      "kept": "December 2027",
+      "kept_date": "2026-09-22",
+      "superseded": "May 2028",
+      "superseded_date": "2026-09-03",
+      "rule": "most recent entry wins",
+      "needs_review": false,
+      "ground_truth": "December 2027",
+      "resolved_correctly": true
+    },
+    {
+      "topic": "advisor",
+      "kept": "Dr. Marcus Lee",
+      "kept_date": "2026-09-25",
+      "superseded": "Dr. Elena Rossi",
+      "superseded_date": "2026-09-05",
+      "rule": "most recent entry wins",
+      "needs_review": false,
+      "ground_truth": "Dr. Marcus Lee",
+      "resolved_correctly": true
+    },
+    {
+      "topic": "work_hours",
+      "kept": "20 hours per week, summer break only",
+      "kept_date": "2026-09-24",
+      "superseded": "12 hours per week at the campus library",
+      "superseded_date": "2026-09-06",
+      "rule": "most recent entry wins",
+      "needs_review": true,
+      "ground_truth": "12 hours per week at the campus library",
+      "resolved_correctly": false
+    },
+    {
+      "topic": "database_port",
+      "kept": "3307, temporary test container only",
+      "kept_date": "2026-09-20",
+      "superseded": "3306",
+      "superseded_date": "2026-09-04",
+      "rule": "most recent entry wins",
+      "needs_review": true,
+      "ground_truth": "3306",
+      "resolved_correctly": false
+    }
+  ]
+}
