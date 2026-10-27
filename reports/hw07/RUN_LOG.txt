@@ -711,7 +711,7 @@ PASS  test_role_policy_create_delete_read
 PASS  test_text_instead_of_tool_and_lost_chain_are_classified
 PASS  test_unknown_tool_is_reprompted_once_and_repaired
 
-24/24 tests passed (3.8s)
+24/24 tests passed (4.1s)
   [OK  ] JWT: login/401, /auth/me 401, role policy 403/201/204, list 200 on the live API -- login=200/bad-login=401 me(no token)=401 me(bad token)=401 reader-create=403 writer-create=201 writer-delete=403 moderator-delete=204 list=200
   [OK  ] MySQL users table: roles reader/writer/moderator and bcrypt password hashes -- 9 users, roles ['moderator', 'reader', 'writer'], every password_hash is a bcrypt hash: True
   [OK  ] agent loop completes a multi-step verification task (>= 2 tool calls, verifier passes) -- stop=final_answer tool_calls=2 verifier=pass
@@ -726,7 +726,7 @@ PASS  test_unknown_tool_is_reprompted_once_and_repaired
   [OK  ] safety gate: 5 safe commands pass, 5 destructive commands blocked -- 5 safe commands allowed, 5 destructive commands blocked (including ones that start with an allow-listed command)
   [OK  ] file tools: glob -> search -> read finds the file containing DEBUG -- glob -> search -> read finds b.py containing DEBUG
   [OK  ] saved 10-command gate run: 10/10 correct and no false allow -- 10/10 correct, false allows: none
-  [OK  ] offline test suite passes (no DB / network / model) -- 24/24 tests passed (4.2s)
+  [OK  ] offline test suite passes (no DB / network / model) -- 24/24 tests passed (4.4s)
   [OK  ] ruff passes on the repository and pre-commit config exists -- All checks passed!
   [OK  ] reports/hw07/RUN_LOG.txt exists and is non-empty -- reports/hw07/RUN_LOG.txt
   [OK  ] reports/hw07/METRICS.md exists and is non-empty -- reports/hw07/METRICS.md
