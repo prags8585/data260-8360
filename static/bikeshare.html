@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bike-share membership advisor - HW7</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --ink:#1c1e26; --muted:#6b7280; --line:#e5e7eb; --accent:#4f46e5; --good:#047857; --bad:#b91c1c; --bg:#f1f2f6; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, "Segoe UI", Arial, sans-serif; margin: 0; background: var(--bg); color: var(--ink); font-size: 14px; }
+  header { background: #1c1e2e; color: #fff; padding: 12px 20px; font-weight: 600; }
+  header span { font-weight: 400; opacity: .7; margin-left: 12px; font-size: 13px; }
+  main { max-width: 1240px; margin: 0 auto; padding: 16px 20px 40px; display: grid; grid-template-columns: 330px 1fr; gap: 16px; }
+  .card { background: #fff; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,.12); padding: 14px 16px; }
+  h3 { margin: 0 0 10px; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+  label { display: block; font-weight: 600; margin: 10px 0 4px; }
+  input[type=text], input[type=file] { width: 100%; padding: 8px; border: 1.5px solid #d1d5db; border-radius: 8px; font-size: 13px; }
+  button { margin-top: 14px; width: 100%; background: var(--accent); color: #fff; border: 0; border-radius: 8px; padding: 10px; font-weight: 600; font-size: 14px; cursor: pointer; }
+  button:disabled { opacity: .55; cursor: default; }
+  #status { margin-top: 10px; color: var(--muted); font-size: 13px; }
+  #timeline { font-size: 12.5px; }
+  .ev { border-left: 3px solid var(--line); padding: 4px 0 4px 10px; margin: 5px 0; }
+  .ev.call { border-color: var(--accent); } .ev.obs { border-color: #9ca3af; } .ev.done { border-color: var(--good); }
+  .ev b { font-weight: 600; } .ev .t { color: var(--muted); float: right; }
+  .ev code { font-family: Menlo, Consolas, monospace; font-size: 11.5px; background: #f3f4f6; padding: 1px 4px; border-radius: 3px; word-break: break-all; }
+  #right { display: grid; gap: 16px; align-content: start; }
+  .badge { display: inline-block; padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 15px; color: #fff; background: var(--accent); }
+  .strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 12px; }
+  .strip div { background: #f9fafb; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+  .strip small { display: block; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
+  .strip strong { font-size: 16px; }
+  table { border-collapse: collapse; width: 100%; margin: 6px 0 12px; font-size: 13px; }
+  th, td { border: 1px solid var(--line); padding: 5px 8px; text-align: right; } th:first-child, td:first-child { text-align: left; }
+  th { background: #f9fafb; font-size: 12px; }
+  tr.win td { background: #ecfdf5; font-weight: 600; }
+  .muted { color: var(--muted); } .ok { color: var(--good); font-weight: 600; } .no { color: var(--bad); font-weight: 600; }
+  ul { margin: 4px 0 8px; padding-left: 18px; } li { margin: 3px 0; }
+  .quote { font-style: italic; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<header>Bike-share membership advisor <span>ReAct / MRKL agent &middot; qwen3:8b via Ollama &middot; tools: csv_sql, policy_retriever, calculator</span></header>
+<main>
+  <section class="card" id="inputs">
+    <h3>Inputs</h3>
+    <label for="csv">Trip CSV (uploaded.csv)</label>
+    <input type="file" id="csv" accept=".csv,text/csv">
+    <label for="url">Pricing page URL</label>
+    <input type="text" id="url" value="https://lyftbikes.com/pricing">
+    <button id="run">Run</button>
+    <div id="status">Choose a CSV and press Run.</div>
+    <h3 style="margin-top:18px">Timeline</h3>
+    <div id="timeline"><span class="muted">Tool calls and observations appear here.</span></div>
+  </section>
+  <div id="right">
+    <section class="card" id="results">
+      <h3>Results</h3>
+      <div class="muted" id="placeholder">The decision, cost comparison and citations appear here when the agent finishes.</div>
+      <div id="out" class="hidden"></div>
+    </section>
+  </div>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>]/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;"}[c]));
+const money = (v) => (typeof v === "number" ? "$" + v.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : "n/a");
+let shown = 0;
+
+function renderEvent(e) {
+  const t = `<span class="t">${e.t}s</span>`;
+  if (e.kind === "start") return `<div class="ev">${t}<b>start</b> &middot; ${e.rows} rows, ${esc(e.url)}</div>`;
+  if (e.kind === "thought") return `<div class="ev">${t}<b>agent note</b><br><span class="muted">${esc(e.content)}</span></div>`;
+  if (e.kind === "tool_call") return `<div class="ev call">${t}<b>call</b> ${esc(e.tool)}<br><code>${esc(JSON.stringify(e.args)).slice(0, 380)}</code></div>`;
+  if (e.kind === "observation") return `<div class="ev obs">${t}<b>observation</b> ${esc(e.tool)}<br><code>${esc(e.content).slice(0, 260)}</code></div>`;
+  return `<div class="ev done">${t}<b>${esc(e.kind)}</b> ${esc(e.stop_reason || "")}</div>`;
+}
+
+function renderResult(r) {
+  const c = r.costs || {}, m = r.metrics || {}, ref = r.reference, chk = r.check;
+  const memWins = r.decision === "Buy Monthly Membership";
+  let html = `<div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
+      <span class="badge" style="background:${memWins ? "#4f46e5" : "#0f766e"}">${esc(r.decision || "no decision")}</span>
+      <span class="muted">${esc(c.rides)} rides over ${esc(c.months_spanned)} month(s)</span></div>
+    <div class="strip">
+      <div><small>Steps</small><strong>${m.steps}</strong></div><div><small>Tool calls</small><strong>${m.tool_calls}</strong></div>
+      <div><small>Total time</small><strong>${m.total_seconds}s</strong></div><div><small>Stop reason</small><strong>${esc(m.stop_reason)}</strong></div>
+      <div><small>Tokens in/out</small><strong>${m.input_tokens}/${m.output_tokens}</strong></div></div>
+    <table><tr><th>Cost comparison</th><th>Pay per ride/minute</th><th>Monthly membership</th></tr>
+      <tr><td>Membership fee (${esc(c.months_spanned)} mo)</td><td>-</td><td>${money(c.membership_fee_total)}</td></tr>
+      <tr><td>Residual per-minute charges</td><td>-</td><td>${money(c.membership_residual)}</td></tr>
+      <tr class="win"><td>Total</td><td>${money(c.pay_per_use_total)}</td><td>${money(c.membership_total)}</td></tr></table>
+    <p><b>Break-even:</b> ${esc(c.break_even_rides_per_month)} rides/month &nbsp;vs&nbsp; <b>actual:</b> ${esc(c.actual_rides_per_month)} rides/month</p>
+    <p>${esc(r.justification)}</p>`;
+  if ((r.weekly || []).length)
+    html += `<table><tr><th>Week starting</th><th>Rides</th><th>Avg min</th><th>Pay-per-use spend</th></tr>` +
+      r.weekly.map((w) => `<tr><td>${esc(w.week_start)}</td><td>${esc(w.rides)}</td><td>${esc(w.avg_min)}</td><td>${money(w.spend)}</td></tr>`).join("") + `</table>`;
+  html += `<h3>Citations</h3><ul>` + (r.citations || []).map((q) =>
+    `<li><span class="quote">&ldquo;${esc(q.quote)}&rdquo;</span> &middot; <a href="${esc(q.url)}">${esc(q.url)}</a> &middot; captured ${esc(q.accessed_at)}
+     <span class="${q.verified_in_snapshot ? "ok" : "no"}">${q.verified_in_snapshot ? "verified in snapshot" : "not found in snapshot"}</span></li>`).join("") + `</ul>`;
+  if (r.snapshot) html += `<p class="muted">Pricing snapshot SHA-256 <code>${esc(r.snapshot.sha256)}</code> (${esc(r.snapshot.chars)} chars)</p>`;
+  html += `<h3>Assumptions and caveats</h3><ul>` + (r.assumptions || []).map((a) => `<li>${esc(a)}</li>`).join("") + `</ul>`;
+  if (ref) html += `<p class="muted"><b>Independent recomputation (pure Python):</b> pay-per-use ${money(ref.pay_per_use_total)}, membership ${money(ref.membership_total)}, decision ${esc(ref.decision)}
+      &mdash; <span class="${chk && Object.values(chk).every(Boolean) ? "ok" : "no"}">${chk && Object.values(chk).every(Boolean) ? "agent numbers match" : "agent numbers differ"}</span></p>`;
+  $("placeholder").classList.add("hidden"); $("out").classList.remove("hidden"); $("out").innerHTML = html;
+}
+
+async function poll(id) {
+  const res = await fetch(`/api/bikeshare/jobs/${id}`); const job = await res.json();
+  const tl = $("timeline");
+  if (shown === 0 && job.events.length) tl.innerHTML = "";
+  for (; shown < job.events.length; shown++) tl.insertAdjacentHTML("beforeend", renderEvent(job.events[shown]));
+  tl.scrollTop = tl.scrollHeight;
+  if (job.status === "running") { setTimeout(() => poll(id), 1000); return; }
+  $("run").disabled = false;
+  if (job.status === "error") { $("status").textContent = "Error: " + job.error; return; }
+  $("status").textContent = "Finished."; renderResult(job.result);
+}
+
+$("run").addEventListener("click", async () => {
+  const file = $("csv").files[0];
+  if (!file) { $("status").textContent = "Please choose a CSV file first."; return; }
+  const form = new FormData(); form.append("csv", file); form.append("url", $("url").value);
+  $("run").disabled = true; $("status").textContent = "Running the agent..."; $("timeline").innerHTML = ""; shown = 0; $("out").classList.add("hidden"); $("placeholder").classList.remove("hidden");
+  const res = await fetch("/api/bikeshare/run", {method: "POST", body: form});
+  if (!res.ok) { const e = await res.json(); $("status").textContent = "Error: " + JSON.stringify(e.detail); $("run").disabled = false; return; }
+  poll((await res.json()).job_id);
+});
+</script>
+</body>
+</html>

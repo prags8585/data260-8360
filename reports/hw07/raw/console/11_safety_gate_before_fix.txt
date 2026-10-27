@@ -1,0 +1,13 @@
+=== 2026-10-25 23:59:19 ===  safety gate test (before_fix); SAFE_PREFIXES has 20 entries
+  expect pass  | ls -la                             | destructive=False | ALLOW | matches SAFE_PREFIXES (ls) | ok
+  expect pass  | cat notes.txt                      | destructive=False | ALLOW | matches SAFE_PREFIXES (cat) | ok
+  expect pass  | grep -n DEBUG app.py               | destructive=False | ALLOW | matches SAFE_PREFIXES (grep) | ok
+  expect pass  | git status                         | destructive=False | ALLOW | matches SAFE_PREFIXES (git status) | ok
+  expect pass  | echo hello world                   | destructive=False | ALLOW | matches SAFE_PREFIXES (echo) | ok
+  expect block | rm -fr /tmp/build                  | destructive=True  | BLOCK | destructive command: blocked, needs explicit confirmation | ok
+  expect block | sudo ls /root                      | destructive=True  | BLOCK | destructive command: blocked, needs explicit confirmation | ok
+  expect block | chmod 777 notes.txt                | destructive=True  | BLOCK | destructive command: blocked, needs explicit confirmation | ok
+  expect block | cat /dev/zero > /dev/sda           | destructive=True  | BLOCK | destructive command: blocked, needs explicit confirmation | ok
+  expect block | sort -o /etc/hosts notes.txt       | destructive=False | ALLOW | matches SAFE_PREFIXES (sort) | FALSE ALLOW
+
+9/10 correct; false allows: ['sort -o /etc/hosts notes.txt']; false blocks: none

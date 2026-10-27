@@ -1,20 +1,14 @@
 #!/usr/bin/env python3
-"""Creates the s8360_rel schema (courses, instructors, users, sessions) and
-seeds the demo user, the starter instructors, and the three starter courses.
-Idempotent. A database created by HW4 needs scripts/migrate_hw5.py once;
-a fresh one gets the HW5 schema from here.
 
-Usage: PYTHONPATH=. python scripts/init_db.py
-"""
 
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+import crud  # noqa: E402
 from db import Base, db_session_basede26, engine  # noqa: E402
 from models import Course, Instructor  # noqa: E402
-import crud  # noqa: E402
 
 DEMO_EMAIL = "karthik.pragada@sjsu.edu"
 DEMO_PASSWORD = "data260"

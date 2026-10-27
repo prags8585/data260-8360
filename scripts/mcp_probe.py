@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Drives both MCP servers over real STDIO JSON-RPC (the same protocol the
-MCP Inspector speaks) and saves every call's input and output to
-reports/hw05/raw/mcp_inspector/. Also lists each server's tool schemas.
 
-Usage: python scripts/mcp_probe.py
-"""
 
 import asyncio
 import json

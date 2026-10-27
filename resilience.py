@@ -1,14 +1,4 @@
-"""HW5 Part 3: per-attempt timeouts + bounded exponential backoff.
 
-call_with_retry(fn, policy) runs fn up to policy.max_attempts times.
-  - each attempt gets policy.timeout_s (enforced with a worker thread)
-  - only TransientError / TimeoutError are retried; anything else
-    (validation problems, programming errors) propagates immediately
-  - the wait before retry n is base_delay_s * backoff_factor**(n-1),
-    capped at max_delay_s, so the total waiting time is bounded
-  - when every attempt fails, RetriesExhausted is raised so the caller can
-    turn it into a clean {ok: false, ...} result instead of crashing
-"""
 
 import logging
 import time

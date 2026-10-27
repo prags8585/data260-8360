@@ -54,6 +54,7 @@ class SqlCourseRepo:
     def search(self, query: str, limit: int) -> list[dict]:
         from sqlalchemy import or_, select
         from sqlalchemy.orm import joinedload
+
         from models import Course
 
         escaped = query.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
@@ -74,6 +75,7 @@ class SqlCourseRepo:
     def get(self, course_id: int) -> dict | None:
         from sqlalchemy import select
         from sqlalchemy.orm import joinedload
+
         from models import Course
 
         db = self._session()
@@ -92,6 +94,7 @@ class SqlCourseRepo:
 
     def stats(self, group_by: str) -> list[dict]:
         from sqlalchemy import func, select
+
         from models import Course, Instructor
 
         db = self._session()

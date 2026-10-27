@@ -8,7 +8,6 @@ import py_compile
 import socket
 import subprocess
 import sys
-import tempfile
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -169,7 +168,7 @@ check("VERIFY_SEED replay matches the saved raw failure sequence", fault_seed_re
 
 
 def agent_log():
-    rows = [json.loads(l) for l in (ROOT / "reports/hw05/raw/agent_runs.jsonl").read_text().splitlines()]
+    rows = [json.loads(line) for line in (ROOT / "reports/hw05/raw/agent_runs.jsonl").read_text().splitlines()]
     stops = {r["stop_reason"] for r in rows if r["event"] == "stop"}
     runs = {r["run_id"] for r in rows}
     return len(runs) >= 4 and stops >= {"final_answer", "safety_block", "max_steps"}, f"{len(runs)} runs; stop reasons seen: {sorted(stops)}"
@@ -180,7 +179,7 @@ check("agent_runs.jsonl: >= 4 runs and all three stop reasons logged", agent_log
 
 def offline_tests():
     r = subprocess.run([sys.executable, "tests_hw5.py"], cwd=ROOT, capture_output=True, text=True, timeout=120)
-    last = [l for l in r.stdout.splitlines() if "tests passed" in l]
+    last = [line for line in r.stdout.splitlines() if "tests passed" in line]
     return r.returncode == 0 and bool(last), last[-1] if last else r.stdout[-200:]
 
 

@@ -1,0 +1,10 @@
+# HW7 Part 1: lint every staged Python file with Ruff before the commit is created.
+# `language: system` runs the Ruff installed in the project's virtualenv, so the hook works offline.
+repos:
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff (lint)
+        entry: .venv/bin/ruff check --force-exclude
+        language: system
+        types: [python]

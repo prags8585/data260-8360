@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 
 
+from mcp.server.fastmcp import FastMCP
+
 import domain_tools
 from domain_tools import default_repo
-from mcp.server.fastmcp import FastMCP
 
 domain_tools.configure_logging()
 

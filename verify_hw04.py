@@ -226,7 +226,8 @@ def backend_smoke_test():
                 return False, f"server never bound to port {PORT_BASE} within 20s"
 
         base = f"http://127.0.0.1:{PORT_BASE}"
-        curl = lambda *args: subprocess.run(["curl", "-s", *args], capture_output=True, text=True, timeout=10).stdout
+        def curl(*args):
+            return subprocess.run(["curl", "-s", *args], capture_output=True, text=True, timeout=10).stdout
 
         # (a) unauthenticated /api/courses -> 401
         code = curl("-o", "/dev/null", "-w", "%{http_code}", f"{base}/api/courses")

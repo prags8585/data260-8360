@@ -2,12 +2,13 @@
 
 import datetime
 
-from sqlalchemy import DateTime, ForeignKey, Integer, String, Text, func, text
+from sqlalchemy import DateTime, Enum, ForeignKey, Integer, String, Text, func, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from db import Base
 
 NOW = text("CURRENT_TIMESTAMP")
+ROLES = ("reader", "writer", "moderator")
 
 
 class Instructor(Base):
@@ -81,12 +82,17 @@ class Course(Base):
 
 
 class User(Base):
+    """HW7: JWT identity. username is the login name, role drives authorization
+    (reader < writer < moderator). Only the bcrypt hash of the password is stored."""
+
     __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     email: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
+    username: Mapped[str] = mapped_column(String(64), nullable=False, unique=True)
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
+    role: Mapped[str] = mapped_column(Enum(*ROLES, name="user_role"), nullable=False, default="reader", server_default="reader")
 
     sessions: Mapped[list["Session"]] = relationship(back_populates="user")
 

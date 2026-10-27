@@ -3,14 +3,16 @@ import secrets
 
 import bcrypt
 from sqlalchemy import func, select
-from sqlalchemy.orm import Session as OrmSession, joinedload
+from sqlalchemy.orm import Session as OrmSession
+from sqlalchemy.orm import joinedload
 
-from models import Course, Instructor, Session as SessionModel, User
+from models import Course, Instructor, User
+from models import Session as SessionModel
 
 SESSION_TTL_SECONDS = 24 * 60 * 60
 
 
-# --- passwords 
+# --- passwords
 
 def hash_password(password: str) -> str:
     return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
@@ -20,21 +22,25 @@ def verify_password(password: str, password_hash: str) -> bool:
     return bcrypt.checkpw(password.encode(), password_hash.encode())
 
 
-# --- users 
+# --- users
 
 def get_user_by_email(db: OrmSession, email: str) -> User | None:
     return db.scalar(select(User).where(User.email == email))
 
 
-def create_user(db: OrmSession, name: str, email: str, password: str) -> User:
-    user = User(name=name, email=email, password_hash=hash_password(password))
+def get_user_by_username(db: OrmSession, username: str) -> User | None:
+    return db.scalar(select(User).where(User.username == username))
+
+
+def create_user(db: OrmSession, name: str, email: str, password: str, username: str | None = None, role: str = "reader") -> User:
+    user = User(name=name, email=email, username=username or email, password_hash=hash_password(password), role=role)
     db.add(user)
     db.commit()
     db.refresh(user)
     return user
 
 
-# --- sessions 
+# --- sessions
 
 def create_session(db: OrmSession, user: User) -> SessionModel:
     now = datetime.datetime.utcnow()

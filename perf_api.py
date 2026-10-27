@@ -1,10 +1,9 @@
 import threading
 from collections import defaultdict
 
-from fastapi import APIRouter, HTTPException, Response
+from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlalchemy import event
 from sqlalchemy.orm import Session as OrmSession
-from fastapi import Depends
 
 from db import engine, get_db
 from perf_models import PerfCourse, PerfCourseReview

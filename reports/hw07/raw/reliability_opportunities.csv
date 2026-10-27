@@ -1,0 +1,71 @@
+attempt,case,iteration,first_ok,repaired,failure_type,problem
+1,A,1,True,False,,
+1,A,2,True,False,,
+2,B,1,True,False,,
+2,B,2,False,True,lost_chain,1 tool call(s) so far; this task still needs 1 more call(s)
+3,C,1,True,False,,
+3,C,2,False,True,lost_chain,2 tool call(s) so far; this task still needs course_detail x2 more
+3,C,4,True,False,,
+4,A,1,True,False,,
+4,A,2,True,False,,
+5,B,1,True,False,,
+5,B,2,False,True,lost_chain,1 tool call(s) so far; this task still needs 1 more call(s)
+6,C,1,True,False,,
+6,C,2,False,True,lost_chain,2 tool call(s) so far; this task still needs course_detail x2 more
+6,C,4,True,False,,
+7,A,1,True,False,,
+7,A,2,True,False,,
+8,B,1,True,False,,
+8,B,2,False,True,lost_chain,1 tool call(s) so far; this task still needs 1 more call(s)
+9,C,1,True,False,,
+9,C,2,False,True,lost_chain,2 tool call(s) so far; this task still needs course_detail x2 more
+9,C,4,True,False,,
+10,A,1,True,False,,
+10,A,2,True,False,,
+11,B,1,True,False,,
+11,B,2,False,True,lost_chain,1 tool call(s) so far; this task still needs 1 more call(s)
+12,C,1,True,False,,
+12,C,2,False,True,lost_chain,2 tool call(s) so far; this task still needs course_detail x2 more
+12,C,4,True,False,,
+13,A,1,True,False,,
+13,A,2,True,False,,
+14,B,1,True,False,,
+14,B,2,False,True,lost_chain,1 tool call(s) so far; this task still needs 1 more call(s)
+15,C,1,True,False,,
+15,C,2,False,True,lost_chain,2 tool call(s) so far; this task still needs course_detail x2 more
+15,C,4,True,False,,
+16,A,1,True,False,,
+16,A,2,True,False,,
+17,B,1,True,False,,
+17,B,2,False,True,lost_chain,1 tool call(s) so far; this task still needs 1 more call(s)
+18,C,1,True,False,,
+18,C,2,False,True,lost_chain,2 tool call(s) so far; this task still needs course_detail x2 more
+18,C,4,True,False,,
+19,A,1,True,False,,
+19,A,2,True,False,,
+20,B,1,True,False,,
+20,B,2,False,True,lost_chain,1 tool call(s) so far; this task still needs 1 more call(s)
+21,C,1,True,False,,
+21,C,2,False,True,lost_chain,2 tool call(s) so far; this task still needs course_detail x2 more
+21,C,4,True,False,,
+22,A,1,True,False,,
+22,A,2,True,False,,
+23,B,1,True,False,,
+23,B,2,False,True,lost_chain,1 tool call(s) so far; this task still needs 1 more call(s)
+24,C,1,True,False,,
+24,C,2,False,True,lost_chain,2 tool call(s) so far; this task still needs course_detail x2 more
+24,C,4,True,False,,
+25,A,1,True,False,,
+25,A,2,True,False,,
+26,B,1,True,False,,
+26,B,2,False,True,lost_chain,1 tool call(s) so far; this task still needs 1 more call(s)
+27,C,1,True,False,,
+27,C,2,False,True,lost_chain,2 tool call(s) so far; this task still needs course_detail x2 more
+27,C,4,True,False,,
+28,A,1,True,False,,
+28,A,2,True,False,,
+29,B,1,True,False,,
+29,B,2,False,True,lost_chain,1 tool call(s) so far; this task still needs 1 more call(s)
+30,C,1,True,False,,
+30,C,2,False,True,lost_chain,2 tool call(s) so far; this task still needs course_detail x2 more
+30,C,4,True,False,,

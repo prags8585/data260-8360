@@ -17,3 +17,11 @@ tiktoken
 numpy
 sentence-transformers
 playwright  # only for scripts/hw6_part2_demo.py (chat page screenshot)
+PyJWT
+jsonschema
+langgraph
+beautifulsoup4
+lxml
+pandas
+ruff
+pre-commit

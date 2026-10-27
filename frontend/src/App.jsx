@@ -9,7 +9,7 @@ import Signup from "./components/Signup";
 import UpdateRecord from "./components/UpdateRecord";
 
 function Nav() {
-  const { user, logout } = useAuth();
+  const { user, role, canWrite, logout } = useAuth();
   const navigate = useNavigate();
 
   async function handleLogout() {
@@ -22,10 +22,10 @@ function Nav() {
       <span className="brand">Campus Course Catalogue</span>
       <div className="nav-links">
         <Link to="/">Home</Link>
-        {user && <Link to="/create">Add Record</Link>}
+        {canWrite && <Link to="/create">Add Record</Link>}
         {user ? (
           <>
-            <span className="user-chip">{user}</span>
+            <span className="user-chip">{user} ({role})</span>
             <button onClick={handleLogout}>Log Out</button>
           </>
         ) : (

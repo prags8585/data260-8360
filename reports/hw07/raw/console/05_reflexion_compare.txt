@@ -1,0 +1,72 @@
+=== 2026-10-26 00:03:46 ===  10 trials x 3 cases x 2 loops, qwen3:8b temperature 1.0
+[trial 0 case A] original: PASS (14331 ms) | reflexion: success retries=0 (14602 ms)
+[trial 0 case B] original: FAIL (15293 ms) | reflexion: success retries=1 (29363 ms)
+[trial 0 case C] original: PASS (26646 ms) | reflexion: success retries=0 (27445 ms)
+[trial 1 case A] original: PASS (11763 ms) | reflexion: success retries=0 (11462 ms)
+[trial 1 case B] original: PASS (20218 ms) | reflexion: success retries=0 (17979 ms)
+[trial 1 case C] original: PASS (24814 ms) | reflexion: success retries=0 (25227 ms)
+[trial 2 case A] original: PASS (11920 ms) | reflexion: success retries=0 (11208 ms)
+[trial 2 case B] original: PASS (18899 ms) | reflexion: success retries=0 (18752 ms)
+[trial 2 case C] original: PASS (23696 ms) | reflexion: success retries=0 (25199 ms)
+[trial 3 case A] original: PASS (11343 ms) | reflexion: success retries=0 (11684 ms)
+[trial 3 case B] original: PASS (19330 ms) | reflexion: success retries=0 (18091 ms)
+[trial 3 case C] original: PASS (24568 ms) | reflexion: success retries=0 (32453 ms)
+[trial 4 case A] original: PASS (13152 ms) | reflexion: success retries=0 (12187 ms)
+[trial 4 case B] original: PASS (28019 ms) | reflexion: success retries=0 (24964 ms)
+[trial 4 case C] original: PASS (35725 ms) | reflexion: success retries=0 (33295 ms)
+[trial 5 case A] original: PASS (13115 ms) | reflexion: success retries=0 (14018 ms)
+[trial 5 case B] original: PASS (23947 ms) | reflexion: success retries=0 (25452 ms)
+[trial 5 case C] original: PASS (26719 ms) | reflexion: success retries=0 (27521 ms)
+[trial 6 case A] original: PASS (13656 ms) | reflexion: success retries=0 (13796 ms)
+[trial 6 case B] original: PASS (23936 ms) | reflexion: success retries=0 (23223 ms)
+[trial 6 case C] original: PASS (29750 ms) | reflexion: success retries=0 (29964 ms)
+[trial 7 case A] original: PASS (15686 ms) | reflexion: success retries=0 (14250 ms)
+[trial 7 case B] original: PASS (15095 ms) | reflexion: success retries=0 (14425 ms)
+[trial 7 case C] original: PASS (17816 ms) | reflexion: success retries=0 (17837 ms)
+[trial 8 case A] original: PASS (8499 ms) | reflexion: success retries=0 (8490 ms)
+[trial 8 case B] original: FAIL (9413 ms) | reflexion: success retries=1 (22256 ms)
+[trial 8 case C] original: PASS (18418 ms) | reflexion: success retries=0 (18463 ms)
+[trial 9 case A] original: PASS (8492 ms) | reflexion: success retries=0 (8404 ms)
+[trial 9 case B] original: PASS (14794 ms) | reflexion: success retries=0 (14815 ms)
+[trial 9 case C] original: PASS (21991 ms) | reflexion: success retries=0 (21632 ms)
+
+{
+  "trials_per_case": 10,
+  "temperature": 1.0,
+  "original": {
+    "runs": 30,
+    "task_success": "28/30",
+    "task_success_rate": 0.9333,
+    "unsupported_claims_per_run": 0,
+    "runs_with_unsupported_claims": 0,
+    "retry_rate_runs_with_retry": 0.0,
+    "retries_per_run": 0,
+    "repair_reprompts_per_run": 0.6,
+    "tool_calls_per_run": 2.67,
+    "tokens_per_run": 2466.2,
+    "latency_ms_per_run": 18701.4,
+    "verifier_false_rejections": 0,
+    "verification_events": 30,
+    "stop_reasons": {
+      "final_answer": 30
+    }
+  },
+  "reflexion": {
+    "runs": 30,
+    "task_success": "30/30",
+    "task_success_rate": 1.0,
+    "unsupported_claims_per_run": 0,
+    "runs_with_unsupported_claims": 0,
+    "retry_rate_runs_with_retry": 0.0667,
+    "retries_per_run": 0.067,
+    "repair_reprompts_per_run": 0.6,
+    "tool_calls_per_run": 2.8,
+    "tokens_per_run": 2609.4,
+    "latency_ms_per_run": 19615.2,
+    "verifier_false_rejections": 0,
+    "verification_events": 32,
+    "stop_reasons": {
+      "success": 30
+    }
+  }
+}

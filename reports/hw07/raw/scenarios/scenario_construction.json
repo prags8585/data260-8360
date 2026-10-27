@@ -1,0 +1,89 @@
+{
+  "source_file": "202510-baywheels-tripdata.csv",
+  "source_url": "https://s3.amazonaws.com/baywheels-data/202510-baywheels-tripdata.zip",
+  "source_sha256": "f6d26f0669691fb9456cfb97e5c53f882380daff718bde1b776cb0b987dc6638",
+  "seed": 8360,
+  "rule": "520 real rows per scenario; durations, bike types, stations, ids are real; start/end dates are ASSIGNED from a schedule",
+  "scenarios": {
+    "scenario_A_membership_wins.csv": {
+      "parameters": {
+        "lo": "10",
+        "hi": "120",
+        "start_day": "2025-07-01 00:00:00",
+        "days": "123",
+        "seed": "8360",
+        "weekend_bias": "0.8"
+      },
+      "summary": {
+        "file": "scenario_A_membership_wins.csv",
+        "rows": 520,
+        "first_start": "2025-07-01 20:07:26.862",
+        "last_start": "2025-10-31 20:34:36.752",
+        "distinct_weeks": 18,
+        "distinct_months": 4,
+        "bike_mix": {
+          "classic_bike": 92,
+          "electric_bike": 428
+        },
+        "duration_min": {
+          "min": 10.0,
+          "mean": 19.0,
+          "max": 113.71,
+          "rides_over_45_min": 23
+        }
+      },
+      "reference_costs": {
+        "rides": 520,
+        "months_spanned": 4,
+        "pay_per_use_total": 4834.93,
+        "membership_fee_total": 116.0,
+        "membership_residual": 1383.87,
+        "membership_total": 1499.87,
+        "decision": "Buy Monthly Membership",
+        "avg_ppu_per_ride": 9.2979,
+        "break_even_rides_per_month": 3.12,
+        "actual_rides_per_month": 130.0
+      }
+    },
+    "scenario_B_pay_per_use_wins.csv": {
+      "parameters": {
+        "lo": "2",
+        "hi": "8",
+        "start_day": "2022-01-01 00:00:00",
+        "days": "1461",
+        "seed": "8361",
+        "weekend_bias": "0.5",
+        "bike": "classic_bike"
+      },
+      "summary": {
+        "file": "scenario_B_pay_per_use_wins.csv",
+        "rows": 520,
+        "first_start": "2022-01-06 08:22:09.241",
+        "last_start": "2025-12-30 18:55:22.040",
+        "distinct_weeks": 197,
+        "distinct_months": 48,
+        "bike_mix": {
+          "classic_bike": 520
+        },
+        "duration_min": {
+          "min": 2.01,
+          "mean": 5.0,
+          "max": 7.99,
+          "rides_over_45_min": 0
+        }
+      },
+      "reference_costs": {
+        "rides": 520,
+        "months_spanned": 48,
+        "pay_per_use_total": 1017.12,
+        "membership_fee_total": 1392.0,
+        "membership_residual": 0.0,
+        "membership_total": 1392.0,
+        "decision": "Pay Per Ride/Minute",
+        "avg_ppu_per_ride": 1.956,
+        "break_even_rides_per_month": 14.83,
+        "actual_rides_per_month": 10.83
+      }
+    }
+  }
+}

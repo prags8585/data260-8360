@@ -137,7 +137,8 @@ def main():
     (RAW / "fault_injection_calls.json").write_text(json.dumps(all_calls, indent=2))
     with open(RAW / "fault_injection_calls.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(all_calls[0]))
-        w.writeheader(); w.writerows(all_calls)
+        w.writeheader()
+        w.writerows(all_calls)
     (RAW / "fault_injection_summary.json").write_text(json.dumps({"verify_seed": VERIFY_SEED, "policy": INTERACTIVE.__dict__,
                                                                   "reproducible": reproducible, "rows": summary}, indent=2))
     print(f"saved {len(all_calls)} call records -> {RAW}/fault_injection_calls.json / .csv")

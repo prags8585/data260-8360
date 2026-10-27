@@ -106,3 +106,41 @@ python rag_chunking_comparison.py --k 5
 python verify_hw03.py
 ```
 
+
+# DATA-260 Homework 7 — Karthik Pragada (SID4: 8360)
+
+## Reproducible run instructions
+
+```bash
+# One-time setup (reuses the HW1-HW6 venv, MySQL and Ollama qwen3:8b)
+pip install -r requirements.txt
+PYTHONPATH=. python scripts/migrate_hw7.py          # users.username + users.role, demo reader/writer/moderator accounts
+pre-commit install                                   # Ruff runs on every commit (config: pyproject.toml, .pre-commit-config.yaml)
+
+# Part 1 -- JWT auth + roles (backend on PORT_BASE 8260)
+SESSION_HTTPS_ONLY=false uvicorn main:app --port 8260
+PYTHONPATH=. python scripts/hw7_auth_evidence.py     # real curl requests: 200 / 201 / 401 / 403 / 204
+
+# Part 2 -- hand-written agent loop
+PYTHONPATH=. python scripts/hw7_agent_demo.py        # tasks A, B, C and the nonexistent-id case
+PYTHONPATH=. python scripts/hw7_reliability.py       # 30 attempts, well-formed call rate before/after repair
+
+# Part 3 -- Reflexion
+PYTHONPATH=. python scripts/hw7_reflexion_compare.py 10
+
+# Part 4 -- LangGraph ReAct/MRKL agent (open http://localhost:8260/static/bikeshare.html)
+PYTHONPATH=. python scripts/hw7_build_scenarios.py /path/to/202510-baywheels-tripdata.csv   # the two 520-row scenarios
+PYTHONPATH=. python scripts/hw7_bikeshare_ui_demo.py # drives the UI for both scenarios
+
+# Part 5 -- prompt injection
+PYTHONPATH=. python scripts/hw7_attack_eval.py 2
+
+# Part 6 -- file tools + safety gate
+PYTHONPATH=. python scripts/hw7_file_tools_demo.py
+
+# Offline tests and the smoke test (writes reports/hw07/verification.json)
+python tests_hw7.py
+PYTHONPATH=. python verify_hw07.py
+```
+
+HW4's cookie-session API was replaced by JWT bearer authentication in HW7 (`jwt_auth.py`); the session version is kept only at the `hw4` tag.

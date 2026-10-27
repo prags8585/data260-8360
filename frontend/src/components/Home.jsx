@@ -7,7 +7,7 @@ import { deleteCourse, fetchCourses } from "../store/coursesSlice";
 // Reads straight from Redux state: when a thunk creates, updates or deletes
 // a course the store changes and this list re-renders on its own.
 export default function Home() {
-  const { user } = useAuth();
+  const { user, canWrite, canDelete } = useAuth();
   const dispatch = useDispatch();
   const { items: courses, status, error } = useSelector((state) => state.courses);
 
@@ -43,10 +43,12 @@ export default function Home() {
                 </div>
               </div>
               <div className="row-actions">
-                <Link to={`/update?id=${c.id}`}>Edit</Link>
-                <button className="delete-btn" onClick={() => dispatch(deleteCourse(c.id))}>
-                  Delete
-                </button>
+                {canWrite && <Link to={`/update?id=${c.id}`}>Edit</Link>}
+                {canDelete && (
+                  <button className="delete-btn" onClick={() => dispatch(deleteCourse(c.id))}>
+                    Delete
+                  </button>
+                )}
               </div>
             </li>
           ))}

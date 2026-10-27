@@ -2,7 +2,6 @@
 
 
 import json
-import os
 import py_compile
 import socket
 import subprocess
@@ -126,6 +125,7 @@ def _drop_usage_rows(user_id):
 
 def part2_api(base):
     import requests
+
     from docdb.mongo import get_db
     try:
         r = requests.post(f"{base}/api/chat", timeout=180, json={
@@ -220,13 +220,13 @@ def agent_md():
 
 def checker():
     r = subprocess.run([sys.executable, "scripts/check_agent_md.py"], cwd=ROOT, capture_output=True, text=True, timeout=60)
-    last = [l for l in r.stdout.splitlines() if "AGENT.md checks passed" in l]
+    last = [line for line in r.stdout.splitlines() if "AGENT.md checks passed" in line]
     return r.returncode == 0 and bool(last), last[-1] if last else r.stdout[-200:]
 
 
 def offline_tests():
     r = subprocess.run([sys.executable, "tests_hw6.py"], cwd=ROOT, capture_output=True, text=True, timeout=180)
-    last = [l for l in r.stdout.splitlines() if "tests passed" in l]
+    last = [line for line in r.stdout.splitlines() if "tests passed" in line]
     return r.returncode == 0 and bool(last), last[-1] if last else r.stdout[-200:]
 
 

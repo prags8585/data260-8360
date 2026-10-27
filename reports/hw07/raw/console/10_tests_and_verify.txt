@@ -1,0 +1,49 @@
+PASS  test_all_tools_use_the_common_envelope
+PASS  test_bash_tool_never_runs_a_blocked_command
+PASS  test_calculator_whitelist_and_no_eval
+PASS  test_csv_sql_derived_columns_and_row_shape
+PASS  test_csv_sql_enforces_single_select_at_the_tool_boundary
+PASS  test_expired_token_is_401
+PASS  test_file_tools_inside_a_sandbox
+PASS  test_gate_allows_safe_and_blocks_destructive_even_with_safe_prefix
+PASS  test_hard_iteration_ceiling
+PASS  test_login_success_returns_token_and_bad_login_is_401
+PASS  test_loop_appends_tool_role_messages_and_counts_calls
+PASS  test_malformed_arguments_are_caught_before_execution
+PASS  test_me_requires_a_valid_token
+PASS  test_nonexistent_id_returns_useful_message_and_agent_does_not_crash
+PASS  test_passwords_are_stored_hashed
+PASS  test_policy_retriever_snapshot_hash_and_passages
+PASS  test_reference_costs_membership_and_pay_per_use
+PASS  test_reflections_are_isolated_by_user_and_run_and_sanitised
+PASS  test_reflexion_is_bounded_to_two_retries_then_human_review
+PASS  test_reflexion_stops_with_budget_exhausted
+PASS  test_repeated_failures_stop_cleanly_after_bounded_repairs
+PASS  test_role_policy_create_delete_read
+PASS  test_text_instead_of_tool_and_lost_chain_are_classified
+PASS  test_unknown_tool_is_reprompted_once_and_repaired
+
+24/24 tests passed (3.8s)
+  [OK  ] JWT: login/401, /auth/me 401, role policy 403/201/204, list 200 on the live API -- login=200/bad-login=401 me(no token)=401 me(bad token)=401 reader-create=403 writer-create=201 writer-delete=403 moderator-delete=204 list=200
+  [OK  ] MySQL users table: roles reader/writer/moderator and bcrypt password hashes -- 9 users, roles ['moderator', 'reader', 'writer'], every password_hash is a bcrypt hash: True
+  [OK  ] agent loop completes a multi-step verification task (>= 2 tool calls, verifier passes) -- stop=final_answer tool_calls=2 verifier=pass
+  [OK  ] agent loop handles a nonexistent id without crashing -- stop=final_answer first tool ok=False
+  [OK  ] 20+ attempt reliability results saved (well-formed rate before/after repair) -- 30 attempts, well-formed 71.4% -> 100.0%, failures {'malformed_arguments': 0, 'unknown_tool': 0, 'text_instead_of_tool': 0, 'lost_chain': 20}
+  [OK  ] Reflexion comparison data and stored reflections with evidence -- 2 stored reflections with evidence; stop reasons ['success']
+  [OK  ] Reflexion is bounded: at most 2 retries, clean stop reason -- retries=2 stop=human_review (never more than 2 retries)
+  [OK  ] csv_sql / calculator / policy tools: common envelope, whitelist, read-only contract -- calculator whitelist ok, csv_sql SELECT ok / DROP rejected, 520 rows loaded
+  [OK  ] two 500+ row scenarios with different decisions and SHA-256 pricing snapshots -- A: 520 rows -> Buy Monthly Membership; B: 520 rows -> Pay Per Ride/Minute; 2 pricing snapshots with SHA-256
+  [OK  ] prompt-injection before/after data for 3 attacks x 3 conditions and 3 hostile fixtures -- 31 attack runs over 18 config/attack/condition cells (procedure, minimal); 3 hostile fixtures
+  [OK  ] read-only SELECT contract rejects mutation attempts at the tool boundary -- 4 mutation attempts rejected; table still has 520 rows
+  [OK  ] safety gate: 5 safe commands pass, 5 destructive commands blocked -- 5 safe commands allowed, 5 destructive commands blocked (including ones that start with an allow-listed command)
+  [OK  ] file tools: glob -> search -> read finds the file containing DEBUG -- glob -> search -> read finds b.py containing DEBUG
+  [OK  ] saved 10-command gate run: 10/10 correct and no false allow -- 10/10 correct, false allows: none
+  [OK  ] offline test suite passes (no DB / network / model) -- 24/24 tests passed (4.2s)
+  [OK  ] ruff passes on the repository and pre-commit config exists -- All checks passed!
+  [OK  ] reports/hw07/RUN_LOG.txt exists and is non-empty -- reports/hw07/RUN_LOG.txt
+  [OK  ] reports/hw07/METRICS.md exists and is non-empty -- reports/hw07/METRICS.md
+  [OK  ] reports/hw07/AI_USE.md exists and is non-empty -- reports/hw07/AI_USE.md
+  [OK  ] reports/hw07/Pragada_HW7.pdf exists and is non-empty -- reports/hw07/Pragada_HW7.pdf
+
+20/20 checks passed.
+Wrote reports/hw07/verification.json

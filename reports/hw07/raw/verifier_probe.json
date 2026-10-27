@@ -1,0 +1,310 @@
+{
+  "summary": {
+    "trials_per_case": 10,
+    "runs": 20,
+    "verifier_rejections": 10,
+    "false_rejections": 10,
+    "by_case": {
+      "A": {
+        "rejected": 0,
+        "false_rejections": 0
+      },
+      "C": {
+        "rejected": 10,
+        "false_rejections": 10
+      }
+    }
+  },
+  "runs": [
+    {
+      "case": "A",
+      "trial": 0,
+      "verifier_passed": true,
+      "oracle_correct": true,
+      "false_rejection": false,
+      "assertion": "",
+      "evidence": "",
+      "tools": [
+        "search_courses",
+        "course_detail"
+      ],
+      "answer": "The course details are as follows:\n\n- **Course Code:** DATA-260  \n- **Title:** Introduction to Distributed Systems  \n- **Instructor:** Dr. Priya Nair  \n- **Description:** Consensus, replication, partitioning, and fault tolerance in distributed systems."
+    },
+    {
+      "case": "A",
+      "trial": 1,
+      "verifier_passed": true,
+      "oracle_correct": true,
+      "false_rejection": false,
+      "assertion": "",
+      "evidence": "",
+      "tools": [
+        "search_courses",
+        "course_detail"
+      ],
+      "answer": "The course details are as follows:\n\n- **Course Code**: DATA-260  \n- **Title**: Introduction to Distributed Systems  \n- **Instructor**: Dr. Priya Nair  \n- **Description**: Consensus, replication, partitioning, and fault tolerance in distributed systems."
+    },
+    {
+      "case": "A",
+      "trial": 2,
+      "verifier_passed": true,
+      "oracle_correct": true,
+      "false_rejection": false,
+      "assertion": "",
+      "evidence": "",
+      "tools": [
+        "search_courses",
+        "course_detail"
+      ],
+      "answer": "The course details are as follows:\n\n- **Course Code**: DATA-260  \n- **Title**: Introduction to Distributed Systems  \n- **Instructor**: Dr. Priya Nair  \n- **Description**: Consensus, replication, partitioning, and fault tolerance in distributed systems."
+    },
+    {
+      "case": "A",
+      "trial": 3,
+      "verifier_passed": true,
+      "oracle_correct": true,
+      "false_rejection": false,
+      "assertion": "",
+      "evidence": "",
+      "tools": [
+        "search_courses",
+        "course_detail"
+      ],
+      "answer": "The full details of the first course result are as follows:\n\n- **Course Code:** DATA-260  \n- **Title:** Introduction to Distributed Systems  \n- **Instructor:** Dr. Priya Nair  \n- **Description:** Consensus, replication, partitioning, and fault tolerance in distributed systems."
+    },
+    {
+      "case": "A",
+      "trial": 4,
+      "verifier_passed": true,
+      "oracle_correct": true,
+      "false_rejection": false,
+      "assertion": "",
+      "evidence": "",
+      "tools": [
+        "search_courses",
+        "course_detail"
+      ],
+      "answer": "The full details of the course are as follows:\n\n- **Course Code:** DATA-260  \n- **Title:** Introduction to Distributed Systems  \n- **Instructor:** Dr. Priya Nair  \n- **Description:** Consensus, replication, partitioning, and fault tolerance in distributed systems."
+    },
+    {
+      "case": "A",
+      "trial": 5,
+      "verifier_passed": true,
+      "oracle_correct": true,
+      "false_rejection": false,
+      "assertion": "",
+      "evidence": "",
+      "tools": [
+        "search_courses",
+        "course_detail"
+      ],
+      "answer": "The full details of the first course result are as follows:\n\n- **Course Code:** DATA-260  \n- **Title:** Introduction to Distributed Systems  \n- **Instructor:** Dr. Priya Nair  \n- **Description:** Consensus, replication, partitioning, and fault tolerance in distributed systems."
+    },
+    {
+      "case": "A",
+      "trial": 6,
+      "verifier_passed": true,
+      "oracle_correct": true,
+      "false_rejection": false,
+      "assertion": "",
+      "evidence": "",
+      "tools": [
+        "search_courses",
+        "course_detail"
+      ],
+      "answer": "The course details are as follows:\n\n- **Course Code:** DATA-260  \n- **Title:** Introduction to Distributed Systems  \n- **Instructor:** Dr. Priya Nair  \n- **Description:** Consensus, replication, partitioning, and fault tolerance in distributed systems."
+    },
+    {
+      "case": "A",
+      "trial": 7,
+      "verifier_passed": true,
+      "oracle_correct": true,
+      "false_rejection": false,
+      "assertion": "",
+      "evidence": "",
+      "tools": [
+        "search_courses",
+        "course_detail"
+      ],
+      "answer": "The full details of the first course result are as follows:\n\n- **Course Code:** DATA-260  \n- **Title:** Introduction to Distributed Systems  \n- **Instructor:** Dr. Priya Nair  \n- **Description:** Consensus, replication, partitioning, and fault tolerance in distributed systems."
+    },
+    {
+      "case": "A",
+      "trial": 8,
+      "verifier_passed": true,
+      "oracle_correct": true,
+      "false_rejection": false,
+      "assertion": "",
+      "evidence": "",
+      "tools": [
+        "search_courses",
+        "course_detail"
+      ],
+      "answer": "The course details are as follows:\n\n- **Course Code**: DATA-260  \n- **Title**: Introduction to Distributed Systems  \n- **Instructor**: Dr. Priya Nair  \n- **Description**: Consensus, replication, partitioning, and fault tolerance in distributed systems."
+    },
+    {
+      "case": "A",
+      "trial": 9,
+      "verifier_passed": true,
+      "oracle_correct": true,
+      "false_rejection": false,
+      "assertion": "",
+      "evidence": "",
+      "tools": [
+        "search_courses",
+        "course_detail"
+      ],
+      "answer": "The full details of the first course result are as follows:\n\n- **Course Code:** DATA-260  \n- **Title:** Introduction to Distributed Systems  \n- **Instructor:** Dr. Priya Nair  \n- **Description:** Consensus, replication, partitioning, and fault tolerance in distributed systems."
+    },
+    {
+      "case": "C",
+      "trial": 0,
+      "verifier_passed": false,
+      "oracle_correct": true,
+      "false_rejection": true,
+      "assertion": "course_detail was called for both named courses",
+      "evidence": "detail lookups cover []; missing ['Database Systems', 'Machine Learning Foundations']",
+      "tools": [
+        "search_courses",
+        "search_courses",
+        "course_stats"
+      ],
+      "answer": "\"Machine Learning Foundations\" has 35 available seats and is taught by Dr. Elena Rossi. \"Database Systems\" has 45 available seats and is taught by Dr. Marcus Lee. Therefore, \"Database Systems\" has more available seats."
+    },
+    {
+      "case": "C",
+      "trial": 1,
+      "verifier_passed": false,
+      "oracle_correct": true,
+      "false_rejection": true,
+      "assertion": "course_detail was called for both named courses",
+      "evidence": "detail lookups cover []; missing ['Database Systems', 'Machine Learning Foundations']",
+      "tools": [
+        "search_courses",
+        "search_courses",
+        "course_stats"
+      ],
+      "answer": "\"Machine Learning Foundations\" has 35 available seats and is taught by Dr. Elena Rossi. \"Database Systems\" has 45 available seats and is taught by Dr. Marcus Lee. Therefore, \"Database Systems\" has more available seats."
+    },
+    {
+      "case": "C",
+      "trial": 2,
+      "verifier_passed": false,
+      "oracle_correct": true,
+      "false_rejection": true,
+      "assertion": "course_detail was called for both named courses",
+      "evidence": "detail lookups cover []; missing ['Database Systems', 'Machine Learning Foundations']",
+      "tools": [
+        "search_courses",
+        "search_courses",
+        "course_stats"
+      ],
+      "answer": "The task is complete. \"Machine Learning Foundations\" has 35 available seats and is taught by Dr. Elena Rossi. \"Database Systems\" has 45 available seats and is taught by Dr. Marcus Lee. Therefore, \"Database Systems\" has more available seats."
+    },
+    {
+      "case": "C",
+      "trial": 3,
+      "verifier_passed": false,
+      "oracle_correct": true,
+      "false_rejection": true,
+      "assertion": "course_detail was called for both named courses",
+      "evidence": "detail lookups cover []; missing ['Database Systems', 'Machine Learning Foundations']",
+      "tools": [
+        "search_courses",
+        "search_courses",
+        "course_stats"
+      ],
+      "answer": "\"Machine Learning Foundations\" has 35 available seats and is taught by Dr. Elena Rossi. \"Database Systems\" has 45 available seats and is taught by Dr. Marcus Lee. Therefore, \"Database Systems\" has more available seats."
+    },
+    {
+      "case": "C",
+      "trial": 4,
+      "verifier_passed": false,
+      "oracle_correct": true,
+      "false_rejection": true,
+      "assertion": "course_detail was called for both named courses",
+      "evidence": "detail lookups cover []; missing ['Database Systems', 'Machine Learning Foundations']",
+      "tools": [
+        "search_courses",
+        "search_courses",
+        "course_stats"
+      ],
+      "answer": "\"Machine Learning Foundations\" has 35 available seats and is taught by Dr. Elena Rossi. \"Database Systems\" has 45 available seats and is taught by Dr. Marcus Lee. Therefore, \"Database Systems\" has more available seats."
+    },
+    {
+      "case": "C",
+      "trial": 5,
+      "verifier_passed": false,
+      "oracle_correct": true,
+      "false_rejection": true,
+      "assertion": "course_detail was called for both named courses",
+      "evidence": "detail lookups cover []; missing ['Database Systems', 'Machine Learning Foundations']",
+      "tools": [
+        "search_courses",
+        "search_courses",
+        "course_stats"
+      ],
+      "answer": "The task requires comparing the available seats of \"Machine Learning Foundations\" and \"Database Systems\" and identifying their instructors. Based on the provided information:\n\n- \"Machine Learning Foundations\" has 35 available seats and is taught by Dr. Elena Rossi.\n- \"Database Systems\" has 45 availa"
+    },
+    {
+      "case": "C",
+      "trial": 6,
+      "verifier_passed": false,
+      "oracle_correct": true,
+      "false_rejection": true,
+      "assertion": "course_detail was called for both named courses",
+      "evidence": "detail lookups cover []; missing ['Database Systems', 'Machine Learning Foundations']",
+      "tools": [
+        "search_courses",
+        "search_courses",
+        "course_stats"
+      ],
+      "answer": "\"Machine Learning Foundations\" has 35 available seats and is taught by Dr. Elena Rossi. \"Database Systems\" has 45 available seats and is taught by Dr. Marcus Lee. Therefore, \"Database Systems\" has more available seats."
+    },
+    {
+      "case": "C",
+      "trial": 7,
+      "verifier_passed": false,
+      "oracle_correct": true,
+      "false_rejection": true,
+      "assertion": "course_detail was called for both named courses",
+      "evidence": "detail lookups cover []; missing ['Database Systems', 'Machine Learning Foundations']",
+      "tools": [
+        "search_courses",
+        "search_courses",
+        "course_stats"
+      ],
+      "answer": "\"Machine Learning Foundations\" has 35 available seats and is taught by Dr. Elena Rossi. \"Database Systems\" has 45 available seats and is taught by Dr. Marcus Lee. Therefore, \"Database Systems\" has more available seats."
+    },
+    {
+      "case": "C",
+      "trial": 8,
+      "verifier_passed": false,
+      "oracle_correct": true,
+      "false_rejection": true,
+      "assertion": "course_detail was called for both named courses",
+      "evidence": "detail lookups cover []; missing ['Database Systems', 'Machine Learning Foundations']",
+      "tools": [
+        "search_courses",
+        "search_courses",
+        "course_stats"
+      ],
+      "answer": "\"Machine Learning Foundations\" has 35 available seats and is taught by Dr. Elena Rossi. \"Database Systems\" has 45 available seats and is taught by Dr. Marcus Lee. Therefore, \"Database Systems\" has more available seats."
+    },
+    {
+      "case": "C",
+      "trial": 9,
+      "verifier_passed": false,
+      "oracle_correct": true,
+      "false_rejection": true,
+      "assertion": "course_detail was called for both named courses",
+      "evidence": "detail lookups cover []; missing ['Database Systems', 'Machine Learning Foundations']",
+      "tools": [
+        "search_courses",
+        "search_courses",
+        "course_stats"
+      ],
+      "answer": "\"Machine Learning Foundations\" has 35 available seats and is taught by Dr. Elena Rossi. \"Database Systems\" has 45 available seats and is taught by Dr. Marcus Lee. Therefore, \"Database Systems\" has more available seats."
+    }
+  ]
+}

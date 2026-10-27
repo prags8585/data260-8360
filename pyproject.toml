@@ -1,0 +1,10 @@
+[tool.ruff]
+line-length = 140
+target-version = "py312"
+output-format = "concise"
+extend-exclude = ["frontend", "reports", "corpus", "screenshots", "certs"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+# E501 (line length) is left to a formatter: the project keeps long SQL, prompts and log lines on one line.
+ignore = ["E501"]

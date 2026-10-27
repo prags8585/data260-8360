@@ -4,7 +4,6 @@ import json
 import time
 from pathlib import Path
 
-import numpy as np
 from langchain_ollama import ChatOllama
 from llama_index.core import Document, Settings, VectorStoreIndex
 from llama_index.core.node_parser import TokenTextSplitter
@@ -165,7 +164,6 @@ def evaluate(q: dict, result: dict) -> dict:
         if q["answer_markers"] else None
     )
     refused = REFUSAL.lower() in answer.lower()
-    refused_when_needed = refused if q.get("must_refuse") else (None if not q.get("must_refuse") else False)
     grounded = None
     if result["config"] == "C_context_engineered":
         has_citation = "[source" in answer.lower()

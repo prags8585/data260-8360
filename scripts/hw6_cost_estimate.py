@@ -1,17 +1,5 @@
 #!/usr/bin/env python3
-"""HW6 Part 3 step 5: cost of 10,000 30-turn conversations per setting.
 
-Pricing (assignment): input $1 / 1M tokens, output $5 / 1M tokens. Token counts
-are the measured per-turn means from reports/hw06/raw/memory_settings_summary.json.
-Input = chat prompt tokens + memory-maintenance prompt tokens (fact extraction and
-summarisation); output = chat completion tokens + memory-maintenance completion tokens.
-
-Best  = cheapest setting whose mean probe quality is within QUALITY_TOLERANCE of the
-        highest quality measured (cost is only worth saving if recall is not sacrificed).
-Worst = the most expensive setting.
-
-Usage: python scripts/hw6_cost_estimate.py
-"""
 
 import csv
 import json

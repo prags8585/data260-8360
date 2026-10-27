@@ -1,0 +1,38 @@
+=== 2026-10-26 00:23:23 ===  verifier strictness probe: cases A and C without the required_tools guard, 10 trials each, temperature 1.0
+[case A trial 0] verifier=PASS oracle=correct tools=search_courses>course_detail
+[case A trial 1] verifier=PASS oracle=correct tools=search_courses>course_detail
+[case A trial 2] verifier=PASS oracle=correct tools=search_courses>course_detail
+[case A trial 3] verifier=PASS oracle=correct tools=search_courses>course_detail
+[case A trial 4] verifier=PASS oracle=correct tools=search_courses>course_detail
+[case A trial 5] verifier=PASS oracle=correct tools=search_courses>course_detail
+[case A trial 6] verifier=PASS oracle=correct tools=search_courses>course_detail
+[case A trial 7] verifier=PASS oracle=correct tools=search_courses>course_detail
+[case A trial 8] verifier=PASS oracle=correct tools=search_courses>course_detail
+[case A trial 9] verifier=PASS oracle=correct tools=search_courses>course_detail
+[case C trial 0] verifier=REJECT oracle=correct tools=search_courses>search_courses>course_stats
+[case C trial 1] verifier=REJECT oracle=correct tools=search_courses>search_courses>course_stats
+[case C trial 2] verifier=REJECT oracle=correct tools=search_courses>search_courses>course_stats
+[case C trial 3] verifier=REJECT oracle=correct tools=search_courses>search_courses>course_stats
+[case C trial 4] verifier=REJECT oracle=correct tools=search_courses>search_courses>course_stats
+[case C trial 5] verifier=REJECT oracle=correct tools=search_courses>search_courses>course_stats
+[case C trial 6] verifier=REJECT oracle=correct tools=search_courses>search_courses>course_stats
+[case C trial 7] verifier=REJECT oracle=correct tools=search_courses>search_courses>course_stats
+[case C trial 8] verifier=REJECT oracle=correct tools=search_courses>search_courses>course_stats
+[case C trial 9] verifier=REJECT oracle=correct tools=search_courses>search_courses>course_stats
+
+{
+  "trials_per_case": 10,
+  "runs": 20,
+  "verifier_rejections": 10,
+  "false_rejections": 10,
+  "by_case": {
+    "A": {
+      "rejected": 0,
+      "false_rejections": 0
+    },
+    "C": {
+      "rejected": 10,
+      "false_rejections": 10
+    }
+  }
+}

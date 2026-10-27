@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { login } = useAuth();
@@ -13,10 +13,10 @@ export default function Login() {
     e.preventDefault();
     setError("");
     try {
-      await login(email, password);
+      await login(username, password);
       navigate("/");
     } catch (err) {
-      setError(err.message || "Invalid email or password.");
+      setError(err.message || "Invalid username or password.");
     }
   }
 
@@ -26,11 +26,11 @@ export default function Login() {
       {error && <div className="alert-error">{error}</div>}
       <form onSubmit={handleSubmit}>
         <label>
-          Email
+          Username
           <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
         </label>

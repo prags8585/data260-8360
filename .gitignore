@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 .DS_Store
 certs/
+
+# local report-builder tooling (not part of the submission)
+.report_tools/

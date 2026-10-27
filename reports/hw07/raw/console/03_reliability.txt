@@ -1,0 +1,78 @@
+WARNING:tool_agent:run=c6473b33 iter=2 invalid response (lost_chain): 1 tool call(s) so far; this task still needs 1 more call(s)
+WARNING:tool_agent:run=f9f2b1d6 iter=2 invalid response (lost_chain): 2 tool call(s) so far; this task still needs course_detail x2 more
+WARNING:tool_agent:run=5e362798 iter=2 invalid response (lost_chain): 1 tool call(s) so far; this task still needs 1 more call(s)
+WARNING:tool_agent:run=29b07912 iter=2 invalid response (lost_chain): 2 tool call(s) so far; this task still needs course_detail x2 more
+WARNING:tool_agent:run=4695f8c8 iter=2 invalid response (lost_chain): 1 tool call(s) so far; this task still needs 1 more call(s)
+WARNING:tool_agent:run=a1676e27 iter=2 invalid response (lost_chain): 2 tool call(s) so far; this task still needs course_detail x2 more
+WARNING:tool_agent:run=382b74f7 iter=2 invalid response (lost_chain): 1 tool call(s) so far; this task still needs 1 more call(s)
+WARNING:tool_agent:run=e6e2a0f6 iter=2 invalid response (lost_chain): 2 tool call(s) so far; this task still needs course_detail x2 more
+WARNING:tool_agent:run=2ed4c847 iter=2 invalid response (lost_chain): 1 tool call(s) so far; this task still needs 1 more call(s)
+WARNING:tool_agent:run=94e1bea2 iter=2 invalid response (lost_chain): 2 tool call(s) so far; this task still needs course_detail x2 more
+WARNING:tool_agent:run=de9474a0 iter=2 invalid response (lost_chain): 1 tool call(s) so far; this task still needs 1 more call(s)
+WARNING:tool_agent:run=2dc5293f iter=2 invalid response (lost_chain): 2 tool call(s) so far; this task still needs course_detail x2 more
+WARNING:tool_agent:run=8361aae5 iter=2 invalid response (lost_chain): 1 tool call(s) so far; this task still needs 1 more call(s)
+WARNING:tool_agent:run=223aebc4 iter=2 invalid response (lost_chain): 2 tool call(s) so far; this task still needs course_detail x2 more
+WARNING:tool_agent:run=67f53db1 iter=2 invalid response (lost_chain): 1 tool call(s) so far; this task still needs 1 more call(s)
+WARNING:tool_agent:run=5ea6eb72 iter=2 invalid response (lost_chain): 2 tool call(s) so far; this task still needs course_detail x2 more
+WARNING:tool_agent:run=4bcb8337 iter=2 invalid response (lost_chain): 1 tool call(s) so far; this task still needs 1 more call(s)
+WARNING:tool_agent:run=4b2abbc1 iter=2 invalid response (lost_chain): 2 tool call(s) so far; this task still needs course_detail x2 more
+WARNING:tool_agent:run=8c032bfd iter=2 invalid response (lost_chain): 1 tool call(s) so far; this task still needs 1 more call(s)
+WARNING:tool_agent:run=7aaa1e3a iter=2 invalid response (lost_chain): 2 tool call(s) so far; this task still needs course_detail x2 more
+=== 2026-10-25 23:47:21 ===  30 attempts, qwen3:8b temperature 0.7, seeds 8360+i
+[ 1/30] case A seed=8360 calls=2 opp=2 first_ok=2 after_repair=2 stop=final_answer verifier=PASS (11811 ms)
+[ 2/30] case B seed=8361 calls=2 opp=2 first_ok=1 after_repair=2 stop=final_answer verifier=PASS (20985 ms)
+[ 3/30] case C seed=8362 calls=4 opp=3 first_ok=2 after_repair=3 stop=final_answer verifier=PASS (25773 ms)
+[ 4/30] case A seed=8363 calls=2 opp=2 first_ok=2 after_repair=2 stop=final_answer verifier=PASS (11878 ms)
+[ 5/30] case B seed=8364 calls=2 opp=2 first_ok=1 after_repair=2 stop=final_answer verifier=PASS (21367 ms)
+[ 6/30] case C seed=8365 calls=4 opp=3 first_ok=2 after_repair=3 stop=final_answer verifier=PASS (25848 ms)
+[ 7/30] case A seed=8366 calls=2 opp=2 first_ok=2 after_repair=2 stop=final_answer verifier=PASS (11959 ms)
+[ 8/30] case B seed=8367 calls=2 opp=2 first_ok=1 after_repair=2 stop=final_answer verifier=PASS (22070 ms)
+[ 9/30] case C seed=8368 calls=4 opp=3 first_ok=2 after_repair=3 stop=final_answer verifier=PASS (32738 ms)
+[10/30] case A seed=8369 calls=2 opp=2 first_ok=2 after_repair=2 stop=final_answer verifier=PASS (16938 ms)
+[11/30] case B seed=8370 calls=2 opp=2 first_ok=1 after_repair=2 stop=final_answer verifier=PASS (36700 ms)
+[12/30] case C seed=8371 calls=4 opp=3 first_ok=2 after_repair=3 stop=final_answer verifier=PASS (46650 ms)
+[13/30] case A seed=8372 calls=2 opp=2 first_ok=2 after_repair=2 stop=final_answer verifier=PASS (21174 ms)
+[14/30] case B seed=8373 calls=2 opp=2 first_ok=1 after_repair=2 stop=final_answer verifier=PASS (28805 ms)
+[15/30] case C seed=8374 calls=4 opp=3 first_ok=2 after_repair=3 stop=final_answer verifier=PASS (32486 ms)
+[16/30] case A seed=8375 calls=2 opp=2 first_ok=2 after_repair=2 stop=final_answer verifier=PASS (16101 ms)
+[17/30] case B seed=8376 calls=2 opp=2 first_ok=1 after_repair=2 stop=final_answer verifier=PASS (29125 ms)
+[18/30] case C seed=8377 calls=4 opp=3 first_ok=2 after_repair=3 stop=final_answer verifier=PASS (29421 ms)
+[19/30] case A seed=8378 calls=2 opp=2 first_ok=2 after_repair=2 stop=final_answer verifier=PASS (13826 ms)
+[20/30] case B seed=8379 calls=2 opp=2 first_ok=1 after_repair=2 stop=final_answer verifier=PASS (27441 ms)
+[21/30] case C seed=8380 calls=4 opp=3 first_ok=2 after_repair=3 stop=final_answer verifier=PASS (33475 ms)
+[22/30] case A seed=8381 calls=2 opp=2 first_ok=2 after_repair=2 stop=final_answer verifier=PASS (13186 ms)
+[23/30] case B seed=8382 calls=2 opp=2 first_ok=1 after_repair=2 stop=final_answer verifier=PASS (24973 ms)
+[24/30] case C seed=8383 calls=4 opp=3 first_ok=2 after_repair=3 stop=final_answer verifier=PASS (27552 ms)
+[25/30] case A seed=8384 calls=2 opp=2 first_ok=2 after_repair=2 stop=final_answer verifier=PASS (13618 ms)
+[26/30] case B seed=8385 calls=2 opp=2 first_ok=1 after_repair=2 stop=final_answer verifier=PASS (24030 ms)
+[27/30] case C seed=8386 calls=4 opp=3 first_ok=2 after_repair=3 stop=final_answer verifier=PASS (30298 ms)
+[28/30] case A seed=8387 calls=2 opp=2 first_ok=2 after_repair=2 stop=final_answer verifier=PASS (13155 ms)
+[29/30] case B seed=8388 calls=2 opp=2 first_ok=1 after_repair=2 stop=final_answer verifier=PASS (30080 ms)
+[30/30] case C seed=8389 calls=4 opp=3 first_ok=2 after_repair=3 stop=final_answer verifier=PASS (34746 ms)
+
+{
+  "attempts": 30,
+  "temperature": 0.7,
+  "seed_base": 8360,
+  "opportunities": 70,
+  "well_formed_before_repair": 50,
+  "well_formed_after_repair": 70,
+  "rate_before_repair": 0.7143,
+  "rate_after_repair": 1.0,
+  "failures_by_type": {
+    "malformed_arguments": 0,
+    "unknown_tool": 0,
+    "text_instead_of_tool": 0,
+    "lost_chain": 20
+  },
+  "repaired_by_type": {
+    "malformed_arguments": 0,
+    "unknown_tool": 0,
+    "text_instead_of_tool": 0,
+    "lost_chain": 20
+  },
+  "attempts_verified": 30,
+  "attempts_with_repair": 20,
+  "mean_latency_ms": 24273.7,
+  "mean_tool_calls": 2.67
+}

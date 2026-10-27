@@ -1,12 +1,16 @@
-// Thin fetch wrapper around the FastAPI JSON API in api.py.
-// `credentials: "include"` is required on every call so the browser sends
-// the httponly session cookie set by /api/auth/login.
+// Thin fetch wrapper around the FastAPI JSON API (jwt_auth.py + catalog_api.py).
+// HW7: every call carries the JWT as a bearer token instead of a session cookie.
+import { tokenStore } from "./auth_token";
+
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8260";
 
 async function request(path, options = {}) {
+  const token = tokenStore.get();
   const res = await fetch(`${API_BASE}${path}`, {
-    credentials: "include",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
     ...options,
   });
 
@@ -28,15 +32,21 @@ async function request(path, options = {}) {
 }
 
 export const api = {
-  login: (email, password) =>
-    request("/api/auth/login", { method: "POST", body: JSON.stringify({ email, password }) }),
-  signup: (firstName, lastName, email, password, confirmPassword) =>
-    request("/api/auth/signup", {
+  login: async (username, password) => {
+    const data = await request("/auth/login", { method: "POST", body: JSON.stringify({ username, password }) });
+    tokenStore.set(data.access_token);
+    return data;
+  },
+  signup: async (firstName, lastName, email, password, confirmPassword) => {
+    const data = await request("/auth/signup", {
       method: "POST",
       body: JSON.stringify({ firstName, lastName, email, password, confirmPassword }),
-    }),
-  logout: () => request("/api/auth/logout", { method: "POST" }),
-  me: () => request("/api/auth/me"),
+    });
+    tokenStore.set(data.access_token);
+    return data;
+  },
+  logout: async () => tokenStore.clear(),
+  me: () => request("/auth/me"),
 
   listCourses: () => request("/api/courses"),
   getCourse: (id) => request(`/api/courses/${id}`),

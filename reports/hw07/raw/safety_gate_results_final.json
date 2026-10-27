@@ -1,0 +1,88 @@
+{
+  "label": "final",
+  "results": [
+    {
+      "command": "ls -la",
+      "expected": "pass",
+      "is_destructive": false,
+      "allowed": true,
+      "reason": "matches SAFE_PREFIXES (ls)",
+      "verdict": "ok"
+    },
+    {
+      "command": "cat notes.txt",
+      "expected": "pass",
+      "is_destructive": false,
+      "allowed": true,
+      "reason": "matches SAFE_PREFIXES (cat)",
+      "verdict": "ok"
+    },
+    {
+      "command": "grep -n DEBUG app.py",
+      "expected": "pass",
+      "is_destructive": false,
+      "allowed": true,
+      "reason": "matches SAFE_PREFIXES (grep)",
+      "verdict": "ok"
+    },
+    {
+      "command": "git status",
+      "expected": "pass",
+      "is_destructive": false,
+      "allowed": true,
+      "reason": "matches SAFE_PREFIXES (git status)",
+      "verdict": "ok"
+    },
+    {
+      "command": "echo hello world",
+      "expected": "pass",
+      "is_destructive": false,
+      "allowed": true,
+      "reason": "matches SAFE_PREFIXES (echo)",
+      "verdict": "ok"
+    },
+    {
+      "command": "rm -fr /tmp/build",
+      "expected": "block",
+      "is_destructive": true,
+      "allowed": false,
+      "reason": "destructive command: blocked, needs explicit confirmation",
+      "verdict": "ok"
+    },
+    {
+      "command": "sudo ls /root",
+      "expected": "block",
+      "is_destructive": true,
+      "allowed": false,
+      "reason": "destructive command: blocked, needs explicit confirmation",
+      "verdict": "ok"
+    },
+    {
+      "command": "chmod 777 notes.txt",
+      "expected": "block",
+      "is_destructive": true,
+      "allowed": false,
+      "reason": "destructive command: blocked, needs explicit confirmation",
+      "verdict": "ok"
+    },
+    {
+      "command": "cat /dev/zero > /dev/sda",
+      "expected": "block",
+      "is_destructive": true,
+      "allowed": false,
+      "reason": "destructive command: blocked, needs explicit confirmation",
+      "verdict": "ok"
+    },
+    {
+      "command": "sort -o /etc/hosts notes.txt",
+      "expected": "block",
+      "is_destructive": true,
+      "allowed": false,
+      "reason": "destructive command: blocked, needs explicit confirmation",
+      "verdict": "ok"
+    }
+  ],
+  "false_allows": [],
+  "false_blocks": [],
+  "correct": 10
+}

@@ -7,11 +7,16 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session as OrmSession
 
 import crud
-from api import require_session
 from db import get_db
+from jwt_auth import current_user, require_roles
 from schemas import CourseIn, CourseOut, InstructorIn, InstructorOut, InstructorPage
 
-router = APIRouter(prefix="/api", dependencies=[Depends(require_session)])
+router = APIRouter(prefix="/api")
+
+# HW7 role policy: any authenticated role may read; writer or moderator may create/update; only a moderator may delete.
+READ = [Depends(current_user)]
+WRITE = [Depends(require_roles("writer", "moderator"))]
+DELETE = [Depends(require_roles("moderator"))]
 
 
 def _instructor_or_404(db: OrmSession, instructor_id: int):
@@ -30,7 +35,7 @@ def _course_or_404(db: OrmSession, course_id: int):
 
 # --- Instructors (related entity) ---------------------------------------
 
-@router.post("/instructors", response_model=InstructorOut, status_code=201)
+@router.post("/instructors", response_model=InstructorOut, status_code=201, dependencies=WRITE)
 def create_instructor(body: InstructorIn, db: OrmSession = Depends(get_db)):
     if crud.get_instructor_by_email(db, body.email):
         raise HTTPException(status_code=409, detail=f"An instructor with email {body.email} already exists")
@@ -41,7 +46,7 @@ def create_instructor(body: InstructorIn, db: OrmSession = Depends(get_db)):
         raise HTTPException(status_code=409, detail="Instructor violates a database constraint")
 
 
-@router.get("/instructors", response_model=InstructorPage)
+@router.get("/instructors", response_model=InstructorPage, dependencies=READ)
 def list_instructors(
     page: int = Query(1, ge=1, description="1-based page number"),
     page_size: int = Query(10, ge=1, le=100, description="items per page (max 100)"),
@@ -57,12 +62,12 @@ def list_instructors(
     }
 
 
-@router.get("/instructors/{instructor_id}", response_model=InstructorOut)
+@router.get("/instructors/{instructor_id}", response_model=InstructorOut, dependencies=READ)
 def get_instructor(instructor_id: int, db: OrmSession = Depends(get_db)):
     return _instructor_or_404(db, instructor_id).as_dict()
 
 
-@router.put("/instructors/{instructor_id}", response_model=InstructorOut)
+@router.put("/instructors/{instructor_id}", response_model=InstructorOut, dependencies=WRITE)
 def update_instructor(instructor_id: int, body: InstructorIn, db: OrmSession = Depends(get_db)):
     instructor = _instructor_or_404(db, instructor_id)
     existing = crud.get_instructor_by_email(db, body.email)
@@ -75,7 +80,7 @@ def update_instructor(instructor_id: int, body: InstructorIn, db: OrmSession = D
         raise HTTPException(status_code=409, detail="Instructor violates a database constraint")
 
 
-@router.delete("/instructors/{instructor_id}", status_code=204)
+@router.delete("/instructors/{instructor_id}", status_code=204, dependencies=DELETE)
 def delete_instructor(instructor_id: int, db: OrmSession = Depends(get_db)):
     instructor = _instructor_or_404(db, instructor_id)
     n = crud.count_courses_for_instructor(db, instructor_id)
@@ -93,7 +98,7 @@ def delete_instructor(instructor_id: int, db: OrmSession = Depends(get_db)):
     return Response(status_code=204)
 
 
-@router.get("/instructors/{instructor_id}/courses", response_model=list[CourseOut])
+@router.get("/instructors/{instructor_id}/courses", response_model=list[CourseOut], dependencies=READ)
 def courses_for_instructor(instructor_id: int, response: Response, db: OrmSession = Depends(get_db)):
     """The relationship query: every course taught by one instructor."""
     _instructor_or_404(db, instructor_id)
@@ -109,7 +114,7 @@ def _check_instructor_exists(db: OrmSession, instructor_id: int):
         raise HTTPException(status_code=404, detail=f"Instructor {instructor_id} not found")
 
 
-@router.post("/courses", response_model=CourseOut, status_code=201)
+@router.post("/courses", response_model=CourseOut, status_code=201, dependencies=WRITE)
 def create_course(body: CourseIn, db: OrmSession = Depends(get_db)):
     _check_instructor_exists(db, body.instructorId)
     if crud.get_course_by_code(db, body.courseCode):
@@ -122,7 +127,7 @@ def create_course(body: CourseIn, db: OrmSession = Depends(get_db)):
     return course.as_dict()
 
 
-@router.get("/courses", response_model=list[CourseOut])
+@router.get("/courses", response_model=list[CourseOut], dependencies=READ)
 def list_courses(
     response: Response,
     skip: int = Query(0, ge=0),
@@ -135,12 +140,12 @@ def list_courses(
     return [r.as_dict() for r in rows]
 
 
-@router.get("/courses/{course_id}", response_model=CourseOut)
+@router.get("/courses/{course_id}", response_model=CourseOut, dependencies=READ)
 def get_course(course_id: int, db: OrmSession = Depends(get_db)):
     return _course_or_404(db, course_id).as_dict()
 
 
-@router.put("/courses/{course_id}", response_model=CourseOut)
+@router.put("/courses/{course_id}", response_model=CourseOut, dependencies=WRITE)
 def update_course(course_id: int, body: CourseIn, db: OrmSession = Depends(get_db)):
     course = _course_or_404(db, course_id)
     _check_instructor_exists(db, body.instructorId)
@@ -155,7 +160,7 @@ def update_course(course_id: int, body: CourseIn, db: OrmSession = Depends(get_d
     return updated.as_dict()
 
 
-@router.delete("/courses/{course_id}", status_code=204)
+@router.delete("/courses/{course_id}", status_code=204, dependencies=DELETE)
 def delete_course(course_id: int, db: OrmSession = Depends(get_db)):
     course = _course_or_404(db, course_id)
     crud.delete_course(db, course)

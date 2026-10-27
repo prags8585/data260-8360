@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import csv
 import json
-import statistics
 import time
 from pathlib import Path
 

@@ -9,11 +9,12 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.middleware.sessions import SessionMiddleware
 
-import api
 import auth
 import catalog_api
 import courses_store as store
+import jwt_auth
 import perf_api
+from bikeshare import server as bikeshare_server
 from docdb import server as docdb_server
 
 app = FastAPI()
@@ -43,9 +44,10 @@ app.add_middleware(
     https_only=os.environ.get("SESSION_HTTPS_ONLY", "true").lower() != "false",
 )
 app.include_router(auth.router)
-app.include_router(api.router)
+app.include_router(jwt_auth.router)
 app.include_router(catalog_api.router)
 app.include_router(perf_api.router)
+app.include_router(bikeshare_server.router)
 docdb_server.register(app)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")

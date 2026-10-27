@@ -1,0 +1,40 @@
+=== 2026-10-26 03:19:51 ===  file tools + safety gate, sandbox /var/folders/bn/syn6z63d1llgjp9x8hgg3chw0000gn/T/course_sandbox_27i8buis
+
+(a) the six file tools, used directly
+write_file  -> {"ok": true, "path": "notes/todo.txt", "bytes": 33}
+read_file(max_lines=2) -> {"ok": true, "path": "notes/todo.txt", "content": "buy milk\nwrite report", "lines_returned": 2, "total_lines": 3, "truncated": true}
+edit_file   -> {"ok": true, "path": "notes/todo.txt", "diff": "--- a/notes/todo.txt\n+++ b/notes/todo.txt\n@@ -1,3 +1,3 @@\n buy milk\n-write report\n+write HW7 report\n submit HW7"}
+glob_files('**/*.txt') -> {"ok": true, "pattern": "**/*.txt", "count": 1, "files": ["notes/todo.txt"]}
+search_in_files('HW7', file_pattern='*.txt') -> {"ok": true, "pattern": "HW7", "count": 2, "matches": [{"file": "notes/todo.txt", "line": 2, "text": "write HW7 report"}, {"file": "notes/todo.txt", "line": 3, "text": "submit HW7"}], "truncated": false}
+bash('cat notes/todo.txt') -> {"ok": true, "returncode": 0, "stdout": "buy milk\nwrite HW7 report\nsubmit HW7\n", "stderr": "", "gate": "matches SAFE_PREFIXES (cat)"}
+bash('rm -rf notes') -> {"ok": false, "blocked": true, "error": "blocked by safety gate: destructive command: blocked, needs explicit confirmation"}
+
+(b) integration test: glob -> search -> read through run_agent()
+03:19:53 tool_agent INFO run=2a7fecd3 tool_call #1 glob_files {"pattern": "*.py"} -> ok=True
+03:20:00 tool_agent INFO run=2a7fecd3 tool_call #2 search_in_files {"file_pattern": "*.py", "pattern": "DEBUG"} -> ok=True
+03:20:02 tool_agent INFO run=2a7fecd3 tool_call #3 read_file {"max_lines": 100, "path": "settings.py"} -> ok=True
+03:20:22 tool_agent INFO run=2a7fecd3 stopped: final_answer after 4 iteration(s); total tool calls: 3
+answer: The contents of the `settings.py` file are as follows:
+
+```
+DEBUG = True
+TIMEOUT = 30
+RETRIES = 3
+```
+tool order: glob_files -> search_in_files -> read_file  | total_tool_calls=3  stop_reason=final_answer
+integration test: PASS (file containing DEBUG = settings.py)
+
+(c) safety-gate test
+=== 2026-10-26 03:20:22 ===  safety gate test (final); SAFE_PREFIXES has 20 entries
+  expect pass  | ls -la                             | destructive=False | ALLOW | matches SAFE_PREFIXES (ls) | ok
+  expect pass  | cat notes.txt                      | destructive=False | ALLOW | matches SAFE_PREFIXES (cat) | ok
+  expect pass  | grep -n DEBUG app.py               | destructive=False | ALLOW | matches SAFE_PREFIXES (grep) | ok
+  expect pass  | git status                         | destructive=False | ALLOW | matches SAFE_PREFIXES (git status) | ok
+  expect pass  | echo hello world                   | destructive=False | ALLOW | matches SAFE_PREFIXES (echo) | ok
+  expect block | rm -fr /tmp/build                  | destructive=True  | BLOCK | destructive command: blocked, needs explicit confirmation | ok
+  expect block | sudo ls /root                      | destructive=True  | BLOCK | destructive command: blocked, needs explicit confirmation | ok
+  expect block | chmod 777 notes.txt                | destructive=True  | BLOCK | destructive command: blocked, needs explicit confirmation | ok
+  expect block | cat /dev/zero > /dev/sda           | destructive=True  | BLOCK | destructive command: blocked, needs explicit confirmation | ok
+  expect block | sort -o /etc/hosts notes.txt       | destructive=True  | BLOCK | destructive command: blocked, needs explicit confirmation | ok
+
+10/10 correct; false allows: none; false blocks: none

@@ -1,0 +1,51 @@
+$ pre-commit install
+pre-commit installed at /Users/prags/Desktop/HW1_DATA260/.git/hooks/pre-commit
+
+# --- a file with lint problems is written (unused imports, unsorted imports, unused variables) ---
+$ ruff check lint_demo.py
+lint_demo.py:1:1: I001 [*] Import block is un-sorted or un-formatted
+lint_demo.py:1:8: F401 [*] `sys` imported but unused
+lint_demo.py:2:8: F401 [*] `os` imported but unused
+lint_demo.py:3:8: F401 [*] `json` imported but unused
+lint_demo.py:7:5: F841 Local variable `total` is assigned to but never used
+lint_demo.py:8:5: F841 Local variable `scaled` is assigned to but never used
+Found 6 errors.
+[*] 4 fixable with `--fix` (2 unsafe fixes available with `--fix --unsafe-fixes`).
+
+# --- commit attempt 1: the pre-commit hook runs and blocks the commit ---
+$ git add lint_demo.py
+
+$ git commit -m "HW7: add summarize helper"
+ruff (lint)..............................................................Failed
+- hook id: ruff
+- exit code: 1
+
+lint_demo.py:1:1: I001 [*] Import block is un-sorted or un-formatted
+lint_demo.py:1:8: F401 [*] `sys` imported but unused
+lint_demo.py:2:8: F401 [*] `os` imported but unused
+lint_demo.py:3:8: F401 [*] `json` imported but unused
+lint_demo.py:7:5: F841 Local variable `total` is assigned to but never used
+lint_demo.py:8:5: F841 Local variable `scaled` is assigned to but never used
+Found 6 errors.
+[*] 4 fixable with `--fix` (2 unsafe fixes available with `--fix --unsafe-fixes`).
+
+# --- fix: Ruff removes the unused/unsorted imports, the unused variables are deleted by hand ---
+$ ruff check --fix lint_demo.py
+lint_demo.py:4:5: F841 Local variable `total` is assigned to but never used
+lint_demo.py:5:5: F841 Local variable `scaled` is assigned to but never used
+Found 5 errors (3 fixed, 2 remaining).
+2 unsafe fixes available with `--fix --unsafe-fixes`.
+$ ruff check lint_demo.py
+All checks passed!
+
+# --- commit attempt 2: the hook passes and the commit is created ---
+$ git add lint_demo.py
+
+$ git commit -m "HW7: add summarize helper"
+[hw7-lint-demo 7a3f4a0] HW7: add summarize helper
+ 1 file changed, 6 insertions(+)
+ create mode 100644 lint_demo.py
+ruff (lint)..............................................................Passed
+$ git log --oneline -2
+7a3f4a0 HW7: add summarize helper
+0160ea5 HW6: AI usage

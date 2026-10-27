@@ -1,0 +1,10 @@
+{
+  "url": "https://lyftbikes.com/pricing",
+  "accessed_at": "2026-10-26T08:34:49Z",
+  "fetched_via": "HTTP 200",
+  "sha256": "2b504ee9500d4afcc263644c0d0725cddd0d6f066cf7ecf46764ef18f4247f67",
+  "raw_html_sha256": "f2727a3e8a390db30a4a4b6653a60e4c72c04726ec568a00f0742232997470e5",
+  "chars": 4761,
+  "text_file": "scenario_A_membership_wins_pricing_snapshot.txt",
+  "text_sha256_check": true
+}

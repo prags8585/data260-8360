@@ -1,0 +1,43 @@
+=== 2026-10-26 01:38:16 ===  MySQL users table (s8360-mysql, database s8360_rel)
+
+$ docker exec s8360-mysql mysql -uroot -p*** s8360_rel -t -e "DESCRIBE users;"
++---------------+-------------------------------------+------+-----+---------+----------------+
+| Field         | Type                                | Null | Key | Default | Extra          |
++---------------+-------------------------------------+------+-----+---------+----------------+
+| id            | int                                 | NO   | PRI | NULL    | auto_increment |
+| name          | varchar(255)                        | NO   |     | NULL    |                |
+| email         | varchar(255)                        | NO   | UNI | NULL    |                |
+| password_hash | varchar(255)                        | NO   |     | NULL    |                |
+| username      | varchar(64)                         | NO   | UNI | NULL    |                |
+| role          | enum('reader','writer','moderator') | NO   |     | reader  |                |
++---------------+-------------------------------------+------+-----+---------+----------------+
+
+$ docker exec s8360-mysql mysql -uroot -p*** s8360_rel -t -e "SELECT id, username, role, LEFT(password_hash, 29) AS password_hash_prefix, LENGTH(password_hash) AS hash_len FROM users;"
++----+-----------------+-----------+-------------------------------+----------+
+| id | username        | role      | password_hash_prefix          | hash_len |
++----+-----------------+-----------+-------------------------------+----------+
+|  1 | karthik.pragada | moderator | $2b$12$7nV8dgxOdRP4atW3/zrtNO |       60 |
+|  2 | garvit.test     | reader    | $2b$12$XUoPMiA4Q/6RNdj42WVPNu |       60 |
+|  3 | yash.rocky      | reader    | $2b$12$czkS2Eg4TV/WKZAjBfl5Ce |       60 |
+|  4 | hw4.demo        | reader    | $2b$12$glDGK1O/FGcjpEUbKDziA. |       60 |
+|  5 | hw4.curl.demo   | reader    | $2b$12$8zFObSlPN46rTrrNo6m7/. |       60 |
+|  6 | hw4.curl.demo2  | reader    | $2b$12$9Tf13gsKIEh5X5nXvROGvO |       60 |
+|  7 | reader1         | reader    | $2b$12$.cm2F09Zt0N/uNYHKuhAdu |       60 |
+|  8 | writer1         | writer    | $2b$12$Z/hMcX5t1b5LZfek9Y7mGO |       60 |
+|  9 | moderator1      | moderator | $2b$12$tkpKTDRHMBxByfM4Y7Tixu |       60 |
++----+-----------------+-----------+-------------------------------+----------+
+
+$ docker exec s8360-mysql mysql -uroot -p*** s8360_rel -t -e "SHOW CREATE TABLE users\G"
+*************************** 1. row ***************************
+       Table: users
+Create Table: CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `username` varchar(64) NOT NULL,
+  `role` enum('reader','writer','moderator') NOT NULL DEFAULT 'reader',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `uq_users_username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci

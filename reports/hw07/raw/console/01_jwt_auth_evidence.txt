@@ -1,0 +1,118 @@
+=== 2026-10-26 03:22:10 ===  JWT auth evidence against http://localhost:8260
+
+## login: valid credentials return a JWT
+$ curl -s -X POST http://localhost:8260/auth/login -H 'Content-Type: application/json' -d '{"username": "writer1", "password": "Writer#Pass2026"}' -w '\nHTTP %{http_code}\n'
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ3cml0ZXIxIiwidWlkIjo4LCJyb2xlIjoid3JpdGVyIiwiaWF0IjoxNzkzMDEwMTMxLCJleHAiOjE3OTMwMTE5MzF9.H_0YqsxUFLqoAbhu3pPVEeEdPkR3HkKXlPpJVGSk6b0",
+  "token_type": "bearer",
+  "expires_in": 1800,
+  "role": "writer"
+}
+HTTP 200
+
+## login: invalid credentials return 401
+$ curl -s -X POST http://localhost:8260/auth/login -H 'Content-Type: application/json' -d '{"username": "writer1", "password": "wrong-password"}' -w '\nHTTP %{http_code}\n'
+{
+  "detail": "Invalid username or password"
+}
+HTTP 401
+
+## GET /auth/me without a token returns 401
+$ curl -s http://localhost:8260/auth/me -w '\nHTTP %{http_code}\n'
+{
+  "detail": "Not authenticated: missing bearer token"
+}
+HTTP 401
+
+## GET /auth/me with an invalid token returns 401
+$ curl -s http://localhost:8260/auth/me -H 'Authorization: Bearer abc.def.ghi' -w '\nHTTP %{http_code}\n'
+{
+  "detail": "Invalid token"
+}
+HTTP 401
+
+## GET /auth/me with an expired token returns 401
+$ curl -s http://localhost:8260/auth/me -H "Authorization: Bearer $EXPIRED" -w '\nHTTP %{http_code}\n'
+{
+  "detail": "Token has expired"
+}
+HTTP 401
+
+## GET /auth/me with a valid token returns the identity and role
+$ curl -s http://localhost:8260/auth/me -H "Authorization: Bearer $WRITER" -w '\nHTTP %{http_code}\n'
+{
+  "id": 8,
+  "username": "writer1",
+  "name": "Wes Writer",
+  "email": "writer1@campus.example.edu",
+  "role": "writer"
+}
+HTTP 200
+
+## create a course as a reader returns 403
+$ curl -s -X POST http://localhost:8260/api/courses -H 'Content-Type: application/json' -H "Authorization: Bearer $READER" -d '{"courseTitle": "JWT Demo Course", "courseCode": "DEMO-101", "seatsAvailable": 20, "instructorId": 1}' -w '\nHTTP %{http_code}\n'
+{
+  "detail": "Role 'reader' is not allowed; requires writer or moderator"
+}
+HTTP 403
+
+## create a course as a writer returns 201
+$ curl -s -X POST http://localhost:8260/api/courses -H 'Content-Type: application/json' -H "Authorization: Bearer $WRITER" -d '{"courseTitle": "JWT Demo Course", "courseCode": "DEMO-101", "seatsAvailable": 20, "instructorId": 1}' -w '\nHTTP %{http_code}\n'
+{
+  "id": 18,
+  "courseTitle": "JWT Demo Course",
+  "courseCode": "DEMO-101",
+  "email": "",
+  "description": "",
+  "department": "",
+  "seatsAvailable": 20,
+  "instructorId": 1,
+  "instructorName": "Dr. Priya Nair",
+  "createdAt": "2026-10-26T10:22:11",
+  "updatedAt": "2026-10-26T10:22:11"
+}
+HTTP 201
+
+## delete a course as a writer returns 403
+$ curl -s -X DELETE http://localhost:8260/api/courses/18 -H "Authorization: Bearer $WRITER" -w '\nHTTP %{http_code}\n'
+{
+  "detail": "Role 'writer' is not allowed; requires moderator"
+}
+HTTP 403
+
+## delete a course as a moderator returns 204
+$ curl -s -X DELETE http://localhost:8260/api/courses/18 -H "Authorization: Bearer $MODERATOR" -w '\nHTTP %{http_code}\n'
+
+HTTP 204
+
+## list courses with a valid token returns 200
+$ curl -s 'http://localhost:8260/api/courses?limit=2' -H "Authorization: Bearer $READER" -w '\nHTTP %{http_code}\n'
+[
+  {
+    "id": 1,
+    "courseTitle": "Introduction to Distributed Systems",
+    "courseCode": "DATA-260",
+    "email": "karthik.pragada@sjsu.edu",
+    "description": "Consensus, replication, partitioning, and fault tolerance in distributed systems.",
+    "department": "Data Science",
+    "seatsAvailable": 40,
+    "instructorId": 1,
+    "instructorName": "Dr. Priya Nair",
+    "createdAt": "2026-10-05T21:25:33",
+    "updatedAt": "2026-10-05T21:25:33"
+  },
+  {
+    "id": 2,
+    "courseTitle": "Machine Learning Foundations",
+    "courseCode": "DATA-245",
+    "email": "karthik.pragada@sjsu.edu",
+    "description": "Supervised and unsupervised learning, model evaluation, and feature engineering.",
+    "department": "Data Science",
+    "seatsAvailable": 35,
+    "instructorId": 3,
+    "instructorName": "Dr. Elena Rossi",
+    "createdAt": "2026-10-05T21:25:33",
+    "updatedAt": "2026-10-05T21:25:33"
+  }
+]
+HTTP 200
