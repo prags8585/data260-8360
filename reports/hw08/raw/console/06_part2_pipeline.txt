@@ -1,0 +1,111 @@
+=== 2026-11-01 15:13:59 === Part 2 - Planner, Writer, Reviewer as separate processes (qwen3:8b, temperature 0, seed 8360)
+$ python planner.py
+2026-11-01T23:13:59.719Z planner INFO Planner ready, reading s8360_inbox (group s8360_planner, partitions [0]), model qwen3:8b
+2026-11-01T23:14:20.755Z planner INFO received question from s8360_inbox partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b message={"correlation_id":"57c72d04-3ef8-4b88-b19d-8c7b08948f1b","question":"Which department has the most available seats, and which course there has the most seats?","submitted_at":"2026-11-01T23:14:20.247Z"}
+2026-11-01T23:14:26.220Z httpx INFO HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-11-01T23:14:28.089Z planner INFO sending plan to s8360_tasks correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b message={"correlation_id":"57c72d04-3ef8-4b88-b19d-8c7b08948f1b","question":"Which department has the most available seats, and which course there has the most seats?","plan":["Identify the department with the highest total available seats across all its courses.","Find the course within that department with the highest number of available seats."],"plan_source":"llm","planned_at":"2026-11-01T23:14:28.089Z"}
+2026-11-01T23:14:28.103Z planner INFO plan acknowledged by the broker partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b
+2026-11-01T23:14:34.456Z planner INFO received question from s8360_inbox partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d message={"correlation_id":"63db99cd-3913-4a59-8004-7f2617c6484d","question":"How many courses does Dr. Priya Nair teach and how many seats do they offer in total?","submitted_at":"2026-11-01T23:14:33.942Z"}
+2026-11-01T23:14:34.851Z httpx INFO HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-11-01T23:14:36.725Z planner INFO sending plan to s8360_tasks correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d message={"correlation_id":"63db99cd-3913-4a59-8004-7f2617c6484d","question":"How many courses does Dr. Priya Nair teach and how many seats do they offer in total?","plan":["Identify all courses taught by Dr. Priya Nair from the catalogue data.","Sum the number of seats offered across all her courses."],"plan_source":"llm","planned_at":"2026-11-01T23:14:36.725Z"}
+2026-11-01T23:14:36.726Z planner INFO plan acknowledged by the broker partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d
+2026-11-01T23:14:59.436Z planner INFO planner stopped
+$ python writer.py
+2026-11-01T23:13:59.655Z writer INFO writer-1 starting: brain=llm idempotency=on commit=after processing retries=3 dead_letter=on
+2026-11-01T23:13:59.715Z writer INFO Writer writer-1 ready, reading s8360_tasks (group s8360_writers), assigned partitions [0, 1]
+2026-11-01T23:14:28.106Z writer INFO received task from s8360_tasks partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b
+2026-11-01T23:14:28.109Z writer INFO processing correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b attempt 1/3
+2026-11-01T23:14:31.737Z httpx INFO HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-11-01T23:14:33.576Z writer INFO sending draft to s8360_drafts correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b message={"correlation_id":"57c72d04-3ef8-4b88-b19d-8c7b08948f1b","question":"Which department has the most available seats, and which course there has the most seats?","plan":["Identify the department with the highest total available seats across all its courses.","Find the course within that department with the highest number of available seats."],"draft":"The department with the most available seats is Data Science, and the course within that department with the most seats is DATA-260 with 40 seats available.","facts":{"departments":[{"group":"Computer Science","courses":2,"totalSeats":95},{"group":"Data Science","courses":3,"totalSeats":105},{"group":"Statistics","courses":1,"totalSeats":60}],"instructors":[{"group":"Dr. Elena Rossi","courses":2,"totalSeats":95},{"group":"Dr. Marcus Lee","courses":2,"totalSeats":95},{"group":"Dr. Priya Nair","courses":2,"totalSeats":70}],"courses":[{"id":3,"courseCode":"CS-157A","courseTitle":"Database Systems","department":"Computer Science","seatsAvailable":45,"instructorName":"Dr. Marcus Lee"},{"id":5,"courseCode":"CS-146","courseTitle":"Data Structures and Algorithms","department":"Computer Science","seatsAvailable":50,"instructorName":"Dr. Marcus Lee"},{"id":1,"courseCode":"DATA-260","courseTitle":"Introduction to Distributed Systems","department":"Data Science","seatsAvailable":40,"instructorName":"Dr. Priya Nair"},{"id":2,"courseCode":"DATA-245","courseTitle":"Machine Learning Foundations","department":"Data Science","seatsAvailable":35,"instructorName":"Dr. Elena Rossi"},{"id":4,"courseCode":"DATA-270","courseTitle":"Cloud Computing","department":"Data Science","seatsAvailable":30,"instructorName":"Dr. Priya Nair"},{"id":6,"courseCode":"STAT-200","courseTitle":"Applied Statistics","department":"Statistics","seatsAvailable":60,"instructorName":"Dr. Elena Rossi"}],"totals":{"courses":6,"seats":260},"course_codes":["DATA-260","DATA-245","CS-157A","DATA-270","CS-146","STAT-200"]},"written_by":"writer-1","written_at":"2026-11-01T23:14:33.576Z"}
+2026-11-01T23:14:33.584Z writer INFO draft acknowledged by the broker partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b
+2026-11-01T23:14:33.589Z writer INFO committed offset 1 on s8360_tasks partition=0
+2026-11-01T23:14:36.727Z writer INFO received task from s8360_tasks partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d
+2026-11-01T23:14:36.727Z writer INFO processing correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d attempt 1/3
+2026-11-01T23:14:40.385Z httpx INFO HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-11-01T23:14:41.525Z writer INFO sending draft to s8360_drafts correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d message={"correlation_id":"63db99cd-3913-4a59-8004-7f2617c6484d","question":"How many courses does Dr. Priya Nair teach and how many seats do they offer in total?","plan":["Identify all courses taught by Dr. Priya Nair from the catalogue data.","Sum the number of seats offered across all her courses."],"draft":"Dr. Priya Nair teaches 2 courses and offers a total of 75 seats.","facts":{"departments":[{"group":"Computer Science","courses":2,"totalSeats":95},{"group":"Data Science","courses":3,"totalSeats":105},{"group":"Statistics","courses":1,"totalSeats":60}],"instructors":[{"group":"Dr. Elena Rossi","courses":2,"totalSeats":95},{"group":"Dr. Marcus Lee","courses":2,"totalSeats":95},{"group":"Dr. Priya Nair","courses":2,"totalSeats":70}],"courses":[{"id":3,"courseCode":"CS-157A","courseTitle":"Database Systems","department":"Computer Science","seatsAvailable":45,"instructorName":"Dr. Marcus Lee"},{"id":5,"courseCode":"CS-146","courseTitle":"Data Structures and Algorithms","department":"Computer Science","seatsAvailable":50,"instructorName":"Dr. Marcus Lee"},{"id":1,"courseCode":"DATA-260","courseTitle":"Introduction to Distributed Systems","department":"Data Science","seatsAvailable":40,"instructorName":"Dr. Priya Nair"},{"id":2,"courseCode":"DATA-245","courseTitle":"Machine Learning Foundations","department":"Data Science","seatsAvailable":35,"instructorName":"Dr. Elena Rossi"},{"id":4,"courseCode":"DATA-270","courseTitle":"Cloud Computing","department":"Data Science","seatsAvailable":30,"instructorName":"Dr. Priya Nair"},{"id":6,"courseCode":"STAT-200","courseTitle":"Applied Statistics","department":"Statistics","seatsAvailable":60,"instructorName":"Dr. Elena Rossi"}],"totals":{"courses":6,"seats":260},"course_codes":["DATA-260","DATA-245","CS-157A","DATA-270","CS-146","STAT-200"]},"written_by":"writer-1","written_at":"2026-11-01T23:14:41.525Z"}
+2026-11-01T23:14:41.527Z writer INFO draft acknowledged by the broker partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d
+2026-11-01T23:14:41.529Z writer INFO committed offset 2 on s8360_tasks partition=0
+2026-11-01T23:14:59.088Z writer INFO partitions revoked [0, 1]
+2026-11-01T23:14:59.093Z writer INFO writer-1 stopped
+$ python reviewer.py
+2026-11-01T23:13:59.225Z reviewer INFO Reviewer ready, reading s8360_drafts (group s8360_reviewer, partitions [0])
+2026-11-01T23:14:33.587Z reviewer INFO received draft from s8360_drafts partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b message={"correlation_id":"57c72d04-3ef8-4b88-b19d-8c7b08948f1b","question":"Which department has the most available seats, and which course there has the most seats?","plan":["Identify the department with the highest total available seats across all its courses.","Find the course within that department with the highest number of available seats."],"draft":"The department with the most available seats is Data Science, and the course within that department with the most seats is DATA-260 with 40 seats available.","facts":{"departments":[{"group":"Computer Science","courses":2,"totalSeats":95},{"group":"Data Science","courses":3,"totalSeats":105},{"group":"Statistics","courses":1,"totalSeats":60}],"instructors":[{"group":"Dr. Elena Rossi","courses":2,"totalSeats":95},{"group":"Dr. Marcus Lee","courses":2,"totalSeats":95},{"group":"Dr. Priya Nair","courses":2,"totalSeats":70}],"courses":[{"id":3,"courseCode":"CS-157A","courseTitle":"Database Systems","department":"Computer Science","seatsAvailable":45,"instructorName":"Dr. Marcus Lee"},{"id":5,"courseCode":"CS-146","courseTitle":"Data Structures and Algorithms","department":"Computer Science","seatsAvailable":50,"instructorName":"Dr. Marcus Lee"},{"id":1,"courseCode":"DATA-260","courseTitle":"Introduction to Distributed Systems","department":"Data Science","seatsAvailable":40,"instructorName":"Dr. Priya Nair"},{"id":2,"courseCode":"DATA-245","courseTitle":"Machine Learning Foundations","department":"Data Science","seatsAvailable":35,"instructorName":"Dr. Elena Rossi"},{"id":4,"courseCode":"DATA-270","courseTitle":"Cloud Computing","department":"Data Science","seatsAvailable":30,"instructorName":"Dr. Priya Nair"},{"id":6,"courseCode":"STAT-200","courseTitle":"Applied Statistics","department":"Statistics","seatsAvailable":60,"instructorName":"Dr. Elena Rossi"}],"totals":{"courses":6,"seats":260},"course_codes":["DATA-260","DATA-245","CS-157A","DATA-270","CS-146","STAT-200"]},"written_by":"writer-1","written_at":"2026-11-01T23:14:33.576Z"}
+2026-11-01T23:14:33.589Z reviewer INFO review approved correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b checks=[{"check":"length","passed":true,"detail":"156 characters"},{"check":"numbers_grounded","passed":true,"detail":"numbers in draft [40, 260]"},{"check":"codes_known","passed":true,"detail":"codes in draft ['DATA-260']"},{"check":"uses_catalogue","passed":true,"detail":"names a department, instructor or course code"},{"check":"superlative_correct","passed":true,"detail":"expected Data Science (105 seats) and DATA-260 (40 seats)"}]
+2026-11-01T23:14:33.589Z reviewer INFO sending final message to s8360_final correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b message={"correlation_id":"57c72d04-3ef8-4b88-b19d-8c7b08948f1b","status":"approved","answer":"The department with the most available seats is Data Science, and the course within that department with the most seats is DATA-260 with 40 seats available.","question":"Which department has the most available seats, and which course there has the most seats?","review":[{"check":"length","passed":true,"detail":"156 characters"},{"check":"numbers_grounded","passed":true,"detail":"numbers in draft [40, 260]"},{"check":"codes_known","passed":true,"detail":"codes in draft ['DATA-260']"},{"check":"uses_catalogue","passed":true,"detail":"names a department, instructor or course code"},{"check":"superlative_correct","passed":true,"detail":"expected Data Science (105 seats) and DATA-260 (40 seats)"}],"reviewed_at":"2026-11-01T23:14:33.589Z"}
+2026-11-01T23:14:33.594Z reviewer INFO final message acknowledged by the broker partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b
+2026-11-01T23:14:41.527Z reviewer INFO received draft from s8360_drafts partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d message={"correlation_id":"63db99cd-3913-4a59-8004-7f2617c6484d","question":"How many courses does Dr. Priya Nair teach and how many seats do they offer in total?","plan":["Identify all courses taught by Dr. Priya Nair from the catalogue data.","Sum the number of seats offered across all her courses."],"draft":"Dr. Priya Nair teaches 2 courses and offers a total of 75 seats.","facts":{"departments":[{"group":"Computer Science","courses":2,"totalSeats":95},{"group":"Data Science","courses":3,"totalSeats":105},{"group":"Statistics","courses":1,"totalSeats":60}],"instructors":[{"group":"Dr. Elena Rossi","courses":2,"totalSeats":95},{"group":"Dr. Marcus Lee","courses":2,"totalSeats":95},{"group":"Dr. Priya Nair","courses":2,"totalSeats":70}],"courses":[{"id":3,"courseCode":"CS-157A","courseTitle":"Database Systems","department":"Computer Science","seatsAvailable":45,"instructorName":"Dr. Marcus Lee"},{"id":5,"courseCode":"CS-146","courseTitle":"Data Structures and Algorithms","department":"Computer Science","seatsAvailable":50,"instructorName":"Dr. Marcus Lee"},{"id":1,"courseCode":"DATA-260","courseTitle":"Introduction to Distributed Systems","department":"Data Science","seatsAvailable":40,"instructorName":"Dr. Priya Nair"},{"id":2,"courseCode":"DATA-245","courseTitle":"Machine Learning Foundations","department":"Data Science","seatsAvailable":35,"instructorName":"Dr. Elena Rossi"},{"id":4,"courseCode":"DATA-270","courseTitle":"Cloud Computing","department":"Data Science","seatsAvailable":30,"instructorName":"Dr. Priya Nair"},{"id":6,"courseCode":"STAT-200","courseTitle":"Applied Statistics","department":"Statistics","seatsAvailable":60,"instructorName":"Dr. Elena Rossi"}],"totals":{"courses":6,"seats":260},"course_codes":["DATA-260","DATA-245","CS-157A","DATA-270","CS-146","STAT-200"]},"written_by":"writer-1","written_at":"2026-11-01T23:14:41.525Z"}
+2026-11-01T23:14:41.527Z reviewer INFO review rejected correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d checks=[{"check":"length","passed":true,"detail":"64 characters"},{"check":"numbers_grounded","passed":false,"detail":"numbers in draft [75]"},{"check":"codes_known","passed":true,"detail":"codes in draft []"},{"check":"uses_catalogue","passed":true,"detail":"names a department, instructor or course code"}]
+2026-11-01T23:14:41.527Z reviewer INFO sending final message to s8360_final correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d message={"correlation_id":"63db99cd-3913-4a59-8004-7f2617c6484d","status":"rejected","answer":null,"question":"How many courses does Dr. Priya Nair teach and how many seats do they offer in total?","review":[{"check":"length","passed":true,"detail":"64 characters"},{"check":"numbers_grounded","passed":false,"detail":"numbers in draft [75]"},{"check":"codes_known","passed":true,"detail":"codes in draft []"},{"check":"uses_catalogue","passed":true,"detail":"names a department, instructor or course code"}],"reviewed_at":"2026-11-01T23:14:41.527Z"}
+2026-11-01T23:14:41.528Z reviewer INFO final message acknowledged by the broker partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d
+2026-11-01T23:14:59.093Z reviewer INFO reviewer stopped
+$ python send_question.py
+2026-11-01T23:14:20.247Z send_question INFO sending question to s8360_inbox correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b message={"correlation_id":"57c72d04-3ef8-4b88-b19d-8c7b08948f1b","question":"Which department has the most available seats, and which course there has the most seats?","submitted_at":"2026-11-01T23:14:20.247Z"}
+2026-11-01T23:14:20.754Z send_question INFO question acknowledged by the broker partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b
+2026-11-01T23:14:33.596Z send_question INFO received final message from s8360_final partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b
+{
+  "correlation_id": "57c72d04-3ef8-4b88-b19d-8c7b08948f1b",
+  "status": "approved",
+  "answer": "The department with the most available seats is Data Science, and the course within that department with the most seats is DATA-260 with 40 seats available.",
+  "question": "Which department has the most available seats, and which course there has the most seats?",
+  "review": [
+    {
+      "check": "length",
+      "passed": true,
+      "detail": "156 characters"
+    },
+    {
+      "check": "numbers_grounded",
+      "passed": true,
+      "detail": "numbers in draft [40, 260]"
+    },
+    {
+      "check": "codes_known",
+      "passed": true,
+      "detail": "codes in draft ['DATA-260']"
+    },
+    {
+      "check": "uses_catalogue",
+      "passed": true,
+      "detail": "names a department, instructor or course code"
+    },
+    {
+      "check": "superlative_correct",
+      "passed": true,
+      "detail": "expected Data Science (105 seats) and DATA-260 (40 seats)"
+    }
+  ],
+  "reviewed_at": "2026-11-01T23:14:33.589Z"
+}
+$ python send_question.py "How many courses does Dr. Priya Nair teach and how many seats do they offer in total?"
+2026-11-01T23:14:33.943Z send_question INFO sending question to s8360_inbox correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d message={"correlation_id":"63db99cd-3913-4a59-8004-7f2617c6484d","question":"How many courses does Dr. Priya Nair teach and how many seats do they offer in total?","submitted_at":"2026-11-01T23:14:33.942Z"}
+2026-11-01T23:14:34.456Z send_question INFO question acknowledged by the broker partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d
+2026-11-01T23:14:41.529Z send_question INFO received final message from s8360_final partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d
+{
+  "correlation_id": "63db99cd-3913-4a59-8004-7f2617c6484d",
+  "status": "rejected",
+  "answer": null,
+  "question": "How many courses does Dr. Priya Nair teach and how many seats do they offer in total?",
+  "review": [
+    {
+      "check": "length",
+      "passed": true,
+      "detail": "64 characters"
+    },
+    {
+      "check": "numbers_grounded",
+      "passed": false,
+      "detail": "numbers in draft [75]"
+    },
+    {
+      "check": "codes_known",
+      "passed": true,
+      "detail": "codes in draft []"
+    },
+    {
+      "check": "uses_catalogue",
+      "passed": true,
+      "detail": "names a department, instructor or course code"
+    }
+  ],
+  "reviewed_at": "2026-11-01T23:14:41.527Z"
+}

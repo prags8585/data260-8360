@@ -1,0 +1,47 @@
+=== 2026-11-01 19:23:54 === offline tests and smoke test
+$ python tests_hw8.py && PYTHONPATH=. python verify_hw08.py
+PASS  test_api_forwards_the_callers_correlation_id_to_kafka
+PASS  test_api_generates_a_correlation_id_when_none_is_supplied
+PASS  test_api_maps_worker_errors_to_http_codes
+PASS  test_auto_commit_mode_never_commits_by_hand
+PASS  test_configuration_follows_the_personal_values
+PASS  test_create_course_generates_a_uuid_and_stores_the_entity
+PASS  test_create_then_get_round_trip
+PASS  test_dead_letter_record_keeps_the_source_position_and_original_bytes
+PASS  test_every_response_keeps_the_correlation_id
+PASS  test_facts_come_from_the_hw5_tools
+PASS  test_get_unknown_course_is_a_clean_error
+PASS  test_idempotent_writer_skips_a_replayed_correlation_id
+PASS  test_missing_empty_and_invalid_fields_are_rejected
+PASS  test_ordering_analysis_finds_inversions_and_partition_spread
+PASS  test_ordering_messages_are_seeded_and_numbered_per_entity
+PASS  test_poison_message_is_retried_three_times_then_dead_lettered_and_skipped
+PASS  test_processed_store_survives_a_restart
+PASS  test_requests_without_a_correlation_id_get_an_error_not_a_crash
+PASS  test_reviewer_rejects_a_wrong_course_and_an_invented_number
+PASS  test_rule_writer_output_passes_the_reviewer
+PASS  test_unknown_operation_is_rejected
+PASS  test_writer_commits_only_after_the_draft_is_sent
+PASS  test_writer_without_dead_letter_raises_and_leaves_the_offset_uncommitted
+PASS  test_writer_without_idempotency_repeats_the_side_effect
+
+24/24 tests passed (0.0s)
+  [OK  ] docker: s8360-kafka, s8360-worker and s8360-api are running -- running: ['s8360-kafka', 's8360-worker', 's8360-api']
+  [OK  ] Kafka topics exist with the required partition counts (tasks = 2) -- 8 topics, partitions {'s8360_dead_letter': 1, 's8360_drafts': 1, 's8360_entity_requests': 1, 's8360_entity_responses': 1, 's8360_final': 1, 's8360_inbox': 1, 's8360_tasks': 2}
+  [OK  ] CREATE_COURSE -> GET_COURSE round-trips through Kafka; errors keep the correlation_id -- CREATE->GET round trip keeps correlation_id; unknown id -> 'Course not found'; unknown op -> 'Unknown operation'; invalid -> 'courseTitle must be a non-empty string'
+  [OK  ] FastAPI wrapper: POST/GET through Kafka, X-Correlation-ID preserved, 404 for unknown id -- POST /courses=201 GET /courses/<id>=200 unknown id=404, X-Correlation-ID echoed
+  [OK  ] Planner -> Writer -> Reviewer pipeline answers a question through Kafka only -- Planner -> Writer -> Reviewer through Kafka: status=approved, correlation_id preserved=True
+  [OK  ] all four pipeline topics carry messages -- messages ever written: {'s8360_inbox': 5, 's8360_tasks': 55, 's8360_drafts': 50, 's8360_final': 5}
+  [OK  ] Part 3 duplicate delivery: replay creates 2 drafts before idempotency, 1 after -- replayed correlation_id -> drafts before=2, after=1
+  [OK  ] Part 3 consumer death: message lost with early commit, redelivered and completed with commit-after -- before: lag after kill 0, redelivered=False, drafts=0; after: lag 1, redelivered=True, drafts=1
+  [OK  ] Part 3 poison message: crash loop before, retried 3x + dead-lettered + later message processed after -- before: crashes 1/1, later message processed=False; after: dead-lettered after 3 attempts, later message processed=True
+  [OK  ] Part 3 ordering: unkeyed messages interleave across partitions, keyed messages stay in one partition in order -- no key: 4 inversions, 1/5 entities in one partition; keyed: 0 inversions, 5/5 in one partition
+  [OK  ] offline test suite passes (no Kafka / network / model) -- 24/24 tests passed (0.0s)
+  [OK  ] ruff passes on the repository -- All checks passed!
+  [OK  ] reports/hw08/RUN_LOG.txt exists and is non-empty -- reports/hw08/RUN_LOG.txt
+  [OK  ] reports/hw08/METRICS.md exists and is non-empty -- reports/hw08/METRICS.md
+  [OK  ] reports/hw08/AI_USE.md exists and is non-empty -- reports/hw08/AI_USE.md
+  [OK  ] reports/hw08/Pragada_HW8.pdf exists and is non-empty -- reports/hw08/Pragada_HW8.pdf
+
+16/16 checks passed.
+Wrote reports/hw08/verification.json

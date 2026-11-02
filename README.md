@@ -144,3 +144,19 @@ PYTHONPATH=. python verify_hw07.py
 ```
 
 HW4's cookie-session API was replaced by JWT bearer authentication in HW7 (`jwt_auth.py`); the session version is kept only at the `hw4` tag.
+
+## Homework 8 — Kafka request/response, three-agent pipeline, failure behaviour
+
+PREFIX `s8360`, PORT_BASE 8260, VERIFY_SEED 268360, primary entity Course. Code lives in `kafka_svc/` (config, course logic, Kafka helpers, RPC client, worker, FastAPI wrapper) plus `homework_demo.py`, `planner.py`, `writer.py`, `reviewer.py`, `send_question.py`.
+
+```bash
+docker compose -f docker-compose.kafka.yml up -d --build        # Kafka (KRaft), topic creation, worker, FastAPI on 8260
+PYTHONPATH=. python homework_demo.py                             # Part 1: CREATE_COURSE -> GET_COURSE, merged log timeline
+PYTHONPATH=. python homework_demo.py --via api                   # the same through the FastAPI wrapper
+python planner.py; python writer.py; python reviewer.py          # Part 2: one terminal each (ollama serve + qwen3:8b running)
+PYTHONPATH=. python send_question.py                             # Part 2: prints the final JSON from s8360_final
+PYTHONPATH=. python scripts/hw8_failure_tests.py all             # Part 3: duplicate, consumer death, poison message, ordering
+python tests_hw8.py && PYTHONPATH=. python verify_hw08.py        # offline tests, then the live smoke test (writes verification.json)
+```
+
+Writer switches used for the "before fix" runs: `--no-idempotency`, `--auto-commit`, `--no-dlq` (or `--naive` for all three). Port 8260 is also used by the HW7 `uvicorn main:app`; stop that first.

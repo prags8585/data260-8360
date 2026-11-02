@@ -1,0 +1,4 @@
+*
+!kafka_svc
+!requirements-kafka.txt
+**/__pycache__

@@ -1,0 +1,123 @@
+=== 2026-11-01 15:15:00 === Part 3 - failure behaviour, all four scenarios
+$ PYTHONPATH=. python scripts/hw8_failure_tests.py all
+=== 2026-11-01 15:15:00 ===  hw8 failure tests, run 7360fe, VERIFY_SEED 268360, broker localhost:9092
+=== Part 3 / I. Duplicate delivery: the same correlation_id delivered twice ===
+-- before fix: writer flags ['--no-idempotency'], correlation_id dup-before-7360fe
+   sent the task at partition=1 offset=0, replayed the identical message at partition=1 offset=1
+    2026-11-01T23:15:01.579Z writer INFO received task from s8360_tasks partition=1 offset=0 correlation_id=dup-before-7360fe
+    2026-11-01T23:15:01.583Z writer INFO draft acknowledged by the broker partition=0 offset=2 correlation_id=dup-before-7360fe
+    2026-11-01T23:15:01.585Z writer INFO committed offset 1 on s8360_tasks partition=1
+    2026-11-01T23:15:01.784Z writer INFO received task from s8360_tasks partition=1 offset=1 correlation_id=dup-before-7360fe
+    2026-11-01T23:15:01.786Z writer INFO draft acknowledged by the broker partition=0 offset=3 correlation_id=dup-before-7360fe
+    2026-11-01T23:15:01.787Z writer INFO committed offset 2 on s8360_tasks partition=1
+   drafts on s8360_drafts for this correlation_id: 2
+-- after fix: writer flags (idempotency on), correlation_id dup-after-7360fe
+   sent the task at partition=0 offset=2, replayed the identical message at partition=0 offset=3
+    2026-11-01T23:15:03.777Z writer INFO received task from s8360_tasks partition=0 offset=2 correlation_id=dup-after-7360fe
+    2026-11-01T23:15:03.784Z writer INFO draft acknowledged by the broker partition=0 offset=4 correlation_id=dup-after-7360fe
+    2026-11-01T23:15:03.789Z writer INFO committed offset 3 on s8360_tasks partition=0
+    2026-11-01T23:15:03.989Z writer INFO received task from s8360_tasks partition=0 offset=3 correlation_id=dup-after-7360fe
+    2026-11-01T23:15:03.989Z writer WARNING DUPLICATE correlation_id=dup-after-7360fe already processed, skipping the side effect
+    2026-11-01T23:15:03.992Z writer INFO committed offset 4 on s8360_tasks partition=0
+   drafts on s8360_drafts for this correlation_id: 1
+   saved reports/hw08/raw/failure_duplicate.json
+
+=== Part 3 / II. Consumer death: Writer killed (SIGKILL) while it is processing ===
+-- before fix: writer flags ['--auto-commit'], task needs 8 s of work, correlation_id death-before-7360fe
+   task at partition=1 offset=2; writer is mid-processing, sending SIGKILL now
+  offsets right after the kill:
+    GROUP                             TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                       HOST             CLIENT-ID
+    s8360_writers_death_before_7360fe s8360_tasks     1          3               3               0               writer-death-26091845-27c8-46ff-97a3-1290ae10f546 /172.182.252.137 writer-death
+    s8360_writers_death_before_7360fe s8360_tasks     0          4               4               0               writer-death-26091845-27c8-46ff-97a3-1290ae10f546 /172.182.252.137 writer-death
+   drafts for this correlation_id after the kill: 0
+   restarting the writer (same group)
+  offsets after the restart:
+    GROUP                             TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+    s8360_writers_death_before_7360fe s8360_tasks     1          3               3               0               -               -               -
+    s8360_writers_death_before_7360fe s8360_tasks     0          4               4               0               -               -               -
+    Consumer group 's8360_writers_death_before_7360fe' has no active members.
+    2026-11-01T23:15:05.443Z writer INFO Writer writer-death ready, reading s8360_tasks (group s8360_writers_death_before_7360fe), assigned partitions [0, 1]
+    2026-11-01T23:15:06.003Z writer INFO received task from s8360_tasks partition=1 offset=2 correlation_id=death-before-7360fe
+    2026-11-01T23:15:06.004Z writer INFO processing correlation_id=death-before-7360fe attempt 1/3
+    2026-11-01T23:15:13.488Z writer INFO Writer writer-death ready, reading s8360_tasks (group s8360_writers_death_before_7360fe), assigned partitions [0, 1]
+   redelivered after restart: False; drafts for this correlation_id: 0
+-- after fix: writer flags (commit after processing), task needs 8 s of work, correlation_id death-after-7360fe
+   task at partition=0 offset=4; writer is mid-processing, sending SIGKILL now
+  offsets right after the kill:
+    GROUP                            TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                       HOST             CLIENT-ID
+    s8360_writers_death_after_7360fe s8360_tasks     1          3               3               0               writer-death-794593d6-04b0-468f-ad88-31d092d5c770 /172.182.252.137 writer-death
+    s8360_writers_death_after_7360fe s8360_tasks     0          4               5               1               writer-death-794593d6-04b0-468f-ad88-31d092d5c770 /172.182.252.137 writer-death
+   drafts for this correlation_id after the kill: 0
+   restarting the writer (same group)
+  offsets after the restart:
+    GROUP                            TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+    s8360_writers_death_after_7360fe s8360_tasks     1          3               3               0               -               -               -
+    s8360_writers_death_after_7360fe s8360_tasks     0          5               5               0               -               -               -
+    Consumer group 's8360_writers_death_after_7360fe' has no active members.
+    2026-11-01T23:15:28.161Z writer INFO Writer writer-death ready, reading s8360_tasks (group s8360_writers_death_after_7360fe), assigned partitions [0, 1]
+    2026-11-01T23:15:28.691Z writer INFO received task from s8360_tasks partition=0 offset=4 correlation_id=death-after-7360fe
+    2026-11-01T23:15:28.692Z writer INFO processing correlation_id=death-after-7360fe attempt 1/3
+    2026-11-01T23:15:36.196Z writer INFO Writer writer-death ready, reading s8360_tasks (group s8360_writers_death_after_7360fe), assigned partitions [0, 1]
+    2026-11-01T23:15:36.199Z writer INFO received task from s8360_tasks partition=0 offset=4 correlation_id=death-after-7360fe
+    2026-11-01T23:15:36.199Z writer INFO processing correlation_id=death-after-7360fe attempt 1/3
+    2026-11-01T23:15:44.216Z writer INFO draft acknowledged by the broker partition=0 offset=5 correlation_id=death-after-7360fe
+    2026-11-01T23:15:44.219Z writer INFO committed offset 5 on s8360_tasks partition=0
+   redelivered after restart: True; drafts for this correlation_id: 1
+   saved reports/hw08/raw/failure_death.json
+
+=== Part 3 / III. Poison message: a malformed task followed by a good one ===
+-- before fix: writer flags ['--no-dlq']
+   poison message at partition/offset (0, 5), good message right behind it at (0, 6)
+   writer run 1 exited with code 1; restarting it
+   writer run 2 exited with code 1 (same message, same crash)
+  offsets after two crashes:
+    GROUP                              TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+    s8360_writers_poison_before_7360fe s8360_tasks     1          3               3               0               -               -               -
+    s8360_writers_poison_before_7360fe s8360_tasks     0          5               7               2               -               -               -
+    Consumer group 's8360_writers_poison_before_7360fe' has no active members.
+    2026-11-01T23:15:47.374Z writer INFO received task from s8360_tasks partition=0 offset=5 correlation_id=poison-before-7360fe
+    Traceback (most recent call last):
+    ValueError: task is not valid JSON
+    ----- writer restarted -----
+    2026-11-01T23:15:47.569Z writer INFO received task from s8360_tasks partition=0 offset=5 correlation_id=poison-before-7360fe
+    Traceback (most recent call last):
+    ValueError: task is not valid JSON
+   good message processed: False
+-- after fix: writer flags (3 attempts, then dead-letter)
+   poison message at partition/offset (0, 7), good message right behind it at (0, 8)
+    2026-11-01T23:15:49.654Z writer INFO received task from s8360_tasks partition=0 offset=7 correlation_id=poison-after-7360fe
+    2026-11-01T23:15:49.654Z writer WARNING attempt 1/3 failed for s8360_tasks offset=7: ValueError: task is not valid JSON
+    2026-11-01T23:15:50.161Z writer WARNING attempt 2/3 failed for s8360_tasks offset=7: ValueError: task is not valid JSON
+    2026-11-01T23:15:51.169Z writer WARNING attempt 3/3 failed for s8360_tasks offset=7: ValueError: task is not valid JSON
+    2026-11-01T23:15:51.174Z writer ERROR gave up after 3 attempts, moved s8360_tasks offset=7 to s8360_dead_letter partition=0 offset=0
+    2026-11-01T23:15:51.176Z writer INFO committed offset 8 on s8360_tasks partition=0
+    2026-11-01T23:15:51.176Z writer INFO received task from s8360_tasks partition=0 offset=8 correlation_id=after-poison-after-7360fe
+    2026-11-01T23:15:51.176Z writer INFO processing correlation_id=after-poison-after-7360fe attempt 1/3
+    2026-11-01T23:15:51.178Z writer INFO draft acknowledged by the broker partition=0 offset=6 correlation_id=after-poison-after-7360fe
+    2026-11-01T23:15:51.182Z writer INFO committed offset 9 on s8360_tasks partition=0
+  offsets after the run:
+    GROUP                             TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                        HOST             CLIENT-ID
+    s8360_writers_poison_after_7360fe s8360_tasks     1          3               3               0               writer-poison-89394e6c-5cc6-4518-ac91-47f0a35c9782 /172.182.252.137 writer-poison
+    s8360_writers_poison_after_7360fe s8360_tasks     0          9               9               0               writer-poison-89394e6c-5cc6-4518-ac91-47f0a35c9782 /172.182.252.137 writer-poison
+   dead-letter record: {"correlation_id": "poison-after-7360fe", "source_topic": "s8360_tasks", "source_partition": 0, "source_offset": 7, "attempts": 3, "error": "ValueError: task is not valid JSON", "failed_at": "2026-11-01T23:15:51Z", "original_value": "{\"correlation_id\": \"poison-after-7360fe\", \"question\": "}
+   good message processed: True
+   saved reports/hw08/raw/failure_poison.json
+
+=== Part 3 / IV. Ordering: 20 related messages (VERIFY_SEED 268360), 2 partitions, 2 writers in one group ===
+   entities and message counts: CS-146=7, CS-157A=1, DATA-245=3, DATA-270=4, STAT-200=5
+-- before fix: message key = none; writer-A owns partition [0], writer-B owns [1]
+   20 messages processed; entities kept in one partition: 1/5; entities processed in order: 2/5; order inversions: 4
+     CS-146    partitions=[0, 1] writers=['writer-A', 'writer-B'] processed seq order=[1, 4, 5, 2, 3, 6, 7] in_order=False
+     CS-157A   partitions=[0] writers=['writer-A'] processed seq order=[1] in_order=True
+     DATA-245  partitions=[0, 1] writers=['writer-A', 'writer-B'] processed seq order=[1, 2, 3] in_order=True
+     DATA-270  partitions=[0, 1] writers=['writer-A', 'writer-B'] processed seq order=[4, 1, 2, 3] in_order=False
+     STAT-200  partitions=[0, 1] writers=['writer-A', 'writer-B'] processed seq order=[2, 1, 5, 3, 4] in_order=False
+-- after fix: message key = entity (course code); writer-A owns partition [0], writer-B owns [1]
+   20 messages processed; entities kept in one partition: 5/5; entities processed in order: 5/5; order inversions: 0
+     CS-146    partitions=[0] writers=['writer-A'] processed seq order=[1, 2, 3, 4, 5, 6, 7] in_order=True
+     CS-157A   partitions=[1] writers=['writer-B'] processed seq order=[1] in_order=True
+     DATA-245  partitions=[0] writers=['writer-A'] processed seq order=[1, 2, 3] in_order=True
+     DATA-270  partitions=[0] writers=['writer-A'] processed seq order=[1, 2, 3, 4] in_order=True
+     STAT-200  partitions=[0] writers=['writer-A'] processed seq order=[1, 2, 3, 4, 5] in_order=True
+   saved reports/hw08/raw/failure_ordering.json
+

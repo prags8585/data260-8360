@@ -1,0 +1,483 @@
+# RUN_LOG.txt - DATA-260 Homework 8 (Karthik Pragada, SID4 8360, PORT_BASE 8260)
+# Real console output captured on a MacBook Air (Apple M4, 16 GB): Kafka 3.8.0 (KRaft), worker and FastAPI in Docker, Ollama qwen3:8b for the Part 2 agents.
+# Container log lines are in UTC (the trailing Z); the '=== date ===' headers are local time (PST). Each block was produced by the command shown above it.
+
+====================================================================================================
+## Part 1 - Kafka, worker and FastAPI containers started from scratch; topics created
+$ docker compose -f docker-compose.kafka.yml up -d --build
+====================================================================================================
+=== 2026-11-01 15:13:09 === Part 1 - stack start from scratch (volumes removed)
+$ docker compose -f docker-compose.kafka.yml down -v 2>&1 | tail -8
+ Container s8360-kafka  Stopping
+ Container s8360-kafka  Stopped
+ Container s8360-kafka  Removing
+ Container s8360-kafka  Removed
+ Network s8360-hw8_default  Removing
+ Volume s8360-hw8_s8360_kafka_data  Removing
+ Volume s8360-hw8_s8360_kafka_data  Removed
+ Network s8360-hw8_default  Removed
+$ docker compose -f docker-compose.kafka.yml up -d --build 2>&1 | grep -E 'Container|Built|built' | tail -14
+ Container s8360-api  Creating
+ Container s8360-api  Created
+ Container s8360-kafka  Starting
+ Container s8360-kafka  Started
+ Container s8360-kafka  Waiting
+ Container s8360-kafka  Healthy
+ Container s8360-kafka-init  Starting
+ Container s8360-kafka-init  Started
+ Container s8360-kafka-init  Waiting
+ Container s8360-kafka-init  Exited
+ Container s8360-worker  Starting
+ Container s8360-worker  Started
+ Container s8360-api  Starting
+ Container s8360-api  Started
+$ docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}' | grep -E 'NAMES|s8360-(kafka|worker|api)'
+NAMES                                   IMAGE                                 STATUS                    PORTS
+s8360-api                               s8360-hw8-kafka-svc                   Up 10 seconds (healthy)   0.0.0.0:8260->8260/tcp, [::]:8260->8260/tcp
+s8360-worker                            s8360-hw8-kafka-svc                   Up 10 seconds             
+s8360-kafka                             apache/kafka:3.8.0                    Up 23 seconds (healthy)   0.0.0.0:9092->9092/tcp, [::]:9092->9092/tcp
+$ docker logs s8360-worker 2>&1 | grep -E 'worker starting|Consumer is ready'
+2026-11-01T23:13:28.143Z worker INFO worker starting, bootstrap kafka:19092, entities held in a plain dict
+2026-11-01T23:13:31.185Z worker INFO Consumer is ready and listening on s8360_entity_requests (group s8360_entity_worker, partitions [0])
+$ docker logs s8360-api 2>&1 | grep -E 'FastAPI server started|Uvicorn running'
+2026-11-01T23:13:28.434Z api INFO FastAPI server started at http://127.0.0.1:8260 (Kafka bootstrap kafka:19092)
+INFO:     Uvicorn running on http://0.0.0.0:8260 (Press CTRL+C to quit)
+$ docker exec s8360-kafka /opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe | grep PartitionCount | awk '{print $1" "$2"  "$3" "$4"  "$5" "$6"  "$7" "$8}' | sort
+Topic: __consumer_offsets  TopicId: sYbYDgrjQqiVLfBDHFi2rQ  PartitionCount: 50  ReplicationFactor: 1
+Topic: s8360_dead_letter  TopicId: iyNkz8tAQPqgjw45KeUImw  PartitionCount: 1  ReplicationFactor: 1
+Topic: s8360_drafts  TopicId: X6wvDFM5RLmR8R_Rcoaylw  PartitionCount: 1  ReplicationFactor: 1
+Topic: s8360_entity_requests  TopicId: 2J6dgY0BSFSdOF_3AoYabA  PartitionCount: 1  ReplicationFactor: 1
+Topic: s8360_entity_responses  TopicId: _HJrkyzdSRiXwbokVfITYg  PartitionCount: 1  ReplicationFactor: 1
+Topic: s8360_final  TopicId: rQooVxt3TW-ErNKgNgVKMg  PartitionCount: 1  ReplicationFactor: 1
+Topic: s8360_inbox  TopicId: eTI3WzL2RMOY-LFJxKBBig  PartitionCount: 1  ReplicationFactor: 1
+Topic: s8360_tasks  TopicId: B4z1P0CIS6eNYLAVOZV2vg  PartitionCount: 2  ReplicationFactor: 1
+
+====================================================================================================
+## Part 1 - CREATE_COURSE -> GET_COURSE through the Kafka client (10-step demonstration)
+$ PYTHONPATH=. python homework_demo.py
+====================================================================================================
+=== 2026-11-01 15:13:46 === Part 1 - homework_demo.py through the Kafka client
+$ PYTHONPATH=. python homework_demo.py
+2026-11-01T23:13:46.917Z demo INFO step 1: created correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c (route: Kafka client)
+2026-11-01T23:13:46.917Z demo INFO step 2: sending CREATE_COURSE to s8360_entity_requests (correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c)
+2026-11-01T23:13:46.917Z client INFO sending request to s8360_entity_requests correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c message={"correlation_id":"6da079a8-e4c0-4559-bef2-49f23367fc3c","reply_to":"s8360_entity_responses","operation":"CREATE_COURSE","data":{"courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}}
+2026-11-01T23:13:46.924Z client INFO request acknowledged by the broker partition=0 offset=0 correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c
+2026-11-01T23:13:46.929Z client INFO received response from s8360_entity_responses correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c success=True message={"correlation_id":"6da079a8-e4c0-4559-bef2-49f23367fc3c","success":true,"course_id":"71604717-d665-492e-84ad-77479e8f1ebc","message":"Course created"}
+2026-11-01T23:13:46.929Z demo INFO step 7: extracted course_id=71604717-d665-492e-84ad-77479e8f1ebc from the CREATE_COURSE response (correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c success=True)
+2026-11-01T23:13:46.929Z demo INFO step 8: sending GET_COURSE for course_id=71604717-d665-492e-84ad-77479e8f1ebc (correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c)
+2026-11-01T23:13:46.929Z client INFO sending request to s8360_entity_requests correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c message={"correlation_id":"6da079a8-e4c0-4559-bef2-49f23367fc3c","reply_to":"s8360_entity_responses","operation":"GET_COURSE","data":{"course_id":"71604717-d665-492e-84ad-77479e8f1ebc"}}
+2026-11-01T23:13:46.931Z client INFO request acknowledged by the broker partition=0 offset=1 correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c
+2026-11-01T23:13:46.938Z client INFO received response from s8360_entity_responses correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c success=True message={"correlation_id":"6da079a8-e4c0-4559-bef2-49f23367fc3c","success":true,"course":{"course_id":"71604717-d665-492e-84ad-77479e8f1ebc","courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}}
+2026-11-01T23:13:46.938Z demo INFO step 10: retrieved entity correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c course={"course_id":"71604717-d665-492e-84ad-77479e8f1ebc","courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}
+2026-11-01T23:13:46.938Z demo INFO step 10: correlation_id preserved end to end: True (sent 6da079a8-e4c0-4559-bef2-49f23367fc3c, CREATE reply 6da079a8-e4c0-4559-bef2-49f23367fc3c, GET reply 6da079a8-e4c0-4559-bef2-49f23367fc3c)
+
+=== merged timeline (demo client + container logs, ordered by timestamp, filtered to this correlation_id) ===
+[demo] 2026-11-01T23:13:46.917Z demo INFO step 1: created correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c (route: Kafka client)
+[demo] 2026-11-01T23:13:46.917Z demo INFO step 2: sending CREATE_COURSE to s8360_entity_requests (correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c)
+[demo] 2026-11-01T23:13:46.917Z client INFO sending request to s8360_entity_requests correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c message={"correlation_id":"6da079a8-e4c0-4559-bef2-49f23367fc3c","reply_to":"s8360_entity_responses","operation":"CREATE_COURSE","data":{"courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}}
+[demo] 2026-11-01T23:13:46.924Z client INFO request acknowledged by the broker partition=0 offset=0 correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c
+[worker] 2026-11-01T23:13:46.926Z worker INFO received request from s8360_entity_requests partition=0 offset=0 correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c operation=CREATE_COURSE message={"correlation_id":"6da079a8-e4c0-4559-bef2-49f23367fc3c","reply_to":"s8360_entity_responses","operation":"CREATE_COURSE","data":{"courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}}
+[worker] 2026-11-01T23:13:46.926Z worker INFO processed correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c success=True store_size=1
+[worker] 2026-11-01T23:13:46.926Z worker INFO sending response to s8360_entity_responses correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c message={"correlation_id":"6da079a8-e4c0-4559-bef2-49f23367fc3c","success":true,"course_id":"71604717-d665-492e-84ad-77479e8f1ebc","message":"Course created"}
+[worker] 2026-11-01T23:13:46.927Z worker INFO response acknowledged by the broker partition=0 offset=0 correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c
+[demo] 2026-11-01T23:13:46.929Z client INFO received response from s8360_entity_responses correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c success=True message={"correlation_id":"6da079a8-e4c0-4559-bef2-49f23367fc3c","success":true,"course_id":"71604717-d665-492e-84ad-77479e8f1ebc","message":"Course created"}
+[demo] 2026-11-01T23:13:46.929Z demo INFO step 7: extracted course_id=71604717-d665-492e-84ad-77479e8f1ebc from the CREATE_COURSE response (correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c success=True)
+[demo] 2026-11-01T23:13:46.929Z demo INFO step 8: sending GET_COURSE for course_id=71604717-d665-492e-84ad-77479e8f1ebc (correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c)
+[demo] 2026-11-01T23:13:46.929Z client INFO sending request to s8360_entity_requests correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c message={"correlation_id":"6da079a8-e4c0-4559-bef2-49f23367fc3c","reply_to":"s8360_entity_responses","operation":"GET_COURSE","data":{"course_id":"71604717-d665-492e-84ad-77479e8f1ebc"}}
+[demo] 2026-11-01T23:13:46.931Z client INFO request acknowledged by the broker partition=0 offset=1 correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c
+[worker] 2026-11-01T23:13:46.935Z worker INFO received request from s8360_entity_requests partition=0 offset=1 correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c operation=GET_COURSE message={"correlation_id":"6da079a8-e4c0-4559-bef2-49f23367fc3c","reply_to":"s8360_entity_responses","operation":"GET_COURSE","data":{"course_id":"71604717-d665-492e-84ad-77479e8f1ebc"}}
+[worker] 2026-11-01T23:13:46.935Z worker INFO processed correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c success=True store_size=1
+[worker] 2026-11-01T23:13:46.935Z worker INFO sending response to s8360_entity_responses correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c message={"correlation_id":"6da079a8-e4c0-4559-bef2-49f23367fc3c","success":true,"course":{"course_id":"71604717-d665-492e-84ad-77479e8f1ebc","courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}}
+[worker] 2026-11-01T23:13:46.937Z worker INFO response acknowledged by the broker partition=0 offset=1 correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c
+[demo] 2026-11-01T23:13:46.938Z client INFO received response from s8360_entity_responses correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c success=True message={"correlation_id":"6da079a8-e4c0-4559-bef2-49f23367fc3c","success":true,"course":{"course_id":"71604717-d665-492e-84ad-77479e8f1ebc","courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}}
+[demo] 2026-11-01T23:13:46.938Z demo INFO step 10: retrieved entity correlation_id=6da079a8-e4c0-4559-bef2-49f23367fc3c course={"course_id":"71604717-d665-492e-84ad-77479e8f1ebc","courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}
+[demo] 2026-11-01T23:13:46.938Z demo INFO step 10: correlation_id preserved end to end: True (sent 6da079a8-e4c0-4559-bef2-49f23367fc3c, CREATE reply 6da079a8-e4c0-4559-bef2-49f23367fc3c, GET reply 6da079a8-e4c0-4559-bef2-49f23367fc3c)
+
+====================================================================================================
+## Part 1 - the same flow through the FastAPI wrapper
+$ PYTHONPATH=. python homework_demo.py --via api
+====================================================================================================
+=== 2026-11-01 15:13:47 === Part 1 - homework_demo.py through the FastAPI wrapper
+$ PYTHONPATH=. python homework_demo.py --via api
+2026-11-01T23:13:47.838Z demo INFO step 1: created correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 (route: FastAPI -> Kafka)
+2026-11-01T23:13:47.838Z demo INFO step 2: sending CREATE_COURSE to s8360_entity_requests (correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629)
+2026-11-01T23:13:47.838Z demo INFO HTTP POST http://127.0.0.1:8260/courses correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 body={"courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}
+2026-11-01T23:13:47.886Z httpx INFO HTTP Request: POST http://127.0.0.1:8260/courses "HTTP/1.1 201 Created"
+2026-11-01T23:13:47.886Z demo INFO HTTP 201 from FastAPI correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 body={"correlation_id":"f6c3a7d0-da9d-43f0-bdd1-b78e7156a629","success":true,"course_id":"07f52fc3-c5d0-4a15-9ae5-73722b56c1ef","message":"Course created"}
+2026-11-01T23:13:47.886Z demo INFO step 7: extracted course_id=07f52fc3-c5d0-4a15-9ae5-73722b56c1ef from the CREATE_COURSE response (correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 success=True)
+2026-11-01T23:13:47.886Z demo INFO step 8: sending GET_COURSE for course_id=07f52fc3-c5d0-4a15-9ae5-73722b56c1ef (correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629)
+2026-11-01T23:13:47.886Z demo INFO HTTP GET http://127.0.0.1:8260/courses/07f52fc3-c5d0-4a15-9ae5-73722b56c1ef correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629
+2026-11-01T23:13:47.896Z httpx INFO HTTP Request: GET http://127.0.0.1:8260/courses/07f52fc3-c5d0-4a15-9ae5-73722b56c1ef "HTTP/1.1 200 OK"
+2026-11-01T23:13:47.897Z demo INFO HTTP 200 from FastAPI correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 body={"correlation_id":"f6c3a7d0-da9d-43f0-bdd1-b78e7156a629","success":true,"course":{"course_id":"07f52fc3-c5d0-4a15-9ae5-73722b56c1ef","courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}}
+2026-11-01T23:13:47.897Z demo INFO step 10: retrieved entity correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 course={"course_id":"07f52fc3-c5d0-4a15-9ae5-73722b56c1ef","courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}
+2026-11-01T23:13:47.897Z demo INFO step 10: correlation_id preserved end to end: True (sent f6c3a7d0-da9d-43f0-bdd1-b78e7156a629, CREATE reply f6c3a7d0-da9d-43f0-bdd1-b78e7156a629, GET reply f6c3a7d0-da9d-43f0-bdd1-b78e7156a629)
+
+=== merged timeline (demo client + container logs, ordered by timestamp, filtered to this correlation_id) ===
+[demo] 2026-11-01T23:13:47.838Z demo INFO step 1: created correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 (route: FastAPI -> Kafka)
+[demo] 2026-11-01T23:13:47.838Z demo INFO step 2: sending CREATE_COURSE to s8360_entity_requests (correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629)
+[demo] 2026-11-01T23:13:47.838Z demo INFO HTTP POST http://127.0.0.1:8260/courses correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 body={"courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}
+[api] 2026-11-01T23:13:47.870Z api INFO HTTP POST /courses correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629
+[api] 2026-11-01T23:13:47.871Z client INFO sending request to s8360_entity_requests correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 message={"correlation_id":"f6c3a7d0-da9d-43f0-bdd1-b78e7156a629","reply_to":"s8360_entity_responses","operation":"CREATE_COURSE","data":{"courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}}
+[api] 2026-11-01T23:13:47.878Z client INFO request acknowledged by the broker partition=0 offset=2 correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629
+[worker] 2026-11-01T23:13:47.879Z worker INFO received request from s8360_entity_requests partition=0 offset=2 correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 operation=CREATE_COURSE message={"correlation_id":"f6c3a7d0-da9d-43f0-bdd1-b78e7156a629","reply_to":"s8360_entity_responses","operation":"CREATE_COURSE","data":{"courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}}
+[worker] 2026-11-01T23:13:47.879Z worker INFO processed correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 success=True store_size=2
+[worker] 2026-11-01T23:13:47.880Z worker INFO sending response to s8360_entity_responses correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 message={"correlation_id":"f6c3a7d0-da9d-43f0-bdd1-b78e7156a629","success":true,"course_id":"07f52fc3-c5d0-4a15-9ae5-73722b56c1ef","message":"Course created"}
+[worker] 2026-11-01T23:13:47.882Z worker INFO response acknowledged by the broker partition=0 offset=2 correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629
+[api] 2026-11-01T23:13:47.884Z client INFO received response from s8360_entity_responses correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 success=True message={"correlation_id":"f6c3a7d0-da9d-43f0-bdd1-b78e7156a629","success":true,"course_id":"07f52fc3-c5d0-4a15-9ae5-73722b56c1ef","message":"Course created"}
+[api] 2026-11-01T23:13:47.884Z api INFO returning to caller correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 success=True
+[demo] 2026-11-01T23:13:47.886Z demo INFO HTTP 201 from FastAPI correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 body={"correlation_id":"f6c3a7d0-da9d-43f0-bdd1-b78e7156a629","success":true,"course_id":"07f52fc3-c5d0-4a15-9ae5-73722b56c1ef","message":"Course created"}
+[demo] 2026-11-01T23:13:47.886Z demo INFO step 7: extracted course_id=07f52fc3-c5d0-4a15-9ae5-73722b56c1ef from the CREATE_COURSE response (correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 success=True)
+[demo] 2026-11-01T23:13:47.886Z demo INFO step 8: sending GET_COURSE for course_id=07f52fc3-c5d0-4a15-9ae5-73722b56c1ef (correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629)
+[demo] 2026-11-01T23:13:47.886Z demo INFO HTTP GET http://127.0.0.1:8260/courses/07f52fc3-c5d0-4a15-9ae5-73722b56c1ef correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629
+[api] 2026-11-01T23:13:47.890Z api INFO HTTP GET /courses/07f52fc3-c5d0-4a15-9ae5-73722b56c1ef correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629
+[api] 2026-11-01T23:13:47.891Z client INFO sending request to s8360_entity_requests correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 message={"correlation_id":"f6c3a7d0-da9d-43f0-bdd1-b78e7156a629","reply_to":"s8360_entity_responses","operation":"GET_COURSE","data":{"course_id":"07f52fc3-c5d0-4a15-9ae5-73722b56c1ef"}}
+[api] 2026-11-01T23:13:47.892Z client INFO request acknowledged by the broker partition=0 offset=3 correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629
+[worker] 2026-11-01T23:13:47.893Z worker INFO received request from s8360_entity_requests partition=0 offset=3 correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 operation=GET_COURSE message={"correlation_id":"f6c3a7d0-da9d-43f0-bdd1-b78e7156a629","reply_to":"s8360_entity_responses","operation":"GET_COURSE","data":{"course_id":"07f52fc3-c5d0-4a15-9ae5-73722b56c1ef"}}
+[worker] 2026-11-01T23:13:47.893Z worker INFO processed correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 success=True store_size=2
+[worker] 2026-11-01T23:13:47.893Z worker INFO sending response to s8360_entity_responses correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 message={"correlation_id":"f6c3a7d0-da9d-43f0-bdd1-b78e7156a629","success":true,"course":{"course_id":"07f52fc3-c5d0-4a15-9ae5-73722b56c1ef","courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}}
+[worker] 2026-11-01T23:13:47.894Z worker INFO response acknowledged by the broker partition=0 offset=3 correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629
+[api] 2026-11-01T23:13:47.895Z client INFO received response from s8360_entity_responses correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 success=True message={"correlation_id":"f6c3a7d0-da9d-43f0-bdd1-b78e7156a629","success":true,"course":{"course_id":"07f52fc3-c5d0-4a15-9ae5-73722b56c1ef","courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}}
+[api] 2026-11-01T23:13:47.895Z api INFO returning to caller correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 success=True
+[demo] 2026-11-01T23:13:47.897Z demo INFO HTTP 200 from FastAPI correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 body={"correlation_id":"f6c3a7d0-da9d-43f0-bdd1-b78e7156a629","success":true,"course":{"course_id":"07f52fc3-c5d0-4a15-9ae5-73722b56c1ef","courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}}
+[demo] 2026-11-01T23:13:47.897Z demo INFO step 10: retrieved entity correlation_id=f6c3a7d0-da9d-43f0-bdd1-b78e7156a629 course={"course_id":"07f52fc3-c5d0-4a15-9ae5-73722b56c1ef","courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}
+[demo] 2026-11-01T23:13:47.897Z demo INFO step 10: correlation_id preserved end to end: True (sent f6c3a7d0-da9d-43f0-bdd1-b78e7156a629, CREATE reply f6c3a7d0-da9d-43f0-bdd1-b78e7156a629, GET reply f6c3a7d0-da9d-43f0-bdd1-b78e7156a629)
+
+====================================================================================================
+## Part 1 - FastAPI wrapper with curl (X-Correlation-ID)
+$ curl against http://127.0.0.1:8260
+====================================================================================================
+=== 2026-11-01 15:13:57 === Part 1 - the HTTP API wrapper with curl
+$ curl -s -i -X POST http://127.0.0.1:8260/courses -H 'Content-Type: application/json' -H 'X-Correlation-ID: curl-demo-001' -d '{"courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}' | grep -E '^HTTP|^x-correlation-id|^\{'
+HTTP/1.1 201 Created
+x-correlation-id: curl-demo-001
+{"correlation_id":"curl-demo-001","success":true,"course_id":"983eb8fd-7891-42a5-adf7-9fd45e931258","message":"Course created"}
+$ curl -s -i http://127.0.0.1:8260/courses/983eb8fd-7891-42a5-adf7-9fd45e931258 -H 'X-Correlation-ID: curl-demo-001' | grep -E '^HTTP|^x-correlation-id|^\{'
+HTTP/1.1 200 OK
+x-correlation-id: curl-demo-001
+{"correlation_id":"curl-demo-001","success":true,"course":{"course_id":"983eb8fd-7891-42a5-adf7-9fd45e931258","courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}}
+$ curl -s -i http://127.0.0.1:8260/courses/00000000-0000-0000-0000-000000000000 -H 'X-Correlation-ID: curl-demo-002' | grep -E '^HTTP|^x-correlation-id|^\{'
+HTTP/1.1 404 Not Found
+x-correlation-id: curl-demo-002
+{"correlation_id":"curl-demo-002","success":false,"error":"Course not found"}
+
+====================================================================================================
+## Part 1 - unknown id, unknown operation, invalid fields
+$ PYTHONPATH=. python scripts/hw8_part1_errors.py
+====================================================================================================
+=== 2026-11-01 15:13:48 === Part 1 - error handling
+$ PYTHONPATH=. python scripts/hw8_part1_errors.py
+=== 2026-11-01 15:13:48 ===  Part 1 error handling through Kafka (client -> s8360_entity_requests -> worker -> s8360_entity_responses)
+  GET_COURSE with an unknown course_id       success=False correlation_id preserved=True  {"error": "Course not found"}
+  unknown operation DELETE_COURSE            success=False correlation_id preserved=True  {"error": "Unknown operation"}
+  CREATE_COURSE with a missing field         success=False correlation_id preserved=True  {"error": "Missing required field(s): seatsAvailable"}
+  CREATE_COURSE with an empty title          success=False correlation_id preserved=True  {"error": "courseTitle must be a non-empty string"}
+  CREATE_COURSE with an invalid course code  success=False correlation_id preserved=True  {"error": "courseCode must look like DATA-260 or CS-157A"}
+  CREATE_COURSE with seatsAvailable=true     success=False correlation_id preserved=True  {"error": "seatsAvailable must be an integer between 0 and 1000"}
+  CREATE_COURSE with data that is not an object success=False correlation_id preserved=True  {"error": "data must be a JSON object"}
+
+  the same checks through the FastAPI wrapper at http://127.0.0.1:8260
+  POST /courses with an invalid code         HTTP 422 X-Correlation-ID preserved=True  {"correlation_id":"4ff760a8-9486-4809-8ac4-2badd776258d","success":false,"error":"courseCode must look like DATA-260 or CS-157A"}
+  GET /courses/<unknown id>                  HTTP 404 X-Correlation-ID preserved=True  {"correlation_id":"e9e46561-2328-46b0-b8af-b05004a39479","success":false,"error":"Course not found"}
+
+====================================================================================================
+## Part 2 - three agents in separate processes, two questions
+$ python planner.py / writer.py / reviewer.py / send_question.py
+====================================================================================================
+=== 2026-11-01 15:13:59 === Part 2 - Planner, Writer, Reviewer as separate processes (qwen3:8b, temperature 0, seed 8360)
+$ python planner.py
+2026-11-01T23:13:59.719Z planner INFO Planner ready, reading s8360_inbox (group s8360_planner, partitions [0]), model qwen3:8b
+2026-11-01T23:14:20.755Z planner INFO received question from s8360_inbox partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b message={"correlation_id":"57c72d04-3ef8-4b88-b19d-8c7b08948f1b","question":"Which department has the most available seats, and which course there has the most seats?","submitted_at":"2026-11-01T23:14:20.247Z"}
+2026-11-01T23:14:26.220Z httpx INFO HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-11-01T23:14:28.089Z planner INFO sending plan to s8360_tasks correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b message={"correlation_id":"57c72d04-3ef8-4b88-b19d-8c7b08948f1b","question":"Which department has the most available seats, and which course there has the most seats?","plan":["Identify the department with the highest total available seats across all its courses.","Find the course within that department with the highest number of available seats."],"plan_source":"llm","planned_at":"2026-11-01T23:14:28.089Z"}
+2026-11-01T23:14:28.103Z planner INFO plan acknowledged by the broker partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b
+2026-11-01T23:14:34.456Z planner INFO received question from s8360_inbox partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d message={"correlation_id":"63db99cd-3913-4a59-8004-7f2617c6484d","question":"How many courses does Dr. Priya Nair teach and how many seats do they offer in total?","submitted_at":"2026-11-01T23:14:33.942Z"}
+2026-11-01T23:14:34.851Z httpx INFO HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-11-01T23:14:36.725Z planner INFO sending plan to s8360_tasks correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d message={"correlation_id":"63db99cd-3913-4a59-8004-7f2617c6484d","question":"How many courses does Dr. Priya Nair teach and how many seats do they offer in total?","plan":["Identify all courses taught by Dr. Priya Nair from the catalogue data.","Sum the number of seats offered across all her courses."],"plan_source":"llm","planned_at":"2026-11-01T23:14:36.725Z"}
+2026-11-01T23:14:36.726Z planner INFO plan acknowledged by the broker partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d
+2026-11-01T23:14:59.436Z planner INFO planner stopped
+$ python writer.py
+2026-11-01T23:13:59.655Z writer INFO writer-1 starting: brain=llm idempotency=on commit=after processing retries=3 dead_letter=on
+2026-11-01T23:13:59.715Z writer INFO Writer writer-1 ready, reading s8360_tasks (group s8360_writers), assigned partitions [0, 1]
+2026-11-01T23:14:28.106Z writer INFO received task from s8360_tasks partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b
+2026-11-01T23:14:28.109Z writer INFO processing correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b attempt 1/3
+2026-11-01T23:14:31.737Z httpx INFO HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-11-01T23:14:33.576Z writer INFO sending draft to s8360_drafts correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b message={"correlation_id":"57c72d04-3ef8-4b88-b19d-8c7b08948f1b","question":"Which department has the most available seats, and which course there has the most seats?","plan":["Identify the department with the highest total available seats across all its courses.","Find the course within that department with the highest number of available seats."],"draft":"The department with the most available seats is Data Science, and the course within that department with the most seats is DATA-260 with 40 seats available.","facts":{"departments":[{"group":"Computer Science","courses":2,"totalSeats":95},{"group":"Data Science","courses":3,"totalSeats":105},{"group":"Statistics","courses":1,"totalSeats":60}],"instructors":[{"group":"Dr. Elena Rossi","courses":2,"totalSeats":95},{"group":"Dr. Marcus Lee","courses":2,"totalSeats":95},{"group":"Dr. Priya Nair","courses":2,"totalSeats":70}],"courses":[{"id":3,"courseCode":"CS-157A","courseTitle":"Database Systems","department":"Computer Science","seatsAvailable":45,"instructorName":"Dr. Marcus Lee"},{"id":5,"courseCode":"CS-146","courseTitle":"Data Structures and Algorithms","department":"Computer Science","seatsAvailable":50,"instructorName":"Dr. Marcus Lee"},{"id":1,"courseCode":"DATA-260","courseTitle":"Introduction to Distributed Systems","department":"Data Science","seatsAvailable":40,"instructorName":"Dr. Priya Nair"},{"id":2,"courseCode":"DATA-245","courseTitle":"Machine Learning Foundations","department":"Data Science","seatsAvailable":35,"instructorName":"Dr. Elena Rossi"},{"id":4,"courseCode":"DATA-270","courseTitle":"Cloud Computing","department":"Data Science","seatsAvailable":30,"instructorName":"Dr. Priya Nair"},{"id":6,"courseCode":"STAT-200","courseTitle":"Applied Statistics","department":"Statistics","seatsAvailable":60,"instructorName":"Dr. Elena Rossi"}],"totals":{"courses":6,"seats":260},"course_codes":["DATA-260","DATA-245","CS-157A","DATA-270","CS-146","STAT-200"]},"written_by":"writer-1","written_at":"2026-11-01T23:14:33.576Z"}
+2026-11-01T23:14:33.584Z writer INFO draft acknowledged by the broker partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b
+2026-11-01T23:14:33.589Z writer INFO committed offset 1 on s8360_tasks partition=0
+2026-11-01T23:14:36.727Z writer INFO received task from s8360_tasks partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d
+2026-11-01T23:14:36.727Z writer INFO processing correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d attempt 1/3
+2026-11-01T23:14:40.385Z httpx INFO HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-11-01T23:14:41.525Z writer INFO sending draft to s8360_drafts correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d message={"correlation_id":"63db99cd-3913-4a59-8004-7f2617c6484d","question":"How many courses does Dr. Priya Nair teach and how many seats do they offer in total?","plan":["Identify all courses taught by Dr. Priya Nair from the catalogue data.","Sum the number of seats offered across all her courses."],"draft":"Dr. Priya Nair teaches 2 courses and offers a total of 75 seats.","facts":{"departments":[{"group":"Computer Science","courses":2,"totalSeats":95},{"group":"Data Science","courses":3,"totalSeats":105},{"group":"Statistics","courses":1,"totalSeats":60}],"instructors":[{"group":"Dr. Elena Rossi","courses":2,"totalSeats":95},{"group":"Dr. Marcus Lee","courses":2,"totalSeats":95},{"group":"Dr. Priya Nair","courses":2,"totalSeats":70}],"courses":[{"id":3,"courseCode":"CS-157A","courseTitle":"Database Systems","department":"Computer Science","seatsAvailable":45,"instructorName":"Dr. Marcus Lee"},{"id":5,"courseCode":"CS-146","courseTitle":"Data Structures and Algorithms","department":"Computer Science","seatsAvailable":50,"instructorName":"Dr. Marcus Lee"},{"id":1,"courseCode":"DATA-260","courseTitle":"Introduction to Distributed Systems","department":"Data Science","seatsAvailable":40,"instructorName":"Dr. Priya Nair"},{"id":2,"courseCode":"DATA-245","courseTitle":"Machine Learning Foundations","department":"Data Science","seatsAvailable":35,"instructorName":"Dr. Elena Rossi"},{"id":4,"courseCode":"DATA-270","courseTitle":"Cloud Computing","department":"Data Science","seatsAvailable":30,"instructorName":"Dr. Priya Nair"},{"id":6,"courseCode":"STAT-200","courseTitle":"Applied Statistics","department":"Statistics","seatsAvailable":60,"instructorName":"Dr. Elena Rossi"}],"totals":{"courses":6,"seats":260},"course_codes":["DATA-260","DATA-245","CS-157A","DATA-270","CS-146","STAT-200"]},"written_by":"writer-1","written_at":"2026-11-01T23:14:41.525Z"}
+2026-11-01T23:14:41.527Z writer INFO draft acknowledged by the broker partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d
+2026-11-01T23:14:41.529Z writer INFO committed offset 2 on s8360_tasks partition=0
+2026-11-01T23:14:59.088Z writer INFO partitions revoked [0, 1]
+2026-11-01T23:14:59.093Z writer INFO writer-1 stopped
+$ python reviewer.py
+2026-11-01T23:13:59.225Z reviewer INFO Reviewer ready, reading s8360_drafts (group s8360_reviewer, partitions [0])
+2026-11-01T23:14:33.587Z reviewer INFO received draft from s8360_drafts partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b message={"correlation_id":"57c72d04-3ef8-4b88-b19d-8c7b08948f1b","question":"Which department has the most available seats, and which course there has the most seats?","plan":["Identify the department with the highest total available seats across all its courses.","Find the course within that department with the highest number of available seats."],"draft":"The department with the most available seats is Data Science, and the course within that department with the most seats is DATA-260 with 40 seats available.","facts":{"departments":[{"group":"Computer Science","courses":2,"totalSeats":95},{"group":"Data Science","courses":3,"totalSeats":105},{"group":"Statistics","courses":1,"totalSeats":60}],"instructors":[{"group":"Dr. Elena Rossi","courses":2,"totalSeats":95},{"group":"Dr. Marcus Lee","courses":2,"totalSeats":95},{"group":"Dr. Priya Nair","courses":2,"totalSeats":70}],"courses":[{"id":3,"courseCode":"CS-157A","courseTitle":"Database Systems","department":"Computer Science","seatsAvailable":45,"instructorName":"Dr. Marcus Lee"},{"id":5,"courseCode":"CS-146","courseTitle":"Data Structures and Algorithms","department":"Computer Science","seatsAvailable":50,"instructorName":"Dr. Marcus Lee"},{"id":1,"courseCode":"DATA-260","courseTitle":"Introduction to Distributed Systems","department":"Data Science","seatsAvailable":40,"instructorName":"Dr. Priya Nair"},{"id":2,"courseCode":"DATA-245","courseTitle":"Machine Learning Foundations","department":"Data Science","seatsAvailable":35,"instructorName":"Dr. Elena Rossi"},{"id":4,"courseCode":"DATA-270","courseTitle":"Cloud Computing","department":"Data Science","seatsAvailable":30,"instructorName":"Dr. Priya Nair"},{"id":6,"courseCode":"STAT-200","courseTitle":"Applied Statistics","department":"Statistics","seatsAvailable":60,"instructorName":"Dr. Elena Rossi"}],"totals":{"courses":6,"seats":260},"course_codes":["DATA-260","DATA-245","CS-157A","DATA-270","CS-146","STAT-200"]},"written_by":"writer-1","written_at":"2026-11-01T23:14:33.576Z"}
+2026-11-01T23:14:33.589Z reviewer INFO review approved correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b checks=[{"check":"length","passed":true,"detail":"156 characters"},{"check":"numbers_grounded","passed":true,"detail":"numbers in draft [40, 260]"},{"check":"codes_known","passed":true,"detail":"codes in draft ['DATA-260']"},{"check":"uses_catalogue","passed":true,"detail":"names a department, instructor or course code"},{"check":"superlative_correct","passed":true,"detail":"expected Data Science (105 seats) and DATA-260 (40 seats)"}]
+2026-11-01T23:14:33.589Z reviewer INFO sending final message to s8360_final correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b message={"correlation_id":"57c72d04-3ef8-4b88-b19d-8c7b08948f1b","status":"approved","answer":"The department with the most available seats is Data Science, and the course within that department with the most seats is DATA-260 with 40 seats available.","question":"Which department has the most available seats, and which course there has the most seats?","review":[{"check":"length","passed":true,"detail":"156 characters"},{"check":"numbers_grounded","passed":true,"detail":"numbers in draft [40, 260]"},{"check":"codes_known","passed":true,"detail":"codes in draft ['DATA-260']"},{"check":"uses_catalogue","passed":true,"detail":"names a department, instructor or course code"},{"check":"superlative_correct","passed":true,"detail":"expected Data Science (105 seats) and DATA-260 (40 seats)"}],"reviewed_at":"2026-11-01T23:14:33.589Z"}
+2026-11-01T23:14:33.594Z reviewer INFO final message acknowledged by the broker partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b
+2026-11-01T23:14:41.527Z reviewer INFO received draft from s8360_drafts partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d message={"correlation_id":"63db99cd-3913-4a59-8004-7f2617c6484d","question":"How many courses does Dr. Priya Nair teach and how many seats do they offer in total?","plan":["Identify all courses taught by Dr. Priya Nair from the catalogue data.","Sum the number of seats offered across all her courses."],"draft":"Dr. Priya Nair teaches 2 courses and offers a total of 75 seats.","facts":{"departments":[{"group":"Computer Science","courses":2,"totalSeats":95},{"group":"Data Science","courses":3,"totalSeats":105},{"group":"Statistics","courses":1,"totalSeats":60}],"instructors":[{"group":"Dr. Elena Rossi","courses":2,"totalSeats":95},{"group":"Dr. Marcus Lee","courses":2,"totalSeats":95},{"group":"Dr. Priya Nair","courses":2,"totalSeats":70}],"courses":[{"id":3,"courseCode":"CS-157A","courseTitle":"Database Systems","department":"Computer Science","seatsAvailable":45,"instructorName":"Dr. Marcus Lee"},{"id":5,"courseCode":"CS-146","courseTitle":"Data Structures and Algorithms","department":"Computer Science","seatsAvailable":50,"instructorName":"Dr. Marcus Lee"},{"id":1,"courseCode":"DATA-260","courseTitle":"Introduction to Distributed Systems","department":"Data Science","seatsAvailable":40,"instructorName":"Dr. Priya Nair"},{"id":2,"courseCode":"DATA-245","courseTitle":"Machine Learning Foundations","department":"Data Science","seatsAvailable":35,"instructorName":"Dr. Elena Rossi"},{"id":4,"courseCode":"DATA-270","courseTitle":"Cloud Computing","department":"Data Science","seatsAvailable":30,"instructorName":"Dr. Priya Nair"},{"id":6,"courseCode":"STAT-200","courseTitle":"Applied Statistics","department":"Statistics","seatsAvailable":60,"instructorName":"Dr. Elena Rossi"}],"totals":{"courses":6,"seats":260},"course_codes":["DATA-260","DATA-245","CS-157A","DATA-270","CS-146","STAT-200"]},"written_by":"writer-1","written_at":"2026-11-01T23:14:41.525Z"}
+2026-11-01T23:14:41.527Z reviewer INFO review rejected correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d checks=[{"check":"length","passed":true,"detail":"64 characters"},{"check":"numbers_grounded","passed":false,"detail":"numbers in draft [75]"},{"check":"codes_known","passed":true,"detail":"codes in draft []"},{"check":"uses_catalogue","passed":true,"detail":"names a department, instructor or course code"}]
+2026-11-01T23:14:41.527Z reviewer INFO sending final message to s8360_final correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d message={"correlation_id":"63db99cd-3913-4a59-8004-7f2617c6484d","status":"rejected","answer":null,"question":"How many courses does Dr. Priya Nair teach and how many seats do they offer in total?","review":[{"check":"length","passed":true,"detail":"64 characters"},{"check":"numbers_grounded","passed":false,"detail":"numbers in draft [75]"},{"check":"codes_known","passed":true,"detail":"codes in draft []"},{"check":"uses_catalogue","passed":true,"detail":"names a department, instructor or course code"}],"reviewed_at":"2026-11-01T23:14:41.527Z"}
+2026-11-01T23:14:41.528Z reviewer INFO final message acknowledged by the broker partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d
+2026-11-01T23:14:59.093Z reviewer INFO reviewer stopped
+$ python send_question.py
+2026-11-01T23:14:20.247Z send_question INFO sending question to s8360_inbox correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b message={"correlation_id":"57c72d04-3ef8-4b88-b19d-8c7b08948f1b","question":"Which department has the most available seats, and which course there has the most seats?","submitted_at":"2026-11-01T23:14:20.247Z"}
+2026-11-01T23:14:20.754Z send_question INFO question acknowledged by the broker partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b
+2026-11-01T23:14:33.596Z send_question INFO received final message from s8360_final partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b
+{
+  "correlation_id": "57c72d04-3ef8-4b88-b19d-8c7b08948f1b",
+  "status": "approved",
+  "answer": "The department with the most available seats is Data Science, and the course within that department with the most seats is DATA-260 with 40 seats available.",
+  "question": "Which department has the most available seats, and which course there has the most seats?",
+  "review": [
+    {
+      "check": "length",
+      "passed": true,
+      "detail": "156 characters"
+    },
+    {
+      "check": "numbers_grounded",
+      "passed": true,
+      "detail": "numbers in draft [40, 260]"
+    },
+    {
+      "check": "codes_known",
+      "passed": true,
+      "detail": "codes in draft ['DATA-260']"
+    },
+    {
+      "check": "uses_catalogue",
+      "passed": true,
+      "detail": "names a department, instructor or course code"
+    },
+    {
+      "check": "superlative_correct",
+      "passed": true,
+      "detail": "expected Data Science (105 seats) and DATA-260 (40 seats)"
+    }
+  ],
+  "reviewed_at": "2026-11-01T23:14:33.589Z"
+}
+$ python send_question.py "How many courses does Dr. Priya Nair teach and how many seats do they offer in total?"
+2026-11-01T23:14:33.943Z send_question INFO sending question to s8360_inbox correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d message={"correlation_id":"63db99cd-3913-4a59-8004-7f2617c6484d","question":"How many courses does Dr. Priya Nair teach and how many seats do they offer in total?","submitted_at":"2026-11-01T23:14:33.942Z"}
+2026-11-01T23:14:34.456Z send_question INFO question acknowledged by the broker partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d
+2026-11-01T23:14:41.529Z send_question INFO received final message from s8360_final partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d
+{
+  "correlation_id": "63db99cd-3913-4a59-8004-7f2617c6484d",
+  "status": "rejected",
+  "answer": null,
+  "question": "How many courses does Dr. Priya Nair teach and how many seats do they offer in total?",
+  "review": [
+    {
+      "check": "length",
+      "passed": true,
+      "detail": "64 characters"
+    },
+    {
+      "check": "numbers_grounded",
+      "passed": false,
+      "detail": "numbers in draft [75]"
+    },
+    {
+      "check": "codes_known",
+      "passed": true,
+      "detail": "codes in draft []"
+    },
+    {
+      "check": "uses_catalogue",
+      "passed": true,
+      "detail": "names a department, instructor or course code"
+    }
+  ],
+  "reviewed_at": "2026-11-01T23:14:41.527Z"
+}
+
+====================================================================================================
+## Part 3 - duplicate delivery, consumer death, poison message, ordering
+$ PYTHONPATH=. python scripts/hw8_failure_tests.py all
+====================================================================================================
+=== 2026-11-01 15:15:00 === Part 3 - failure behaviour, all four scenarios
+$ PYTHONPATH=. python scripts/hw8_failure_tests.py all
+=== 2026-11-01 15:15:00 ===  hw8 failure tests, run 7360fe, VERIFY_SEED 268360, broker localhost:9092
+=== Part 3 / I. Duplicate delivery: the same correlation_id delivered twice ===
+-- before fix: writer flags ['--no-idempotency'], correlation_id dup-before-7360fe
+   sent the task at partition=1 offset=0, replayed the identical message at partition=1 offset=1
+    2026-11-01T23:15:01.579Z writer INFO received task from s8360_tasks partition=1 offset=0 correlation_id=dup-before-7360fe
+    2026-11-01T23:15:01.583Z writer INFO draft acknowledged by the broker partition=0 offset=2 correlation_id=dup-before-7360fe
+    2026-11-01T23:15:01.585Z writer INFO committed offset 1 on s8360_tasks partition=1
+    2026-11-01T23:15:01.784Z writer INFO received task from s8360_tasks partition=1 offset=1 correlation_id=dup-before-7360fe
+    2026-11-01T23:15:01.786Z writer INFO draft acknowledged by the broker partition=0 offset=3 correlation_id=dup-before-7360fe
+    2026-11-01T23:15:01.787Z writer INFO committed offset 2 on s8360_tasks partition=1
+   drafts on s8360_drafts for this correlation_id: 2
+-- after fix: writer flags (idempotency on), correlation_id dup-after-7360fe
+   sent the task at partition=0 offset=2, replayed the identical message at partition=0 offset=3
+    2026-11-01T23:15:03.777Z writer INFO received task from s8360_tasks partition=0 offset=2 correlation_id=dup-after-7360fe
+    2026-11-01T23:15:03.784Z writer INFO draft acknowledged by the broker partition=0 offset=4 correlation_id=dup-after-7360fe
+    2026-11-01T23:15:03.789Z writer INFO committed offset 3 on s8360_tasks partition=0
+    2026-11-01T23:15:03.989Z writer INFO received task from s8360_tasks partition=0 offset=3 correlation_id=dup-after-7360fe
+    2026-11-01T23:15:03.989Z writer WARNING DUPLICATE correlation_id=dup-after-7360fe already processed, skipping the side effect
+    2026-11-01T23:15:03.992Z writer INFO committed offset 4 on s8360_tasks partition=0
+   drafts on s8360_drafts for this correlation_id: 1
+   saved reports/hw08/raw/failure_duplicate.json
+
+=== Part 3 / II. Consumer death: Writer killed (SIGKILL) while it is processing ===
+-- before fix: writer flags ['--auto-commit'], task needs 8 s of work, correlation_id death-before-7360fe
+   task at partition=1 offset=2; writer is mid-processing, sending SIGKILL now
+  offsets right after the kill:
+    GROUP                             TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                       HOST             CLIENT-ID
+    s8360_writers_death_before_7360fe s8360_tasks     1          3               3               0               writer-death-26091845-27c8-46ff-97a3-1290ae10f546 /172.182.252.137 writer-death
+    s8360_writers_death_before_7360fe s8360_tasks     0          4               4               0               writer-death-26091845-27c8-46ff-97a3-1290ae10f546 /172.182.252.137 writer-death
+   drafts for this correlation_id after the kill: 0
+   restarting the writer (same group)
+  offsets after the restart:
+    GROUP                             TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+    s8360_writers_death_before_7360fe s8360_tasks     1          3               3               0               -               -               -
+    s8360_writers_death_before_7360fe s8360_tasks     0          4               4               0               -               -               -
+    Consumer group 's8360_writers_death_before_7360fe' has no active members.
+    2026-11-01T23:15:05.443Z writer INFO Writer writer-death ready, reading s8360_tasks (group s8360_writers_death_before_7360fe), assigned partitions [0, 1]
+    2026-11-01T23:15:06.003Z writer INFO received task from s8360_tasks partition=1 offset=2 correlation_id=death-before-7360fe
+    2026-11-01T23:15:06.004Z writer INFO processing correlation_id=death-before-7360fe attempt 1/3
+    2026-11-01T23:15:13.488Z writer INFO Writer writer-death ready, reading s8360_tasks (group s8360_writers_death_before_7360fe), assigned partitions [0, 1]
+   redelivered after restart: False; drafts for this correlation_id: 0
+-- after fix: writer flags (commit after processing), task needs 8 s of work, correlation_id death-after-7360fe
+   task at partition=0 offset=4; writer is mid-processing, sending SIGKILL now
+  offsets right after the kill:
+    GROUP                            TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                       HOST             CLIENT-ID
+    s8360_writers_death_after_7360fe s8360_tasks     1          3               3               0               writer-death-794593d6-04b0-468f-ad88-31d092d5c770 /172.182.252.137 writer-death
+    s8360_writers_death_after_7360fe s8360_tasks     0          4               5               1               writer-death-794593d6-04b0-468f-ad88-31d092d5c770 /172.182.252.137 writer-death
+   drafts for this correlation_id after the kill: 0
+   restarting the writer (same group)
+  offsets after the restart:
+    GROUP                            TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+    s8360_writers_death_after_7360fe s8360_tasks     1          3               3               0               -               -               -
+    s8360_writers_death_after_7360fe s8360_tasks     0          5               5               0               -               -               -
+    Consumer group 's8360_writers_death_after_7360fe' has no active members.
+    2026-11-01T23:15:28.161Z writer INFO Writer writer-death ready, reading s8360_tasks (group s8360_writers_death_after_7360fe), assigned partitions [0, 1]
+    2026-11-01T23:15:28.691Z writer INFO received task from s8360_tasks partition=0 offset=4 correlation_id=death-after-7360fe
+    2026-11-01T23:15:28.692Z writer INFO processing correlation_id=death-after-7360fe attempt 1/3
+    2026-11-01T23:15:36.196Z writer INFO Writer writer-death ready, reading s8360_tasks (group s8360_writers_death_after_7360fe), assigned partitions [0, 1]
+    2026-11-01T23:15:36.199Z writer INFO received task from s8360_tasks partition=0 offset=4 correlation_id=death-after-7360fe
+    2026-11-01T23:15:36.199Z writer INFO processing correlation_id=death-after-7360fe attempt 1/3
+    2026-11-01T23:15:44.216Z writer INFO draft acknowledged by the broker partition=0 offset=5 correlation_id=death-after-7360fe
+    2026-11-01T23:15:44.219Z writer INFO committed offset 5 on s8360_tasks partition=0
+   redelivered after restart: True; drafts for this correlation_id: 1
+   saved reports/hw08/raw/failure_death.json
+
+=== Part 3 / III. Poison message: a malformed task followed by a good one ===
+-- before fix: writer flags ['--no-dlq']
+   poison message at partition/offset (0, 5), good message right behind it at (0, 6)
+   writer run 1 exited with code 1; restarting it
+   writer run 2 exited with code 1 (same message, same crash)
+  offsets after two crashes:
+    GROUP                              TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+    s8360_writers_poison_before_7360fe s8360_tasks     1          3               3               0               -               -               -
+    s8360_writers_poison_before_7360fe s8360_tasks     0          5               7               2               -               -               -
+    Consumer group 's8360_writers_poison_before_7360fe' has no active members.
+    2026-11-01T23:15:47.374Z writer INFO received task from s8360_tasks partition=0 offset=5 correlation_id=poison-before-7360fe
+    Traceback (most recent call last):
+    ValueError: task is not valid JSON
+    ----- writer restarted -----
+    2026-11-01T23:15:47.569Z writer INFO received task from s8360_tasks partition=0 offset=5 correlation_id=poison-before-7360fe
+    Traceback (most recent call last):
+    ValueError: task is not valid JSON
+   good message processed: False
+-- after fix: writer flags (3 attempts, then dead-letter)
+   poison message at partition/offset (0, 7), good message right behind it at (0, 8)
+    2026-11-01T23:15:49.654Z writer INFO received task from s8360_tasks partition=0 offset=7 correlation_id=poison-after-7360fe
+    2026-11-01T23:15:49.654Z writer WARNING attempt 1/3 failed for s8360_tasks offset=7: ValueError: task is not valid JSON
+    2026-11-01T23:15:50.161Z writer WARNING attempt 2/3 failed for s8360_tasks offset=7: ValueError: task is not valid JSON
+    2026-11-01T23:15:51.169Z writer WARNING attempt 3/3 failed for s8360_tasks offset=7: ValueError: task is not valid JSON
+    2026-11-01T23:15:51.174Z writer ERROR gave up after 3 attempts, moved s8360_tasks offset=7 to s8360_dead_letter partition=0 offset=0
+    2026-11-01T23:15:51.176Z writer INFO committed offset 8 on s8360_tasks partition=0
+    2026-11-01T23:15:51.176Z writer INFO received task from s8360_tasks partition=0 offset=8 correlation_id=after-poison-after-7360fe
+    2026-11-01T23:15:51.176Z writer INFO processing correlation_id=after-poison-after-7360fe attempt 1/3
+    2026-11-01T23:15:51.178Z writer INFO draft acknowledged by the broker partition=0 offset=6 correlation_id=after-poison-after-7360fe
+    2026-11-01T23:15:51.182Z writer INFO committed offset 9 on s8360_tasks partition=0
+  offsets after the run:
+    GROUP                             TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                        HOST             CLIENT-ID
+    s8360_writers_poison_after_7360fe s8360_tasks     1          3               3               0               writer-poison-89394e6c-5cc6-4518-ac91-47f0a35c9782 /172.182.252.137 writer-poison
+    s8360_writers_poison_after_7360fe s8360_tasks     0          9               9               0               writer-poison-89394e6c-5cc6-4518-ac91-47f0a35c9782 /172.182.252.137 writer-poison
+   dead-letter record: {"correlation_id": "poison-after-7360fe", "source_topic": "s8360_tasks", "source_partition": 0, "source_offset": 7, "attempts": 3, "error": "ValueError: task is not valid JSON", "failed_at": "2026-11-01T23:15:51Z", "original_value": "{\"correlation_id\": \"poison-after-7360fe\", \"question\": "}
+   good message processed: True
+   saved reports/hw08/raw/failure_poison.json
+
+=== Part 3 / IV. Ordering: 20 related messages (VERIFY_SEED 268360), 2 partitions, 2 writers in one group ===
+   entities and message counts: CS-146=7, CS-157A=1, DATA-245=3, DATA-270=4, STAT-200=5
+-- before fix: message key = none; writer-A owns partition [0], writer-B owns [1]
+   20 messages processed; entities kept in one partition: 1/5; entities processed in order: 2/5; order inversions: 4
+     CS-146    partitions=[0, 1] writers=['writer-A', 'writer-B'] processed seq order=[1, 4, 5, 2, 3, 6, 7] in_order=False
+     CS-157A   partitions=[0] writers=['writer-A'] processed seq order=[1] in_order=True
+     DATA-245  partitions=[0, 1] writers=['writer-A', 'writer-B'] processed seq order=[1, 2, 3] in_order=True
+     DATA-270  partitions=[0, 1] writers=['writer-A', 'writer-B'] processed seq order=[4, 1, 2, 3] in_order=False
+     STAT-200  partitions=[0, 1] writers=['writer-A', 'writer-B'] processed seq order=[2, 1, 5, 3, 4] in_order=False
+-- after fix: message key = entity (course code); writer-A owns partition [0], writer-B owns [1]
+   20 messages processed; entities kept in one partition: 5/5; entities processed in order: 5/5; order inversions: 0
+     CS-146    partitions=[0] writers=['writer-A'] processed seq order=[1, 2, 3, 4, 5, 6, 7] in_order=True
+     CS-157A   partitions=[1] writers=['writer-B'] processed seq order=[1] in_order=True
+     DATA-245  partitions=[0] writers=['writer-A'] processed seq order=[1, 2, 3] in_order=True
+     DATA-270  partitions=[0] writers=['writer-A'] processed seq order=[1, 2, 3, 4] in_order=True
+     STAT-200  partitions=[0] writers=['writer-A'] processed seq order=[1, 2, 3, 4, 5] in_order=True
+   saved reports/hw08/raw/failure_ordering.json
+
+====================================================================================================
+## Part 3 - the dead-letter topic
+$ kafka-console-consumer.sh --topic s8360_dead_letter
+====================================================================================================
+=== 2026-11-01 15:17:13 === Part 3 - dead-letter topic contents (Kafka console consumer)
+$ docker exec s8360-kafka /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic s8360_dead_letter --from-beginning --timeout-ms 6000 --property print.partition=true --property print.offset=true 2>&1 | grep '^Partition'
+Partition:0	Offset:0	{"correlation_id": "poison-after-7360fe", "source_topic": "s8360_tasks", "source_partition": 0, "source_offset": 7, "attempts": 3, "error": "ValueError: task is not valid JSON", "failed_at": "2026-11-01T23:15:51Z", "original_value": "{\"correlation_id\": \"poison-after-7360fe\", \"question\": "}
+
+====================================================================================================
+## Offline tests and the smoke test (writes reports/hw08/verification.json)
+$ python tests_hw8.py && PYTHONPATH=. python verify_hw08.py
+====================================================================================================
+=== 2026-11-01 19:23:54 === offline tests and smoke test
+$ python tests_hw8.py && PYTHONPATH=. python verify_hw08.py
+PASS  test_api_forwards_the_callers_correlation_id_to_kafka
+PASS  test_api_generates_a_correlation_id_when_none_is_supplied
+PASS  test_api_maps_worker_errors_to_http_codes
+PASS  test_auto_commit_mode_never_commits_by_hand
+PASS  test_configuration_follows_the_personal_values
+PASS  test_create_course_generates_a_uuid_and_stores_the_entity
+PASS  test_create_then_get_round_trip
+PASS  test_dead_letter_record_keeps_the_source_position_and_original_bytes
+PASS  test_every_response_keeps_the_correlation_id
+PASS  test_facts_come_from_the_hw5_tools
+PASS  test_get_unknown_course_is_a_clean_error
+PASS  test_idempotent_writer_skips_a_replayed_correlation_id
+PASS  test_missing_empty_and_invalid_fields_are_rejected
+PASS  test_ordering_analysis_finds_inversions_and_partition_spread
+PASS  test_ordering_messages_are_seeded_and_numbered_per_entity
+PASS  test_poison_message_is_retried_three_times_then_dead_lettered_and_skipped
+PASS  test_processed_store_survives_a_restart
+PASS  test_requests_without_a_correlation_id_get_an_error_not_a_crash
+PASS  test_reviewer_rejects_a_wrong_course_and_an_invented_number
+PASS  test_rule_writer_output_passes_the_reviewer
+PASS  test_unknown_operation_is_rejected
+PASS  test_writer_commits_only_after_the_draft_is_sent
+PASS  test_writer_without_dead_letter_raises_and_leaves_the_offset_uncommitted
+PASS  test_writer_without_idempotency_repeats_the_side_effect
+
+24/24 tests passed (0.0s)
+  [OK  ] docker: s8360-kafka, s8360-worker and s8360-api are running -- running: ['s8360-kafka', 's8360-worker', 's8360-api']
+  [OK  ] Kafka topics exist with the required partition counts (tasks = 2) -- 8 topics, partitions {'s8360_dead_letter': 1, 's8360_drafts': 1, 's8360_entity_requests': 1, 's8360_entity_responses': 1, 's8360_final': 1, 's8360_inbox': 1, 's8360_tasks': 2}
+  [OK  ] CREATE_COURSE -> GET_COURSE round-trips through Kafka; errors keep the correlation_id -- CREATE->GET round trip keeps correlation_id; unknown id -> 'Course not found'; unknown op -> 'Unknown operation'; invalid -> 'courseTitle must be a non-empty string'
+  [OK  ] FastAPI wrapper: POST/GET through Kafka, X-Correlation-ID preserved, 404 for unknown id -- POST /courses=201 GET /courses/<id>=200 unknown id=404, X-Correlation-ID echoed
+  [OK  ] Planner -> Writer -> Reviewer pipeline answers a question through Kafka only -- Planner -> Writer -> Reviewer through Kafka: status=approved, correlation_id preserved=True
+  [OK  ] all four pipeline topics carry messages -- messages ever written: {'s8360_inbox': 5, 's8360_tasks': 55, 's8360_drafts': 50, 's8360_final': 5}
+  [OK  ] Part 3 duplicate delivery: replay creates 2 drafts before idempotency, 1 after -- replayed correlation_id -> drafts before=2, after=1
+  [OK  ] Part 3 consumer death: message lost with early commit, redelivered and completed with commit-after -- before: lag after kill 0, redelivered=False, drafts=0; after: lag 1, redelivered=True, drafts=1
+  [OK  ] Part 3 poison message: crash loop before, retried 3x + dead-lettered + later message processed after -- before: crashes 1/1, later message processed=False; after: dead-lettered after 3 attempts, later message processed=True
+  [OK  ] Part 3 ordering: unkeyed messages interleave across partitions, keyed messages stay in one partition in order -- no key: 4 inversions, 1/5 entities in one partition; keyed: 0 inversions, 5/5 in one partition
+  [OK  ] offline test suite passes (no Kafka / network / model) -- 24/24 tests passed (0.0s)
+  [OK  ] ruff passes on the repository -- All checks passed!
+  [OK  ] reports/hw08/RUN_LOG.txt exists and is non-empty -- reports/hw08/RUN_LOG.txt
+  [OK  ] reports/hw08/METRICS.md exists and is non-empty -- reports/hw08/METRICS.md
+  [OK  ] reports/hw08/AI_USE.md exists and is non-empty -- reports/hw08/AI_USE.md
+  [OK  ] reports/hw08/Pragada_HW8.pdf exists and is non-empty -- reports/hw08/Pragada_HW8.pdf
+
+16/16 checks passed.
+Wrote reports/hw08/verification.json

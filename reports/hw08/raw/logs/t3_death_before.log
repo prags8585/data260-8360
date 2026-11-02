@@ -1,0 +1,9 @@
+2026-11-01T23:15:05.383Z writer INFO writer-death starting: brain=rule idempotency=on commit=auto (before processing ends) retries=3 dead_letter=on
+2026-11-01T23:15:05.443Z writer INFO Writer writer-death ready, reading s8360_tasks (group s8360_writers_death_before_7360fe), assigned partitions [0, 1]
+2026-11-01T23:15:06.003Z writer INFO received task from s8360_tasks partition=1 offset=2 correlation_id=death-before-7360fe
+2026-11-01T23:15:06.004Z writer INFO processing correlation_id=death-before-7360fe attempt 1/3
+----- writer restarted -----
+2026-11-01T23:15:11.068Z writer INFO writer-death starting: brain=rule idempotency=on commit=auto (before processing ends) retries=3 dead_letter=on
+2026-11-01T23:15:13.488Z writer INFO Writer writer-death ready, reading s8360_tasks (group s8360_writers_death_before_7360fe), assigned partitions [0, 1]
+2026-11-01T23:15:26.523Z writer INFO partitions revoked [0, 1]
+2026-11-01T23:15:26.543Z writer INFO writer-death stopped

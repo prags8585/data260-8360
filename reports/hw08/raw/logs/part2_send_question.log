@@ -1,0 +1,37 @@
+2026-11-01T23:14:20.247Z send_question INFO sending question to s8360_inbox correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b message={"correlation_id":"57c72d04-3ef8-4b88-b19d-8c7b08948f1b","question":"Which department has the most available seats, and which course there has the most seats?","submitted_at":"2026-11-01T23:14:20.247Z"}
+2026-11-01T23:14:20.754Z send_question INFO question acknowledged by the broker partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b
+2026-11-01T23:14:33.596Z send_question INFO received final message from s8360_final partition=0 offset=0 correlation_id=57c72d04-3ef8-4b88-b19d-8c7b08948f1b
+{
+  "correlation_id": "57c72d04-3ef8-4b88-b19d-8c7b08948f1b",
+  "status": "approved",
+  "answer": "The department with the most available seats is Data Science, and the course within that department with the most seats is DATA-260 with 40 seats available.",
+  "question": "Which department has the most available seats, and which course there has the most seats?",
+  "review": [
+    {
+      "check": "length",
+      "passed": true,
+      "detail": "156 characters"
+    },
+    {
+      "check": "numbers_grounded",
+      "passed": true,
+      "detail": "numbers in draft [40, 260]"
+    },
+    {
+      "check": "codes_known",
+      "passed": true,
+      "detail": "codes in draft ['DATA-260']"
+    },
+    {
+      "check": "uses_catalogue",
+      "passed": true,
+      "detail": "names a department, instructor or course code"
+    },
+    {
+      "check": "superlative_correct",
+      "passed": true,
+      "detail": "expected Data Science (105 seats) and DATA-260 (40 seats)"
+    }
+  ],
+  "reviewed_at": "2026-11-01T23:14:33.589Z"
+}

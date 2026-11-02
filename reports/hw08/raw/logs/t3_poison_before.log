@@ -1,0 +1,27 @@
+2026-11-01T23:15:47.293Z writer INFO writer-poison starting: brain=rule idempotency=on commit=after processing retries=1 dead_letter=off
+2026-11-01T23:15:47.371Z writer INFO Writer writer-poison ready, reading s8360_tasks (group s8360_writers_poison_before_7360fe), assigned partitions [0, 1]
+2026-11-01T23:15:47.374Z writer INFO received task from s8360_tasks partition=0 offset=5 correlation_id=poison-before-7360fe
+2026-11-01T23:15:47.374Z writer INFO partitions revoked [0, 1]
+2026-11-01T23:15:47.375Z writer INFO writer-poison stopped
+Traceback (most recent call last):
+  File "/Users/prags/Desktop/HW1_DATA260/writer.py", line 127, in <module>
+    main()
+  File "/Users/prags/Desktop/HW1_DATA260/writer.py", line 120, in main
+    handle(msg, args, model, producer, consumer, processed, args.trace_file)
+  File "/Users/prags/Desktop/HW1_DATA260/writer.py", line 50, in handle
+    raise ValueError("task is not valid JSON")
+ValueError: task is not valid JSON
+----- writer restarted -----
+2026-11-01T23:15:47.498Z writer INFO writer-poison starting: brain=rule idempotency=on commit=after processing retries=1 dead_letter=off
+2026-11-01T23:15:47.567Z writer INFO Writer writer-poison ready, reading s8360_tasks (group s8360_writers_poison_before_7360fe), assigned partitions [0, 1]
+2026-11-01T23:15:47.569Z writer INFO received task from s8360_tasks partition=0 offset=5 correlation_id=poison-before-7360fe
+2026-11-01T23:15:47.569Z writer INFO partitions revoked [0, 1]
+2026-11-01T23:15:47.570Z writer INFO writer-poison stopped
+Traceback (most recent call last):
+  File "/Users/prags/Desktop/HW1_DATA260/writer.py", line 127, in <module>
+    main()
+  File "/Users/prags/Desktop/HW1_DATA260/writer.py", line 120, in main
+    handle(msg, args, model, producer, consumer, processed, args.trace_file)
+  File "/Users/prags/Desktop/HW1_DATA260/writer.py", line 50, in handle
+    raise ValueError("task is not valid JSON")
+ValueError: task is not valid JSON

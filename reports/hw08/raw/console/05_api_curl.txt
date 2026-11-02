@@ -1,0 +1,13 @@
+=== 2026-11-01 15:13:57 === Part 1 - the HTTP API wrapper with curl
+$ curl -s -i -X POST http://127.0.0.1:8260/courses -H 'Content-Type: application/json' -H 'X-Correlation-ID: curl-demo-001' -d '{"courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}' | grep -E '^HTTP|^x-correlation-id|^\{'
+HTTP/1.1 201 Created
+x-correlation-id: curl-demo-001
+{"correlation_id":"curl-demo-001","success":true,"course_id":"983eb8fd-7891-42a5-adf7-9fd45e931258","message":"Course created"}
+$ curl -s -i http://127.0.0.1:8260/courses/983eb8fd-7891-42a5-adf7-9fd45e931258 -H 'X-Correlation-ID: curl-demo-001' | grep -E '^HTTP|^x-correlation-id|^\{'
+HTTP/1.1 200 OK
+x-correlation-id: curl-demo-001
+{"correlation_id":"curl-demo-001","success":true,"course":{"course_id":"983eb8fd-7891-42a5-adf7-9fd45e931258","courseTitle":"Cloud Computing","courseCode":"DATA-270","seatsAvailable":40,"instructorId":1}}
+$ curl -s -i http://127.0.0.1:8260/courses/00000000-0000-0000-0000-000000000000 -H 'X-Correlation-ID: curl-demo-002' | grep -E '^HTTP|^x-correlation-id|^\{'
+HTTP/1.1 404 Not Found
+x-correlation-id: curl-demo-002
+{"correlation_id":"curl-demo-002","success":false,"error":"Course not found"}

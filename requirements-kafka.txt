@@ -1,0 +1,3 @@
+confluent-kafka
+fastapi
+uvicorn

@@ -1,0 +1,45 @@
+=== 2026-11-01 15:13:09 === Part 1 - stack start from scratch (volumes removed)
+$ docker compose -f docker-compose.kafka.yml down -v 2>&1 | tail -8
+ Container s8360-kafka  Stopping
+ Container s8360-kafka  Stopped
+ Container s8360-kafka  Removing
+ Container s8360-kafka  Removed
+ Network s8360-hw8_default  Removing
+ Volume s8360-hw8_s8360_kafka_data  Removing
+ Volume s8360-hw8_s8360_kafka_data  Removed
+ Network s8360-hw8_default  Removed
+$ docker compose -f docker-compose.kafka.yml up -d --build 2>&1 | grep -E 'Container|Built|built' | tail -14
+ Container s8360-api  Creating
+ Container s8360-api  Created
+ Container s8360-kafka  Starting
+ Container s8360-kafka  Started
+ Container s8360-kafka  Waiting
+ Container s8360-kafka  Healthy
+ Container s8360-kafka-init  Starting
+ Container s8360-kafka-init  Started
+ Container s8360-kafka-init  Waiting
+ Container s8360-kafka-init  Exited
+ Container s8360-worker  Starting
+ Container s8360-worker  Started
+ Container s8360-api  Starting
+ Container s8360-api  Started
+$ docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}' | grep -E 'NAMES|s8360-(kafka|worker|api)'
+NAMES                                   IMAGE                                 STATUS                    PORTS
+s8360-api                               s8360-hw8-kafka-svc                   Up 10 seconds (healthy)   0.0.0.0:8260->8260/tcp, [::]:8260->8260/tcp
+s8360-worker                            s8360-hw8-kafka-svc                   Up 10 seconds             
+s8360-kafka                             apache/kafka:3.8.0                    Up 23 seconds (healthy)   0.0.0.0:9092->9092/tcp, [::]:9092->9092/tcp
+$ docker logs s8360-worker 2>&1 | grep -E 'worker starting|Consumer is ready'
+2026-11-01T23:13:28.143Z worker INFO worker starting, bootstrap kafka:19092, entities held in a plain dict
+2026-11-01T23:13:31.185Z worker INFO Consumer is ready and listening on s8360_entity_requests (group s8360_entity_worker, partitions [0])
+$ docker logs s8360-api 2>&1 | grep -E 'FastAPI server started|Uvicorn running'
+2026-11-01T23:13:28.434Z api INFO FastAPI server started at http://127.0.0.1:8260 (Kafka bootstrap kafka:19092)
+INFO:     Uvicorn running on http://0.0.0.0:8260 (Press CTRL+C to quit)
+$ docker exec s8360-kafka /opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe | grep PartitionCount | awk '{print $1" "$2"  "$3" "$4"  "$5" "$6"  "$7" "$8}' | sort
+Topic: __consumer_offsets  TopicId: sYbYDgrjQqiVLfBDHFi2rQ  PartitionCount: 50  ReplicationFactor: 1
+Topic: s8360_dead_letter  TopicId: iyNkz8tAQPqgjw45KeUImw  PartitionCount: 1  ReplicationFactor: 1
+Topic: s8360_drafts  TopicId: X6wvDFM5RLmR8R_Rcoaylw  PartitionCount: 1  ReplicationFactor: 1
+Topic: s8360_entity_requests  TopicId: 2J6dgY0BSFSdOF_3AoYabA  PartitionCount: 1  ReplicationFactor: 1
+Topic: s8360_entity_responses  TopicId: _HJrkyzdSRiXwbokVfITYg  PartitionCount: 1  ReplicationFactor: 1
+Topic: s8360_final  TopicId: rQooVxt3TW-ErNKgNgVKMg  PartitionCount: 1  ReplicationFactor: 1
+Topic: s8360_inbox  TopicId: eTI3WzL2RMOY-LFJxKBBig  PartitionCount: 1  ReplicationFactor: 1
+Topic: s8360_tasks  TopicId: B4z1P0CIS6eNYLAVOZV2vg  PartitionCount: 2  ReplicationFactor: 1

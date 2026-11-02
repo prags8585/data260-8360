@@ -1,0 +1,860 @@
+{
+  "run_id": "7360fe",
+  "scenario": "ordering",
+  "before": {
+    "keyed": false,
+    "sent": [
+      {
+        "correlation_id": "ord-268360-00",
+        "entity": "CS-146",
+        "seq": 1,
+        "partition": 1,
+        "offset": 3
+      },
+      {
+        "correlation_id": "ord-268360-01",
+        "entity": "STAT-200",
+        "seq": 1,
+        "partition": 1,
+        "offset": 4
+      },
+      {
+        "correlation_id": "ord-268360-02",
+        "entity": "DATA-245",
+        "seq": 1,
+        "partition": 1,
+        "offset": 5
+      },
+      {
+        "correlation_id": "ord-268360-03",
+        "entity": "CS-146",
+        "seq": 2,
+        "partition": 1,
+        "offset": 6
+      },
+      {
+        "correlation_id": "ord-268360-04",
+        "entity": "STAT-200",
+        "seq": 2,
+        "partition": 0,
+        "offset": 9
+      },
+      {
+        "correlation_id": "ord-268360-05",
+        "entity": "CS-146",
+        "seq": 3,
+        "partition": 1,
+        "offset": 7
+      },
+      {
+        "correlation_id": "ord-268360-06",
+        "entity": "STAT-200",
+        "seq": 3,
+        "partition": 1,
+        "offset": 8
+      },
+      {
+        "correlation_id": "ord-268360-07",
+        "entity": "DATA-270",
+        "seq": 1,
+        "partition": 1,
+        "offset": 9
+      },
+      {
+        "correlation_id": "ord-268360-08",
+        "entity": "CS-146",
+        "seq": 4,
+        "partition": 0,
+        "offset": 10
+      },
+      {
+        "correlation_id": "ord-268360-09",
+        "entity": "DATA-270",
+        "seq": 2,
+        "partition": 1,
+        "offset": 10
+      },
+      {
+        "correlation_id": "ord-268360-10",
+        "entity": "CS-146",
+        "seq": 5,
+        "partition": 0,
+        "offset": 11
+      },
+      {
+        "correlation_id": "ord-268360-11",
+        "entity": "STAT-200",
+        "seq": 4,
+        "partition": 1,
+        "offset": 11
+      },
+      {
+        "correlation_id": "ord-268360-12",
+        "entity": "CS-157A",
+        "seq": 1,
+        "partition": 0,
+        "offset": 12
+      },
+      {
+        "correlation_id": "ord-268360-13",
+        "entity": "DATA-270",
+        "seq": 3,
+        "partition": 1,
+        "offset": 12
+      },
+      {
+        "correlation_id": "ord-268360-14",
+        "entity": "STAT-200",
+        "seq": 5,
+        "partition": 0,
+        "offset": 13
+      },
+      {
+        "correlation_id": "ord-268360-15",
+        "entity": "DATA-270",
+        "seq": 4,
+        "partition": 0,
+        "offset": 14
+      },
+      {
+        "correlation_id": "ord-268360-16",
+        "entity": "DATA-245",
+        "seq": 2,
+        "partition": 0,
+        "offset": 15
+      },
+      {
+        "correlation_id": "ord-268360-17",
+        "entity": "CS-146",
+        "seq": 6,
+        "partition": 0,
+        "offset": 16
+      },
+      {
+        "correlation_id": "ord-268360-18",
+        "entity": "CS-146",
+        "seq": 7,
+        "partition": 0,
+        "offset": 17
+      },
+      {
+        "correlation_id": "ord-268360-19",
+        "entity": "DATA-245",
+        "seq": 3,
+        "partition": 1,
+        "offset": 13
+      }
+    ],
+    "analysis": {
+      "messages_processed": 20,
+      "entities": {
+        "CS-146": {
+          "messages": 7,
+          "processed_seqs": [
+            1,
+            4,
+            5,
+            2,
+            3,
+            6,
+            7
+          ],
+          "partitions": [
+            0,
+            1
+          ],
+          "writers": [
+            "writer-A",
+            "writer-B"
+          ],
+          "in_order": false,
+          "inversions": 1
+        },
+        "CS-157A": {
+          "messages": 1,
+          "processed_seqs": [
+            1
+          ],
+          "partitions": [
+            0
+          ],
+          "writers": [
+            "writer-A"
+          ],
+          "in_order": true,
+          "inversions": 0
+        },
+        "DATA-245": {
+          "messages": 3,
+          "processed_seqs": [
+            1,
+            2,
+            3
+          ],
+          "partitions": [
+            0,
+            1
+          ],
+          "writers": [
+            "writer-A",
+            "writer-B"
+          ],
+          "in_order": true,
+          "inversions": 0
+        },
+        "DATA-270": {
+          "messages": 4,
+          "processed_seqs": [
+            4,
+            1,
+            2,
+            3
+          ],
+          "partitions": [
+            0,
+            1
+          ],
+          "writers": [
+            "writer-A",
+            "writer-B"
+          ],
+          "in_order": false,
+          "inversions": 1
+        },
+        "STAT-200": {
+          "messages": 5,
+          "processed_seqs": [
+            2,
+            1,
+            5,
+            3,
+            4
+          ],
+          "partitions": [
+            0,
+            1
+          ],
+          "writers": [
+            "writer-A",
+            "writer-B"
+          ],
+          "in_order": false,
+          "inversions": 2
+        }
+      },
+      "entities_in_one_partition": 1,
+      "entities_in_order": 2,
+      "total_inversions": 4,
+      "processing_order": [
+        {
+          "position": 1,
+          "writer": "writer-B",
+          "partition": 1,
+          "offset": 3,
+          "entity": "CS-146",
+          "seq": 1,
+          "finished_at": "2026-11-01T23:15:55.605Z"
+        },
+        {
+          "position": 2,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 9,
+          "entity": "STAT-200",
+          "seq": 2,
+          "finished_at": "2026-11-01T23:15:55.712Z"
+        },
+        {
+          "position": 3,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 10,
+          "entity": "CS-146",
+          "seq": 4,
+          "finished_at": "2026-11-01T23:15:56.002Z"
+        },
+        {
+          "position": 4,
+          "writer": "writer-B",
+          "partition": 1,
+          "offset": 4,
+          "entity": "STAT-200",
+          "seq": 1,
+          "finished_at": "2026-11-01T23:15:56.008Z"
+        },
+        {
+          "position": 5,
+          "writer": "writer-B",
+          "partition": 1,
+          "offset": 5,
+          "entity": "DATA-245",
+          "seq": 1,
+          "finished_at": "2026-11-01T23:15:56.250Z"
+        },
+        {
+          "position": 6,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 11,
+          "entity": "CS-146",
+          "seq": 5,
+          "finished_at": "2026-11-01T23:15:56.328Z"
+        },
+        {
+          "position": 7,
+          "writer": "writer-B",
+          "partition": 1,
+          "offset": 6,
+          "entity": "CS-146",
+          "seq": 2,
+          "finished_at": "2026-11-01T23:15:56.397Z"
+        },
+        {
+          "position": 8,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 12,
+          "entity": "CS-157A",
+          "seq": 1,
+          "finished_at": "2026-11-01T23:15:56.561Z"
+        },
+        {
+          "position": 9,
+          "writer": "writer-B",
+          "partition": 1,
+          "offset": 7,
+          "entity": "CS-146",
+          "seq": 3,
+          "finished_at": "2026-11-01T23:15:56.649Z"
+        },
+        {
+          "position": 10,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 13,
+          "entity": "STAT-200",
+          "seq": 5,
+          "finished_at": "2026-11-01T23:15:56.784Z"
+        },
+        {
+          "position": 11,
+          "writer": "writer-B",
+          "partition": 1,
+          "offset": 8,
+          "entity": "STAT-200",
+          "seq": 3,
+          "finished_at": "2026-11-01T23:15:56.904Z"
+        },
+        {
+          "position": 12,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 14,
+          "entity": "DATA-270",
+          "seq": 4,
+          "finished_at": "2026-11-01T23:15:57.066Z"
+        },
+        {
+          "position": 13,
+          "writer": "writer-B",
+          "partition": 1,
+          "offset": 9,
+          "entity": "DATA-270",
+          "seq": 1,
+          "finished_at": "2026-11-01T23:15:57.214Z"
+        },
+        {
+          "position": 14,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 15,
+          "entity": "DATA-245",
+          "seq": 2,
+          "finished_at": "2026-11-01T23:15:57.215Z"
+        },
+        {
+          "position": 15,
+          "writer": "writer-B",
+          "partition": 1,
+          "offset": 10,
+          "entity": "DATA-270",
+          "seq": 2,
+          "finished_at": "2026-11-01T23:15:57.452Z"
+        },
+        {
+          "position": 16,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 16,
+          "entity": "CS-146",
+          "seq": 6,
+          "finished_at": "2026-11-01T23:15:57.634Z"
+        },
+        {
+          "position": 17,
+          "writer": "writer-B",
+          "partition": 1,
+          "offset": 11,
+          "entity": "STAT-200",
+          "seq": 4,
+          "finished_at": "2026-11-01T23:15:57.743Z"
+        },
+        {
+          "position": 18,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 17,
+          "entity": "CS-146",
+          "seq": 7,
+          "finished_at": "2026-11-01T23:15:57.821Z"
+        },
+        {
+          "position": 19,
+          "writer": "writer-B",
+          "partition": 1,
+          "offset": 12,
+          "entity": "DATA-270",
+          "seq": 3,
+          "finished_at": "2026-11-01T23:15:58.161Z"
+        },
+        {
+          "position": 20,
+          "writer": "writer-B",
+          "partition": 1,
+          "offset": 13,
+          "entity": "DATA-245",
+          "seq": 3,
+          "finished_at": "2026-11-01T23:15:58.426Z"
+        }
+      ]
+    },
+    "logs": [
+      "reports/hw08/raw/logs/t3_ordering_before_A.log",
+      "reports/hw08/raw/logs/t3_ordering_before_B.log"
+    ]
+  },
+  "after": {
+    "keyed": true,
+    "sent": [
+      {
+        "correlation_id": "ord-268360-00",
+        "entity": "CS-146",
+        "seq": 1,
+        "partition": 0,
+        "offset": 18
+      },
+      {
+        "correlation_id": "ord-268360-01",
+        "entity": "STAT-200",
+        "seq": 1,
+        "partition": 0,
+        "offset": 19
+      },
+      {
+        "correlation_id": "ord-268360-02",
+        "entity": "DATA-245",
+        "seq": 1,
+        "partition": 0,
+        "offset": 20
+      },
+      {
+        "correlation_id": "ord-268360-03",
+        "entity": "CS-146",
+        "seq": 2,
+        "partition": 0,
+        "offset": 21
+      },
+      {
+        "correlation_id": "ord-268360-04",
+        "entity": "STAT-200",
+        "seq": 2,
+        "partition": 0,
+        "offset": 22
+      },
+      {
+        "correlation_id": "ord-268360-05",
+        "entity": "CS-146",
+        "seq": 3,
+        "partition": 0,
+        "offset": 23
+      },
+      {
+        "correlation_id": "ord-268360-06",
+        "entity": "STAT-200",
+        "seq": 3,
+        "partition": 0,
+        "offset": 24
+      },
+      {
+        "correlation_id": "ord-268360-07",
+        "entity": "DATA-270",
+        "seq": 1,
+        "partition": 0,
+        "offset": 25
+      },
+      {
+        "correlation_id": "ord-268360-08",
+        "entity": "CS-146",
+        "seq": 4,
+        "partition": 0,
+        "offset": 26
+      },
+      {
+        "correlation_id": "ord-268360-09",
+        "entity": "DATA-270",
+        "seq": 2,
+        "partition": 0,
+        "offset": 27
+      },
+      {
+        "correlation_id": "ord-268360-10",
+        "entity": "CS-146",
+        "seq": 5,
+        "partition": 0,
+        "offset": 28
+      },
+      {
+        "correlation_id": "ord-268360-11",
+        "entity": "STAT-200",
+        "seq": 4,
+        "partition": 0,
+        "offset": 29
+      },
+      {
+        "correlation_id": "ord-268360-12",
+        "entity": "CS-157A",
+        "seq": 1,
+        "partition": 1,
+        "offset": 14
+      },
+      {
+        "correlation_id": "ord-268360-13",
+        "entity": "DATA-270",
+        "seq": 3,
+        "partition": 0,
+        "offset": 30
+      },
+      {
+        "correlation_id": "ord-268360-14",
+        "entity": "STAT-200",
+        "seq": 5,
+        "partition": 0,
+        "offset": 31
+      },
+      {
+        "correlation_id": "ord-268360-15",
+        "entity": "DATA-270",
+        "seq": 4,
+        "partition": 0,
+        "offset": 32
+      },
+      {
+        "correlation_id": "ord-268360-16",
+        "entity": "DATA-245",
+        "seq": 2,
+        "partition": 0,
+        "offset": 33
+      },
+      {
+        "correlation_id": "ord-268360-17",
+        "entity": "CS-146",
+        "seq": 6,
+        "partition": 0,
+        "offset": 34
+      },
+      {
+        "correlation_id": "ord-268360-18",
+        "entity": "CS-146",
+        "seq": 7,
+        "partition": 0,
+        "offset": 35
+      },
+      {
+        "correlation_id": "ord-268360-19",
+        "entity": "DATA-245",
+        "seq": 3,
+        "partition": 0,
+        "offset": 36
+      }
+    ],
+    "analysis": {
+      "messages_processed": 20,
+      "entities": {
+        "CS-146": {
+          "messages": 7,
+          "processed_seqs": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "partitions": [
+            0
+          ],
+          "writers": [
+            "writer-A"
+          ],
+          "in_order": true,
+          "inversions": 0
+        },
+        "CS-157A": {
+          "messages": 1,
+          "processed_seqs": [
+            1
+          ],
+          "partitions": [
+            1
+          ],
+          "writers": [
+            "writer-B"
+          ],
+          "in_order": true,
+          "inversions": 0
+        },
+        "DATA-245": {
+          "messages": 3,
+          "processed_seqs": [
+            1,
+            2,
+            3
+          ],
+          "partitions": [
+            0
+          ],
+          "writers": [
+            "writer-A"
+          ],
+          "in_order": true,
+          "inversions": 0
+        },
+        "DATA-270": {
+          "messages": 4,
+          "processed_seqs": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "partitions": [
+            0
+          ],
+          "writers": [
+            "writer-A"
+          ],
+          "in_order": true,
+          "inversions": 0
+        },
+        "STAT-200": {
+          "messages": 5,
+          "processed_seqs": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "partitions": [
+            0
+          ],
+          "writers": [
+            "writer-A"
+          ],
+          "in_order": true,
+          "inversions": 0
+        }
+      },
+      "entities_in_one_partition": 5,
+      "entities_in_order": 5,
+      "total_inversions": 0,
+      "processing_order": [
+        {
+          "position": 1,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 18,
+          "entity": "CS-146",
+          "seq": 1,
+          "finished_at": "2026-11-01T23:16:01.709Z"
+        },
+        {
+          "position": 2,
+          "writer": "writer-B",
+          "partition": 1,
+          "offset": 14,
+          "entity": "CS-157A",
+          "seq": 1,
+          "finished_at": "2026-11-01T23:16:01.745Z"
+        },
+        {
+          "position": 3,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 19,
+          "entity": "STAT-200",
+          "seq": 1,
+          "finished_at": "2026-11-01T23:16:02.117Z"
+        },
+        {
+          "position": 4,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 20,
+          "entity": "DATA-245",
+          "seq": 1,
+          "finished_at": "2026-11-01T23:16:02.358Z"
+        },
+        {
+          "position": 5,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 21,
+          "entity": "CS-146",
+          "seq": 2,
+          "finished_at": "2026-11-01T23:16:02.505Z"
+        },
+        {
+          "position": 6,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 22,
+          "entity": "STAT-200",
+          "seq": 2,
+          "finished_at": "2026-11-01T23:16:02.831Z"
+        },
+        {
+          "position": 7,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 23,
+          "entity": "CS-146",
+          "seq": 3,
+          "finished_at": "2026-11-01T23:16:03.080Z"
+        },
+        {
+          "position": 8,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 24,
+          "entity": "STAT-200",
+          "seq": 3,
+          "finished_at": "2026-11-01T23:16:03.340Z"
+        },
+        {
+          "position": 9,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 25,
+          "entity": "DATA-270",
+          "seq": 1,
+          "finished_at": "2026-11-01T23:16:03.658Z"
+        },
+        {
+          "position": 10,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 26,
+          "entity": "CS-146",
+          "seq": 4,
+          "finished_at": "2026-11-01T23:16:03.951Z"
+        },
+        {
+          "position": 11,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 27,
+          "entity": "DATA-270",
+          "seq": 2,
+          "finished_at": "2026-11-01T23:16:04.184Z"
+        },
+        {
+          "position": 12,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 28,
+          "entity": "CS-146",
+          "seq": 5,
+          "finished_at": "2026-11-01T23:16:04.521Z"
+        },
+        {
+          "position": 13,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 29,
+          "entity": "STAT-200",
+          "seq": 4,
+          "finished_at": "2026-11-01T23:16:04.815Z"
+        },
+        {
+          "position": 14,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 30,
+          "entity": "DATA-270",
+          "seq": 3,
+          "finished_at": "2026-11-01T23:16:05.232Z"
+        },
+        {
+          "position": 15,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 31,
+          "entity": "STAT-200",
+          "seq": 5,
+          "finished_at": "2026-11-01T23:16:05.463Z"
+        },
+        {
+          "position": 16,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 32,
+          "entity": "DATA-270",
+          "seq": 4,
+          "finished_at": "2026-11-01T23:16:05.752Z"
+        },
+        {
+          "position": 17,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 33,
+          "entity": "DATA-245",
+          "seq": 2,
+          "finished_at": "2026-11-01T23:16:05.894Z"
+        },
+        {
+          "position": 18,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 34,
+          "entity": "CS-146",
+          "seq": 6,
+          "finished_at": "2026-11-01T23:16:06.301Z"
+        },
+        {
+          "position": 19,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 35,
+          "entity": "CS-146",
+          "seq": 7,
+          "finished_at": "2026-11-01T23:16:06.484Z"
+        },
+        {
+          "position": 20,
+          "writer": "writer-A",
+          "partition": 0,
+          "offset": 36,
+          "entity": "DATA-245",
+          "seq": 3,
+          "finished_at": "2026-11-01T23:16:06.740Z"
+        }
+      ]
+    },
+    "logs": [
+      "reports/hw08/raw/logs/t3_ordering_after_A.log",
+      "reports/hw08/raw/logs/t3_ordering_after_B.log"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "run_id": "7360fe",
+  "scenario": "duplicate",
+  "before": {
+    "flags": [
+      "--no-idempotency"
+    ],
+    "correlation_id": "dup-before-7360fe",
+    "deliveries": 2,
+    "drafts_published": 2,
+    "duplicate_skipped": 0,
+    "log": "reports/hw08/raw/logs/t3_duplicate_before.log"
+  },
+  "after": {
+    "flags": [],
+    "correlation_id": "dup-after-7360fe",
+    "deliveries": 2,
+    "drafts_published": 1,
+    "duplicate_skipped": 1,
+    "log": "reports/hw08/raw/logs/t3_duplicate_after.log"
+  }
+}

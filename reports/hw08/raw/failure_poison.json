@@ -1,0 +1,69 @@
+{
+  "run_id": "7360fe",
+  "scenario": "poison",
+  "before": {
+    "flags": [
+      "--no-dlq"
+    ],
+    "poison_correlation_id": "poison-before-7360fe",
+    "good_correlation_id": "after-poison-before-7360fe",
+    "first_run_exit_code": 1,
+    "second_run_exit_code": 1,
+    "offsets": {
+      "raw": "GROUP                              TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID\ns8360_writers_poison_before_7360fe s8360_tasks     1          3               3               0               -               -               -\ns8360_writers_poison_before_7360fe s8360_tasks     0          5               7               2               -               -               -\nConsumer group 's8360_writers_poison_before_7360fe' has no active members.",
+      "rows": [
+        {
+          "partition": 1,
+          "current_offset": 3,
+          "log_end_offset": 3,
+          "lag": 0
+        },
+        {
+          "partition": 0,
+          "current_offset": 5,
+          "log_end_offset": 7,
+          "lag": 2
+        }
+      ]
+    },
+    "good_message_processed": false,
+    "log": "reports/hw08/raw/logs/t3_poison_before.log"
+  },
+  "after": {
+    "flags": [],
+    "poison_correlation_id": "poison-after-7360fe",
+    "good_correlation_id": "after-poison-after-7360fe",
+    "offsets": {
+      "raw": "GROUP                             TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                        HOST             CLIENT-ID\ns8360_writers_poison_after_7360fe s8360_tasks     1          3               3               0               writer-poison-89394e6c-5cc6-4518-ac91-47f0a35c9782 /172.182.252.137 writer-poison\ns8360_writers_poison_after_7360fe s8360_tasks     0          9               9               0               writer-poison-89394e6c-5cc6-4518-ac91-47f0a35c9782 /172.182.252.137 writer-poison",
+      "rows": [
+        {
+          "partition": 1,
+          "current_offset": 3,
+          "log_end_offset": 3,
+          "lag": 0
+        },
+        {
+          "partition": 0,
+          "current_offset": 9,
+          "log_end_offset": 9,
+          "lag": 0
+        }
+      ]
+    },
+    "dead_letter_records": [
+      {
+        "correlation_id": "poison-after-7360fe",
+        "source_topic": "s8360_tasks",
+        "source_partition": 0,
+        "source_offset": 7,
+        "attempts": 3,
+        "error": "ValueError: task is not valid JSON",
+        "failed_at": "2026-11-01T23:15:51Z",
+        "original_value": "{\"correlation_id\": \"poison-after-7360fe\", \"question\": "
+      }
+    ],
+    "good_message_processed": true,
+    "attempt_lines": 4,
+    "log": "reports/hw08/raw/logs/t3_poison_after.log"
+  }
+}

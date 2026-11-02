@@ -1,0 +1,80 @@
+name: s8360-hw8
+
+services:
+  kafka:
+    image: apache/kafka:3.8.0
+    container_name: s8360-kafka
+    hostname: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      CLUSTER_ID: "czgzNjAtaHc4LWthZmthMQ"
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: INTERNAL://:19092,CONTROLLER://:9093,EXTERNAL://:9092
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:19092,EXTERNAL://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+    volumes:
+      - s8360_kafka_data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 > /dev/null 2>&1"]
+      interval: 5s
+      timeout: 10s
+      retries: 30
+      start_period: 15s
+
+  kafka-init:
+    image: apache/kafka:3.8.0
+    container_name: s8360-kafka-init
+    depends_on:
+      kafka:
+        condition: service_healthy
+    environment:
+      BOOTSTRAP: kafka:19092
+    volumes:
+      - ./scripts/hw8_create_topics.sh:/create_topics.sh:ro
+    entrypoint: ["bash", "/create_topics.sh"]
+    restart: "no"
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.kafka
+    image: s8360-hw8-kafka-svc
+    container_name: s8360-worker
+    command: ["python", "-m", "kafka_svc.worker"]
+    environment:
+      KAFKA_BOOTSTRAP: kafka:19092
+    depends_on:
+      kafka-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  api:
+    image: s8360-hw8-kafka-svc
+    container_name: s8360-api
+    command: ["uvicorn", "kafka_svc.api:app", "--host", "0.0.0.0", "--port", "8260"]
+    environment:
+      KAFKA_BOOTSTRAP: kafka:19092
+    ports:
+      - "8260:8260"
+    depends_on:
+      worker:
+        condition: service_started
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8260/health')"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  s8360_kafka_data:

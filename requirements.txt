@@ -25,3 +25,4 @@ lxml
 pandas
 ruff
 pre-commit
+confluent-kafka  # HW8: Kafka client

@@ -1,0 +1,3 @@
+=== 2026-11-01 15:17:13 === Part 3 - dead-letter topic contents (Kafka console consumer)
+$ docker exec s8360-kafka /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic s8360_dead_letter --from-beginning --timeout-ms 6000 --property print.partition=true --property print.offset=true 2>&1 | grep '^Partition'
+Partition:0	Offset:0	{"correlation_id": "poison-after-7360fe", "source_topic": "s8360_tasks", "source_partition": 0, "source_offset": 7, "attempts": 3, "error": "ValueError: task is not valid JSON", "failed_at": "2026-11-01T23:15:51Z", "original_value": "{\"correlation_id\": \"poison-after-7360fe\", \"question\": "}

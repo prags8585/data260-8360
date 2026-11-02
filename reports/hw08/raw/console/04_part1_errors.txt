@@ -1,0 +1,14 @@
+=== 2026-11-01 15:13:48 === Part 1 - error handling
+$ PYTHONPATH=. python scripts/hw8_part1_errors.py
+=== 2026-11-01 15:13:48 ===  Part 1 error handling through Kafka (client -> s8360_entity_requests -> worker -> s8360_entity_responses)
+  GET_COURSE with an unknown course_id       success=False correlation_id preserved=True  {"error": "Course not found"}
+  unknown operation DELETE_COURSE            success=False correlation_id preserved=True  {"error": "Unknown operation"}
+  CREATE_COURSE with a missing field         success=False correlation_id preserved=True  {"error": "Missing required field(s): seatsAvailable"}
+  CREATE_COURSE with an empty title          success=False correlation_id preserved=True  {"error": "courseTitle must be a non-empty string"}
+  CREATE_COURSE with an invalid course code  success=False correlation_id preserved=True  {"error": "courseCode must look like DATA-260 or CS-157A"}
+  CREATE_COURSE with seatsAvailable=true     success=False correlation_id preserved=True  {"error": "seatsAvailable must be an integer between 0 and 1000"}
+  CREATE_COURSE with data that is not an object success=False correlation_id preserved=True  {"error": "data must be a JSON object"}
+
+  the same checks through the FastAPI wrapper at http://127.0.0.1:8260
+  POST /courses with an invalid code         HTTP 422 X-Correlation-ID preserved=True  {"correlation_id":"4ff760a8-9486-4809-8ac4-2badd776258d","success":false,"error":"courseCode must look like DATA-260 or CS-157A"}
+  GET /courses/<unknown id>                  HTTP 404 X-Correlation-ID preserved=True  {"correlation_id":"e9e46561-2328-46b0-b8af-b05004a39479","success":false,"error":"Course not found"}

@@ -1,0 +1,262 @@
+[
+  {
+    "correlation_id": "ord-268360-00",
+    "entity": "CS-146",
+    "seq": 1,
+    "question": "Update CS-146, step 1",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 204,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-01",
+    "entity": "STAT-200",
+    "seq": 1,
+    "question": "Update STAT-200, step 1",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 390,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-02",
+    "entity": "DATA-245",
+    "seq": 1,
+    "question": "Update DATA-245, step 1",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 230,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-03",
+    "entity": "CS-146",
+    "seq": 2,
+    "question": "Update CS-146, step 2",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 135,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-04",
+    "entity": "STAT-200",
+    "seq": 2,
+    "question": "Update STAT-200, step 2",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 310,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-05",
+    "entity": "CS-146",
+    "seq": 3,
+    "question": "Update CS-146, step 3",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 238,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-06",
+    "entity": "STAT-200",
+    "seq": 3,
+    "question": "Update STAT-200, step 3",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 241,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-07",
+    "entity": "DATA-270",
+    "seq": 1,
+    "question": "Update DATA-270, step 1",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 296,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-08",
+    "entity": "CS-146",
+    "seq": 4,
+    "question": "Update CS-146, step 4",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 275,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-09",
+    "entity": "DATA-270",
+    "seq": 2,
+    "question": "Update DATA-270, step 2",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 218,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-10",
+    "entity": "CS-146",
+    "seq": 5,
+    "question": "Update CS-146, step 5",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 314,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-11",
+    "entity": "STAT-200",
+    "seq": 4,
+    "question": "Update STAT-200, step 4",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 281,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-12",
+    "entity": "CS-157A",
+    "seq": 1,
+    "question": "Update CS-157A, step 1",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 220,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-13",
+    "entity": "DATA-270",
+    "seq": 3,
+    "question": "Update DATA-270, step 3",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 400,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-14",
+    "entity": "STAT-200",
+    "seq": 5,
+    "question": "Update STAT-200, step 5",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 215,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-15",
+    "entity": "DATA-270",
+    "seq": 4,
+    "question": "Update DATA-270, step 4",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 270,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-16",
+    "entity": "DATA-245",
+    "seq": 2,
+    "question": "Update DATA-245, step 2",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 130,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-17",
+    "entity": "CS-146",
+    "seq": 6,
+    "question": "Update CS-146, step 6",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 398,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-18",
+    "entity": "CS-146",
+    "seq": 7,
+    "question": "Update CS-146, step 7",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 175,
+    "test": "ordering"
+  },
+  {
+    "correlation_id": "ord-268360-19",
+    "entity": "DATA-245",
+    "seq": 3,
+    "question": "Update DATA-245, step 3",
+    "plan": [
+      "Identify which catalogue facts the question needs",
+      "Look up those facts in the catalogue tools",
+      "Answer in two or three sentences using only those facts"
+    ],
+    "work_ms": 240,
+    "test": "ordering"
+  }
+]

@@ -1,0 +1,10 @@
+FROM python:3.12-slim
+
+ENV PYTHONUNBUFFERED=1
+WORKDIR /app
+COPY requirements-kafka.txt ./
+RUN pip install --no-cache-dir -r requirements-kafka.txt
+
+COPY kafka_svc ./kafka_svc
+
+CMD ["python", "-m", "kafka_svc.worker"]

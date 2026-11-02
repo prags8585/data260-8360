@@ -6,3 +6,6 @@ certs/
 
 # local report-builder tooling (not part of the submission)
 .report_tools/
+
+# HW8 local state (idempotency db, trace files)
+kafka_state/

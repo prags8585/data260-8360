@@ -1,0 +1,32 @@
+2026-11-01T23:14:33.943Z send_question INFO sending question to s8360_inbox correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d message={"correlation_id":"63db99cd-3913-4a59-8004-7f2617c6484d","question":"How many courses does Dr. Priya Nair teach and how many seats do they offer in total?","submitted_at":"2026-11-01T23:14:33.942Z"}
+2026-11-01T23:14:34.456Z send_question INFO question acknowledged by the broker partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d
+2026-11-01T23:14:41.529Z send_question INFO received final message from s8360_final partition=0 offset=1 correlation_id=63db99cd-3913-4a59-8004-7f2617c6484d
+{
+  "correlation_id": "63db99cd-3913-4a59-8004-7f2617c6484d",
+  "status": "rejected",
+  "answer": null,
+  "question": "How many courses does Dr. Priya Nair teach and how many seats do they offer in total?",
+  "review": [
+    {
+      "check": "length",
+      "passed": true,
+      "detail": "64 characters"
+    },
+    {
+      "check": "numbers_grounded",
+      "passed": false,
+      "detail": "numbers in draft [75]"
+    },
+    {
+      "check": "codes_known",
+      "passed": true,
+      "detail": "codes in draft []"
+    },
+    {
+      "check": "uses_catalogue",
+      "passed": true,
+      "detail": "names a department, instructor or course code"
+    }
+  ],
+  "reviewed_at": "2026-11-01T23:14:41.527Z"
+}
