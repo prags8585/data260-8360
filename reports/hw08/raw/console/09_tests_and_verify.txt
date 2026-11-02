@@ -1,4 +1,4 @@
-=== 2026-11-01 19:23:54 === offline tests and smoke test
+=== 2026-11-01 22:38:56 === offline tests and smoke test
 $ python tests_hw8.py && PYTHONPATH=. python verify_hw08.py
 PASS  test_api_forwards_the_callers_correlation_id_to_kafka
 PASS  test_api_generates_a_correlation_id_when_none_is_supplied
@@ -31,7 +31,7 @@ PASS  test_writer_without_idempotency_repeats_the_side_effect
   [OK  ] CREATE_COURSE -> GET_COURSE round-trips through Kafka; errors keep the correlation_id -- CREATE->GET round trip keeps correlation_id; unknown id -> 'Course not found'; unknown op -> 'Unknown operation'; invalid -> 'courseTitle must be a non-empty string'
   [OK  ] FastAPI wrapper: POST/GET through Kafka, X-Correlation-ID preserved, 404 for unknown id -- POST /courses=201 GET /courses/<id>=200 unknown id=404, X-Correlation-ID echoed
   [OK  ] Planner -> Writer -> Reviewer pipeline answers a question through Kafka only -- Planner -> Writer -> Reviewer through Kafka: status=approved, correlation_id preserved=True
-  [OK  ] all four pipeline topics carry messages -- messages ever written: {'s8360_inbox': 5, 's8360_tasks': 55, 's8360_drafts': 50, 's8360_final': 5}
+  [OK  ] all four pipeline topics carry messages -- messages ever written: {'s8360_inbox': 6, 's8360_tasks': 56, 's8360_drafts': 51, 's8360_final': 6}
   [OK  ] Part 3 duplicate delivery: replay creates 2 drafts before idempotency, 1 after -- replayed correlation_id -> drafts before=2, after=1
   [OK  ] Part 3 consumer death: message lost with early commit, redelivered and completed with commit-after -- before: lag after kill 0, redelivered=False, drafts=0; after: lag 1, redelivered=True, drafts=1
   [OK  ] Part 3 poison message: crash loop before, retried 3x + dead-lettered + later message processed after -- before: crashes 1/1, later message processed=False; after: dead-lettered after 3 attempts, later message processed=True
