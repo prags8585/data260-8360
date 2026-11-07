@@ -1,0 +1,75 @@
+# HW9 Part 3.1 - labeled cache test set (40 cases). Written and committed BEFORE any threshold sweep; labels are never edited
+# after seeing results (a labeling mistake would be documented separately in the report, not fixed here).
+#
+# How it is used: the cache is first filled with the 10 seed queries below (each answered once by the real agent pipeline).
+# Each case is then sent to the cache on its own. expected_hit says whether the cache SHOULD answer it:
+#   exact_duplicate        same text as a seed query                                        -> should hit that seed
+#   paraphrase             different wording, same meaning, same answer as a seed query     -> should hit that seed
+#   superficially_similar  almost the same wording as a seed query, but a DIFFERENT answer  -> should miss
+#   unrelated              not about the course catalogue                                   -> should miss
+# A "false hit" is a hit on a should-miss case, or a hit on the wrong seed. The correct answers were written from the
+# s8360_rel course rows as they were when this file was written (DATA-260 40 seats, DATA-245 35, CS-157A 45, DATA-230 30,
+# CS-146 50, ENGR-200 25; instructors Priya Nair, Elena Rossi, Marcus Lee x2, Samuel Okafor x2).
+
+version: 1
+
+seed_queries:
+  - {id: s01, query: "How many seats are available in DATA-260?"}
+  - {id: s02, query: "Who teaches CS-157A?"}
+  - {id: s03, query: "Which department has the most available seats?"}
+  - {id: s04, query: "How many courses does Dr. Marcus Lee teach?"}
+  - {id: s05, query: "What is the total number of seats in the Computer Science department?"}
+  - {id: s06, query: "Which course has the most available seats?"}
+  - {id: s07, query: "What is the title of course DATA-245?"}
+  - {id: s08, query: "List the courses taught by Dr. Samuel Okafor."}
+  - {id: s09, query: "How many courses are offered in the Data Science department?"}
+  - {id: s10, query: "Which department does ENGR-200 belong to?"}
+
+cases:
+  # ---- 10 exact duplicates (should hit) ----------------------------------------------------------------------
+  - {id: ex01, category: exact_duplicate, query: "How many seats are available in DATA-260?", expected_hit: true, cached_seed: s01, correct_answer: "DATA-260 has 40 seats available."}
+  - {id: ex02, category: exact_duplicate, query: "Who teaches CS-157A?", expected_hit: true, cached_seed: s02, correct_answer: "Dr. Marcus Lee teaches CS-157A."}
+  - {id: ex03, category: exact_duplicate, query: "Which department has the most available seats?", expected_hit: true, cached_seed: s03, correct_answer: "Data Science, with 105 seats."}
+  - {id: ex04, category: exact_duplicate, query: "How many courses does Dr. Marcus Lee teach?", expected_hit: true, cached_seed: s04, correct_answer: "Two courses: CS-157A and CS-146."}
+  - {id: ex05, category: exact_duplicate, query: "What is the total number of seats in the Computer Science department?", expected_hit: true, cached_seed: s05, correct_answer: "95 seats (45 + 50)."}
+  - {id: ex06, category: exact_duplicate, query: "Which course has the most available seats?", expected_hit: true, cached_seed: s06, correct_answer: "CS-146 (Web Programming) with 50 seats."}
+  - {id: ex07, category: exact_duplicate, query: "What is the title of course DATA-245?", expected_hit: true, cached_seed: s07, correct_answer: "Machine Learning Foundations."}
+  - {id: ex08, category: exact_duplicate, query: "List the courses taught by Dr. Samuel Okafor.", expected_hit: true, cached_seed: s08, correct_answer: "DATA-230 and ENGR-200."}
+  - {id: ex09, category: exact_duplicate, query: "How many courses are offered in the Data Science department?", expected_hit: true, cached_seed: s09, correct_answer: "Three courses."}
+  - {id: ex10, category: exact_duplicate, query: "Which department does ENGR-200 belong to?", expected_hit: true, cached_seed: s10, correct_answer: "Engineering."}
+
+  # ---- 10 paraphrases (should hit) ---------------------------------------------------------------------------
+  - {id: pa01, category: paraphrase, query: "What is the seat availability for course DATA-260?", expected_hit: true, cached_seed: s01, correct_answer: "DATA-260 has 40 seats available."}
+  - {id: pa02, category: paraphrase, query: "Which instructor is teaching CS-157A?", expected_hit: true, cached_seed: s02, correct_answer: "Dr. Marcus Lee teaches CS-157A."}
+  - {id: pa03, category: paraphrase, query: "Which department has the largest number of open seats?", expected_hit: true, cached_seed: s03, correct_answer: "Data Science, with 105 seats."}
+  - {id: pa04, category: paraphrase, query: "How many classes is Dr. Marcus Lee teaching?", expected_hit: true, cached_seed: s04, correct_answer: "Two courses: CS-157A and CS-146."}
+  - {id: pa05, category: paraphrase, query: "How many seats does the Computer Science department have in total?", expected_hit: true, cached_seed: s05, correct_answer: "95 seats (45 + 50)."}
+  - {id: pa06, category: paraphrase, query: "What is the course with the highest number of seats available?", expected_hit: true, cached_seed: s06, correct_answer: "CS-146 (Web Programming) with 50 seats."}
+  - {id: pa07, category: paraphrase, query: "What is the name of course DATA-245?", expected_hit: true, cached_seed: s07, correct_answer: "Machine Learning Foundations."}
+  - {id: pa08, category: paraphrase, query: "Which courses does Dr. Samuel Okafor teach?", expected_hit: true, cached_seed: s08, correct_answer: "DATA-230 and ENGR-200."}
+  - {id: pa09, category: paraphrase, query: "How many courses does the Data Science department offer?", expected_hit: true, cached_seed: s09, correct_answer: "Three courses."}
+  - {id: pa10, category: paraphrase, query: "Which department is ENGR-200 part of?", expected_hit: true, cached_seed: s10, correct_answer: "Engineering."}
+
+  # ---- 10 superficially similar questions with different correct answers (should miss) -----------------------
+  - {id: sd01, category: superficially_similar, query: "How many seats are available in DATA-230?", expected_hit: false, confusable_with: s01, correct_answer: "DATA-230 has 30 seats available (not 40)."}
+  - {id: sd02, category: superficially_similar, query: "Who teaches DATA-245?", expected_hit: false, confusable_with: s02, correct_answer: "Dr. Elena Rossi teaches DATA-245 (not Dr. Marcus Lee)."}
+  - {id: sd03, category: superficially_similar, query: "Which department has the fewest available seats?", expected_hit: false, confusable_with: s03, correct_answer: "Engineering, with 25 seats (not Data Science)."}
+  - {id: sd04, category: superficially_similar, query: "How many seats do Dr. Marcus Lee's courses offer in total?", expected_hit: false, confusable_with: s04, correct_answer: "95 seats (not a course count of 2)."}
+  - {id: sd05, category: superficially_similar, query: "What is the total number of seats in the Data Science department?", expected_hit: false, confusable_with: s05, correct_answer: "105 seats (not 95)."}
+  - {id: sd06, category: superficially_similar, query: "Which course has the fewest available seats?", expected_hit: false, confusable_with: s06, correct_answer: "ENGR-200 with 25 seats (not CS-146)."}
+  - {id: sd07, category: superficially_similar, query: "What is the title of course DATA-230?", expected_hit: false, confusable_with: s07, correct_answer: "Data Visualization (not Machine Learning Foundations)."}
+  - {id: sd08, category: superficially_similar, query: "List the courses taught by Dr. Marcus Lee.", expected_hit: false, confusable_with: s08, correct_answer: "CS-157A and CS-146 (not DATA-230 and ENGR-200)."}
+  - {id: sd09, category: superficially_similar, query: "How many courses are offered in the Computer Science department?", expected_hit: false, confusable_with: s09, correct_answer: "Two courses (not three)."}
+  - {id: sd10, category: superficially_similar, query: "Which department does DATA-260 belong to?", expected_hit: false, confusable_with: s10, correct_answer: "Data Science (not Engineering)."}
+
+  # ---- 10 unrelated questions (should miss) ------------------------------------------------------------------
+  - {id: un01, category: unrelated, query: "What is the capital of France?", expected_hit: false, correct_answer: "Not a course-catalogue question; no cached course answer may be returned."}
+  - {id: un02, category: unrelated, query: "How do I reset my email password?", expected_hit: false, correct_answer: "Not a course-catalogue question; no cached course answer may be returned."}
+  - {id: un03, category: unrelated, query: "Who won the 2018 World Cup?", expected_hit: false, correct_answer: "Not a course-catalogue question; no cached course answer may be returned."}
+  - {id: un04, category: unrelated, query: "What is the boiling point of water at sea level?", expected_hit: false, correct_answer: "Not a course-catalogue question; no cached course answer may be returned."}
+  - {id: un05, category: unrelated, query: "Recommend a good pizza place in San Jose.", expected_hit: false, correct_answer: "Not a course-catalogue question; no cached course answer may be returned."}
+  - {id: un06, category: unrelated, query: "Translate good morning into Spanish.", expected_hit: false, correct_answer: "Not a course-catalogue question; no cached course answer may be returned."}
+  - {id: un07, category: unrelated, query: "How tall is Mount Everest?", expected_hit: false, correct_answer: "Not a course-catalogue question; no cached course answer may be returned."}
+  - {id: un08, category: unrelated, query: "What will the weather be like tomorrow?", expected_hit: false, correct_answer: "Not a course-catalogue question; no cached course answer may be returned."}
+  - {id: un09, category: unrelated, query: "Write a haiku about autumn.", expected_hit: false, correct_answer: "Not a course-catalogue question; no cached course answer may be returned."}
+  - {id: un10, category: unrelated, query: "What is the square root of 144?", expected_hit: false, correct_answer: "Not a course-catalogue question; no cached course answer may be returned."}
