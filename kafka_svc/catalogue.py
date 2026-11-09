@@ -1,3 +1,5 @@
+import os
+
 from domain_tools import InMemoryCourseRepo, course_stats, search_courses
 
 CATALOGUE = [
@@ -13,17 +15,37 @@ REPO = InMemoryCourseRepo(CATALOGUE)
 COURSE_CODES = [c["courseCode"] for c in CATALOGUE]
 
 
+def mysql_courses() -> list[dict]:
+    """HW9: the live rows of s8360_rel, so a cached answer can be compared with the record it came from."""
+    from sqlalchemy import select
+
+    from db import db_session_basede26
+    from models import Course, Instructor
+
+    with db_session_basede26() as session:
+        rows = session.execute(select(Course, Instructor.name).join(Instructor, Instructor.id == Course.instructor_id).order_by(Course.id)).all()
+    return [{"id": c.id, "courseCode": c.course_code, "courseTitle": c.course_title, "department": c.department,
+             "seatsAvailable": c.seats_available, "instructorName": name} for c, name in rows]
+
+
+def current_courses() -> list[dict]:
+    """CATALOGUE_SOURCE=mysql reads s8360_rel on every call; the default is the static snapshot above (HW8 behaviour)."""
+    return mysql_courses() if os.environ.get("CATALOGUE_SOURCE", "static") == "mysql" else CATALOGUE
+
+
 def gather_facts(question: str) -> dict:
-    """Runs the HW5 catalogue tools over the in-memory snapshot and returns only what they returned."""
-    departments = course_stats(REPO, "department")["data"]
-    instructors = course_stats(REPO, "instructor")["data"]
+    """Runs the HW5 catalogue tools over the catalogue and returns only what they returned."""
+    courses_now = current_courses()
+    repo = REPO if courses_now is CATALOGUE else InMemoryCourseRepo(courses_now)
+    departments = course_stats(repo, "department")["data"]
+    instructors = course_stats(repo, "instructor")["data"]
     courses: list[dict] = []
     for group in departments["groups"]:
-        courses += search_courses(REPO, group["group"], 50)["data"]["courses"]
+        courses += search_courses(repo, group["group"], 50)["data"]["courses"]
     return {
         "departments": departments["groups"],
         "instructors": instructors["groups"],
         "courses": courses,
         "totals": {"courses": departments["totalCourses"], "seats": departments["totalSeats"]},
-        "course_codes": COURSE_CODES,
+        "course_codes": [c["courseCode"] for c in courses_now],
     }

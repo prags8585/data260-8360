@@ -55,6 +55,7 @@ class Course(Base):
     description: Mapped[str] = mapped_column(Text, nullable=False, default="")
     department: Mapped[str] = mapped_column(String(64), nullable=False, default="")
     seats_available: Mapped[int] = mapped_column(Integer, nullable=False, default=30, server_default=text("30"))
+    views: Mapped[int] = mapped_column(Integer, nullable=False, default=0, server_default=text("0"))  # HW9: synced from Redis
     instructor_id: Mapped[int] = mapped_column(
         ForeignKey("instructors.id", ondelete="RESTRICT"), nullable=False
     )

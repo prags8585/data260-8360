@@ -1,0 +1,36 @@
+=== 2026-11-09 02:29:43 === Part 4: revision sequence and lesson reuse
+$ PYTHONPATH=. python scripts/hw9_part4_run.py demo 
+=== 2026-11-09 02:29:43 === 4.1 one complete revision sequence (controlled: the first answer is made incomplete on purpose)
+question: How many seats are available in DATA-260?
+
+attempt 1: answer   : DATA-260 still has seats available.
+           evaluator: REVISE - the answer omits the value 40
+           feedback : The answer does not state the value 40. Reference facts: value 40. State the requested value explicitly.
+
+attempt 2: answer   : DATA-260 has 40 seats available.
+           evaluator: PASS - the answer matches the reference (value 40)
+
+attempts: 2   final answer: DATA-260 has 40 seats available.   final evaluation: PASS
+
+=== 4.2 a lesson created after ONE failed answer is loaded and reused for a later related question ===
+first question : Is CS-146 a fun course?
+  answer       : The course CS-146, Web Programming, is taught by Dr. Marcus Lee and has 50 seats available.
+  evaluator    : REVISE - the answer gives details although the catalogue holds facts, not opinions, advice or recommendations
+  lesson created and saved to lessons.json:
+  {
+    "lesson_id": "lesson_001",
+    "failure_pattern": "The answer gives an opinion, a recommendation or a judgement (best, easy, difficult, worth taking) although the catalogue holds only facts. Example question: Is CS-146 a fun course?",
+    "correction": "The catalogue holds facts only: course code, title, department, seats and instructor. When a question asks for an opinion, a recommendation, how hard a course is or who is the best, begin with a sentence saying that the catalogue cannot judge or recommend; do not give an opinion.",
+    "created_at": "2026-11-09",
+    "use_count": 0
+  }
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 18436.11it/s]
+
+later, related question : Which Data Science course is the easiest to pass?
+  lessons loaded before answering: ['lesson_001']
+  answer       : The catalogue cannot judge or recommend which course is the easiest to pass.
+  evaluator    : PASS - the answer correctly says the catalogue cannot answer this
+  use_count of lesson_001 in lessons.json is now 1
+  control, same question without any lesson: The easiest Data Science course to pass is likely DATA-260 | Introduction to Distributed Systems, as it has the most seats available.
+  evaluator    : REVISE - the answer gives details although the catalogue holds facts, not opinions, advice or recommendations
+saved reports/hw09/raw/part4_demo.json

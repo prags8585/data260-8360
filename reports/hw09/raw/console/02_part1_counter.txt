@@ -1,0 +1,48 @@
+=== 2026-11-09 02:21:04 === Part 1: Redis view counter, synced to MySQL every 10th increment
+$ PYTHONPATH=. .venv/bin/python scripts/hw9_part1_counter.py
+Entity: course DATA-260 (course_id=1), Redis key s8360:views:course:1
+
+=== Testing Counter ===
+
+Access #1: Total = 1
+Access #2: Total = 2
+Access #3: Total = 3
+Access #4: Total = 4
+Access #5: Total = 5
+Access #6: Total = 6
+Access #7: Total = 7
+Access #8: Total = 8
+Access #9: Total = 9
+Access #10: Total = 10
+✓ Synced views to database
+Access #11: Total = 11
+Access #12: Total = 12
+Access #13: Total = 13
+Access #14: Total = 14
+Access #15: Total = 15
+Access #16: Total = 16
+Access #17: Total = 17
+Access #18: Total = 18
+Access #19: Total = 19
+Access #20: Total = 20
+✓ Synced views to database
+Access #21: Total = 21
+Access #22: Total = 22
+Access #23: Total = 23
+Access #24: Total = 24
+Access #25: Total = 25
+
+after 25 accesses: Redis s8360:views:course:1 = 25, MySQL courses.views = 20 (last sync at 20)
+
+=== Redis key lost: the counter resumes from the value synced to MySQL ===
+deleted s8360:views:course:1 from Redis; MySQL courses.views = 20
+Access #26: Total = 21
+resumed from the synced value
+$ redis-cli -p 6382 GET s8360:views:course:1
+21
+$ docker exec s8360-mysql mysql -uroot -phw4pass s8360_rel -t -e "SELECT id, course_code, seats_available, views FROM courses WHERE id = 1" 2>/dev/null
++----+-------------+-----------------+-------+
+| id | course_code | seats_available | views |
++----+-------------+-----------------+-------+
+|  1 | DATA-260    |              40 |    20 |
++----+-------------+-----------------+-------+

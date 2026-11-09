@@ -1,0 +1,1265 @@
+=== 2026-11-06 23:50:39 === Part 3 threshold sweep
+cache_cases.yaml sha256 a3057d2fc09db565...; last commit touching it: 5dc41494c820202ee5cbc694cb38564142adca73 2026-11-06 23:47:41 -0800
+10 seed queries, 40 cases, thresholds [0.75, 0.8, 0.85, 0.9, 0.95]
+2026-11-07T07:50:43.107Z sentence_transformers.base.model INFO Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 9271.87it/s]
+
+-- seeding the cache (flushed 5 old entries); each seed is answered by the real agent pipeline
+2026-11-07T07:50:43.312Z ingress INFO ask start question='How many seats are available in DATA-260?' threshold=2.00
+2026-11-07T07:50:43.320Z ingress INFO embedding 5.6 ms, vector search 2.1 ms, nearest similarity=None
+2026-11-07T07:50:43.320Z ingress INFO cache MISS best_similarity=None threshold=2.00 -> running the agent pipeline
+2026-11-07T07:50:43.320Z agent_client INFO sending question to s8360_inbox correlation_id=81b28f3e-b7de-4bed-9e0d-5e8d22425eec message={"correlation_id":"81b28f3e-b7de-4bed-9e0d-5e8d22425eec","question":"How many seats are available in DATA-260?","submitted_at":"2026-11-07T07:50:43.320Z"}
+2026-11-07T07:50:52.315Z agent_client INFO received final message from s8360_final correlation_id=81b28f3e-b7de-4bed-9e0d-5e8d22425eec status=approved
+2026-11-07T07:50:52.318Z ingress INFO agent pipeline finished status=approved in 8998 ms
+2026-11-07T07:50:52.435Z ingress INFO cache STORE key=s8360:cache:entry:726901369fc0 data_version=41d1242df4dd deps=DATA-260
+  s01: How many seats are available in DATA-260?  ->  The course DATA-260 has 40 seats available.
+2026-11-07T07:50:52.436Z ingress INFO ask start question='Who teaches CS-157A?' threshold=2.00
+2026-11-07T07:50:52.483Z ingress INFO embedding 41.9 ms, vector search 5.7 ms, nearest similarity=0.1816
+2026-11-07T07:50:52.484Z ingress INFO cache MISS best_similarity=0.1816 threshold=2.00 -> running the agent pipeline
+2026-11-07T07:50:52.484Z agent_client INFO sending question to s8360_inbox correlation_id=36df15aa-1cfb-4cda-9284-b7e9b8e96de8 message={"correlation_id":"36df15aa-1cfb-4cda-9284-b7e9b8e96de8","question":"Who teaches CS-157A?","submitted_at":"2026-11-07T07:50:52.484Z"}
+2026-11-07T07:51:02.437Z agent_client INFO received final message from s8360_final correlation_id=36df15aa-1cfb-4cda-9284-b7e9b8e96de8 status=approved
+2026-11-07T07:51:02.438Z ingress INFO agent pipeline finished status=approved in 9955 ms
+2026-11-07T07:51:02.468Z ingress INFO cache STORE key=s8360:cache:entry:176a5e4314b5 data_version=b4a2be1b3a22 deps=CS-157A
+  s02: Who teaches CS-157A?  ->  The course CS-157A is taught by Dr. Marcus Lee.
+2026-11-07T07:51:02.468Z ingress INFO ask start question='Which department has the most available seats?' threshold=2.00
+2026-11-07T07:51:02.500Z ingress INFO embedding 28.3 ms, vector search 3.7 ms, nearest similarity=0.595
+2026-11-07T07:51:02.501Z ingress INFO cache MISS best_similarity=0.595 threshold=2.00 -> running the agent pipeline
+2026-11-07T07:51:02.501Z agent_client INFO sending question to s8360_inbox correlation_id=d0becdb9-3852-4400-8d40-e170f25b24ac message={"correlation_id":"d0becdb9-3852-4400-8d40-e170f25b24ac","question":"Which department has the most available seats?","submitted_at":"2026-11-07T07:51:02.501Z"}
+2026-11-07T07:51:11.557Z agent_client INFO received final message from s8360_final correlation_id=d0becdb9-3852-4400-8d40-e170f25b24ac status=approved
+2026-11-07T07:51:11.558Z ingress INFO agent pipeline finished status=approved in 9057 ms
+2026-11-07T07:51:11.579Z ingress INFO cache STORE key=s8360:cache:entry:e5b64e0c6d84 data_version=d794f1ff71b7 deps=*
+  s03: Which department has the most available seats?  ->  The department with the most available seats is Data Science with a total of 105 seats.
+2026-11-07T07:51:11.579Z ingress INFO ask start question='How many courses does Dr. Marcus Lee teach?' threshold=2.00
+2026-11-07T07:51:11.606Z ingress INFO embedding 24.9 ms, vector search 1.6 ms, nearest similarity=0.5083
+2026-11-07T07:51:11.606Z ingress INFO cache MISS best_similarity=0.5083 threshold=2.00 -> running the agent pipeline
+2026-11-07T07:51:11.606Z agent_client INFO sending question to s8360_inbox correlation_id=7d9b01bd-ae80-4bfe-9c4b-4c1816eace2e message={"correlation_id":"7d9b01bd-ae80-4bfe-9c4b-4c1816eace2e","question":"How many courses does Dr. Marcus Lee teach?","submitted_at":"2026-11-07T07:51:11.606Z"}
+2026-11-07T07:51:22.702Z agent_client INFO received final message from s8360_final correlation_id=7d9b01bd-ae80-4bfe-9c4b-4c1816eace2e status=approved
+2026-11-07T07:51:22.703Z ingress INFO agent pipeline finished status=approved in 11097 ms
+2026-11-07T07:51:22.729Z ingress INFO cache STORE key=s8360:cache:entry:5604164c360c data_version=d794f1ff71b7 deps=*
+  s04: How many courses does Dr. Marcus Lee teach?  ->  Dr. Marcus Lee teaches 2 courses. The courses are CS-157A and CS-146.
+2026-11-07T07:51:22.730Z ingress INFO ask start question='What is the total number of seats in the Computer Science department?' threshold=2.00
+2026-11-07T07:51:22.770Z ingress INFO embedding 37.7 ms, vector search 2.8 ms, nearest similarity=0.6399
+2026-11-07T07:51:22.770Z ingress INFO cache MISS best_similarity=0.6399 threshold=2.00 -> running the agent pipeline
+2026-11-07T07:51:22.771Z agent_client INFO sending question to s8360_inbox correlation_id=50c8702a-e617-41ee-b8a6-229f87ad3fc7 message={"correlation_id":"50c8702a-e617-41ee-b8a6-229f87ad3fc7","question":"What is the total number of seats in the Computer Science department?","submitted_at":"2026-11-07T07:51:22.770Z"}
+2026-11-07T07:51:32.147Z agent_client INFO received final message from s8360_final correlation_id=50c8702a-e617-41ee-b8a6-229f87ad3fc7 status=approved
+2026-11-07T07:51:32.148Z ingress INFO agent pipeline finished status=approved in 9378 ms
+2026-11-07T07:51:32.174Z ingress INFO cache STORE key=s8360:cache:entry:3e790cb3fc19 data_version=d794f1ff71b7 deps=*
+  s05: What is the total number of seats in the Computer Science department?  ->  The total number of seats in the Computer Science department is 95.
+2026-11-07T07:51:32.174Z ingress INFO ask start question='Which course has the most available seats?' threshold=2.00
+2026-11-07T07:51:32.215Z ingress INFO embedding 38.0 ms, vector search 2.1 ms, nearest similarity=0.7509
+2026-11-07T07:51:32.215Z ingress INFO cache MISS best_similarity=0.7509 threshold=2.00 -> running the agent pipeline
+2026-11-07T07:51:32.215Z agent_client INFO sending question to s8360_inbox correlation_id=afd9b569-2727-4b2b-9cf9-f40ffe90da81 message={"correlation_id":"afd9b569-2727-4b2b-9cf9-f40ffe90da81","question":"Which course has the most available seats?","submitted_at":"2026-11-07T07:51:32.215Z"}
+2026-11-07T07:51:42.533Z agent_client INFO received final message from s8360_final correlation_id=afd9b569-2727-4b2b-9cf9-f40ffe90da81 status=approved
+2026-11-07T07:51:42.534Z ingress INFO agent pipeline finished status=approved in 10319 ms
+2026-11-07T07:51:42.562Z ingress INFO cache STORE key=s8360:cache:entry:ee82ede4c2de data_version=d794f1ff71b7 deps=*
+  s06: Which course has the most available seats?  ->  The course with the most available seats is CS-146, which has 50 seats available.
+2026-11-07T07:51:42.562Z ingress INFO ask start question='What is the title of course DATA-245?' threshold=2.00
+2026-11-07T07:51:42.597Z ingress INFO embedding 32.2 ms, vector search 3.0 ms, nearest similarity=0.481
+2026-11-07T07:51:42.597Z ingress INFO cache MISS best_similarity=0.481 threshold=2.00 -> running the agent pipeline
+2026-11-07T07:51:42.598Z agent_client INFO sending question to s8360_inbox correlation_id=d4825952-d6cc-4254-a09e-b4ee1ce1f3cb message={"correlation_id":"d4825952-d6cc-4254-a09e-b4ee1ce1f3cb","question":"What is the title of course DATA-245?","submitted_at":"2026-11-07T07:51:42.598Z"}
+2026-11-07T07:52:01.683Z agent_client INFO received final message from s8360_final correlation_id=d4825952-d6cc-4254-a09e-b4ee1ce1f3cb status=approved
+2026-11-07T07:52:01.684Z ingress INFO agent pipeline finished status=approved in 19086 ms
+2026-11-07T07:52:01.725Z ingress INFO cache STORE key=s8360:cache:entry:d16c6925a7d8 data_version=f58e4877c77d deps=DATA-245
+  s07: What is the title of course DATA-245?  ->  The title of course DATA-245 is "Machine Learning Foundations".
+2026-11-07T07:52:01.726Z ingress INFO ask start question='List the courses taught by Dr. Samuel Okafor.' threshold=2.00
+2026-11-07T07:52:01.766Z ingress INFO embedding 30.5 ms, vector search 10.3 ms, nearest similarity=0.5294
+2026-11-07T07:52:01.766Z ingress INFO cache MISS best_similarity=0.5294 threshold=2.00 -> running the agent pipeline
+2026-11-07T07:52:01.767Z agent_client INFO sending question to s8360_inbox correlation_id=b816db27-e67c-49e0-be34-3a363c359836 message={"correlation_id":"b816db27-e67c-49e0-be34-3a363c359836","question":"List the courses taught by Dr. Samuel Okafor.","submitted_at":"2026-11-07T07:52:01.767Z"}
+2026-11-07T07:52:25.829Z agent_client INFO received final message from s8360_final correlation_id=b816db27-e67c-49e0-be34-3a363c359836 status=approved
+2026-11-07T07:52:25.832Z ingress INFO agent pipeline finished status=approved in 24065 ms
+2026-11-07T07:52:25.853Z ingress INFO cache STORE key=s8360:cache:entry:03f139cd5934 data_version=d794f1ff71b7 deps=*
+  s08: List the courses taught by Dr. Samuel Okafor.  ->  Dr. Samuel Okafor teaches the courses DATA-230 and ENGR-200.
+2026-11-07T07:52:25.853Z ingress INFO ask start question='How many courses are offered in the Data Science department?' threshold=2.00
+2026-11-07T07:52:25.879Z ingress INFO embedding 24.2 ms, vector search 2.1 ms, nearest similarity=0.616
+2026-11-07T07:52:25.880Z ingress INFO cache MISS best_similarity=0.616 threshold=2.00 -> running the agent pipeline
+2026-11-07T07:52:25.880Z agent_client INFO sending question to s8360_inbox correlation_id=11be2ca6-d399-4309-8e25-a8e00e13e214 message={"correlation_id":"11be2ca6-d399-4309-8e25-a8e00e13e214","question":"How many courses are offered in the Data Science department?","submitted_at":"2026-11-07T07:52:25.880Z"}
+2026-11-07T07:52:46.322Z agent_client INFO received final message from s8360_final correlation_id=11be2ca6-d399-4309-8e25-a8e00e13e214 status=approved
+2026-11-07T07:52:46.323Z ingress INFO agent pipeline finished status=approved in 20443 ms
+2026-11-07T07:52:46.350Z ingress INFO cache STORE key=s8360:cache:entry:89490e796c3d data_version=d794f1ff71b7 deps=*
+  s09: How many courses are offered in the Data Science department?  ->  The Data Science department offers 3 courses.
+2026-11-07T07:52:46.350Z ingress INFO ask start question='Which department does ENGR-200 belong to?' threshold=2.00
+2026-11-07T07:52:46.411Z ingress INFO embedding 55.5 ms, vector search 5.6 ms, nearest similarity=0.4005
+2026-11-07T07:52:46.412Z ingress INFO cache MISS best_similarity=0.4005 threshold=2.00 -> running the agent pipeline
+2026-11-07T07:52:46.413Z agent_client INFO sending question to s8360_inbox correlation_id=27ae274a-2854-4799-8610-7df14a90bb9a message={"correlation_id":"27ae274a-2854-4799-8610-7df14a90bb9a","question":"Which department does ENGR-200 belong to?","submitted_at":"2026-11-07T07:52:46.412Z"}
+2026-11-07T07:53:08.004Z agent_client INFO received final message from s8360_final correlation_id=27ae274a-2854-4799-8610-7df14a90bb9a status=approved
+2026-11-07T07:53:08.005Z ingress INFO agent pipeline finished status=approved in 21594 ms
+2026-11-07T07:53:08.027Z ingress INFO cache STORE key=s8360:cache:entry:be1aaf1eb4dc data_version=c1d56ca54408 deps=ENGR-200
+  s10: Which department does ENGR-200 belong to?  ->  The course ENGR-200 belongs to the Engineering department.
+
+-- threshold 0.75
+2026-11-07T07:53:08.028Z ingress INFO ask start question='How many seats are available in DATA-260?' threshold=0.75
+2026-11-07T07:53:08.063Z ingress INFO embedding 32.5 ms, vector search 1.8 ms, nearest similarity=1.0
+2026-11-07T07:53:08.066Z ingress INFO data-version check 2.8 ms: stored=41d1242df4dd current=41d1242df4dd -> fresh
+2026-11-07T07:53:08.066Z ingress INFO cache HIT similarity=1.0000 threshold=0.75 matched_query='How many seats are available in DATA-260?' latency_ms=37.5
+  ex01 HIT  sim=1.0000     37.5 ms 
+2026-11-07T07:53:08.066Z ingress INFO ask start question='Who teaches CS-157A?' threshold=0.75
+2026-11-07T07:53:08.076Z ingress INFO embedding 9.3 ms, vector search 1.0 ms, nearest similarity=1.0
+2026-11-07T07:53:08.080Z ingress INFO data-version check 3.2 ms: stored=b4a2be1b3a22 current=b4a2be1b3a22 -> fresh
+2026-11-07T07:53:08.080Z ingress INFO cache HIT similarity=1.0000 threshold=0.75 matched_query='Who teaches CS-157A?' latency_ms=13.7
+  ex02 HIT  sim=1.0000     13.7 ms 
+2026-11-07T07:53:08.080Z ingress INFO ask start question='Which department has the most available seats?' threshold=0.75
+2026-11-07T07:53:08.090Z ingress INFO embedding 8.2 ms, vector search 1.5 ms, nearest similarity=1.0
+2026-11-07T07:53:08.095Z ingress INFO data-version check 5.4 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.095Z ingress INFO cache HIT similarity=1.0000 threshold=0.75 matched_query='Which department has the most available seats?' latency_ms=15.4
+  ex03 HIT  sim=1.0000     15.4 ms 
+2026-11-07T07:53:08.096Z ingress INFO ask start question='How many courses does Dr. Marcus Lee teach?' threshold=0.75
+2026-11-07T07:53:08.107Z ingress INFO embedding 9.3 ms, vector search 1.7 ms, nearest similarity=1.0
+2026-11-07T07:53:08.111Z ingress INFO data-version check 4.3 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.111Z ingress INFO cache HIT similarity=1.0000 threshold=0.75 matched_query='How many courses does Dr. Marcus Lee teach?' latency_ms=15.5
+  ex04 HIT  sim=1.0000     15.5 ms 
+2026-11-07T07:53:08.111Z ingress INFO ask start question='What is the total number of seats in the Computer Science department?' threshold=0.75
+2026-11-07T07:53:08.121Z ingress INFO embedding 8.8 ms, vector search 1.2 ms, nearest similarity=1.0
+2026-11-07T07:53:08.126Z ingress INFO data-version check 4.8 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.126Z ingress INFO cache HIT similarity=1.0000 threshold=0.75 matched_query='What is the total number of seats in the Computer Science department?' latency_ms=15.0
+  ex05 HIT  sim=1.0000     15.0 ms 
+2026-11-07T07:53:08.126Z ingress INFO ask start question='Which course has the most available seats?' threshold=0.75
+2026-11-07T07:53:08.136Z ingress INFO embedding 8.4 ms, vector search 1.3 ms, nearest similarity=1.0
+2026-11-07T07:53:08.140Z ingress INFO data-version check 3.8 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.140Z ingress INFO cache HIT similarity=1.0000 threshold=0.75 matched_query='Which course has the most available seats?' latency_ms=13.6
+  ex06 HIT  sim=1.0000     13.6 ms 
+2026-11-07T07:53:08.140Z ingress INFO ask start question='What is the title of course DATA-245?' threshold=0.75
+2026-11-07T07:53:08.150Z ingress INFO embedding 8.9 ms, vector search 1.4 ms, nearest similarity=1.0
+2026-11-07T07:53:08.154Z ingress INFO data-version check 3.7 ms: stored=f58e4877c77d current=f58e4877c77d -> fresh
+2026-11-07T07:53:08.154Z ingress INFO cache HIT similarity=1.0000 threshold=0.75 matched_query='What is the title of course DATA-245?' latency_ms=14.1
+  ex07 HIT  sim=1.0000     14.1 ms 
+2026-11-07T07:53:08.154Z ingress INFO ask start question='List the courses taught by Dr. Samuel Okafor.' threshold=0.75
+2026-11-07T07:53:08.165Z ingress INFO embedding 9.4 ms, vector search 1.1 ms, nearest similarity=1.0
+2026-11-07T07:53:08.169Z ingress INFO data-version check 3.9 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.169Z ingress INFO cache HIT similarity=1.0000 threshold=0.75 matched_query='List the courses taught by Dr. Samuel Okafor.' latency_ms=14.4
+  ex08 HIT  sim=1.0000     14.4 ms 
+2026-11-07T07:53:08.169Z ingress INFO ask start question='How many courses are offered in the Data Science department?' threshold=0.75
+2026-11-07T07:53:08.178Z ingress INFO embedding 8.1 ms, vector search 1.2 ms, nearest similarity=1.0
+2026-11-07T07:53:08.182Z ingress INFO data-version check 4.3 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.182Z ingress INFO cache HIT similarity=1.0000 threshold=0.75 matched_query='How many courses are offered in the Data Science department?' latency_ms=13.7
+  ex09 HIT  sim=1.0000     13.7 ms 
+2026-11-07T07:53:08.183Z ingress INFO ask start question='Which department does ENGR-200 belong to?' threshold=0.75
+2026-11-07T07:53:08.193Z ingress INFO embedding 9.5 ms, vector search 1.1 ms, nearest similarity=1.0
+2026-11-07T07:53:08.197Z ingress INFO data-version check 3.7 ms: stored=c1d56ca54408 current=c1d56ca54408 -> fresh
+2026-11-07T07:53:08.197Z ingress INFO cache HIT similarity=1.0000 threshold=0.75 matched_query='Which department does ENGR-200 belong to?' latency_ms=14.5
+  ex10 HIT  sim=1.0000     14.5 ms 
+2026-11-07T07:53:08.197Z ingress INFO ask start question='What is the seat availability for course DATA-260?' threshold=0.75
+2026-11-07T07:53:08.209Z ingress INFO embedding 9.6 ms, vector search 1.9 ms, nearest similarity=0.8334
+2026-11-07T07:53:08.214Z ingress INFO data-version check 5.1 ms: stored=41d1242df4dd current=41d1242df4dd -> fresh
+2026-11-07T07:53:08.214Z ingress INFO cache HIT similarity=0.8334 threshold=0.75 matched_query='How many seats are available in DATA-260?' latency_ms=16.8
+  pa01 HIT  sim=0.8334     16.8 ms 
+2026-11-07T07:53:08.214Z ingress INFO ask start question='Which instructor is teaching CS-157A?' threshold=0.75
+2026-11-07T07:53:08.224Z ingress INFO embedding 8.5 ms, vector search 1.6 ms, nearest similarity=0.9012
+2026-11-07T07:53:08.229Z ingress INFO data-version check 4.8 ms: stored=b4a2be1b3a22 current=b4a2be1b3a22 -> fresh
+2026-11-07T07:53:08.229Z ingress INFO cache HIT similarity=0.9012 threshold=0.75 matched_query='Who teaches CS-157A?' latency_ms=15.0
+  pa02 HIT  sim=0.9012     15.0 ms 
+2026-11-07T07:53:08.229Z ingress INFO ask start question='Which department has the largest number of open seats?' threshold=0.75
+2026-11-07T07:53:08.239Z ingress INFO embedding 8.3 ms, vector search 1.6 ms, nearest similarity=0.9024
+2026-11-07T07:53:08.244Z ingress INFO data-version check 5.6 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.245Z ingress INFO cache HIT similarity=0.9024 threshold=0.75 matched_query='Which department has the most available seats?' latency_ms=15.6
+  pa03 HIT  sim=0.9024     15.6 ms 
+2026-11-07T07:53:08.245Z ingress INFO ask start question='How many classes is Dr. Marcus Lee teaching?' threshold=0.75
+2026-11-07T07:53:08.253Z ingress INFO embedding 7.7 ms, vector search 1.0 ms, nearest similarity=0.9599
+2026-11-07T07:53:08.257Z ingress INFO data-version check 3.9 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.257Z ingress INFO cache HIT similarity=0.9599 threshold=0.75 matched_query='How many courses does Dr. Marcus Lee teach?' latency_ms=12.7
+  pa04 HIT  sim=0.9599     12.7 ms 
+2026-11-07T07:53:08.257Z ingress INFO ask start question='How many seats does the Computer Science department have in total?' threshold=0.75
+2026-11-07T07:53:08.267Z ingress INFO embedding 8.4 ms, vector search 1.4 ms, nearest similarity=0.9729
+2026-11-07T07:53:08.272Z ingress INFO data-version check 5.0 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.272Z ingress INFO cache HIT similarity=0.9729 threshold=0.75 matched_query='What is the total number of seats in the Computer Science department?' latency_ms=15.0
+  pa05 HIT  sim=0.9729     15.0 ms 
+2026-11-07T07:53:08.272Z ingress INFO ask start question='What is the course with the highest number of seats available?' threshold=0.75
+2026-11-07T07:53:08.283Z ingress INFO embedding 8.7 ms, vector search 1.4 ms, nearest similarity=0.9057
+2026-11-07T07:53:08.287Z ingress INFO data-version check 4.1 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.287Z ingress INFO cache HIT similarity=0.9057 threshold=0.75 matched_query='Which course has the most available seats?' latency_ms=14.4
+  pa06 HIT  sim=0.9057     14.4 ms 
+2026-11-07T07:53:08.287Z ingress INFO ask start question='What is the name of course DATA-245?' threshold=0.75
+2026-11-07T07:53:08.296Z ingress INFO embedding 7.7 ms, vector search 1.4 ms, nearest similarity=0.9747
+2026-11-07T07:53:08.300Z ingress INFO data-version check 3.9 ms: stored=f58e4877c77d current=f58e4877c77d -> fresh
+2026-11-07T07:53:08.300Z ingress INFO cache HIT similarity=0.9747 threshold=0.75 matched_query='What is the title of course DATA-245?' latency_ms=13.2
+  pa07 HIT  sim=0.9747     13.2 ms 
+2026-11-07T07:53:08.300Z ingress INFO ask start question='Which courses does Dr. Samuel Okafor teach?' threshold=0.75
+2026-11-07T07:53:08.310Z ingress INFO embedding 8.1 ms, vector search 1.8 ms, nearest similarity=0.9125
+2026-11-07T07:53:08.314Z ingress INFO data-version check 4.4 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.314Z ingress INFO cache HIT similarity=0.9125 threshold=0.75 matched_query='List the courses taught by Dr. Samuel Okafor.' latency_ms=14.5
+  pa08 HIT  sim=0.9125     14.5 ms 
+2026-11-07T07:53:08.314Z ingress INFO ask start question='How many courses does the Data Science department offer?' threshold=0.75
+2026-11-07T07:53:08.324Z ingress INFO embedding 7.9 ms, vector search 1.5 ms, nearest similarity=0.9867
+2026-11-07T07:53:08.329Z ingress INFO data-version check 4.6 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.329Z ingress INFO cache HIT similarity=0.9867 threshold=0.75 matched_query='How many courses are offered in the Data Science department?' latency_ms=14.1
+  pa09 HIT  sim=0.9867     14.1 ms 
+2026-11-07T07:53:08.329Z ingress INFO ask start question='Which department is ENGR-200 part of?' threshold=0.75
+2026-11-07T07:53:08.338Z ingress INFO embedding 7.4 ms, vector search 1.5 ms, nearest similarity=0.9755
+2026-11-07T07:53:08.343Z ingress INFO data-version check 5.1 ms: stored=c1d56ca54408 current=c1d56ca54408 -> fresh
+2026-11-07T07:53:08.343Z ingress INFO cache HIT similarity=0.9755 threshold=0.75 matched_query='Which department does ENGR-200 belong to?' latency_ms=14.2
+  pa10 HIT  sim=0.9755     14.2 ms 
+2026-11-07T07:53:08.343Z ingress INFO ask start question='How many seats are available in DATA-230?' threshold=0.75
+2026-11-07T07:53:08.352Z ingress INFO embedding 7.8 ms, vector search 1.5 ms, nearest similarity=0.9388
+2026-11-07T07:53:08.357Z ingress INFO data-version check 4.5 ms: stored=41d1242df4dd current=41d1242df4dd -> fresh
+2026-11-07T07:53:08.357Z ingress INFO cache HIT similarity=0.9388 threshold=0.75 matched_query='How many seats are available in DATA-260?' latency_ms=13.9
+  sd01 HIT  sim=0.9388     13.9 ms FALSE HIT
+2026-11-07T07:53:08.357Z ingress INFO ask start question='Who teaches DATA-245?' threshold=0.75
+2026-11-07T07:53:08.365Z ingress INFO embedding 7.4 ms, vector search 1.0 ms, nearest similarity=0.779
+2026-11-07T07:53:08.369Z ingress INFO data-version check 3.7 ms: stored=f58e4877c77d current=f58e4877c77d -> fresh
+2026-11-07T07:53:08.369Z ingress INFO cache HIT similarity=0.7790 threshold=0.75 matched_query='What is the title of course DATA-245?' latency_ms=12.3
+  sd02 HIT  sim=0.7790     12.3 ms FALSE HIT
+2026-11-07T07:53:08.369Z ingress INFO ask start question='Which department has the fewest available seats?' threshold=0.75
+2026-11-07T07:53:08.378Z ingress INFO embedding 7.9 ms, vector search 1.2 ms, nearest similarity=0.9676
+2026-11-07T07:53:08.384Z ingress INFO data-version check 5.4 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.384Z ingress INFO cache HIT similarity=0.9676 threshold=0.75 matched_query='Which department has the most available seats?' latency_ms=14.7
+  sd03 HIT  sim=0.9676     14.7 ms FALSE HIT
+2026-11-07T07:53:08.384Z ingress INFO ask start question="How many seats do Dr. Marcus Lee's courses offer in total?" threshold=0.75
+2026-11-07T07:53:08.393Z ingress INFO embedding 8.0 ms, vector search 1.5 ms, nearest similarity=0.8381
+2026-11-07T07:53:08.398Z ingress INFO data-version check 4.1 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.398Z ingress INFO cache HIT similarity=0.8381 threshold=0.75 matched_query='How many courses does Dr. Marcus Lee teach?' latency_ms=13.8
+  sd04 HIT  sim=0.8381     13.8 ms FALSE HIT
+2026-11-07T07:53:08.398Z ingress INFO ask start question='What is the total number of seats in the Data Science department?' threshold=0.75
+2026-11-07T07:53:08.407Z ingress INFO embedding 7.7 ms, vector search 1.5 ms, nearest similarity=0.881
+2026-11-07T07:53:08.412Z ingress INFO data-version check 4.9 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.412Z ingress INFO cache HIT similarity=0.8810 threshold=0.75 matched_query='What is the total number of seats in the Computer Science department?' latency_ms=14.3
+  sd05 HIT  sim=0.8810     14.3 ms FALSE HIT
+2026-11-07T07:53:08.412Z ingress INFO ask start question='Which course has the fewest available seats?' threshold=0.75
+2026-11-07T07:53:08.421Z ingress INFO embedding 7.6 ms, vector search 1.5 ms, nearest similarity=0.9667
+2026-11-07T07:53:08.426Z ingress INFO data-version check 4.6 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.426Z ingress INFO cache HIT similarity=0.9667 threshold=0.75 matched_query='Which course has the most available seats?' latency_ms=13.8
+  sd06 HIT  sim=0.9667     13.8 ms FALSE HIT
+2026-11-07T07:53:08.426Z ingress INFO ask start question='What is the title of course DATA-230?' threshold=0.75
+2026-11-07T07:53:08.434Z ingress INFO embedding 7.3 ms, vector search 1.3 ms, nearest similarity=0.9367
+2026-11-07T07:53:08.438Z ingress INFO data-version check 3.8 ms: stored=f58e4877c77d current=f58e4877c77d -> fresh
+2026-11-07T07:53:08.438Z ingress INFO cache HIT similarity=0.9367 threshold=0.75 matched_query='What is the title of course DATA-245?' latency_ms=12.6
+  sd07 HIT  sim=0.9367     12.6 ms FALSE HIT
+2026-11-07T07:53:08.438Z ingress INFO ask start question='List the courses taught by Dr. Marcus Lee.' threshold=0.75
+2026-11-07T07:53:08.448Z ingress INFO embedding 7.8 ms, vector search 1.2 ms, nearest similarity=0.8635
+2026-11-07T07:53:08.452Z ingress INFO data-version check 4.4 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.452Z ingress INFO cache HIT similarity=0.8635 threshold=0.75 matched_query='How many courses does Dr. Marcus Lee teach?' latency_ms=13.5
+  sd08 HIT  sim=0.8635     13.5 ms FALSE HIT
+2026-11-07T07:53:08.452Z ingress INFO ask start question='How many courses are offered in the Computer Science department?' threshold=0.75
+2026-11-07T07:53:08.461Z ingress INFO embedding 8.0 ms, vector search 1.3 ms, nearest similarity=0.8423
+2026-11-07T07:53:08.465Z ingress INFO data-version check 3.7 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:53:08.465Z ingress INFO cache HIT similarity=0.8423 threshold=0.75 matched_query='How many courses are offered in the Data Science department?' latency_ms=13.2
+  sd09 HIT  sim=0.8423     13.2 ms FALSE HIT
+2026-11-07T07:53:08.465Z ingress INFO ask start question='Which department does DATA-260 belong to?' threshold=0.75
+2026-11-07T07:53:08.475Z ingress INFO embedding 7.7 ms, vector search 1.7 ms, nearest similarity=0.6332
+2026-11-07T07:53:08.475Z ingress INFO cache MISS best_similarity=0.6332 threshold=0.75 -> running the agent pipeline
+2026-11-07T07:53:08.475Z agent_client INFO sending question to s8360_inbox correlation_id=99ece5e9-9edf-4b67-aa57-885671b7fac1 message={"correlation_id":"99ece5e9-9edf-4b67-aa57-885671b7fac1","question":"Which department does DATA-260 belong to?","submitted_at":"2026-11-07T07:53:08.475Z"}
+2026-11-07T07:53:28.730Z agent_client INFO received final message from s8360_final correlation_id=99ece5e9-9edf-4b67-aa57-885671b7fac1 status=approved
+2026-11-07T07:53:28.731Z ingress INFO agent pipeline finished status=approved in 20256 ms
+  sd10 MISS sim=0.6332  20265.9 ms 
+2026-11-07T07:53:28.731Z ingress INFO ask start question='What is the capital of France?' threshold=0.75
+2026-11-07T07:53:28.783Z ingress INFO embedding 45.4 ms, vector search 6.3 ms, nearest similarity=0.2127
+2026-11-07T07:53:28.783Z ingress INFO cache MISS best_similarity=0.2127 threshold=0.75 -> running the agent pipeline
+2026-11-07T07:53:28.783Z agent_client INFO sending question to s8360_inbox correlation_id=d5fc0ee8-2b07-4ec8-a200-f2e74b2053c5 message={"correlation_id":"d5fc0ee8-2b07-4ec8-a200-f2e74b2053c5","question":"What is the capital of France?","submitted_at":"2026-11-07T07:53:28.783Z"}
+2026-11-07T07:53:39.196Z agent_client INFO received final message from s8360_final correlation_id=d5fc0ee8-2b07-4ec8-a200-f2e74b2053c5 status=rejected
+2026-11-07T07:53:39.198Z ingress INFO agent pipeline finished status=rejected in 10414 ms
+  un01 MISS sim=0.2127  10466.7 ms 
+2026-11-07T07:53:39.198Z ingress INFO ask start question='How do I reset my email password?' threshold=0.75
+2026-11-07T07:53:39.275Z ingress INFO embedding 64.0 ms, vector search 12.6 ms, nearest similarity=0.1601
+2026-11-07T07:53:39.275Z ingress INFO cache MISS best_similarity=0.1601 threshold=0.75 -> running the agent pipeline
+2026-11-07T07:53:39.275Z agent_client INFO sending question to s8360_inbox correlation_id=dc75e6e5-0667-4451-ae02-1be6318e0043 message={"correlation_id":"dc75e6e5-0667-4451-ae02-1be6318e0043","question":"How do I reset my email password?","submitted_at":"2026-11-07T07:53:39.275Z"}
+2026-11-07T07:54:07.430Z agent_client INFO received final message from s8360_final correlation_id=dc75e6e5-0667-4451-ae02-1be6318e0043 status=rejected
+2026-11-07T07:54:07.433Z ingress INFO agent pipeline finished status=rejected in 28158 ms
+  un02 MISS sim=0.1601  28235.0 ms 
+2026-11-07T07:54:07.433Z ingress INFO ask start question='Who won the 2018 World Cup?' threshold=0.75
+2026-11-07T07:54:07.460Z ingress INFO embedding 23.7 ms, vector search 2.8 ms, nearest similarity=0.1298
+2026-11-07T07:54:07.460Z ingress INFO cache MISS best_similarity=0.1298 threshold=0.75 -> running the agent pipeline
+2026-11-07T07:54:07.460Z agent_client INFO sending question to s8360_inbox correlation_id=57224356-61c8-40c8-b724-5bd30659dfa5 message={"correlation_id":"57224356-61c8-40c8-b724-5bd30659dfa5","question":"Who won the 2018 World Cup?","submitted_at":"2026-11-07T07:54:07.460Z"}
+2026-11-07T07:54:28.824Z agent_client INFO received final message from s8360_final correlation_id=57224356-61c8-40c8-b724-5bd30659dfa5 status=rejected
+2026-11-07T07:54:28.825Z ingress INFO agent pipeline finished status=rejected in 21365 ms
+  un03 MISS sim=0.1298  21391.5 ms 
+2026-11-07T07:54:28.825Z ingress INFO ask start question='What is the boiling point of water at sea level?' threshold=0.75
+2026-11-07T07:54:28.871Z ingress INFO embedding 40.8 ms, vector search 4.7 ms, nearest similarity=0.1689
+2026-11-07T07:54:28.871Z ingress INFO cache MISS best_similarity=0.1689 threshold=0.75 -> running the agent pipeline
+2026-11-07T07:54:28.871Z agent_client INFO sending question to s8360_inbox correlation_id=7dd2f1c0-00e9-4fc5-80e3-9488f9c3a6da message={"correlation_id":"7dd2f1c0-00e9-4fc5-80e3-9488f9c3a6da","question":"What is the boiling point of water at sea level?","submitted_at":"2026-11-07T07:54:28.871Z"}
+2026-11-07T07:54:54.170Z agent_client INFO received final message from s8360_final correlation_id=7dd2f1c0-00e9-4fc5-80e3-9488f9c3a6da status=rejected
+2026-11-07T07:54:54.171Z ingress INFO agent pipeline finished status=rejected in 25301 ms
+  un04 MISS sim=0.1689  25346.4 ms 
+2026-11-07T07:54:54.172Z ingress INFO ask start question='Recommend a good pizza place in San Jose.' threshold=0.75
+2026-11-07T07:54:54.212Z ingress INFO embedding 37.3 ms, vector search 2.7 ms, nearest similarity=0.1753
+2026-11-07T07:54:54.212Z ingress INFO cache MISS best_similarity=0.1753 threshold=0.75 -> running the agent pipeline
+2026-11-07T07:54:54.212Z agent_client INFO sending question to s8360_inbox correlation_id=621c406b-b866-45fb-8d9f-b2b2b7ebe2c1 message={"correlation_id":"621c406b-b866-45fb-8d9f-b2b2b7ebe2c1","question":"Recommend a good pizza place in San Jose.","submitted_at":"2026-11-07T07:54:54.212Z"}
+2026-11-07T07:55:12.245Z agent_client INFO received final message from s8360_final correlation_id=621c406b-b866-45fb-8d9f-b2b2b7ebe2c1 status=rejected
+2026-11-07T07:55:12.245Z ingress INFO agent pipeline finished status=rejected in 18033 ms
+  un05 MISS sim=0.1753  18073.8 ms 
+2026-11-07T07:55:12.246Z ingress INFO ask start question='Translate good morning into Spanish.' threshold=0.75
+2026-11-07T07:55:12.283Z ingress INFO embedding 33.8 ms, vector search 3.4 ms, nearest similarity=0.102
+2026-11-07T07:55:12.283Z ingress INFO cache MISS best_similarity=0.102 threshold=0.75 -> running the agent pipeline
+2026-11-07T07:55:12.284Z agent_client INFO sending question to s8360_inbox correlation_id=eb346c34-afae-4dca-a682-4435a3bf52d2 message={"correlation_id":"eb346c34-afae-4dca-a682-4435a3bf52d2","question":"Translate good morning into Spanish.","submitted_at":"2026-11-07T07:55:12.284Z"}
+2026-11-07T07:55:30.660Z agent_client INFO received final message from s8360_final correlation_id=eb346c34-afae-4dca-a682-4435a3bf52d2 status=rejected
+2026-11-07T07:55:30.660Z ingress INFO agent pipeline finished status=rejected in 18377 ms
+  un06 MISS sim=0.1020  18414.6 ms 
+2026-11-07T07:55:30.661Z ingress INFO ask start question='How tall is Mount Everest?' threshold=0.75
+2026-11-07T07:55:30.680Z ingress INFO embedding 16.4 ms, vector search 2.9 ms, nearest similarity=0.2324
+2026-11-07T07:55:30.680Z ingress INFO cache MISS best_similarity=0.2324 threshold=0.75 -> running the agent pipeline
+2026-11-07T07:55:30.681Z agent_client INFO sending question to s8360_inbox correlation_id=82a354aa-75c7-4fc8-891c-df49f854e241 message={"correlation_id":"82a354aa-75c7-4fc8-891c-df49f854e241","question":"How tall is Mount Everest?","submitted_at":"2026-11-07T07:55:30.681Z"}
+2026-11-07T07:55:53.333Z agent_client INFO received final message from s8360_final correlation_id=82a354aa-75c7-4fc8-891c-df49f854e241 status=rejected
+2026-11-07T07:55:53.333Z ingress INFO agent pipeline finished status=rejected in 22653 ms
+  un07 MISS sim=0.2324  22672.7 ms 
+2026-11-07T07:55:53.334Z ingress INFO ask start question='What will the weather be like tomorrow?' threshold=0.75
+2026-11-07T07:55:53.363Z ingress INFO embedding 25.8 ms, vector search 3.7 ms, nearest similarity=0.1017
+2026-11-07T07:55:53.363Z ingress INFO cache MISS best_similarity=0.1017 threshold=0.75 -> running the agent pipeline
+2026-11-07T07:55:53.363Z agent_client INFO sending question to s8360_inbox correlation_id=056afed5-a856-44ad-a6b4-61bb80f89c8f message={"correlation_id":"056afed5-a856-44ad-a6b4-61bb80f89c8f","question":"What will the weather be like tomorrow?","submitted_at":"2026-11-07T07:55:53.363Z"}
+2026-11-07T07:56:14.689Z agent_client INFO received final message from s8360_final correlation_id=056afed5-a856-44ad-a6b4-61bb80f89c8f status=rejected
+2026-11-07T07:56:14.692Z ingress INFO agent pipeline finished status=rejected in 21328 ms
+  un08 MISS sim=0.1017  21358.6 ms 
+2026-11-07T07:56:14.693Z ingress INFO ask start question='Write a haiku about autumn.' threshold=0.75
+2026-11-07T07:56:14.729Z ingress INFO embedding 31.9 ms, vector search 4.0 ms, nearest similarity=0.1347
+2026-11-07T07:56:14.729Z ingress INFO cache MISS best_similarity=0.1347 threshold=0.75 -> running the agent pipeline
+2026-11-07T07:56:14.729Z agent_client INFO sending question to s8360_inbox correlation_id=4a1ac93c-1fb8-4f3a-80aa-f886d7bf9eb7 message={"correlation_id":"4a1ac93c-1fb8-4f3a-80aa-f886d7bf9eb7","question":"Write a haiku about autumn.","submitted_at":"2026-11-07T07:56:14.729Z"}
+2026-11-07T07:56:32.509Z agent_client INFO received final message from s8360_final correlation_id=4a1ac93c-1fb8-4f3a-80aa-f886d7bf9eb7 status=rejected
+2026-11-07T07:56:32.514Z ingress INFO agent pipeline finished status=rejected in 17785 ms
+  un09 MISS sim=0.1347  17822.3 ms 
+2026-11-07T07:56:32.516Z ingress INFO ask start question='What is the square root of 144?' threshold=0.75
+2026-11-07T07:56:32.572Z ingress INFO embedding 49.1 ms, vector search 6.6 ms, nearest similarity=0.2456
+2026-11-07T07:56:32.572Z ingress INFO cache MISS best_similarity=0.2456 threshold=0.75 -> running the agent pipeline
+2026-11-07T07:56:32.572Z agent_client INFO sending question to s8360_inbox correlation_id=0f4b06f1-0202-4723-94f0-02b23d1da5c5 message={"correlation_id":"0f4b06f1-0202-4723-94f0-02b23d1da5c5","question":"What is the square root of 144?","submitted_at":"2026-11-07T07:56:32.572Z"}
+2026-11-07T07:56:53.055Z agent_client INFO received final message from s8360_final correlation_id=0f4b06f1-0202-4723-94f0-02b23d1da5c5 status=rejected
+2026-11-07T07:56:53.056Z ingress INFO agent pipeline finished status=rejected in 20484 ms
+  un10 MISS sim=0.2456  20540.2 ms 
+  => {'hits': 29, 'misses': 11, 'false_hits': 9, 'should_miss_cases': 20, 'hit_rate': 0.725, 'false_hit_rate': 0.45, 'mean_latency_ms': 5625.6, 'mean_latency_ms_hit': 15.0, 'mean_latency_ms_miss': 20417.1, 'total_cost': 9.1129}
+
+-- threshold 0.80
+2026-11-07T07:56:53.059Z ingress INFO ask start question='How many seats are available in DATA-260?' threshold=0.80
+2026-11-07T07:56:53.090Z ingress INFO embedding 28.0 ms, vector search 3.2 ms, nearest similarity=1.0
+2026-11-07T07:56:53.107Z ingress INFO data-version check 17.6 ms: stored=41d1242df4dd current=41d1242df4dd -> fresh
+2026-11-07T07:56:53.108Z ingress INFO cache HIT similarity=1.0000 threshold=0.80 matched_query='How many seats are available in DATA-260?' latency_ms=49.0
+  ex01 HIT  sim=1.0000     49.0 ms 
+2026-11-07T07:56:53.108Z ingress INFO ask start question='Who teaches CS-157A?' threshold=0.80
+2026-11-07T07:56:53.119Z ingress INFO embedding 9.9 ms, vector search 1.1 ms, nearest similarity=1.0
+2026-11-07T07:56:53.123Z ingress INFO data-version check 4.3 ms: stored=b4a2be1b3a22 current=b4a2be1b3a22 -> fresh
+2026-11-07T07:56:53.123Z ingress INFO cache HIT similarity=1.0000 threshold=0.80 matched_query='Who teaches CS-157A?' latency_ms=15.5
+  ex02 HIT  sim=1.0000     15.5 ms 
+2026-11-07T07:56:53.123Z ingress INFO ask start question='Which department has the most available seats?' threshold=0.80
+2026-11-07T07:56:53.134Z ingress INFO embedding 9.8 ms, vector search 1.0 ms, nearest similarity=1.0
+2026-11-07T07:56:53.137Z ingress INFO data-version check 2.8 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:56:53.137Z ingress INFO cache HIT similarity=1.0000 threshold=0.80 matched_query='Which department has the most available seats?' latency_ms=14.0
+  ex03 HIT  sim=1.0000     14.0 ms 
+2026-11-07T07:56:53.137Z ingress INFO ask start question='How many courses does Dr. Marcus Lee teach?' threshold=0.80
+2026-11-07T07:56:53.148Z ingress INFO embedding 10.4 ms, vector search 0.7 ms, nearest similarity=1.0
+2026-11-07T07:56:53.151Z ingress INFO data-version check 2.4 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:56:53.151Z ingress INFO cache HIT similarity=1.0000 threshold=0.80 matched_query='How many courses does Dr. Marcus Lee teach?' latency_ms=13.7
+  ex04 HIT  sim=1.0000     13.7 ms 
+2026-11-07T07:56:53.151Z ingress INFO ask start question='What is the total number of seats in the Computer Science department?' threshold=0.80
+2026-11-07T07:56:53.164Z ingress INFO embedding 11.9 ms, vector search 0.9 ms, nearest similarity=1.0
+2026-11-07T07:56:53.166Z ingress INFO data-version check 2.4 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:56:53.166Z ingress INFO cache HIT similarity=1.0000 threshold=0.80 matched_query='What is the total number of seats in the Computer Science department?' latency_ms=15.4
+  ex05 HIT  sim=1.0000     15.4 ms 
+2026-11-07T07:56:53.167Z ingress INFO ask start question='Which course has the most available seats?' threshold=0.80
+2026-11-07T07:56:53.176Z ingress INFO embedding 8.8 ms, vector search 0.9 ms, nearest similarity=1.0
+2026-11-07T07:56:53.179Z ingress INFO data-version check 2.8 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:56:53.179Z ingress INFO cache HIT similarity=1.0000 threshold=0.80 matched_query='Which course has the most available seats?' latency_ms=12.7
+  ex06 HIT  sim=1.0000     12.7 ms 
+2026-11-07T07:56:53.179Z ingress INFO ask start question='What is the title of course DATA-245?' threshold=0.80
+2026-11-07T07:56:53.190Z ingress INFO embedding 9.5 ms, vector search 0.9 ms, nearest similarity=1.0
+2026-11-07T07:56:53.193Z ingress INFO data-version check 3.5 ms: stored=f58e4877c77d current=f58e4877c77d -> fresh
+2026-11-07T07:56:53.193Z ingress INFO cache HIT similarity=1.0000 threshold=0.80 matched_query='What is the title of course DATA-245?' latency_ms=14.1
+  ex07 HIT  sim=1.0000     14.1 ms 
+2026-11-07T07:56:53.193Z ingress INFO ask start question='List the courses taught by Dr. Samuel Okafor.' threshold=0.80
+2026-11-07T07:56:53.202Z ingress INFO embedding 8.0 ms, vector search 0.7 ms, nearest similarity=1.0
+2026-11-07T07:56:53.204Z ingress INFO data-version check 2.1 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:56:53.204Z ingress INFO cache HIT similarity=1.0000 threshold=0.80 matched_query='List the courses taught by Dr. Samuel Okafor.' latency_ms=10.8
+  ex08 HIT  sim=1.0000     10.8 ms 
+2026-11-07T07:56:53.204Z ingress INFO ask start question='How many courses are offered in the Data Science department?' threshold=0.80
+2026-11-07T07:56:53.213Z ingress INFO embedding 7.5 ms, vector search 0.7 ms, nearest similarity=1.0
+2026-11-07T07:56:53.217Z ingress INFO data-version check 4.1 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:56:53.217Z ingress INFO cache HIT similarity=1.0000 threshold=0.80 matched_query='How many courses are offered in the Data Science department?' latency_ms=12.5
+  ex09 HIT  sim=1.0000     12.5 ms 
+2026-11-07T07:56:53.217Z ingress INFO ask start question='Which department does ENGR-200 belong to?' threshold=0.80
+2026-11-07T07:56:53.237Z ingress INFO embedding 17.6 ms, vector search 2.7 ms, nearest similarity=1.0
+2026-11-07T07:56:53.244Z ingress INFO data-version check 5.9 ms: stored=c1d56ca54408 current=c1d56ca54408 -> fresh
+2026-11-07T07:56:53.244Z ingress INFO cache HIT similarity=1.0000 threshold=0.80 matched_query='Which department does ENGR-200 belong to?' latency_ms=26.5
+  ex10 HIT  sim=1.0000     26.5 ms 
+2026-11-07T07:56:53.244Z ingress INFO ask start question='What is the seat availability for course DATA-260?' threshold=0.80
+2026-11-07T07:56:53.253Z ingress INFO embedding 8.5 ms, vector search 1.2 ms, nearest similarity=0.8334
+2026-11-07T07:56:53.257Z ingress INFO data-version check 3.6 ms: stored=41d1242df4dd current=41d1242df4dd -> fresh
+2026-11-07T07:56:53.258Z ingress INFO cache HIT similarity=0.8334 threshold=0.80 matched_query='How many seats are available in DATA-260?' latency_ms=13.8
+  pa01 HIT  sim=0.8334     13.8 ms 
+2026-11-07T07:56:53.258Z ingress INFO ask start question='Which instructor is teaching CS-157A?' threshold=0.80
+2026-11-07T07:56:53.269Z ingress INFO embedding 10.3 ms, vector search 0.7 ms, nearest similarity=0.9012
+2026-11-07T07:56:53.272Z ingress INFO data-version check 2.7 ms: stored=b4a2be1b3a22 current=b4a2be1b3a22 -> fresh
+2026-11-07T07:56:53.272Z ingress INFO cache HIT similarity=0.9012 threshold=0.80 matched_query='Who teaches CS-157A?' latency_ms=13.9
+  pa02 HIT  sim=0.9012     13.9 ms 
+2026-11-07T07:56:53.272Z ingress INFO ask start question='Which department has the largest number of open seats?' threshold=0.80
+2026-11-07T07:56:53.285Z ingress INFO embedding 12.4 ms, vector search 1.0 ms, nearest similarity=0.9024
+2026-11-07T07:56:53.289Z ingress INFO data-version check 3.6 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:56:53.289Z ingress INFO cache HIT similarity=0.9024 threshold=0.80 matched_query='Which department has the most available seats?' latency_ms=17.2
+  pa03 HIT  sim=0.9024     17.2 ms 
+2026-11-07T07:56:53.289Z ingress INFO ask start question='How many classes is Dr. Marcus Lee teaching?' threshold=0.80
+2026-11-07T07:56:53.300Z ingress INFO embedding 10.3 ms, vector search 0.7 ms, nearest similarity=0.9599
+2026-11-07T07:56:53.303Z ingress INFO data-version check 2.2 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:56:53.303Z ingress INFO cache HIT similarity=0.9599 threshold=0.80 matched_query='How many courses does Dr. Marcus Lee teach?' latency_ms=13.4
+  pa04 HIT  sim=0.9599     13.4 ms 
+2026-11-07T07:56:53.303Z ingress INFO ask start question='How many seats does the Computer Science department have in total?' threshold=0.80
+2026-11-07T07:56:53.311Z ingress INFO embedding 7.8 ms, vector search 0.6 ms, nearest similarity=0.9729
+2026-11-07T07:56:53.313Z ingress INFO data-version check 2.0 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:56:53.313Z ingress INFO cache HIT similarity=0.9729 threshold=0.80 matched_query='What is the total number of seats in the Computer Science department?' latency_ms=10.7
+  pa05 HIT  sim=0.9729     10.7 ms 
+2026-11-07T07:56:53.313Z ingress INFO ask start question='What is the course with the highest number of seats available?' threshold=0.80
+2026-11-07T07:56:53.321Z ingress INFO embedding 7.0 ms, vector search 0.6 ms, nearest similarity=0.9057
+2026-11-07T07:56:53.323Z ingress INFO data-version check 2.1 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:56:53.323Z ingress INFO cache HIT similarity=0.9057 threshold=0.80 matched_query='Which course has the most available seats?' latency_ms=9.8
+  pa06 HIT  sim=0.9057      9.8 ms 
+2026-11-07T07:56:53.323Z ingress INFO ask start question='What is the name of course DATA-245?' threshold=0.80
+2026-11-07T07:56:53.335Z ingress INFO embedding 10.6 ms, vector search 0.8 ms, nearest similarity=0.9747
+2026-11-07T07:56:53.338Z ingress INFO data-version check 3.3 ms: stored=f58e4877c77d current=f58e4877c77d -> fresh
+2026-11-07T07:56:53.338Z ingress INFO cache HIT similarity=0.9747 threshold=0.80 matched_query='What is the title of course DATA-245?' latency_ms=14.9
+  pa07 HIT  sim=0.9747     14.9 ms 
+2026-11-07T07:56:53.338Z ingress INFO ask start question='Which courses does Dr. Samuel Okafor teach?' threshold=0.80
+2026-11-07T07:56:53.349Z ingress INFO embedding 9.4 ms, vector search 0.9 ms, nearest similarity=0.9125
+2026-11-07T07:56:53.352Z ingress INFO data-version check 3.6 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:56:53.352Z ingress INFO cache HIT similarity=0.9125 threshold=0.80 matched_query='List the courses taught by Dr. Samuel Okafor.' latency_ms=14.1
+  pa08 HIT  sim=0.9125     14.1 ms 
+2026-11-07T07:56:53.352Z ingress INFO ask start question='How many courses does the Data Science department offer?' threshold=0.80
+2026-11-07T07:56:53.363Z ingress INFO embedding 9.5 ms, vector search 1.0 ms, nearest similarity=0.9867
+2026-11-07T07:56:53.366Z ingress INFO data-version check 2.9 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:56:53.366Z ingress INFO cache HIT similarity=0.9867 threshold=0.80 matched_query='How many courses are offered in the Data Science department?' latency_ms=13.6
+  pa09 HIT  sim=0.9867     13.6 ms 
+2026-11-07T07:56:53.366Z ingress INFO ask start question='Which department is ENGR-200 part of?' threshold=0.80
+2026-11-07T07:56:53.376Z ingress INFO embedding 9.1 ms, vector search 0.7 ms, nearest similarity=0.9755
+2026-11-07T07:56:53.379Z ingress INFO data-version check 2.9 ms: stored=c1d56ca54408 current=c1d56ca54408 -> fresh
+2026-11-07T07:56:53.379Z ingress INFO cache HIT similarity=0.9755 threshold=0.80 matched_query='Which department does ENGR-200 belong to?' latency_ms=12.9
+  pa10 HIT  sim=0.9755     12.9 ms 
+2026-11-07T07:56:53.379Z ingress INFO ask start question='How many seats are available in DATA-230?' threshold=0.80
+2026-11-07T07:56:53.388Z ingress INFO embedding 8.1 ms, vector search 0.7 ms, nearest similarity=0.9388
+2026-11-07T07:56:53.391Z ingress INFO data-version check 2.9 ms: stored=41d1242df4dd current=41d1242df4dd -> fresh
+2026-11-07T07:56:53.391Z ingress INFO cache HIT similarity=0.9388 threshold=0.80 matched_query='How many seats are available in DATA-260?' latency_ms=11.9
+  sd01 HIT  sim=0.9388     11.9 ms FALSE HIT
+2026-11-07T07:56:53.391Z ingress INFO ask start question='Who teaches DATA-245?' threshold=0.80
+2026-11-07T07:56:53.403Z ingress INFO embedding 11.4 ms, vector search 0.7 ms, nearest similarity=0.779
+2026-11-07T07:56:53.403Z ingress INFO cache MISS best_similarity=0.779 threshold=0.80 -> running the agent pipeline
+2026-11-07T07:56:53.403Z agent_client INFO sending question to s8360_inbox correlation_id=aa090242-1d4e-43de-bef1-ef77f132b703 message={"correlation_id":"aa090242-1d4e-43de-bef1-ef77f132b703","question":"Who teaches DATA-245?","submitted_at":"2026-11-07T07:56:53.403Z"}
+2026-11-07T07:57:12.141Z agent_client INFO received final message from s8360_final correlation_id=aa090242-1d4e-43de-bef1-ef77f132b703 status=approved
+2026-11-07T07:57:12.143Z ingress INFO agent pipeline finished status=approved in 18740 ms
+  sd02 MISS sim=0.7790  18752.5 ms 
+2026-11-07T07:57:12.144Z ingress INFO ask start question='Which department has the fewest available seats?' threshold=0.80
+2026-11-07T07:57:12.183Z ingress INFO embedding 36.6 ms, vector search 2.6 ms, nearest similarity=0.9676
+2026-11-07T07:57:12.196Z ingress INFO data-version check 12.4 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:57:12.196Z ingress INFO cache HIT similarity=0.9676 threshold=0.80 matched_query='Which department has the most available seats?' latency_ms=51.9
+  sd03 HIT  sim=0.9676     51.9 ms FALSE HIT
+2026-11-07T07:57:12.196Z ingress INFO ask start question="How many seats do Dr. Marcus Lee's courses offer in total?" threshold=0.80
+2026-11-07T07:57:12.209Z ingress INFO embedding 11.6 ms, vector search 1.1 ms, nearest similarity=0.8381
+2026-11-07T07:57:12.214Z ingress INFO data-version check 4.8 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:57:12.214Z ingress INFO cache HIT similarity=0.8381 threshold=0.80 matched_query='How many courses does Dr. Marcus Lee teach?' latency_ms=17.8
+  sd04 HIT  sim=0.8381     17.8 ms FALSE HIT
+2026-11-07T07:57:12.214Z ingress INFO ask start question='What is the total number of seats in the Data Science department?' threshold=0.80
+2026-11-07T07:57:12.224Z ingress INFO embedding 9.0 ms, vector search 1.1 ms, nearest similarity=0.881
+2026-11-07T07:57:12.228Z ingress INFO data-version check 3.9 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:57:12.228Z ingress INFO cache HIT similarity=0.8810 threshold=0.80 matched_query='What is the total number of seats in the Computer Science department?' latency_ms=14.2
+  sd05 HIT  sim=0.8810     14.2 ms FALSE HIT
+2026-11-07T07:57:12.228Z ingress INFO ask start question='Which course has the fewest available seats?' threshold=0.80
+2026-11-07T07:57:12.238Z ingress INFO embedding 9.5 ms, vector search 0.8 ms, nearest similarity=0.9667
+2026-11-07T07:57:12.241Z ingress INFO data-version check 2.5 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:57:12.241Z ingress INFO cache HIT similarity=0.9667 threshold=0.80 matched_query='Which course has the most available seats?' latency_ms=13.1
+  sd06 HIT  sim=0.9667     13.1 ms FALSE HIT
+2026-11-07T07:57:12.241Z ingress INFO ask start question='What is the title of course DATA-230?' threshold=0.80
+2026-11-07T07:57:12.250Z ingress INFO embedding 8.5 ms, vector search 0.8 ms, nearest similarity=0.9367
+2026-11-07T07:57:12.253Z ingress INFO data-version check 2.9 ms: stored=f58e4877c77d current=f58e4877c77d -> fresh
+2026-11-07T07:57:12.253Z ingress INFO cache HIT similarity=0.9367 threshold=0.80 matched_query='What is the title of course DATA-245?' latency_ms=12.3
+  sd07 HIT  sim=0.9367     12.3 ms FALSE HIT
+2026-11-07T07:57:12.254Z ingress INFO ask start question='List the courses taught by Dr. Marcus Lee.' threshold=0.80
+2026-11-07T07:57:12.264Z ingress INFO embedding 9.2 ms, vector search 0.8 ms, nearest similarity=0.8635
+2026-11-07T07:57:12.266Z ingress INFO data-version check 2.3 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:57:12.266Z ingress INFO cache HIT similarity=0.8635 threshold=0.80 matched_query='How many courses does Dr. Marcus Lee teach?' latency_ms=12.5
+  sd08 HIT  sim=0.8635     12.5 ms FALSE HIT
+2026-11-07T07:57:12.266Z ingress INFO ask start question='How many courses are offered in the Computer Science department?' threshold=0.80
+2026-11-07T07:57:12.275Z ingress INFO embedding 8.2 ms, vector search 0.7 ms, nearest similarity=0.8423
+2026-11-07T07:57:12.278Z ingress INFO data-version check 2.5 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:57:12.278Z ingress INFO cache HIT similarity=0.8423 threshold=0.80 matched_query='How many courses are offered in the Data Science department?' latency_ms=11.6
+  sd09 HIT  sim=0.8423     11.6 ms FALSE HIT
+2026-11-07T07:57:12.278Z ingress INFO ask start question='Which department does DATA-260 belong to?' threshold=0.80
+2026-11-07T07:57:12.289Z ingress INFO embedding 9.8 ms, vector search 1.0 ms, nearest similarity=0.6332
+2026-11-07T07:57:12.289Z ingress INFO cache MISS best_similarity=0.6332 threshold=0.80 -> running the agent pipeline
+2026-11-07T07:57:12.289Z agent_client INFO sending question to s8360_inbox correlation_id=9265d11b-4293-4234-955f-9114a4b77f61 message={"correlation_id":"9265d11b-4293-4234-955f-9114a4b77f61","question":"Which department does DATA-260 belong to?","submitted_at":"2026-11-07T07:57:12.289Z"}
+2026-11-07T07:57:21.088Z agent_client INFO received final message from s8360_final correlation_id=9265d11b-4293-4234-955f-9114a4b77f61 status=approved
+2026-11-07T07:57:21.094Z ingress INFO agent pipeline finished status=approved in 8806 ms
+  sd10 MISS sim=0.6332   8816.6 ms 
+2026-11-07T07:57:21.095Z ingress INFO ask start question='What is the capital of France?' threshold=0.80
+2026-11-07T07:57:21.130Z ingress INFO embedding 27.8 ms, vector search 7.7 ms, nearest similarity=0.2127
+2026-11-07T07:57:21.130Z ingress INFO cache MISS best_similarity=0.2127 threshold=0.80 -> running the agent pipeline
+2026-11-07T07:57:21.130Z agent_client INFO sending question to s8360_inbox correlation_id=529dfd13-b858-4686-a82c-9be4d5f4285b message={"correlation_id":"529dfd13-b858-4686-a82c-9be4d5f4285b","question":"What is the capital of France?","submitted_at":"2026-11-07T07:57:21.130Z"}
+2026-11-07T07:57:29.687Z agent_client INFO received final message from s8360_final correlation_id=529dfd13-b858-4686-a82c-9be4d5f4285b status=rejected
+2026-11-07T07:57:29.688Z ingress INFO agent pipeline finished status=rejected in 8558 ms
+  un01 MISS sim=0.2127   8594.0 ms 
+2026-11-07T07:57:29.689Z ingress INFO ask start question='How do I reset my email password?' threshold=0.80
+2026-11-07T07:57:29.742Z ingress INFO embedding 48.1 ms, vector search 4.8 ms, nearest similarity=0.1601
+2026-11-07T07:57:29.742Z ingress INFO cache MISS best_similarity=0.1601 threshold=0.80 -> running the agent pipeline
+2026-11-07T07:57:29.743Z agent_client INFO sending question to s8360_inbox correlation_id=c9b90982-84e4-4f7a-84e9-f5c4ffd14680 message={"correlation_id":"c9b90982-84e4-4f7a-84e9-f5c4ffd14680","question":"How do I reset my email password?","submitted_at":"2026-11-07T07:57:29.742Z"}
+2026-11-07T07:57:45.845Z agent_client INFO received final message from s8360_final correlation_id=c9b90982-84e4-4f7a-84e9-f5c4ffd14680 status=rejected
+2026-11-07T07:57:45.847Z ingress INFO agent pipeline finished status=rejected in 16104 ms
+  un02 MISS sim=0.1601  16157.9 ms 
+2026-11-07T07:57:45.847Z ingress INFO ask start question='Who won the 2018 World Cup?' threshold=0.80
+2026-11-07T07:57:45.893Z ingress INFO embedding 40.5 ms, vector search 5.4 ms, nearest similarity=0.1298
+2026-11-07T07:57:45.893Z ingress INFO cache MISS best_similarity=0.1298 threshold=0.80 -> running the agent pipeline
+2026-11-07T07:57:45.893Z agent_client INFO sending question to s8360_inbox correlation_id=f1d990ac-e052-435d-b8e8-0f90cd418555 message={"correlation_id":"f1d990ac-e052-435d-b8e8-0f90cd418555","question":"Who won the 2018 World Cup?","submitted_at":"2026-11-07T07:57:45.893Z"}
+2026-11-07T07:57:55.781Z agent_client INFO received final message from s8360_final correlation_id=f1d990ac-e052-435d-b8e8-0f90cd418555 status=rejected
+2026-11-07T07:57:55.782Z ingress INFO agent pipeline finished status=rejected in 9888 ms
+  un03 MISS sim=0.1298   9934.7 ms 
+2026-11-07T07:57:55.782Z ingress INFO ask start question='What is the boiling point of water at sea level?' threshold=0.80
+2026-11-07T07:57:55.825Z ingress INFO embedding 39.0 ms, vector search 3.8 ms, nearest similarity=0.1689
+2026-11-07T07:57:55.825Z ingress INFO cache MISS best_similarity=0.1689 threshold=0.80 -> running the agent pipeline
+2026-11-07T07:57:55.825Z agent_client INFO sending question to s8360_inbox correlation_id=df0864f4-5138-4231-96bf-7ac23b463c4a message={"correlation_id":"df0864f4-5138-4231-96bf-7ac23b463c4a","question":"What is the boiling point of water at sea level?","submitted_at":"2026-11-07T07:57:55.825Z"}
+2026-11-07T07:58:08.884Z agent_client INFO received final message from s8360_final correlation_id=df0864f4-5138-4231-96bf-7ac23b463c4a status=rejected
+2026-11-07T07:58:08.886Z ingress INFO agent pipeline finished status=rejected in 13061 ms
+  un04 MISS sim=0.1689  13104.4 ms 
+2026-11-07T07:58:08.887Z ingress INFO ask start question='Recommend a good pizza place in San Jose.' threshold=0.80
+2026-11-07T07:58:08.925Z ingress INFO embedding 31.0 ms, vector search 7.0 ms, nearest similarity=0.1753
+2026-11-07T07:58:08.925Z ingress INFO cache MISS best_similarity=0.1753 threshold=0.80 -> running the agent pipeline
+2026-11-07T07:58:08.925Z agent_client INFO sending question to s8360_inbox correlation_id=9c8efacb-eafd-4f51-9204-d53d54709e82 message={"correlation_id":"9c8efacb-eafd-4f51-9204-d53d54709e82","question":"Recommend a good pizza place in San Jose.","submitted_at":"2026-11-07T07:58:08.925Z"}
+2026-11-07T07:58:17.209Z agent_client INFO received final message from s8360_final correlation_id=9c8efacb-eafd-4f51-9204-d53d54709e82 status=rejected
+2026-11-07T07:58:17.210Z ingress INFO agent pipeline finished status=rejected in 8285 ms
+  un05 MISS sim=0.1753   8324.0 ms 
+2026-11-07T07:58:17.211Z ingress INFO ask start question='Translate good morning into Spanish.' threshold=0.80
+2026-11-07T07:58:17.250Z ingress INFO embedding 34.7 ms, vector search 3.5 ms, nearest similarity=0.102
+2026-11-07T07:58:17.250Z ingress INFO cache MISS best_similarity=0.102 threshold=0.80 -> running the agent pipeline
+2026-11-07T07:58:17.250Z agent_client INFO sending question to s8360_inbox correlation_id=790fe62e-0a98-4aed-ac5e-14faaf517098 message={"correlation_id":"790fe62e-0a98-4aed-ac5e-14faaf517098","question":"Translate good morning into Spanish.","submitted_at":"2026-11-07T07:58:17.250Z"}
+2026-11-07T07:58:25.339Z agent_client INFO received final message from s8360_final correlation_id=790fe62e-0a98-4aed-ac5e-14faaf517098 status=rejected
+2026-11-07T07:58:25.341Z ingress INFO agent pipeline finished status=rejected in 8091 ms
+  un06 MISS sim=0.1020   8130.3 ms 
+2026-11-07T07:58:25.342Z ingress INFO ask start question='How tall is Mount Everest?' threshold=0.80
+2026-11-07T07:58:25.379Z ingress INFO embedding 33.4 ms, vector search 3.0 ms, nearest similarity=0.2324
+2026-11-07T07:58:25.379Z ingress INFO cache MISS best_similarity=0.2324 threshold=0.80 -> running the agent pipeline
+2026-11-07T07:58:25.379Z agent_client INFO sending question to s8360_inbox correlation_id=1103b074-669b-4200-833e-e4950baf788c message={"correlation_id":"1103b074-669b-4200-833e-e4950baf788c","question":"How tall is Mount Everest?","submitted_at":"2026-11-07T07:58:25.379Z"}
+2026-11-07T07:58:37.839Z agent_client INFO received final message from s8360_final correlation_id=1103b074-669b-4200-833e-e4950baf788c status=rejected
+2026-11-07T07:58:37.841Z ingress INFO agent pipeline finished status=rejected in 12462 ms
+  un07 MISS sim=0.2324  12498.8 ms 
+2026-11-07T07:58:37.841Z ingress INFO ask start question='What will the weather be like tomorrow?' threshold=0.80
+2026-11-07T07:58:37.888Z ingress INFO embedding 41.9 ms, vector search 3.8 ms, nearest similarity=0.1017
+2026-11-07T07:58:37.888Z ingress INFO cache MISS best_similarity=0.1017 threshold=0.80 -> running the agent pipeline
+2026-11-07T07:58:37.888Z agent_client INFO sending question to s8360_inbox correlation_id=250b454d-7a7e-40b8-a4da-7e59786e7328 message={"correlation_id":"250b454d-7a7e-40b8-a4da-7e59786e7328","question":"What will the weather be like tomorrow?","submitted_at":"2026-11-07T07:58:37.888Z"}
+2026-11-07T07:58:49.720Z agent_client INFO received final message from s8360_final correlation_id=250b454d-7a7e-40b8-a4da-7e59786e7328 status=rejected
+2026-11-07T07:58:49.721Z ingress INFO agent pipeline finished status=rejected in 11833 ms
+  un08 MISS sim=0.1017  11879.6 ms 
+2026-11-07T07:58:49.721Z ingress INFO ask start question='Write a haiku about autumn.' threshold=0.80
+2026-11-07T07:58:49.765Z ingress INFO embedding 37.2 ms, vector search 6.5 ms, nearest similarity=0.1347
+2026-11-07T07:58:49.765Z ingress INFO cache MISS best_similarity=0.1347 threshold=0.80 -> running the agent pipeline
+2026-11-07T07:58:49.765Z agent_client INFO sending question to s8360_inbox correlation_id=43e8dd38-a736-431d-b9f5-ab7737a1daf0 message={"correlation_id":"43e8dd38-a736-431d-b9f5-ab7737a1daf0","question":"Write a haiku about autumn.","submitted_at":"2026-11-07T07:58:49.765Z"}
+2026-11-07T07:58:56.825Z agent_client INFO received final message from s8360_final correlation_id=43e8dd38-a736-431d-b9f5-ab7737a1daf0 status=rejected
+2026-11-07T07:58:56.826Z ingress INFO agent pipeline finished status=rejected in 7061 ms
+  un09 MISS sim=0.1347   7105.4 ms 
+2026-11-07T07:58:56.827Z ingress INFO ask start question='What is the square root of 144?' threshold=0.80
+2026-11-07T07:58:56.878Z ingress INFO embedding 47.3 ms, vector search 4.5 ms, nearest similarity=0.2456
+2026-11-07T07:58:56.879Z ingress INFO cache MISS best_similarity=0.2456 threshold=0.80 -> running the agent pipeline
+2026-11-07T07:58:56.879Z agent_client INFO sending question to s8360_inbox correlation_id=f562fef3-c824-43ad-bd32-75999aed2fa1 message={"correlation_id":"f562fef3-c824-43ad-bd32-75999aed2fa1","question":"What is the square root of 144?","submitted_at":"2026-11-07T07:58:56.879Z"}
+2026-11-07T07:59:03.599Z agent_client INFO received final message from s8360_final correlation_id=f562fef3-c824-43ad-bd32-75999aed2fa1 status=rejected
+2026-11-07T07:59:03.601Z ingress INFO agent pipeline finished status=rejected in 6722 ms
+  un10 MISS sim=0.2456   6774.8 ms 
+  => {'hits': 28, 'misses': 12, 'false_hits': 8, 'should_miss_cases': 20, 'hit_rate': 0.7, 'false_hit_rate': 0.4, 'mean_latency_ms': 3263.4, 'mean_latency_ms_hit': 16.6, 'mean_latency_ms_miss': 10839.4, 'total_cost': 8.1228}
+
+-- threshold 0.85
+2026-11-07T07:59:03.610Z ingress INFO ask start question='How many seats are available in DATA-260?' threshold=0.85
+2026-11-07T07:59:03.648Z ingress INFO embedding 32.2 ms, vector search 4.9 ms, nearest similarity=1.0
+2026-11-07T07:59:03.663Z ingress INFO data-version check 14.8 ms: stored=41d1242df4dd current=41d1242df4dd -> fresh
+2026-11-07T07:59:03.663Z ingress INFO cache HIT similarity=1.0000 threshold=0.85 matched_query='How many seats are available in DATA-260?' latency_ms=52.6
+  ex01 HIT  sim=1.0000     52.6 ms 
+2026-11-07T07:59:03.663Z ingress INFO ask start question='Who teaches CS-157A?' threshold=0.85
+2026-11-07T07:59:03.677Z ingress INFO embedding 12.4 ms, vector search 1.6 ms, nearest similarity=1.0
+2026-11-07T07:59:03.683Z ingress INFO data-version check 5.6 ms: stored=b4a2be1b3a22 current=b4a2be1b3a22 -> fresh
+2026-11-07T07:59:03.683Z ingress INFO cache HIT similarity=1.0000 threshold=0.85 matched_query='Who teaches CS-157A?' latency_ms=19.9
+  ex02 HIT  sim=1.0000     19.9 ms 
+2026-11-07T07:59:03.683Z ingress INFO ask start question='Which department has the most available seats?' threshold=0.85
+2026-11-07T07:59:03.696Z ingress INFO embedding 12.5 ms, vector search 1.1 ms, nearest similarity=1.0
+2026-11-07T07:59:03.700Z ingress INFO data-version check 3.8 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:59:03.700Z ingress INFO cache HIT similarity=1.0000 threshold=0.85 matched_query='Which department has the most available seats?' latency_ms=17.6
+  ex03 HIT  sim=1.0000     17.6 ms 
+2026-11-07T07:59:03.700Z ingress INFO ask start question='How many courses does Dr. Marcus Lee teach?' threshold=0.85
+2026-11-07T07:59:03.712Z ingress INFO embedding 10.5 ms, vector search 1.3 ms, nearest similarity=1.0
+2026-11-07T07:59:03.716Z ingress INFO data-version check 3.8 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:59:03.716Z ingress INFO cache HIT similarity=1.0000 threshold=0.85 matched_query='How many courses does Dr. Marcus Lee teach?' latency_ms=15.7
+  ex04 HIT  sim=1.0000     15.7 ms 
+2026-11-07T07:59:03.716Z ingress INFO ask start question='What is the total number of seats in the Computer Science department?' threshold=0.85
+2026-11-07T07:59:03.729Z ingress INFO embedding 11.0 ms, vector search 1.2 ms, nearest similarity=1.0
+2026-11-07T07:59:03.737Z ingress INFO data-version check 7.9 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:59:03.737Z ingress INFO cache HIT similarity=1.0000 threshold=0.85 matched_query='What is the total number of seats in the Computer Science department?' latency_ms=20.4
+  ex05 HIT  sim=1.0000     20.4 ms 
+2026-11-07T07:59:03.737Z ingress INFO ask start question='Which course has the most available seats?' threshold=0.85
+2026-11-07T07:59:03.750Z ingress INFO embedding 11.9 ms, vector search 1.0 ms, nearest similarity=1.0
+2026-11-07T07:59:03.753Z ingress INFO data-version check 3.3 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:59:03.753Z ingress INFO cache HIT similarity=1.0000 threshold=0.85 matched_query='Which course has the most available seats?' latency_ms=16.5
+  ex06 HIT  sim=1.0000     16.5 ms 
+2026-11-07T07:59:03.753Z ingress INFO ask start question='What is the title of course DATA-245?' threshold=0.85
+2026-11-07T07:59:03.764Z ingress INFO embedding 10.2 ms, vector search 1.0 ms, nearest similarity=1.0
+2026-11-07T07:59:03.769Z ingress INFO data-version check 4.6 ms: stored=f58e4877c77d current=f58e4877c77d -> fresh
+2026-11-07T07:59:03.769Z ingress INFO cache HIT similarity=1.0000 threshold=0.85 matched_query='What is the title of course DATA-245?' latency_ms=16.0
+  ex07 HIT  sim=1.0000     16.0 ms 
+2026-11-07T07:59:03.769Z ingress INFO ask start question='List the courses taught by Dr. Samuel Okafor.' threshold=0.85
+2026-11-07T07:59:03.780Z ingress INFO embedding 9.7 ms, vector search 0.9 ms, nearest similarity=1.0
+2026-11-07T07:59:03.783Z ingress INFO data-version check 2.8 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:59:03.783Z ingress INFO cache HIT similarity=1.0000 threshold=0.85 matched_query='List the courses taught by Dr. Samuel Okafor.' latency_ms=13.6
+  ex08 HIT  sim=1.0000     13.6 ms 
+2026-11-07T07:59:03.783Z ingress INFO ask start question='How many courses are offered in the Data Science department?' threshold=0.85
+2026-11-07T07:59:03.793Z ingress INFO embedding 8.9 ms, vector search 0.8 ms, nearest similarity=1.0
+2026-11-07T07:59:03.795Z ingress INFO data-version check 2.5 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:59:03.795Z ingress INFO cache HIT similarity=1.0000 threshold=0.85 matched_query='How many courses are offered in the Data Science department?' latency_ms=12.4
+  ex09 HIT  sim=1.0000     12.4 ms 
+2026-11-07T07:59:03.795Z ingress INFO ask start question='Which department does ENGR-200 belong to?' threshold=0.85
+2026-11-07T07:59:03.805Z ingress INFO embedding 8.8 ms, vector search 0.8 ms, nearest similarity=1.0
+2026-11-07T07:59:03.808Z ingress INFO data-version check 2.6 ms: stored=c1d56ca54408 current=c1d56ca54408 -> fresh
+2026-11-07T07:59:03.808Z ingress INFO cache HIT similarity=1.0000 threshold=0.85 matched_query='Which department does ENGR-200 belong to?' latency_ms=12.3
+  ex10 HIT  sim=1.0000     12.3 ms 
+2026-11-07T07:59:03.808Z ingress INFO ask start question='What is the seat availability for course DATA-260?' threshold=0.85
+2026-11-07T07:59:03.818Z ingress INFO embedding 9.1 ms, vector search 0.8 ms, nearest similarity=0.8334
+2026-11-07T07:59:03.818Z ingress INFO cache MISS best_similarity=0.8334 threshold=0.85 -> running the agent pipeline
+2026-11-07T07:59:03.818Z agent_client INFO sending question to s8360_inbox correlation_id=42dd71db-d296-4aad-bab2-314fc8c8152f message={"correlation_id":"42dd71db-d296-4aad-bab2-314fc8c8152f","question":"What is the seat availability for course DATA-260?","submitted_at":"2026-11-07T07:59:03.818Z"}
+2026-11-07T07:59:09.823Z agent_client INFO received final message from s8360_final correlation_id=42dd71db-d296-4aad-bab2-314fc8c8152f status=approved
+2026-11-07T07:59:09.824Z ingress INFO agent pipeline finished status=approved in 6006 ms
+  pa01 MISS sim=0.8334   6016.5 ms 
+2026-11-07T07:59:09.825Z ingress INFO ask start question='Which instructor is teaching CS-157A?' threshold=0.85
+2026-11-07T07:59:09.867Z ingress INFO embedding 36.8 ms, vector search 5.8 ms, nearest similarity=0.9012
+2026-11-07T07:59:09.882Z ingress INFO data-version check 14.3 ms: stored=b4a2be1b3a22 current=b4a2be1b3a22 -> fresh
+2026-11-07T07:59:09.882Z ingress INFO cache HIT similarity=0.9012 threshold=0.85 matched_query='Who teaches CS-157A?' latency_ms=57.3
+  pa02 HIT  sim=0.9012     57.3 ms 
+2026-11-07T07:59:09.882Z ingress INFO ask start question='Which department has the largest number of open seats?' threshold=0.85
+2026-11-07T07:59:09.895Z ingress INFO embedding 12.2 ms, vector search 1.1 ms, nearest similarity=0.9024
+2026-11-07T07:59:09.899Z ingress INFO data-version check 3.3 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:59:09.899Z ingress INFO cache HIT similarity=0.9024 threshold=0.85 matched_query='Which department has the most available seats?' latency_ms=16.9
+  pa03 HIT  sim=0.9024     16.9 ms 
+2026-11-07T07:59:09.899Z ingress INFO ask start question='How many classes is Dr. Marcus Lee teaching?' threshold=0.85
+2026-11-07T07:59:09.910Z ingress INFO embedding 10.2 ms, vector search 1.0 ms, nearest similarity=0.9599
+2026-11-07T07:59:09.914Z ingress INFO data-version check 3.3 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:59:09.914Z ingress INFO cache HIT similarity=0.9599 threshold=0.85 matched_query='How many courses does Dr. Marcus Lee teach?' latency_ms=14.7
+  pa04 HIT  sim=0.9599     14.7 ms 
+2026-11-07T07:59:09.914Z ingress INFO ask start question='How many seats does the Computer Science department have in total?' threshold=0.85
+2026-11-07T07:59:09.925Z ingress INFO embedding 9.9 ms, vector search 1.0 ms, nearest similarity=0.9729
+2026-11-07T07:59:09.929Z ingress INFO data-version check 4.1 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:59:09.929Z ingress INFO cache HIT similarity=0.9729 threshold=0.85 matched_query='What is the total number of seats in the Computer Science department?' latency_ms=15.2
+  pa05 HIT  sim=0.9729     15.2 ms 
+2026-11-07T07:59:09.929Z ingress INFO ask start question='What is the course with the highest number of seats available?' threshold=0.85
+2026-11-07T07:59:09.939Z ingress INFO embedding 9.7 ms, vector search 0.9 ms, nearest similarity=0.9057
+2026-11-07T07:59:09.942Z ingress INFO data-version check 2.7 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:59:09.942Z ingress INFO cache HIT similarity=0.9057 threshold=0.85 matched_query='Which course has the most available seats?' latency_ms=13.4
+  pa06 HIT  sim=0.9057     13.4 ms 
+2026-11-07T07:59:09.942Z ingress INFO ask start question='What is the name of course DATA-245?' threshold=0.85
+2026-11-07T07:59:09.953Z ingress INFO embedding 9.8 ms, vector search 1.0 ms, nearest similarity=0.9747
+2026-11-07T07:59:09.956Z ingress INFO data-version check 2.9 ms: stored=f58e4877c77d current=f58e4877c77d -> fresh
+2026-11-07T07:59:09.956Z ingress INFO cache HIT similarity=0.9747 threshold=0.85 matched_query='What is the title of course DATA-245?' latency_ms=13.9
+  pa07 HIT  sim=0.9747     13.9 ms 
+2026-11-07T07:59:09.956Z ingress INFO ask start question='Which courses does Dr. Samuel Okafor teach?' threshold=0.85
+2026-11-07T07:59:09.967Z ingress INFO embedding 10.1 ms, vector search 0.9 ms, nearest similarity=0.9125
+2026-11-07T07:59:09.972Z ingress INFO data-version check 4.8 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:59:09.972Z ingress INFO cache HIT similarity=0.9125 threshold=0.85 matched_query='List the courses taught by Dr. Samuel Okafor.' latency_ms=16.0
+  pa08 HIT  sim=0.9125     16.0 ms 
+2026-11-07T07:59:09.972Z ingress INFO ask start question='How many courses does the Data Science department offer?' threshold=0.85
+2026-11-07T07:59:09.984Z ingress INFO embedding 10.1 ms, vector search 1.0 ms, nearest similarity=0.9867
+2026-11-07T07:59:09.988Z ingress INFO data-version check 4.0 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:59:09.988Z ingress INFO cache HIT similarity=0.9867 threshold=0.85 matched_query='How many courses are offered in the Data Science department?' latency_ms=15.4
+  pa09 HIT  sim=0.9867     15.4 ms 
+2026-11-07T07:59:09.988Z ingress INFO ask start question='Which department is ENGR-200 part of?' threshold=0.85
+2026-11-07T07:59:10.002Z ingress INFO embedding 12.6 ms, vector search 1.1 ms, nearest similarity=0.9755
+2026-11-07T07:59:10.006Z ingress INFO data-version check 3.9 ms: stored=c1d56ca54408 current=c1d56ca54408 -> fresh
+2026-11-07T07:59:10.006Z ingress INFO cache HIT similarity=0.9755 threshold=0.85 matched_query='Which department does ENGR-200 belong to?' latency_ms=17.9
+  pa10 HIT  sim=0.9755     17.9 ms 
+2026-11-07T07:59:10.006Z ingress INFO ask start question='How many seats are available in DATA-230?' threshold=0.85
+2026-11-07T07:59:10.017Z ingress INFO embedding 10.1 ms, vector search 0.9 ms, nearest similarity=0.9388
+2026-11-07T07:59:10.020Z ingress INFO data-version check 2.8 ms: stored=41d1242df4dd current=41d1242df4dd -> fresh
+2026-11-07T07:59:10.020Z ingress INFO cache HIT similarity=0.9388 threshold=0.85 matched_query='How many seats are available in DATA-260?' latency_ms=14.0
+  sd01 HIT  sim=0.9388     14.0 ms FALSE HIT
+2026-11-07T07:59:10.020Z ingress INFO ask start question='Who teaches DATA-245?' threshold=0.85
+2026-11-07T07:59:10.030Z ingress INFO embedding 9.1 ms, vector search 0.9 ms, nearest similarity=0.779
+2026-11-07T07:59:10.030Z ingress INFO cache MISS best_similarity=0.779 threshold=0.85 -> running the agent pipeline
+2026-11-07T07:59:10.030Z agent_client INFO sending question to s8360_inbox correlation_id=3d525cc2-d400-4d25-9059-aaedede15799 message={"correlation_id":"3d525cc2-d400-4d25-9059-aaedede15799","question":"Who teaches DATA-245?","submitted_at":"2026-11-07T07:59:10.030Z"}
+2026-11-07T07:59:16.603Z agent_client INFO received final message from s8360_final correlation_id=3d525cc2-d400-4d25-9059-aaedede15799 status=approved
+2026-11-07T07:59:16.604Z ingress INFO agent pipeline finished status=approved in 6574 ms
+  sd02 MISS sim=0.7790   6583.8 ms 
+2026-11-07T07:59:16.604Z ingress INFO ask start question='Which department has the fewest available seats?' threshold=0.85
+2026-11-07T07:59:16.640Z ingress INFO embedding 32.0 ms, vector search 3.9 ms, nearest similarity=0.9676
+2026-11-07T07:59:16.654Z ingress INFO data-version check 13.2 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:59:16.654Z ingress INFO cache HIT similarity=0.9676 threshold=0.85 matched_query='Which department has the most available seats?' latency_ms=49.8
+  sd03 HIT  sim=0.9676     49.8 ms FALSE HIT
+2026-11-07T07:59:16.654Z ingress INFO ask start question="How many seats do Dr. Marcus Lee's courses offer in total?" threshold=0.85
+2026-11-07T07:59:16.668Z ingress INFO embedding 12.7 ms, vector search 1.0 ms, nearest similarity=0.8381
+2026-11-07T07:59:16.668Z ingress INFO cache MISS best_similarity=0.8381 threshold=0.85 -> running the agent pipeline
+2026-11-07T07:59:16.668Z agent_client INFO sending question to s8360_inbox correlation_id=3f9e6e21-d6cc-4ffc-aac3-7290919d5500 message={"correlation_id":"3f9e6e21-d6cc-4ffc-aac3-7290919d5500","question":"How many seats do Dr. Marcus Lee's courses offer in total?","submitted_at":"2026-11-07T07:59:16.668Z"}
+2026-11-07T07:59:35.889Z agent_client INFO received final message from s8360_final correlation_id=3f9e6e21-d6cc-4ffc-aac3-7290919d5500 status=approved
+2026-11-07T07:59:35.890Z ingress INFO agent pipeline finished status=approved in 19222 ms
+  sd04 MISS sim=0.8381  19236.1 ms 
+2026-11-07T07:59:35.890Z ingress INFO ask start question='What is the total number of seats in the Data Science department?' threshold=0.85
+2026-11-07T07:59:35.927Z ingress INFO embedding 33.4 ms, vector search 3.0 ms, nearest similarity=0.881
+2026-11-07T07:59:35.942Z ingress INFO data-version check 15.4 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:59:35.943Z ingress INFO cache HIT similarity=0.8810 threshold=0.85 matched_query='What is the total number of seats in the Computer Science department?' latency_ms=52.2
+  sd05 HIT  sim=0.8810     52.2 ms FALSE HIT
+2026-11-07T07:59:35.943Z ingress INFO ask start question='Which course has the fewest available seats?' threshold=0.85
+2026-11-07T07:59:35.955Z ingress INFO embedding 11.2 ms, vector search 1.1 ms, nearest similarity=0.9667
+2026-11-07T07:59:35.959Z ingress INFO data-version check 3.8 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:59:35.959Z ingress INFO cache HIT similarity=0.9667 threshold=0.85 matched_query='Which course has the most available seats?' latency_ms=16.4
+  sd06 HIT  sim=0.9667     16.4 ms FALSE HIT
+2026-11-07T07:59:35.959Z ingress INFO ask start question='What is the title of course DATA-230?' threshold=0.85
+2026-11-07T07:59:35.971Z ingress INFO embedding 11.0 ms, vector search 0.9 ms, nearest similarity=0.9367
+2026-11-07T07:59:35.975Z ingress INFO data-version check 3.9 ms: stored=f58e4877c77d current=f58e4877c77d -> fresh
+2026-11-07T07:59:35.975Z ingress INFO cache HIT similarity=0.9367 threshold=0.85 matched_query='What is the title of course DATA-245?' latency_ms=16.1
+  sd07 HIT  sim=0.9367     16.1 ms FALSE HIT
+2026-11-07T07:59:35.975Z ingress INFO ask start question='List the courses taught by Dr. Marcus Lee.' threshold=0.85
+2026-11-07T07:59:35.998Z ingress INFO embedding 21.5 ms, vector search 1.1 ms, nearest similarity=0.8635
+2026-11-07T07:59:36.002Z ingress INFO data-version check 4.2 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T07:59:36.002Z ingress INFO cache HIT similarity=0.8635 threshold=0.85 matched_query='How many courses does Dr. Marcus Lee teach?' latency_ms=27.2
+  sd08 HIT  sim=0.8635     27.2 ms FALSE HIT
+2026-11-07T07:59:36.002Z ingress INFO ask start question='How many courses are offered in the Computer Science department?' threshold=0.85
+2026-11-07T07:59:36.017Z ingress INFO embedding 13.3 ms, vector search 1.0 ms, nearest similarity=0.8423
+2026-11-07T07:59:36.017Z ingress INFO cache MISS best_similarity=0.8423 threshold=0.85 -> running the agent pipeline
+2026-11-07T07:59:36.017Z agent_client INFO sending question to s8360_inbox correlation_id=0cdc7b8a-f1e0-465d-83d4-deb1a408bfdc message={"correlation_id":"0cdc7b8a-f1e0-465d-83d4-deb1a408bfdc","question":"How many courses are offered in the Computer Science department?","submitted_at":"2026-11-07T07:59:36.017Z"}
+2026-11-07T07:59:50.258Z agent_client INFO received final message from s8360_final correlation_id=0cdc7b8a-f1e0-465d-83d4-deb1a408bfdc status=approved
+2026-11-07T07:59:50.261Z ingress INFO agent pipeline finished status=approved in 14244 ms
+  sd09 MISS sim=0.8423  14258.8 ms 
+2026-11-07T07:59:50.264Z ingress INFO ask start question='Which department does DATA-260 belong to?' threshold=0.85
+2026-11-07T07:59:50.302Z ingress INFO embedding 30.3 ms, vector search 7.6 ms, nearest similarity=0.6332
+2026-11-07T07:59:50.303Z ingress INFO cache MISS best_similarity=0.6332 threshold=0.85 -> running the agent pipeline
+2026-11-07T07:59:50.303Z agent_client INFO sending question to s8360_inbox correlation_id=72fbbe96-8d0e-49aa-9d44-8a4fd3781084 message={"correlation_id":"72fbbe96-8d0e-49aa-9d44-8a4fd3781084","question":"Which department does DATA-260 belong to?","submitted_at":"2026-11-07T07:59:50.303Z"}
+2026-11-07T07:59:56.917Z agent_client INFO received final message from s8360_final correlation_id=72fbbe96-8d0e-49aa-9d44-8a4fd3781084 status=approved
+2026-11-07T07:59:56.919Z ingress INFO agent pipeline finished status=approved in 6616 ms
+  sd10 MISS sim=0.6332   6655.3 ms 
+2026-11-07T07:59:56.920Z ingress INFO ask start question='What is the capital of France?' threshold=0.85
+2026-11-07T07:59:56.996Z ingress INFO embedding 66.4 ms, vector search 9.0 ms, nearest similarity=0.2127
+2026-11-07T07:59:56.996Z ingress INFO cache MISS best_similarity=0.2127 threshold=0.85 -> running the agent pipeline
+2026-11-07T07:59:56.996Z agent_client INFO sending question to s8360_inbox correlation_id=b6dffe01-1f01-477f-8cb5-482f8431c798 message={"correlation_id":"b6dffe01-1f01-477f-8cb5-482f8431c798","question":"What is the capital of France?","submitted_at":"2026-11-07T07:59:56.996Z"}
+2026-11-07T08:00:04.043Z agent_client INFO received final message from s8360_final correlation_id=b6dffe01-1f01-477f-8cb5-482f8431c798 status=rejected
+2026-11-07T08:00:04.052Z ingress INFO agent pipeline finished status=rejected in 7056 ms
+  un01 MISS sim=0.2127   7132.7 ms 
+2026-11-07T08:00:04.053Z ingress INFO ask start question='How do I reset my email password?' threshold=0.85
+2026-11-07T08:00:04.139Z ingress INFO embedding 79.0 ms, vector search 6.4 ms, nearest similarity=0.1601
+2026-11-07T08:00:04.139Z ingress INFO cache MISS best_similarity=0.1601 threshold=0.85 -> running the agent pipeline
+2026-11-07T08:00:04.140Z agent_client INFO sending question to s8360_inbox correlation_id=bb2a8ce6-cdc0-49a3-8b47-3b658e81263b message={"correlation_id":"bb2a8ce6-cdc0-49a3-8b47-3b658e81263b","question":"How do I reset my email password?","submitted_at":"2026-11-07T08:00:04.140Z"}
+2026-11-07T08:00:14.788Z agent_client INFO received final message from s8360_final correlation_id=bb2a8ce6-cdc0-49a3-8b47-3b658e81263b status=rejected
+2026-11-07T08:00:14.792Z ingress INFO agent pipeline finished status=rejected in 10652 ms
+  un02 MISS sim=0.1601  10739.8 ms 
+2026-11-07T08:00:14.794Z ingress INFO ask start question='Who won the 2018 World Cup?' threshold=0.85
+2026-11-07T08:00:14.842Z ingress INFO embedding 42.4 ms, vector search 4.4 ms, nearest similarity=0.1298
+2026-11-07T08:00:14.842Z ingress INFO cache MISS best_similarity=0.1298 threshold=0.85 -> running the agent pipeline
+2026-11-07T08:00:14.843Z agent_client INFO sending question to s8360_inbox correlation_id=112f464d-3c78-44c8-88cc-d46543d151ff message={"correlation_id":"112f464d-3c78-44c8-88cc-d46543d151ff","question":"Who won the 2018 World Cup?","submitted_at":"2026-11-07T08:00:14.842Z"}
+2026-11-07T08:00:21.681Z agent_client INFO received final message from s8360_final correlation_id=112f464d-3c78-44c8-88cc-d46543d151ff status=rejected
+2026-11-07T08:00:21.683Z ingress INFO agent pipeline finished status=rejected in 6841 ms
+  un03 MISS sim=0.1298   6888.8 ms 
+2026-11-07T08:00:21.684Z ingress INFO ask start question='What is the boiling point of water at sea level?' threshold=0.85
+2026-11-07T08:00:21.727Z ingress INFO embedding 39.1 ms, vector search 4.3 ms, nearest similarity=0.1689
+2026-11-07T08:00:21.727Z ingress INFO cache MISS best_similarity=0.1689 threshold=0.85 -> running the agent pipeline
+2026-11-07T08:00:21.727Z agent_client INFO sending question to s8360_inbox correlation_id=4c7dc350-1ea0-48b5-a561-1b5d6334d792 message={"correlation_id":"4c7dc350-1ea0-48b5-a561-1b5d6334d792","question":"What is the boiling point of water at sea level?","submitted_at":"2026-11-07T08:00:21.727Z"}
+2026-11-07T08:00:30.978Z agent_client INFO received final message from s8360_final correlation_id=4c7dc350-1ea0-48b5-a561-1b5d6334d792 status=rejected
+2026-11-07T08:00:30.979Z ingress INFO agent pipeline finished status=rejected in 9251 ms
+  un04 MISS sim=0.1689   9295.3 ms 
+2026-11-07T08:00:30.979Z ingress INFO ask start question='Recommend a good pizza place in San Jose.' threshold=0.85
+2026-11-07T08:00:31.016Z ingress INFO embedding 34.2 ms, vector search 2.6 ms, nearest similarity=0.1753
+2026-11-07T08:00:31.016Z ingress INFO cache MISS best_similarity=0.1753 threshold=0.85 -> running the agent pipeline
+2026-11-07T08:00:31.016Z agent_client INFO sending question to s8360_inbox correlation_id=7d7638f3-ff6b-42c3-89cc-02116256b756 message={"correlation_id":"7d7638f3-ff6b-42c3-89cc-02116256b756","question":"Recommend a good pizza place in San Jose.","submitted_at":"2026-11-07T08:00:31.016Z"}
+2026-11-07T08:00:37.185Z agent_client INFO received final message from s8360_final correlation_id=7d7638f3-ff6b-42c3-89cc-02116256b756 status=rejected
+2026-11-07T08:00:37.186Z ingress INFO agent pipeline finished status=rejected in 6170 ms
+  un05 MISS sim=0.1753   6207.4 ms 
+2026-11-07T08:00:37.187Z ingress INFO ask start question='Translate good morning into Spanish.' threshold=0.85
+2026-11-07T08:00:37.231Z ingress INFO embedding 41.9 ms, vector search 2.5 ms, nearest similarity=0.102
+2026-11-07T08:00:37.232Z ingress INFO cache MISS best_similarity=0.102 threshold=0.85 -> running the agent pipeline
+2026-11-07T08:00:37.232Z agent_client INFO sending question to s8360_inbox correlation_id=0379f2f9-da87-4fde-ad72-17c74ba7f11a message={"correlation_id":"0379f2f9-da87-4fde-ad72-17c74ba7f11a","question":"Translate good morning into Spanish.","submitted_at":"2026-11-07T08:00:37.232Z"}
+2026-11-07T08:00:43.977Z agent_client INFO received final message from s8360_final correlation_id=0379f2f9-da87-4fde-ad72-17c74ba7f11a status=rejected
+2026-11-07T08:00:43.980Z ingress INFO agent pipeline finished status=rejected in 6748 ms
+  un06 MISS sim=0.1020   6792.9 ms 
+2026-11-07T08:00:43.980Z ingress INFO ask start question='How tall is Mount Everest?' threshold=0.85
+2026-11-07T08:00:44.060Z ingress INFO embedding 75.6 ms, vector search 4.1 ms, nearest similarity=0.2324
+2026-11-07T08:00:44.060Z ingress INFO cache MISS best_similarity=0.2324 threshold=0.85 -> running the agent pipeline
+2026-11-07T08:00:44.060Z agent_client INFO sending question to s8360_inbox correlation_id=dd4f6b5e-fff0-4590-8a3a-183678789426 message={"correlation_id":"dd4f6b5e-fff0-4590-8a3a-183678789426","question":"How tall is Mount Everest?","submitted_at":"2026-11-07T08:00:44.060Z"}
+2026-11-07T08:00:52.675Z agent_client INFO received final message from s8360_final correlation_id=dd4f6b5e-fff0-4590-8a3a-183678789426 status=rejected
+2026-11-07T08:00:52.676Z ingress INFO agent pipeline finished status=rejected in 8616 ms
+  un07 MISS sim=0.2324   8696.0 ms 
+2026-11-07T08:00:52.677Z ingress INFO ask start question='What will the weather be like tomorrow?' threshold=0.85
+2026-11-07T08:00:52.738Z ingress INFO embedding 49.1 ms, vector search 11.5 ms, nearest similarity=0.1017
+2026-11-07T08:00:52.738Z ingress INFO cache MISS best_similarity=0.1017 threshold=0.85 -> running the agent pipeline
+2026-11-07T08:00:52.738Z agent_client INFO sending question to s8360_inbox correlation_id=b1bfe967-c392-43c0-94e9-28ff1d7159ed message={"correlation_id":"b1bfe967-c392-43c0-94e9-28ff1d7159ed","question":"What will the weather be like tomorrow?","submitted_at":"2026-11-07T08:00:52.738Z"}
+2026-11-07T08:01:00.925Z agent_client INFO received final message from s8360_final correlation_id=b1bfe967-c392-43c0-94e9-28ff1d7159ed status=rejected
+2026-11-07T08:01:00.926Z ingress INFO agent pipeline finished status=rejected in 8188 ms
+  un08 MISS sim=0.1017   8249.5 ms 
+2026-11-07T08:01:00.927Z ingress INFO ask start question='Write a haiku about autumn.' threshold=0.85
+2026-11-07T08:01:00.967Z ingress INFO embedding 33.6 ms, vector search 6.5 ms, nearest similarity=0.1347
+2026-11-07T08:01:00.967Z ingress INFO cache MISS best_similarity=0.1347 threshold=0.85 -> running the agent pipeline
+2026-11-07T08:01:00.967Z agent_client INFO sending question to s8360_inbox correlation_id=780b5765-2cd8-460e-af1d-a266d83b9d79 message={"correlation_id":"780b5765-2cd8-460e-af1d-a266d83b9d79","question":"Write a haiku about autumn.","submitted_at":"2026-11-07T08:01:00.967Z"}
+2026-11-07T08:01:08.743Z agent_client INFO received final message from s8360_final correlation_id=780b5765-2cd8-460e-af1d-a266d83b9d79 status=rejected
+2026-11-07T08:01:08.756Z ingress INFO agent pipeline finished status=rejected in 7789 ms
+  un09 MISS sim=0.1347   7829.5 ms 
+2026-11-07T08:01:08.757Z ingress INFO ask start question='What is the square root of 144?' threshold=0.85
+2026-11-07T08:01:08.788Z ingress INFO embedding 26.6 ms, vector search 3.8 ms, nearest similarity=0.2456
+2026-11-07T08:01:08.788Z ingress INFO cache MISS best_similarity=0.2456 threshold=0.85 -> running the agent pipeline
+2026-11-07T08:01:08.788Z agent_client INFO sending question to s8360_inbox correlation_id=0c8cfaf3-b4f7-48ff-8d95-7870607ebbca message={"correlation_id":"0c8cfaf3-b4f7-48ff-8d95-7870607ebbca","question":"What is the square root of 144?","submitted_at":"2026-11-07T08:01:08.788Z"}
+2026-11-07T08:01:15.942Z agent_client INFO received final message from s8360_final correlation_id=0c8cfaf3-b4f7-48ff-8d95-7870607ebbca status=rejected
+2026-11-07T08:01:15.947Z ingress INFO agent pipeline finished status=rejected in 7158 ms
+  un10 MISS sim=0.2456   7190.5 ms 
+  => {'hits': 25, 'misses': 15, 'false_hits': 6, 'should_miss_cases': 20, 'hit_rate': 0.625, 'false_hit_rate': 0.3, 'mean_latency_ms': 3308.2, 'mean_latency_ms_hit': 22.1, 'mean_latency_ms_miss': 8784.9, 'total_cost': 6.1525}
+
+-- threshold 0.90
+2026-11-07T08:01:15.954Z ingress INFO ask start question='How many seats are available in DATA-260?' threshold=0.90
+2026-11-07T08:01:15.992Z ingress INFO embedding 35.5 ms, vector search 2.7 ms, nearest similarity=1.0
+2026-11-07T08:01:16.013Z ingress INFO data-version check 20.8 ms: stored=41d1242df4dd current=41d1242df4dd -> fresh
+2026-11-07T08:01:16.013Z ingress INFO cache HIT similarity=1.0000 threshold=0.90 matched_query='How many seats are available in DATA-260?' latency_ms=59.4
+  ex01 HIT  sim=1.0000     59.4 ms 
+2026-11-07T08:01:16.013Z ingress INFO ask start question='Who teaches CS-157A?' threshold=0.90
+2026-11-07T08:01:16.025Z ingress INFO embedding 10.6 ms, vector search 1.6 ms, nearest similarity=1.0
+2026-11-07T08:01:16.030Z ingress INFO data-version check 4.6 ms: stored=b4a2be1b3a22 current=b4a2be1b3a22 -> fresh
+2026-11-07T08:01:16.030Z ingress INFO cache HIT similarity=1.0000 threshold=0.90 matched_query='Who teaches CS-157A?' latency_ms=16.9
+  ex02 HIT  sim=1.0000     16.9 ms 
+2026-11-07T08:01:16.030Z ingress INFO ask start question='Which department has the most available seats?' threshold=0.90
+2026-11-07T08:01:16.040Z ingress INFO embedding 8.4 ms, vector search 1.2 ms, nearest similarity=1.0
+2026-11-07T08:01:16.045Z ingress INFO data-version check 5.0 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T08:01:16.045Z ingress INFO cache HIT similarity=1.0000 threshold=0.90 matched_query='Which department has the most available seats?' latency_ms=14.8
+  ex03 HIT  sim=1.0000     14.8 ms 
+2026-11-07T08:01:16.045Z ingress INFO ask start question='How many courses does Dr. Marcus Lee teach?' threshold=0.90
+2026-11-07T08:01:16.057Z ingress INFO embedding 10.8 ms, vector search 1.2 ms, nearest similarity=1.0
+2026-11-07T08:01:16.061Z ingress INFO data-version check 3.7 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T08:01:16.061Z ingress INFO cache HIT similarity=1.0000 threshold=0.90 matched_query='How many courses does Dr. Marcus Lee teach?' latency_ms=15.9
+  ex04 HIT  sim=1.0000     15.9 ms 
+2026-11-07T08:01:16.061Z ingress INFO ask start question='What is the total number of seats in the Computer Science department?' threshold=0.90
+2026-11-07T08:01:16.074Z ingress INFO embedding 10.7 ms, vector search 2.1 ms, nearest similarity=1.0
+2026-11-07T08:01:16.080Z ingress INFO data-version check 6.0 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T08:01:16.080Z ingress INFO cache HIT similarity=1.0000 threshold=0.90 matched_query='What is the total number of seats in the Computer Science department?' latency_ms=19.0
+  ex05 HIT  sim=1.0000     19.0 ms 
+2026-11-07T08:01:16.080Z ingress INFO ask start question='Which course has the most available seats?' threshold=0.90
+2026-11-07T08:01:16.090Z ingress INFO embedding 9.0 ms, vector search 1.5 ms, nearest similarity=1.0
+2026-11-07T08:01:16.095Z ingress INFO data-version check 4.5 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T08:01:16.095Z ingress INFO cache HIT similarity=1.0000 threshold=0.90 matched_query='Which course has the most available seats?' latency_ms=15.2
+  ex06 HIT  sim=1.0000     15.2 ms 
+2026-11-07T08:01:16.095Z ingress INFO ask start question='What is the title of course DATA-245?' threshold=0.90
+2026-11-07T08:01:16.106Z ingress INFO embedding 9.0 ms, vector search 1.6 ms, nearest similarity=1.0
+2026-11-07T08:01:16.111Z ingress INFO data-version check 5.1 ms: stored=f58e4877c77d current=f58e4877c77d -> fresh
+2026-11-07T08:01:16.111Z ingress INFO cache HIT similarity=1.0000 threshold=0.90 matched_query='What is the title of course DATA-245?' latency_ms=15.9
+  ex07 HIT  sim=1.0000     15.9 ms 
+2026-11-07T08:01:16.111Z ingress INFO ask start question='List the courses taught by Dr. Samuel Okafor.' threshold=0.90
+2026-11-07T08:01:16.122Z ingress INFO embedding 9.7 ms, vector search 1.4 ms, nearest similarity=1.0
+2026-11-07T08:01:16.127Z ingress INFO data-version check 4.7 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T08:01:16.127Z ingress INFO cache HIT similarity=1.0000 threshold=0.90 matched_query='List the courses taught by Dr. Samuel Okafor.' latency_ms=15.9
+  ex08 HIT  sim=1.0000     15.9 ms 
+2026-11-07T08:01:16.127Z ingress INFO ask start question='How many courses are offered in the Data Science department?' threshold=0.90
+2026-11-07T08:01:16.138Z ingress INFO embedding 9.2 ms, vector search 1.5 ms, nearest similarity=1.0
+2026-11-07T08:01:16.143Z ingress INFO data-version check 5.2 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T08:01:16.143Z ingress INFO cache HIT similarity=1.0000 threshold=0.90 matched_query='How many courses are offered in the Data Science department?' latency_ms=16.1
+  ex09 HIT  sim=1.0000     16.1 ms 
+2026-11-07T08:01:16.143Z ingress INFO ask start question='Which department does ENGR-200 belong to?' threshold=0.90
+2026-11-07T08:01:16.155Z ingress INFO embedding 10.1 ms, vector search 1.2 ms, nearest similarity=1.0
+2026-11-07T08:01:16.159Z ingress INFO data-version check 4.4 ms: stored=c1d56ca54408 current=c1d56ca54408 -> fresh
+2026-11-07T08:01:16.159Z ingress INFO cache HIT similarity=1.0000 threshold=0.90 matched_query='Which department does ENGR-200 belong to?' latency_ms=15.9
+  ex10 HIT  sim=1.0000     15.9 ms 
+2026-11-07T08:01:16.159Z ingress INFO ask start question='What is the seat availability for course DATA-260?' threshold=0.90
+2026-11-07T08:01:16.172Z ingress INFO embedding 10.7 ms, vector search 2.6 ms, nearest similarity=0.8334
+2026-11-07T08:01:16.172Z ingress INFO cache MISS best_similarity=0.8334 threshold=0.90 -> running the agent pipeline
+2026-11-07T08:01:16.173Z agent_client INFO sending question to s8360_inbox correlation_id=2959df41-1a1a-402c-ba2d-d105acf439cb message={"correlation_id":"2959df41-1a1a-402c-ba2d-d105acf439cb","question":"What is the seat availability for course DATA-260?","submitted_at":"2026-11-07T08:01:16.173Z"}
+2026-11-07T08:01:22.910Z agent_client INFO received final message from s8360_final correlation_id=2959df41-1a1a-402c-ba2d-d105acf439cb status=approved
+2026-11-07T08:01:22.914Z ingress INFO agent pipeline finished status=approved in 6742 ms
+  pa01 MISS sim=0.8334   6755.2 ms 
+2026-11-07T08:01:22.915Z ingress INFO ask start question='Which instructor is teaching CS-157A?' threshold=0.90
+2026-11-07T08:01:22.960Z ingress INFO embedding 37.8 ms, vector search 7.1 ms, nearest similarity=0.9012
+2026-11-07T08:01:22.973Z ingress INFO data-version check 12.4 ms: stored=b4a2be1b3a22 current=b4a2be1b3a22 -> fresh
+2026-11-07T08:01:22.973Z ingress INFO cache HIT similarity=0.9012 threshold=0.90 matched_query='Who teaches CS-157A?' latency_ms=58.0
+  pa02 HIT  sim=0.9012     58.0 ms 
+2026-11-07T08:01:22.973Z ingress INFO ask start question='Which department has the largest number of open seats?' threshold=0.90
+2026-11-07T08:01:22.986Z ingress INFO embedding 11.9 ms, vector search 1.1 ms, nearest similarity=0.9024
+2026-11-07T08:01:22.989Z ingress INFO data-version check 3.3 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T08:01:22.989Z ingress INFO cache HIT similarity=0.9024 threshold=0.90 matched_query='Which department has the most available seats?' latency_ms=16.5
+  pa03 HIT  sim=0.9024     16.5 ms 
+2026-11-07T08:01:22.989Z ingress INFO ask start question='How many classes is Dr. Marcus Lee teaching?' threshold=0.90
+2026-11-07T08:01:23.002Z ingress INFO embedding 11.3 ms, vector search 1.0 ms, nearest similarity=0.9599
+2026-11-07T08:01:23.006Z ingress INFO data-version check 4.0 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T08:01:23.006Z ingress INFO cache HIT similarity=0.9599 threshold=0.90 matched_query='How many courses does Dr. Marcus Lee teach?' latency_ms=16.6
+  pa04 HIT  sim=0.9599     16.6 ms 
+2026-11-07T08:01:23.006Z ingress INFO ask start question='How many seats does the Computer Science department have in total?' threshold=0.90
+2026-11-07T08:01:23.018Z ingress INFO embedding 10.9 ms, vector search 1.1 ms, nearest similarity=0.9729
+2026-11-07T08:01:23.021Z ingress INFO data-version check 3.1 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T08:01:23.021Z ingress INFO cache HIT similarity=0.9729 threshold=0.90 matched_query='What is the total number of seats in the Computer Science department?' latency_ms=15.3
+  pa05 HIT  sim=0.9729     15.3 ms 
+2026-11-07T08:01:23.021Z ingress INFO ask start question='What is the course with the highest number of seats available?' threshold=0.90
+2026-11-07T08:01:23.033Z ingress INFO embedding 10.9 ms, vector search 1.0 ms, nearest similarity=0.9057
+2026-11-07T08:01:23.036Z ingress INFO data-version check 2.9 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T08:01:23.036Z ingress INFO cache HIT similarity=0.9057 threshold=0.90 matched_query='Which course has the most available seats?' latency_ms=15.1
+  pa06 HIT  sim=0.9057     15.1 ms 
+2026-11-07T08:01:23.037Z ingress INFO ask start question='What is the name of course DATA-245?' threshold=0.90
+2026-11-07T08:01:23.047Z ingress INFO embedding 9.9 ms, vector search 1.0 ms, nearest similarity=0.9747
+2026-11-07T08:01:23.051Z ingress INFO data-version check 3.0 ms: stored=f58e4877c77d current=f58e4877c77d -> fresh
+2026-11-07T08:01:23.051Z ingress INFO cache HIT similarity=0.9747 threshold=0.90 matched_query='What is the title of course DATA-245?' latency_ms=14.1
+  pa07 HIT  sim=0.9747     14.1 ms 
+2026-11-07T08:01:23.051Z ingress INFO ask start question='Which courses does Dr. Samuel Okafor teach?' threshold=0.90
+2026-11-07T08:01:23.062Z ingress INFO embedding 10.3 ms, vector search 0.9 ms, nearest similarity=0.9125
+2026-11-07T08:01:23.065Z ingress INFO data-version check 2.8 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T08:01:23.065Z ingress INFO cache HIT similarity=0.9125 threshold=0.90 matched_query='List the courses taught by Dr. Samuel Okafor.' latency_ms=14.2
+  pa08 HIT  sim=0.9125     14.2 ms 
+2026-11-07T08:01:23.065Z ingress INFO ask start question='How many courses does the Data Science department offer?' threshold=0.90
+2026-11-07T08:01:23.077Z ingress INFO embedding 11.6 ms, vector search 0.8 ms, nearest similarity=0.9867
+2026-11-07T08:01:23.082Z ingress INFO data-version check 4.0 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T08:01:23.082Z ingress INFO cache HIT similarity=0.9867 threshold=0.90 matched_query='How many courses are offered in the Data Science department?' latency_ms=16.7
+  pa09 HIT  sim=0.9867     16.7 ms 
+2026-11-07T08:01:23.082Z ingress INFO ask start question='Which department is ENGR-200 part of?' threshold=0.90
+2026-11-07T08:01:23.099Z ingress INFO embedding 15.9 ms, vector search 1.0 ms, nearest similarity=0.9755
+2026-11-07T08:01:23.103Z ingress INFO data-version check 4.2 ms: stored=c1d56ca54408 current=c1d56ca54408 -> fresh
+2026-11-07T08:01:23.103Z ingress INFO cache HIT similarity=0.9755 threshold=0.90 matched_query='Which department does ENGR-200 belong to?' latency_ms=21.3
+  pa10 HIT  sim=0.9755     21.3 ms 
+2026-11-07T08:01:23.103Z ingress INFO ask start question='How many seats are available in DATA-230?' threshold=0.90
+2026-11-07T08:01:23.116Z ingress INFO embedding 11.6 ms, vector search 1.2 ms, nearest similarity=0.9388
+2026-11-07T08:01:23.121Z ingress INFO data-version check 4.4 ms: stored=41d1242df4dd current=41d1242df4dd -> fresh
+2026-11-07T08:01:23.121Z ingress INFO cache HIT similarity=0.9388 threshold=0.90 matched_query='How many seats are available in DATA-260?' latency_ms=17.5
+  sd01 HIT  sim=0.9388     17.5 ms FALSE HIT
+2026-11-07T08:01:23.121Z ingress INFO ask start question='Who teaches DATA-245?' threshold=0.90
+2026-11-07T08:01:23.132Z ingress INFO embedding 10.7 ms, vector search 1.0 ms, nearest similarity=0.779
+2026-11-07T08:01:23.133Z ingress INFO cache MISS best_similarity=0.779 threshold=0.90 -> running the agent pipeline
+2026-11-07T08:01:23.133Z agent_client INFO sending question to s8360_inbox correlation_id=7c0c3c93-6510-47c6-b781-7e31993827e2 message={"correlation_id":"7c0c3c93-6510-47c6-b781-7e31993827e2","question":"Who teaches DATA-245?","submitted_at":"2026-11-07T08:01:23.133Z"}
+2026-11-07T08:01:30.654Z agent_client INFO received final message from s8360_final correlation_id=7c0c3c93-6510-47c6-b781-7e31993827e2 status=approved
+2026-11-07T08:01:30.659Z ingress INFO agent pipeline finished status=approved in 7526 ms
+  sd02 MISS sim=0.7790   7539.3 ms 
+2026-11-07T08:01:30.662Z ingress INFO ask start question='Which department has the fewest available seats?' threshold=0.90
+2026-11-07T08:01:30.716Z ingress INFO embedding 49.4 ms, vector search 3.8 ms, nearest similarity=0.9676
+2026-11-07T08:01:30.734Z ingress INFO data-version check 18.4 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T08:01:30.734Z ingress INFO cache HIT similarity=0.9676 threshold=0.90 matched_query='Which department has the most available seats?' latency_ms=72.5
+  sd03 HIT  sim=0.9676     72.5 ms FALSE HIT
+2026-11-07T08:01:30.734Z ingress INFO ask start question="How many seats do Dr. Marcus Lee's courses offer in total?" threshold=0.90
+2026-11-07T08:01:30.752Z ingress INFO embedding 16.1 ms, vector search 1.2 ms, nearest similarity=0.8381
+2026-11-07T08:01:30.752Z ingress INFO cache MISS best_similarity=0.8381 threshold=0.90 -> running the agent pipeline
+2026-11-07T08:01:30.752Z agent_client INFO sending question to s8360_inbox correlation_id=64f4c3db-c63c-4a10-867a-fa3c0eeaebba message={"correlation_id":"64f4c3db-c63c-4a10-867a-fa3c0eeaebba","question":"How many seats do Dr. Marcus Lee's courses offer in total?","submitted_at":"2026-11-07T08:01:30.752Z"}
+2026-11-07T08:01:41.831Z agent_client INFO received final message from s8360_final correlation_id=64f4c3db-c63c-4a10-867a-fa3c0eeaebba status=approved
+2026-11-07T08:01:41.832Z ingress INFO agent pipeline finished status=approved in 11080 ms
+  sd04 MISS sim=0.8381  11098.2 ms 
+2026-11-07T08:01:41.833Z ingress INFO ask start question='What is the total number of seats in the Data Science department?' threshold=0.90
+2026-11-07T08:01:41.909Z ingress INFO embedding 71.5 ms, vector search 3.9 ms, nearest similarity=0.881
+2026-11-07T08:01:41.909Z ingress INFO cache MISS best_similarity=0.881 threshold=0.90 -> running the agent pipeline
+2026-11-07T08:01:41.909Z agent_client INFO sending question to s8360_inbox correlation_id=d275f16b-2473-46c1-b4d0-b029e7b375a0 message={"correlation_id":"d275f16b-2473-46c1-b4d0-b029e7b375a0","question":"What is the total number of seats in the Data Science department?","submitted_at":"2026-11-07T08:01:41.909Z"}
+2026-11-07T08:01:55.949Z agent_client INFO received final message from s8360_final correlation_id=d275f16b-2473-46c1-b4d0-b029e7b375a0 status=approved
+2026-11-07T08:01:55.951Z ingress INFO agent pipeline finished status=approved in 14043 ms
+  sd05 MISS sim=0.8810  14118.7 ms 
+2026-11-07T08:01:55.952Z ingress INFO ask start question='Which course has the fewest available seats?' threshold=0.90
+2026-11-07T08:01:56.001Z ingress INFO embedding 45.3 ms, vector search 3.0 ms, nearest similarity=0.9667
+2026-11-07T08:01:56.009Z ingress INFO data-version check 8.3 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T08:01:56.009Z ingress INFO cache HIT similarity=0.9667 threshold=0.90 matched_query='Which course has the most available seats?' latency_ms=57.1
+  sd06 HIT  sim=0.9667     57.1 ms FALSE HIT
+2026-11-07T08:01:56.009Z ingress INFO ask start question='What is the title of course DATA-230?' threshold=0.90
+2026-11-07T08:01:56.020Z ingress INFO embedding 9.2 ms, vector search 1.2 ms, nearest similarity=0.9367
+2026-11-07T08:01:56.025Z ingress INFO data-version check 5.6 ms: stored=f58e4877c77d current=f58e4877c77d -> fresh
+2026-11-07T08:01:56.025Z ingress INFO cache HIT similarity=0.9367 threshold=0.90 matched_query='What is the title of course DATA-245?' latency_ms=16.2
+  sd07 HIT  sim=0.9367     16.2 ms FALSE HIT
+2026-11-07T08:01:56.025Z ingress INFO ask start question='List the courses taught by Dr. Marcus Lee.' threshold=0.90
+2026-11-07T08:01:56.035Z ingress INFO embedding 8.4 ms, vector search 1.4 ms, nearest similarity=0.8635
+2026-11-07T08:01:56.035Z ingress INFO cache MISS best_similarity=0.8635 threshold=0.90 -> running the agent pipeline
+2026-11-07T08:01:56.036Z agent_client INFO sending question to s8360_inbox correlation_id=3317030a-9301-4e82-829b-7790741760cc message={"correlation_id":"3317030a-9301-4e82-829b-7790741760cc","question":"List the courses taught by Dr. Marcus Lee.","submitted_at":"2026-11-07T08:01:56.036Z"}
+2026-11-07T08:02:11.925Z agent_client INFO received final message from s8360_final correlation_id=3317030a-9301-4e82-829b-7790741760cc status=approved
+2026-11-07T08:02:11.932Z ingress INFO agent pipeline finished status=approved in 15897 ms
+  sd08 MISS sim=0.8635  15907.0 ms 
+2026-11-07T08:02:11.934Z ingress INFO ask start question='How many courses are offered in the Computer Science department?' threshold=0.90
+2026-11-07T08:02:11.960Z ingress INFO embedding 19.2 ms, vector search 6.6 ms, nearest similarity=0.8423
+2026-11-07T08:02:11.960Z ingress INFO cache MISS best_similarity=0.8423 threshold=0.90 -> running the agent pipeline
+2026-11-07T08:02:11.960Z agent_client INFO sending question to s8360_inbox correlation_id=9b0758f1-65a2-4266-ad7a-59fa4ce6ffff message={"correlation_id":"9b0758f1-65a2-4266-ad7a-59fa4ce6ffff","question":"How many courses are offered in the Computer Science department?","submitted_at":"2026-11-07T08:02:11.960Z"}
+2026-11-07T08:02:18.108Z agent_client INFO received final message from s8360_final correlation_id=9b0758f1-65a2-4266-ad7a-59fa4ce6ffff status=approved
+2026-11-07T08:02:18.109Z ingress INFO agent pipeline finished status=approved in 6149 ms
+  sd09 MISS sim=0.8423   6175.3 ms 
+2026-11-07T08:02:18.110Z ingress INFO ask start question='Which department does DATA-260 belong to?' threshold=0.90
+2026-11-07T08:02:18.155Z ingress INFO embedding 41.7 ms, vector search 3.4 ms, nearest similarity=0.6332
+2026-11-07T08:02:18.155Z ingress INFO cache MISS best_similarity=0.6332 threshold=0.90 -> running the agent pipeline
+2026-11-07T08:02:18.155Z agent_client INFO sending question to s8360_inbox correlation_id=db8147ce-ce8e-4af0-b6b5-77272477dcd9 message={"correlation_id":"db8147ce-ce8e-4af0-b6b5-77272477dcd9","question":"Which department does DATA-260 belong to?","submitted_at":"2026-11-07T08:02:18.155Z"}
+2026-11-07T08:02:24.153Z agent_client INFO received final message from s8360_final correlation_id=db8147ce-ce8e-4af0-b6b5-77272477dcd9 status=approved
+2026-11-07T08:02:24.154Z ingress INFO agent pipeline finished status=approved in 5999 ms
+  sd10 MISS sim=0.6332   6044.4 ms 
+2026-11-07T08:02:24.154Z ingress INFO ask start question='What is the capital of France?' threshold=0.90
+2026-11-07T08:02:24.179Z ingress INFO embedding 22.1 ms, vector search 2.9 ms, nearest similarity=0.2127
+2026-11-07T08:02:24.179Z ingress INFO cache MISS best_similarity=0.2127 threshold=0.90 -> running the agent pipeline
+2026-11-07T08:02:24.179Z agent_client INFO sending question to s8360_inbox correlation_id=0f1c429a-a59e-433c-8ef0-c831f568aa90 message={"correlation_id":"0f1c429a-a59e-433c-8ef0-c831f568aa90","question":"What is the capital of France?","submitted_at":"2026-11-07T08:02:24.179Z"}
+2026-11-07T08:02:30.544Z agent_client INFO received final message from s8360_final correlation_id=0f1c429a-a59e-433c-8ef0-c831f568aa90 status=rejected
+2026-11-07T08:02:30.544Z ingress INFO agent pipeline finished status=rejected in 6365 ms
+  un01 MISS sim=0.2127   6390.7 ms 
+2026-11-07T08:02:30.545Z ingress INFO ask start question='How do I reset my email password?' threshold=0.90
+2026-11-07T08:02:30.572Z ingress INFO embedding 24.4 ms, vector search 2.4 ms, nearest similarity=0.1601
+2026-11-07T08:02:30.572Z ingress INFO cache MISS best_similarity=0.1601 threshold=0.90 -> running the agent pipeline
+2026-11-07T08:02:30.572Z agent_client INFO sending question to s8360_inbox correlation_id=bceeee5b-d229-4f7c-9d5c-60f71245dc98 message={"correlation_id":"bceeee5b-d229-4f7c-9d5c-60f71245dc98","question":"How do I reset my email password?","submitted_at":"2026-11-07T08:02:30.572Z"}
+2026-11-07T08:02:42.006Z agent_client INFO received final message from s8360_final correlation_id=bceeee5b-d229-4f7c-9d5c-60f71245dc98 status=rejected
+2026-11-07T08:02:42.008Z ingress INFO agent pipeline finished status=rejected in 11436 ms
+  un02 MISS sim=0.1601  11463.5 ms 
+2026-11-07T08:02:42.009Z ingress INFO ask start question='Who won the 2018 World Cup?' threshold=0.90
+2026-11-07T08:02:42.078Z ingress INFO embedding 62.6 ms, vector search 6.7 ms, nearest similarity=0.1298
+2026-11-07T08:02:42.079Z ingress INFO cache MISS best_similarity=0.1298 threshold=0.90 -> running the agent pipeline
+2026-11-07T08:02:42.079Z agent_client INFO sending question to s8360_inbox correlation_id=4acefc9c-e3db-41a0-95a7-83e24aa1e867 message={"correlation_id":"4acefc9c-e3db-41a0-95a7-83e24aa1e867","question":"Who won the 2018 World Cup?","submitted_at":"2026-11-07T08:02:42.079Z"}
+2026-11-07T08:02:49.235Z agent_client INFO received final message from s8360_final correlation_id=4acefc9c-e3db-41a0-95a7-83e24aa1e867 status=rejected
+2026-11-07T08:02:49.237Z ingress INFO agent pipeline finished status=rejected in 7158 ms
+  un03 MISS sim=0.1298   7228.0 ms 
+2026-11-07T08:02:49.237Z ingress INFO ask start question='What is the boiling point of water at sea level?' threshold=0.90
+2026-11-07T08:02:49.272Z ingress INFO embedding 30.2 ms, vector search 5.1 ms, nearest similarity=0.1689
+2026-11-07T08:02:49.273Z ingress INFO cache MISS best_similarity=0.1689 threshold=0.90 -> running the agent pipeline
+2026-11-07T08:02:49.273Z agent_client INFO sending question to s8360_inbox correlation_id=27aa8c03-388c-43f9-aa42-dee446456be6 message={"correlation_id":"27aa8c03-388c-43f9-aa42-dee446456be6","question":"What is the boiling point of water at sea level?","submitted_at":"2026-11-07T08:02:49.273Z"}
+%5|1794040691.691|REQTMOUT|hw9-ingress#consumer-2| [thrd:localhost:9092/1]: localhost:9092/1: Timed out FetchRequest in flight (after 2112662ms, timeout #0)
+%4|1794040691.786|REQTMOUT|hw9-ingress#consumer-2| [thrd:localhost:9092/1]: localhost:9092/1: Timed out 1 in-flight, 0 retry-queued, 0 out-queue, 0 partially-sent requests
+2026-11-07T08:38:11.861Z agent_client ERROR no final message for correlation_id=27aa8c03-388c-43f9-aa42-dee446456be6 within 240s
+2026-11-07T08:38:11.885Z ingress INFO agent pipeline finished status=timeout in 42967 ms
+  un04 MISS sim=0.1689  43006.5 ms 
+2026-11-07T08:38:11.902Z ingress INFO ask start question='Recommend a good pizza place in San Jose.' threshold=0.90
+2026-11-07T08:38:12.721Z ingress INFO embedding 709.0 ms, vector search 108.1 ms, nearest similarity=0.1753
+2026-11-07T08:38:12.743Z ingress INFO cache MISS best_similarity=0.1753 threshold=0.90 -> running the agent pipeline
+2026-11-07T08:38:12.744Z agent_client INFO sending question to s8360_inbox correlation_id=4f42fd2e-1d92-45bc-a2d7-71793cabd2b6 message={"correlation_id":"4f42fd2e-1d92-45bc-a2d7-71793cabd2b6","question":"Recommend a good pizza place in San Jose.","submitted_at":"2026-11-07T08:38:12.744Z"}
+%4|1794040692.828|METADATAUPDATE|hw9-ingress#producer-1| [thrd:main]: Partition s8360_inbox(eTI3WzL2RMOY+LFJxKBBig)[0]: new leader-1 not found in cache
+2026-11-07T08:42:13.134Z agent_client ERROR no final message for correlation_id=4f42fd2e-1d92-45bc-a2d7-71793cabd2b6 within 240s
+2026-11-07T08:42:13.138Z ingress INFO agent pipeline finished status=timeout in 240427 ms
+  un05 MISS sim=0.1753 241267.5 ms 
+2026-11-07T08:42:13.140Z ingress INFO ask start question='Translate good morning into Spanish.' threshold=0.90
+2026-11-07T08:42:13.305Z ingress INFO embedding 162.1 ms, vector search 2.9 ms, nearest similarity=0.102
+2026-11-07T08:42:13.305Z ingress INFO cache MISS best_similarity=0.102 threshold=0.90 -> running the agent pipeline
+2026-11-07T08:42:13.305Z agent_client INFO sending question to s8360_inbox correlation_id=81c39609-0276-4c4b-acec-8b9b53e79cad message={"correlation_id":"81c39609-0276-4c4b-acec-8b9b53e79cad","question":"Translate good morning into Spanish.","submitted_at":"2026-11-07T08:42:13.305Z"}
+2026-11-07T08:46:14.072Z agent_client ERROR no final message for correlation_id=81c39609-0276-4c4b-acec-8b9b53e79cad within 240s
+2026-11-07T08:46:14.077Z ingress INFO agent pipeline finished status=timeout in 240774 ms
+  un06 MISS sim=0.1020 240939.8 ms 
+2026-11-07T08:46:14.077Z ingress INFO ask start question='How tall is Mount Everest?' threshold=0.90
+2026-11-07T08:46:14.121Z ingress INFO embedding 38.6 ms, vector search 5.3 ms, nearest similarity=0.2324
+2026-11-07T08:46:14.121Z ingress INFO cache MISS best_similarity=0.2324 threshold=0.90 -> running the agent pipeline
+2026-11-07T08:46:14.122Z agent_client INFO sending question to s8360_inbox correlation_id=c5af16d6-3740-4307-a3c2-a6e8f56085ab message={"correlation_id":"c5af16d6-3740-4307-a3c2-a6e8f56085ab","question":"How tall is Mount Everest?","submitted_at":"2026-11-07T08:46:14.122Z"}
+2026-11-07T08:50:14.471Z agent_client ERROR no final message for correlation_id=c5af16d6-3740-4307-a3c2-a6e8f56085ab within 240s
+2026-11-07T08:50:14.475Z ingress INFO agent pipeline finished status=timeout in 240355 ms
+  un07 MISS sim=0.2324 240400.3 ms 
+2026-11-07T08:50:14.476Z ingress INFO ask start question='What will the weather be like tomorrow?' threshold=0.90
+2026-11-07T08:50:14.512Z ingress INFO embedding 31.9 ms, vector search 3.8 ms, nearest similarity=0.1017
+2026-11-07T08:50:14.512Z ingress INFO cache MISS best_similarity=0.1017 threshold=0.90 -> running the agent pipeline
+2026-11-07T08:50:14.512Z agent_client INFO sending question to s8360_inbox correlation_id=e163fa3d-f463-4911-80a0-429d2c5dc7d8 message={"correlation_id":"e163fa3d-f463-4911-80a0-429d2c5dc7d8","question":"What will the weather be like tomorrow?","submitted_at":"2026-11-07T08:50:14.512Z"}
+2026-11-07T08:54:15.059Z agent_client ERROR no final message for correlation_id=e163fa3d-f463-4911-80a0-429d2c5dc7d8 within 240s
+2026-11-07T08:54:15.064Z ingress INFO agent pipeline finished status=timeout in 240554 ms
+  un08 MISS sim=0.1017 240590.7 ms 
+2026-11-07T08:54:15.066Z ingress INFO ask start question='Write a haiku about autumn.' threshold=0.90
+2026-11-07T08:54:15.248Z ingress INFO embedding 176.0 ms, vector search 5.4 ms, nearest similarity=0.1347
+2026-11-07T08:54:15.248Z ingress INFO cache MISS best_similarity=0.1347 threshold=0.90 -> running the agent pipeline
+2026-11-07T08:54:15.248Z agent_client INFO sending question to s8360_inbox correlation_id=3a62a9cb-60d5-4592-92ec-b18300af3f9f message={"correlation_id":"3a62a9cb-60d5-4592-92ec-b18300af3f9f","question":"Write a haiku about autumn.","submitted_at":"2026-11-07T08:54:15.248Z"}
+2026-11-07T08:58:15.835Z agent_client ERROR no final message for correlation_id=3a62a9cb-60d5-4592-92ec-b18300af3f9f within 240s
+2026-11-07T08:58:15.838Z ingress INFO agent pipeline finished status=timeout in 240592 ms
+  un09 MISS sim=0.1347 240774.9 ms 
+2026-11-07T08:58:15.839Z ingress INFO ask start question='What is the square root of 144?' threshold=0.90
+2026-11-07T08:58:15.880Z ingress INFO embedding 37.1 ms, vector search 3.5 ms, nearest similarity=0.2456
+2026-11-07T08:58:15.881Z ingress INFO cache MISS best_similarity=0.2456 threshold=0.90 -> running the agent pipeline
+2026-11-07T08:58:15.881Z agent_client INFO sending question to s8360_inbox correlation_id=fd194b91-9907-49c0-9e16-ee75c49752c6 message={"correlation_id":"fd194b91-9907-49c0-9e16-ee75c49752c6","question":"What is the square root of 144?","submitted_at":"2026-11-07T08:58:15.881Z"}
+2026-11-07T09:02:16.242Z agent_client ERROR no final message for correlation_id=fd194b91-9907-49c0-9e16-ee75c49752c6 within 240s
+2026-11-07T09:02:16.245Z ingress INFO agent pipeline finished status=timeout in 240367 ms
+  un10 MISS sim=0.2456 240408.5 ms 
+  => {'hits': 23, 'misses': 17, 'false_hits': 4, 'should_miss_cases': 20, 'hit_rate': 0.575, 'false_hit_rate': 0.2, 'mean_latency_ms': 39516.6, 'mean_latency_ms_hit': 24.2, 'mean_latency_ms_miss': 92947.6, 'total_cost': 4.1723}
+
+-- threshold 0.95
+2026-11-07T09:02:16.260Z ingress INFO ask start question='How many seats are available in DATA-260?' threshold=0.95
+2026-11-07T09:02:16.304Z ingress INFO embedding 36.3 ms, vector search 6.6 ms, nearest similarity=1.0
+2026-11-07T09:02:16.349Z ingress INFO data-version check 45.2 ms: stored=41d1242df4dd current=41d1242df4dd -> fresh
+2026-11-07T09:02:16.349Z ingress INFO cache HIT similarity=1.0000 threshold=0.95 matched_query='How many seats are available in DATA-260?' latency_ms=88.7
+  ex01 HIT  sim=1.0000     88.7 ms 
+2026-11-07T09:02:16.349Z ingress INFO ask start question='Who teaches CS-157A?' threshold=0.95
+2026-11-07T09:02:16.360Z ingress INFO embedding 10.3 ms, vector search 0.7 ms, nearest similarity=1.0
+2026-11-07T09:02:16.362Z ingress INFO data-version check 1.8 ms: stored=b4a2be1b3a22 current=b4a2be1b3a22 -> fresh
+2026-11-07T09:02:16.362Z ingress INFO cache HIT similarity=1.0000 threshold=0.95 matched_query='Who teaches CS-157A?' latency_ms=13.0
+  ex02 HIT  sim=1.0000     13.0 ms 
+2026-11-07T09:02:16.362Z ingress INFO ask start question='Which department has the most available seats?' threshold=0.95
+2026-11-07T09:02:16.371Z ingress INFO embedding 8.1 ms, vector search 0.7 ms, nearest similarity=1.0
+2026-11-07T09:02:16.373Z ingress INFO data-version check 2.3 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T09:02:16.373Z ingress INFO cache HIT similarity=1.0000 threshold=0.95 matched_query='Which department has the most available seats?' latency_ms=11.2
+  ex03 HIT  sim=1.0000     11.2 ms 
+2026-11-07T09:02:16.373Z ingress INFO ask start question='How many courses does Dr. Marcus Lee teach?' threshold=0.95
+2026-11-07T09:02:16.383Z ingress INFO embedding 8.9 ms, vector search 0.7 ms, nearest similarity=1.0
+2026-11-07T09:02:16.385Z ingress INFO data-version check 1.7 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T09:02:16.385Z ingress INFO cache HIT similarity=1.0000 threshold=0.95 matched_query='How many courses does Dr. Marcus Lee teach?' latency_ms=11.5
+  ex04 HIT  sim=1.0000     11.5 ms 
+2026-11-07T09:02:16.385Z ingress INFO ask start question='What is the total number of seats in the Computer Science department?' threshold=0.95
+2026-11-07T09:02:16.394Z ingress INFO embedding 8.3 ms, vector search 0.8 ms, nearest similarity=1.0
+2026-11-07T09:02:16.396Z ingress INFO data-version check 1.7 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T09:02:16.396Z ingress INFO cache HIT similarity=1.0000 threshold=0.95 matched_query='What is the total number of seats in the Computer Science department?' latency_ms=10.9
+  ex05 HIT  sim=1.0000     10.9 ms 
+2026-11-07T09:02:16.396Z ingress INFO ask start question='Which course has the most available seats?' threshold=0.95
+2026-11-07T09:02:16.404Z ingress INFO embedding 6.9 ms, vector search 1.0 ms, nearest similarity=1.0
+2026-11-07T09:02:16.407Z ingress INFO data-version check 3.0 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T09:02:16.407Z ingress INFO cache HIT similarity=1.0000 threshold=0.95 matched_query='Which course has the most available seats?' latency_ms=11.1
+  ex06 HIT  sim=1.0000     11.1 ms 
+2026-11-07T09:02:16.407Z ingress INFO ask start question='What is the title of course DATA-245?' threshold=0.95
+2026-11-07T09:02:16.415Z ingress INFO embedding 7.6 ms, vector search 0.8 ms, nearest similarity=1.0
+2026-11-07T09:02:16.418Z ingress INFO data-version check 2.7 ms: stored=f58e4877c77d current=f58e4877c77d -> fresh
+2026-11-07T09:02:16.418Z ingress INFO cache HIT similarity=1.0000 threshold=0.95 matched_query='What is the title of course DATA-245?' latency_ms=11.3
+  ex07 HIT  sim=1.0000     11.3 ms 
+2026-11-07T09:02:16.418Z ingress INFO ask start question='List the courses taught by Dr. Samuel Okafor.' threshold=0.95
+2026-11-07T09:02:16.427Z ingress INFO embedding 8.0 ms, vector search 0.8 ms, nearest similarity=1.0
+2026-11-07T09:02:16.430Z ingress INFO data-version check 2.8 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T09:02:16.430Z ingress INFO cache HIT similarity=1.0000 threshold=0.95 matched_query='List the courses taught by Dr. Samuel Okafor.' latency_ms=11.6
+  ex08 HIT  sim=1.0000     11.6 ms 
+2026-11-07T09:02:16.430Z ingress INFO ask start question='How many courses are offered in the Data Science department?' threshold=0.95
+2026-11-07T09:02:16.437Z ingress INFO embedding 6.5 ms, vector search 0.8 ms, nearest similarity=1.0
+2026-11-07T09:02:16.440Z ingress INFO data-version check 2.5 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T09:02:16.440Z ingress INFO cache HIT similarity=1.0000 threshold=0.95 matched_query='How many courses are offered in the Data Science department?' latency_ms=9.9
+  ex09 HIT  sim=1.0000      9.9 ms 
+2026-11-07T09:02:16.440Z ingress INFO ask start question='Which department does ENGR-200 belong to?' threshold=0.95
+2026-11-07T09:02:16.447Z ingress INFO embedding 6.5 ms, vector search 0.8 ms, nearest similarity=1.0
+2026-11-07T09:02:16.450Z ingress INFO data-version check 2.3 ms: stored=c1d56ca54408 current=c1d56ca54408 -> fresh
+2026-11-07T09:02:16.450Z ingress INFO cache HIT similarity=1.0000 threshold=0.95 matched_query='Which department does ENGR-200 belong to?' latency_ms=9.7
+  ex10 HIT  sim=1.0000      9.7 ms 
+2026-11-07T09:02:16.450Z ingress INFO ask start question='What is the seat availability for course DATA-260?' threshold=0.95
+2026-11-07T09:02:16.458Z ingress INFO embedding 7.5 ms, vector search 0.9 ms, nearest similarity=0.8334
+2026-11-07T09:02:16.458Z ingress INFO cache MISS best_similarity=0.8334 threshold=0.95 -> running the agent pipeline
+2026-11-07T09:02:16.458Z agent_client INFO sending question to s8360_inbox correlation_id=206a0e83-45de-4269-afd7-acd7537879e6 message={"correlation_id":"206a0e83-45de-4269-afd7-acd7537879e6","question":"What is the seat availability for course DATA-260?","submitted_at":"2026-11-07T09:02:16.458Z"}
+2026-11-07T09:06:16.750Z agent_client ERROR no final message for correlation_id=206a0e83-45de-4269-afd7-acd7537879e6 within 240s
+2026-11-07T09:06:16.751Z ingress INFO agent pipeline finished status=timeout in 240334 ms
+  pa01 MISS sim=0.8334 240343.3 ms 
+2026-11-07T09:06:16.752Z ingress INFO ask start question='Which instructor is teaching CS-157A?' threshold=0.95
+2026-11-07T09:06:16.787Z ingress INFO embedding 33.2 ms, vector search 1.8 ms, nearest similarity=0.9012
+2026-11-07T09:06:16.787Z ingress INFO cache MISS best_similarity=0.9012 threshold=0.95 -> running the agent pipeline
+2026-11-07T09:06:16.787Z agent_client INFO sending question to s8360_inbox correlation_id=400e9f91-d377-4386-ae58-650dd229e346 message={"correlation_id":"400e9f91-d377-4386-ae58-650dd229e346","question":"Which instructor is teaching CS-157A?","submitted_at":"2026-11-07T09:06:16.787Z"}
+2026-11-07T09:10:17.516Z agent_client ERROR no final message for correlation_id=400e9f91-d377-4386-ae58-650dd229e346 within 240s
+2026-11-07T09:10:17.521Z ingress INFO agent pipeline finished status=timeout in 240740 ms
+  pa02 MISS sim=0.9012 240775.7 ms 
+2026-11-07T09:10:17.521Z ingress INFO ask start question='Which department has the largest number of open seats?' threshold=0.95
+2026-11-07T09:10:17.556Z ingress INFO embedding 31.8 ms, vector search 3.3 ms, nearest similarity=0.9024
+2026-11-07T09:10:17.557Z ingress INFO cache MISS best_similarity=0.9024 threshold=0.95 -> running the agent pipeline
+2026-11-07T09:10:17.558Z agent_client INFO sending question to s8360_inbox correlation_id=8fefe287-0e9e-475b-80d1-1597c82b7e71 message={"correlation_id":"8fefe287-0e9e-475b-80d1-1597c82b7e71","question":"Which department has the largest number of open seats?","submitted_at":"2026-11-07T09:10:17.557Z"}
+2026-11-07T09:14:17.618Z agent_client ERROR no final message for correlation_id=8fefe287-0e9e-475b-80d1-1597c82b7e71 within 240s
+2026-11-07T09:14:17.622Z ingress INFO agent pipeline finished status=timeout in 240072 ms
+  pa03 MISS sim=0.9024 240108.0 ms 
+2026-11-07T09:14:17.624Z ingress INFO ask start question='How many classes is Dr. Marcus Lee teaching?' threshold=0.95
+2026-11-07T09:14:17.794Z ingress INFO embedding 163.8 ms, vector search 5.8 ms, nearest similarity=0.9599
+2026-11-07T09:14:17.807Z ingress INFO data-version check 12.8 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T09:14:17.807Z ingress INFO cache HIT similarity=0.9599 threshold=0.95 matched_query='How many courses does Dr. Marcus Lee teach?' latency_ms=182.7
+  pa04 HIT  sim=0.9599    182.7 ms 
+2026-11-07T09:14:17.807Z ingress INFO ask start question='How many seats does the Computer Science department have in total?' threshold=0.95
+2026-11-07T09:14:17.817Z ingress INFO embedding 9.6 ms, vector search 0.7 ms, nearest similarity=0.9729
+2026-11-07T09:14:17.819Z ingress INFO data-version check 2.1 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T09:14:17.819Z ingress INFO cache HIT similarity=0.9729 threshold=0.95 matched_query='What is the total number of seats in the Computer Science department?' latency_ms=12.6
+  pa05 HIT  sim=0.9729     12.6 ms 
+2026-11-07T09:14:17.819Z ingress INFO ask start question='What is the course with the highest number of seats available?' threshold=0.95
+2026-11-07T09:14:17.828Z ingress INFO embedding 8.0 ms, vector search 0.9 ms, nearest similarity=0.9057
+2026-11-07T09:14:17.828Z ingress INFO cache MISS best_similarity=0.9057 threshold=0.95 -> running the agent pipeline
+2026-11-07T09:14:17.829Z agent_client INFO sending question to s8360_inbox correlation_id=1967229a-9ba5-4e7f-b573-236fd943fe51 message={"correlation_id":"1967229a-9ba5-4e7f-b573-236fd943fe51","question":"What is the course with the highest number of seats available?","submitted_at":"2026-11-07T09:14:17.828Z"}
+2026-11-07T09:18:18.381Z agent_client ERROR no final message for correlation_id=1967229a-9ba5-4e7f-b573-236fd943fe51 within 240s
+2026-11-07T09:18:18.383Z ingress INFO agent pipeline finished status=timeout in 240561 ms
+  pa06 MISS sim=0.9057 240570.4 ms 
+2026-11-07T09:18:18.383Z ingress INFO ask start question='What is the name of course DATA-245?' threshold=0.95
+2026-11-07T09:18:18.416Z ingress INFO embedding 26.4 ms, vector search 6.3 ms, nearest similarity=0.9747
+2026-11-07T09:18:18.438Z ingress INFO data-version check 21.5 ms: stored=f58e4877c77d current=f58e4877c77d -> fresh
+2026-11-07T09:18:18.438Z ingress INFO cache HIT similarity=0.9747 threshold=0.95 matched_query='What is the title of course DATA-245?' latency_ms=54.4
+  pa07 HIT  sim=0.9747     54.4 ms 
+2026-11-07T09:18:18.438Z ingress INFO ask start question='Which courses does Dr. Samuel Okafor teach?' threshold=0.95
+2026-11-07T09:18:18.447Z ingress INFO embedding 8.7 ms, vector search 0.7 ms, nearest similarity=0.9125
+2026-11-07T09:18:18.447Z ingress INFO cache MISS best_similarity=0.9125 threshold=0.95 -> running the agent pipeline
+2026-11-07T09:18:18.447Z agent_client INFO sending question to s8360_inbox correlation_id=d198957c-6b9a-4ddd-a696-b2d0699e53a5 message={"correlation_id":"d198957c-6b9a-4ddd-a696-b2d0699e53a5","question":"Which courses does Dr. Samuel Okafor teach?","submitted_at":"2026-11-07T09:18:18.447Z"}
+2026-11-07T09:22:19.386Z agent_client ERROR no final message for correlation_id=d198957c-6b9a-4ddd-a696-b2d0699e53a5 within 240s
+2026-11-07T09:22:19.389Z ingress INFO agent pipeline finished status=timeout in 240948 ms
+  pa08 MISS sim=0.9125 240957.6 ms 
+2026-11-07T09:22:19.389Z ingress INFO ask start question='How many courses does the Data Science department offer?' threshold=0.95
+2026-11-07T09:22:19.413Z ingress INFO embedding 21.4 ms, vector search 2.8 ms, nearest similarity=0.9867
+2026-11-07T09:22:19.424Z ingress INFO data-version check 10.8 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T09:22:19.424Z ingress INFO cache HIT similarity=0.9867 threshold=0.95 matched_query='How many courses are offered in the Data Science department?' latency_ms=35.2
+  pa09 HIT  sim=0.9867     35.2 ms 
+2026-11-07T09:22:19.424Z ingress INFO ask start question='Which department is ENGR-200 part of?' threshold=0.95
+2026-11-07T09:22:19.431Z ingress INFO embedding 6.4 ms, vector search 0.7 ms, nearest similarity=0.9755
+2026-11-07T09:22:19.434Z ingress INFO data-version check 2.8 ms: stored=c1d56ca54408 current=c1d56ca54408 -> fresh
+2026-11-07T09:22:19.434Z ingress INFO cache HIT similarity=0.9755 threshold=0.95 matched_query='Which department does ENGR-200 belong to?' latency_ms=10.0
+  pa10 HIT  sim=0.9755     10.0 ms 
+2026-11-07T09:22:19.434Z ingress INFO ask start question='How many seats are available in DATA-230?' threshold=0.95
+2026-11-07T09:22:19.441Z ingress INFO embedding 6.2 ms, vector search 0.7 ms, nearest similarity=0.9388
+2026-11-07T09:22:19.441Z ingress INFO cache MISS best_similarity=0.9388 threshold=0.95 -> running the agent pipeline
+2026-11-07T09:22:19.441Z agent_client INFO sending question to s8360_inbox correlation_id=7a4797ec-1155-4245-b406-adc542eb4fa9 message={"correlation_id":"7a4797ec-1155-4245-b406-adc542eb4fa9","question":"How many seats are available in DATA-230?","submitted_at":"2026-11-07T09:22:19.441Z"}
+2026-11-07T09:26:19.670Z agent_client ERROR no final message for correlation_id=7a4797ec-1155-4245-b406-adc542eb4fa9 within 240s
+2026-11-07T09:26:19.672Z ingress INFO agent pipeline finished status=timeout in 240237 ms
+  sd01 MISS sim=0.9388 240244.2 ms 
+2026-11-07T09:26:19.672Z ingress INFO ask start question='Who teaches DATA-245?' threshold=0.95
+2026-11-07T09:26:19.704Z ingress INFO embedding 27.1 ms, vector search 4.6 ms, nearest similarity=0.779
+2026-11-07T09:26:19.704Z ingress INFO cache MISS best_similarity=0.779 threshold=0.95 -> running the agent pipeline
+2026-11-07T09:26:19.704Z agent_client INFO sending question to s8360_inbox correlation_id=5339a9f9-d242-4ca7-9a77-4c816ab11300 message={"correlation_id":"5339a9f9-d242-4ca7-9a77-4c816ab11300","question":"Who teaches DATA-245?","submitted_at":"2026-11-07T09:26:19.704Z"}
+2026-11-07T09:30:20.198Z agent_client ERROR no final message for correlation_id=5339a9f9-d242-4ca7-9a77-4c816ab11300 within 240s
+2026-11-07T09:30:20.199Z ingress INFO agent pipeline finished status=timeout in 240502 ms
+  sd02 MISS sim=0.7790 240534.1 ms 
+2026-11-07T09:30:20.199Z ingress INFO ask start question='Which department has the fewest available seats?' threshold=0.95
+2026-11-07T09:30:20.219Z ingress INFO embedding 17.5 ms, vector search 2.2 ms, nearest similarity=0.9676
+2026-11-07T09:30:20.239Z ingress INFO data-version check 20.2 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T09:30:20.239Z ingress INFO cache HIT similarity=0.9676 threshold=0.95 matched_query='Which department has the most available seats?' latency_ms=40.1
+  sd03 HIT  sim=0.9676     40.1 ms FALSE HIT
+2026-11-07T09:30:20.239Z ingress INFO ask start question="How many seats do Dr. Marcus Lee's courses offer in total?" threshold=0.95
+2026-11-07T09:30:20.252Z ingress INFO embedding 11.0 ms, vector search 1.5 ms, nearest similarity=0.8381
+2026-11-07T09:30:20.252Z ingress INFO cache MISS best_similarity=0.8381 threshold=0.95 -> running the agent pipeline
+2026-11-07T09:30:20.252Z agent_client INFO sending question to s8360_inbox correlation_id=2b8120b5-06f7-4bea-aab2-80e003d78315 message={"correlation_id":"2b8120b5-06f7-4bea-aab2-80e003d78315","question":"How many seats do Dr. Marcus Lee's courses offer in total?","submitted_at":"2026-11-07T09:30:20.252Z"}
+2026-11-07T09:34:20.763Z agent_client ERROR no final message for correlation_id=2b8120b5-06f7-4bea-aab2-80e003d78315 within 240s
+2026-11-07T09:34:20.765Z ingress INFO agent pipeline finished status=timeout in 240520 ms
+  sd04 MISS sim=0.8381 240533.0 ms 
+2026-11-07T09:34:20.766Z ingress INFO ask start question='What is the total number of seats in the Data Science department?' threshold=0.95
+2026-11-07T09:34:20.800Z ingress INFO embedding 31.2 ms, vector search 2.8 ms, nearest similarity=0.881
+2026-11-07T09:34:20.800Z ingress INFO cache MISS best_similarity=0.881 threshold=0.95 -> running the agent pipeline
+2026-11-07T09:34:20.800Z agent_client INFO sending question to s8360_inbox correlation_id=dd945156-597e-4adc-a1ac-0fb3569f4ea4 message={"correlation_id":"dd945156-597e-4adc-a1ac-0fb3569f4ea4","question":"What is the total number of seats in the Data Science department?","submitted_at":"2026-11-07T09:34:20.800Z"}
+2026-11-07T09:38:21.346Z agent_client ERROR no final message for correlation_id=dd945156-597e-4adc-a1ac-0fb3569f4ea4 within 240s
+2026-11-07T09:38:21.347Z ingress INFO agent pipeline finished status=timeout in 240554 ms
+  sd05 MISS sim=0.8810 240588.1 ms 
+2026-11-07T09:38:21.348Z ingress INFO ask start question='Which course has the fewest available seats?' threshold=0.95
+2026-11-07T09:38:21.377Z ingress INFO embedding 25.4 ms, vector search 3.7 ms, nearest similarity=0.9667
+2026-11-07T09:38:21.388Z ingress INFO data-version check 11.1 ms: stored=d794f1ff71b7 current=d794f1ff71b7 -> fresh
+2026-11-07T09:38:21.388Z ingress INFO cache HIT similarity=0.9667 threshold=0.95 matched_query='Which course has the most available seats?' latency_ms=40.5
+  sd06 HIT  sim=0.9667     40.5 ms FALSE HIT
+2026-11-07T09:38:21.388Z ingress INFO ask start question='What is the title of course DATA-230?' threshold=0.95
+2026-11-07T09:38:21.398Z ingress INFO embedding 8.4 ms, vector search 1.1 ms, nearest similarity=0.9367
+2026-11-07T09:38:21.398Z ingress INFO cache MISS best_similarity=0.9367 threshold=0.95 -> running the agent pipeline
+2026-11-07T09:38:21.398Z agent_client INFO sending question to s8360_inbox correlation_id=1bac598e-05f2-49bd-a8b1-1e92ec1033b6 message={"correlation_id":"1bac598e-05f2-49bd-a8b1-1e92ec1033b6","question":"What is the title of course DATA-230?","submitted_at":"2026-11-07T09:38:21.398Z"}
+2026-11-07T09:42:21.853Z agent_client ERROR no final message for correlation_id=1bac598e-05f2-49bd-a8b1-1e92ec1033b6 within 240s
+2026-11-07T09:42:21.856Z ingress INFO agent pipeline finished status=timeout in 240465 ms
+  sd07 MISS sim=0.9367 240474.9 ms 
+2026-11-07T09:42:21.857Z ingress INFO ask start question='List the courses taught by Dr. Marcus Lee.' threshold=0.95
+2026-11-07T09:42:21.888Z ingress INFO embedding 28.7 ms, vector search 2.7 ms, nearest similarity=0.8635
+2026-11-07T09:42:21.888Z ingress INFO cache MISS best_similarity=0.8635 threshold=0.95 -> running the agent pipeline
+2026-11-07T09:42:21.888Z agent_client INFO sending question to s8360_inbox correlation_id=f6f18ff0-aacb-4cb1-b49c-0cf5c66e4b81 message={"correlation_id":"f6f18ff0-aacb-4cb1-b49c-0cf5c66e4b81","question":"List the courses taught by Dr. Marcus Lee.","submitted_at":"2026-11-07T09:42:21.888Z"}
+2026-11-07T09:46:22.396Z agent_client ERROR no final message for correlation_id=f6f18ff0-aacb-4cb1-b49c-0cf5c66e4b81 within 240s
+2026-11-07T09:46:22.398Z ingress INFO agent pipeline finished status=timeout in 240516 ms
+  sd08 MISS sim=0.8635 240548.0 ms 
+2026-11-07T09:46:22.398Z ingress INFO ask start question='How many courses are offered in the Computer Science department?' threshold=0.95
+2026-11-07T09:46:22.424Z ingress INFO embedding 22.0 ms, vector search 3.5 ms, nearest similarity=0.8423
+2026-11-07T09:46:22.424Z ingress INFO cache MISS best_similarity=0.8423 threshold=0.95 -> running the agent pipeline
+2026-11-07T09:46:22.424Z agent_client INFO sending question to s8360_inbox correlation_id=496827ce-83ca-40eb-a11d-dedaa45f1eec message={"correlation_id":"496827ce-83ca-40eb-a11d-dedaa45f1eec","question":"How many courses are offered in the Computer Science department?","submitted_at":"2026-11-07T09:46:22.424Z"}
+2026-11-07T09:50:23.018Z agent_client ERROR no final message for correlation_id=496827ce-83ca-40eb-a11d-dedaa45f1eec within 240s
+2026-11-07T09:50:23.023Z ingress INFO agent pipeline finished status=timeout in 240606 ms
+  sd09 MISS sim=0.8423 240632.0 ms 
+2026-11-07T09:50:23.026Z ingress INFO ask start question='Which department does DATA-260 belong to?' threshold=0.95
+2026-11-07T09:50:23.204Z ingress INFO embedding 168.1 ms, vector search 10.6 ms, nearest similarity=0.6332
+2026-11-07T09:50:23.204Z ingress INFO cache MISS best_similarity=0.6332 threshold=0.95 -> running the agent pipeline
+2026-11-07T09:50:23.205Z agent_client INFO sending question to s8360_inbox correlation_id=da43e6db-43b9-4252-bf4e-c5e83a5c184a message={"correlation_id":"da43e6db-43b9-4252-bf4e-c5e83a5c184a","question":"Which department does DATA-260 belong to?","submitted_at":"2026-11-07T09:50:23.205Z"}
+2026-11-07T09:54:23.881Z agent_client ERROR no final message for correlation_id=da43e6db-43b9-4252-bf4e-c5e83a5c184a within 240s
+2026-11-07T09:54:23.887Z ingress INFO agent pipeline finished status=timeout in 240689 ms
+  sd10 MISS sim=0.6332 240868.5 ms 
+2026-11-07T09:54:23.889Z ingress INFO ask start question='What is the capital of France?' threshold=0.95
+2026-11-07T09:54:24.060Z ingress INFO embedding 166.1 ms, vector search 4.9 ms, nearest similarity=0.2127
+2026-11-07T09:54:24.060Z ingress INFO cache MISS best_similarity=0.2127 threshold=0.95 -> running the agent pipeline
+2026-11-07T09:54:24.061Z agent_client INFO sending question to s8360_inbox correlation_id=e8c388f7-d157-43c3-83ce-27411b1fd1e0 message={"correlation_id":"e8c388f7-d157-43c3-83ce-27411b1fd1e0","question":"What is the capital of France?","submitted_at":"2026-11-07T09:54:24.060Z"}
+2026-11-07T09:58:24.597Z agent_client ERROR no final message for correlation_id=e8c388f7-d157-43c3-83ce-27411b1fd1e0 within 240s
+2026-11-07T09:58:24.603Z ingress INFO agent pipeline finished status=timeout in 240549 ms
+  un01 MISS sim=0.2127 240721.0 ms 
+2026-11-07T09:58:24.606Z ingress INFO ask start question='How do I reset my email password?' threshold=0.95
+2026-11-07T09:58:24.793Z ingress INFO embedding 181.9 ms, vector search 5.7 ms, nearest similarity=0.1601
+2026-11-07T09:58:24.794Z ingress INFO cache MISS best_similarity=0.1601 threshold=0.95 -> running the agent pipeline
+2026-11-07T09:58:24.794Z agent_client INFO sending question to s8360_inbox correlation_id=3d628324-d533-46c6-9f4a-30c625d03756 message={"correlation_id":"3d628324-d533-46c6-9f4a-30c625d03756","question":"How do I reset my email password?","submitted_at":"2026-11-07T09:58:24.794Z"}
+2026-11-07T10:02:25.224Z agent_client ERROR no final message for correlation_id=3d628324-d533-46c6-9f4a-30c625d03756 within 240s
+2026-11-07T10:02:25.228Z ingress INFO agent pipeline finished status=timeout in 240441 ms
+  un02 MISS sim=0.1601 240628.9 ms 
+2026-11-07T10:02:25.228Z ingress INFO ask start question='Who won the 2018 World Cup?' threshold=0.95
+2026-11-07T10:02:25.277Z ingress INFO embedding 39.9 ms, vector search 8.7 ms, nearest similarity=0.1298
+2026-11-07T10:02:25.277Z ingress INFO cache MISS best_similarity=0.1298 threshold=0.95 -> running the agent pipeline
+2026-11-07T10:02:25.278Z agent_client INFO sending question to s8360_inbox correlation_id=63ae4f36-47df-4a76-bc57-771bf4b754b5 message={"correlation_id":"63ae4f36-47df-4a76-bc57-771bf4b754b5","question":"Who won the 2018 World Cup?","submitted_at":"2026-11-07T10:02:25.278Z"}
+2026-11-07T10:06:25.837Z agent_client ERROR no final message for correlation_id=63ae4f36-47df-4a76-bc57-771bf4b754b5 within 240s
+2026-11-07T10:06:25.843Z ingress INFO agent pipeline finished status=timeout in 240572 ms
+  un03 MISS sim=0.1298 240622.0 ms 
+2026-11-07T10:06:25.845Z ingress INFO ask start question='What is the boiling point of water at sea level?' threshold=0.95
+2026-11-07T10:06:26.042Z ingress INFO embedding 189.8 ms, vector search 6.4 ms, nearest similarity=0.1689
+2026-11-07T10:06:26.042Z ingress INFO cache MISS best_similarity=0.1689 threshold=0.95 -> running the agent pipeline
+2026-11-07T10:06:26.042Z agent_client INFO sending question to s8360_inbox correlation_id=d2080f28-4ecc-4191-b1c8-fd6c9e25b11d message={"correlation_id":"d2080f28-4ecc-4191-b1c8-fd6c9e25b11d","question":"What is the boiling point of water at sea level?","submitted_at":"2026-11-07T10:06:26.042Z"}
+2026-11-07T10:10:26.512Z agent_client ERROR no final message for correlation_id=d2080f28-4ecc-4191-b1c8-fd6c9e25b11d within 240s
+2026-11-07T10:10:26.516Z ingress INFO agent pipeline finished status=timeout in 240480 ms
+  un04 MISS sim=0.1689 240677.2 ms 
+2026-11-07T10:10:26.516Z ingress INFO ask start question='Recommend a good pizza place in San Jose.' threshold=0.95
+2026-11-07T10:10:26.563Z ingress INFO embedding 44.0 ms, vector search 3.1 ms, nearest similarity=0.1753
+2026-11-07T10:10:26.563Z ingress INFO cache MISS best_similarity=0.1753 threshold=0.95 -> running the agent pipeline
+2026-11-07T10:10:26.563Z agent_client INFO sending question to s8360_inbox correlation_id=5a03601c-961b-4480-ade5-a67c775c3f94 message={"correlation_id":"5a03601c-961b-4480-ade5-a67c775c3f94","question":"Recommend a good pizza place in San Jose.","submitted_at":"2026-11-07T10:10:26.563Z"}
+2026-11-07T10:14:27.263Z agent_client ERROR no final message for correlation_id=5a03601c-961b-4480-ade5-a67c775c3f94 within 240s
+2026-11-07T10:14:27.265Z ingress INFO agent pipeline finished status=timeout in 240541 ms
+  un05 MISS sim=0.1753 240588.3 ms 
+2026-11-07T10:14:27.266Z ingress INFO ask start question='Translate good morning into Spanish.' threshold=0.95
+2026-11-07T10:14:27.337Z ingress INFO embedding 64.0 ms, vector search 6.6 ms, nearest similarity=0.102
+2026-11-07T10:14:27.337Z ingress INFO cache MISS best_similarity=0.102 threshold=0.95 -> running the agent pipeline
+2026-11-07T10:14:27.337Z agent_client INFO sending question to s8360_inbox correlation_id=19e070b7-8105-4466-ade3-634e7e0ac281 message={"correlation_id":"19e070b7-8105-4466-ade3-634e7e0ac281","question":"Translate good morning into Spanish.","submitted_at":"2026-11-07T10:14:27.337Z"}
+2026-11-07T10:18:27.819Z agent_client ERROR no final message for correlation_id=19e070b7-8105-4466-ade3-634e7e0ac281 within 240s
+2026-11-07T10:18:27.821Z ingress INFO agent pipeline finished status=timeout in 240480 ms
+  un06 MISS sim=0.1020 240551.1 ms 
+2026-11-07T10:18:27.822Z ingress INFO ask start question='How tall is Mount Everest?' threshold=0.95
+2026-11-07T10:18:27.849Z ingress INFO embedding 24.3 ms, vector search 2.6 ms, nearest similarity=0.2324
+2026-11-07T10:18:27.849Z ingress INFO cache MISS best_similarity=0.2324 threshold=0.95 -> running the agent pipeline
+2026-11-07T10:18:27.849Z agent_client INFO sending question to s8360_inbox correlation_id=01ce02cc-34d7-4345-92a2-de4bb63be435 message={"correlation_id":"01ce02cc-34d7-4345-92a2-de4bb63be435","question":"How tall is Mount Everest?","submitted_at":"2026-11-07T10:18:27.849Z"}
+2026-11-07T10:22:28.295Z agent_client ERROR no final message for correlation_id=01ce02cc-34d7-4345-92a2-de4bb63be435 within 240s
+2026-11-07T10:22:28.299Z ingress INFO agent pipeline finished status=timeout in 240445 ms
+  un07 MISS sim=0.2324 240473.1 ms 
+2026-11-07T10:22:28.300Z ingress INFO ask start question='What will the weather be like tomorrow?' threshold=0.95
+2026-11-07T10:22:28.347Z ingress INFO embedding 42.9 ms, vector search 4.2 ms, nearest similarity=0.1017
+2026-11-07T10:22:28.347Z ingress INFO cache MISS best_similarity=0.1017 threshold=0.95 -> running the agent pipeline
+2026-11-07T10:22:28.347Z agent_client INFO sending question to s8360_inbox correlation_id=97d2c297-4d96-4803-9a32-47d3db01e62b message={"correlation_id":"97d2c297-4d96-4803-9a32-47d3db01e62b","question":"What will the weather be like tomorrow?","submitted_at":"2026-11-07T10:22:28.347Z"}
+2026-11-07T10:26:28.792Z agent_client ERROR no final message for correlation_id=97d2c297-4d96-4803-9a32-47d3db01e62b within 240s
+2026-11-07T10:26:28.801Z ingress INFO agent pipeline finished status=timeout in 240449 ms
+  un08 MISS sim=0.1017 240496.7 ms 
+2026-11-07T10:26:28.803Z ingress INFO ask start question='Write a haiku about autumn.' threshold=0.95
+2026-11-07T10:26:28.989Z ingress INFO embedding 181.8 ms, vector search 4.5 ms, nearest similarity=0.1347
+2026-11-07T10:26:28.989Z ingress INFO cache MISS best_similarity=0.1347 threshold=0.95 -> running the agent pipeline
+2026-11-07T10:26:28.990Z agent_client INFO sending question to s8360_inbox correlation_id=90c03aeb-3048-4d39-b651-d33b57c063ee message={"correlation_id":"90c03aeb-3048-4d39-b651-d33b57c063ee","question":"Write a haiku about autumn.","submitted_at":"2026-11-07T10:26:28.989Z"}
+2026-11-07T10:30:29.764Z agent_client ERROR no final message for correlation_id=90c03aeb-3048-4d39-b651-d33b57c063ee within 240s
+2026-11-07T10:30:29.778Z ingress INFO agent pipeline finished status=timeout in 240785 ms
+  un09 MISS sim=0.1347 240971.3 ms 
+2026-11-07T10:30:29.779Z ingress INFO ask start question='What is the square root of 144?' threshold=0.95
+2026-11-07T10:30:29.839Z ingress INFO embedding 53.2 ms, vector search 7.0 ms, nearest similarity=0.2456
+2026-11-07T10:30:29.839Z ingress INFO cache MISS best_similarity=0.2456 threshold=0.95 -> running the agent pipeline
+2026-11-07T10:30:29.840Z agent_client INFO sending question to s8360_inbox correlation_id=8a503af8-19aa-4124-bdd3-4c0acd3693f0 message={"correlation_id":"8a503af8-19aa-4124-bdd3-4c0acd3693f0","question":"What is the square root of 144?","submitted_at":"2026-11-07T10:30:29.840Z"}
+2026-11-07T10:36:46.227Z agent_client ERROR no final message for correlation_id=8a503af8-19aa-4124-bdd3-4c0acd3693f0 within 240s
+2026-11-07T10:36:46.229Z ingress INFO agent pipeline finished status=timeout in 8250 ms
+  un10 MISS sim=0.2456   8311.8 ms 
+  => {'hits': 17, 'misses': 23, 'false_hits': 2, 'should_miss_cases': 20, 'hit_rate': 0.425, 'false_hit_rate': 0.1, 'mean_latency_ms': 132544.6, 'mean_latency_ms_hit': 33.2, 'mean_latency_ms_miss': 230487.8, 'total_cost': 2.2317}
+
+saved reports/hw09/raw/threshold_sweep.json
+%5|1794047806.244|REQTMOUT|hw9-ingress#consumer-2| [thrd:localhost:9092/1]: localhost:9092/1: Timed out FetchRequest in flight (after 368507ms, timeout #0)
+%4|1794047806.244|REQTMOUT|hw9-ingress#consumer-2| [thrd:localhost:9092/1]: localhost:9092/1: Timed out 1 in-flight, 0 retry-queued, 0 out-queue, 0 partially-sent requests

@@ -26,3 +26,4 @@ pandas
 ruff
 pre-commit
 confluent-kafka  # HW8: Kafka client
+redis  # HW9: view counter + semantic cache (Redis Stack for the vector index)

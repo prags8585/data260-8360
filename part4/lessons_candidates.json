@@ -1,0 +1,16 @@
+[
+  {
+    "lesson_id": "lesson_001",
+    "failure_pattern": "The answer gives an opinion, a recommendation or a judgement (best, easy, difficult, worth taking) although the catalogue holds only facts. Example question: Is DATA-260 a difficult course?",
+    "correction": "The catalogue holds facts only: course code, title, department, seats and instructor. When a question asks for an opinion, a recommendation, how hard a course is or who is the best, begin with a sentence saying that the catalogue cannot judge or recommend; do not give an opinion.",
+    "created_at": "2026-11-09",
+    "use_count": 15
+  },
+  {
+    "lesson_id": "lesson_002",
+    "failure_pattern": "The answer gives a wrong total for the seats of all courses in the catalogue. Example question: How many seats are available across all courses?",
+    "correction": "For a total over the whole catalogue, write down the seats of every row of the table one by one, add them up in order and state the sum.",
+    "created_at": "2026-11-09",
+    "use_count": 17
+  }
+]

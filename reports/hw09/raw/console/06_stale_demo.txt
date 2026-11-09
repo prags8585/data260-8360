@@ -1,0 +1,32 @@
+=== 2026-11-09 02:21:45 === Part 3.5: stale answer and invalidation by data version
+$ PYTHONPATH=. .venv/bin/python scripts/hw9_stale_demo.py
+=== 2026-11-09 02:21:45 === 3.5 stale answers and invalidation
+cached query: 'How many seats are available in DATA-260?' - its answer depends on s8360_rel.courses row DATA-260
+courses row DATA-260: seats_available = 40
+
+1. first ask (cache is empty): the agent answers and the answer is stored with the data version of the DATA-260 row
+   MISS similarity=None latency=3838.9 ms data_version=41d1242df4dd
+   answer: The course DATA-260 has 40 seats available.
+
+2. same question again: served from the cache, the version check finds the row unchanged
+   HIT  similarity=1.0 latency=29.7 ms data_version=41d1242df4dd version_check=4.3 ms
+   answer: The course DATA-260 has 40 seats available.
+
+3. UPDATE courses SET seats_available = 12 WHERE course_code = 'DATA-260'   (was 40)
+   courses row DATA-260: seats_available = 12
+
+4. ask again with the version check switched off (what a plain semantic cache does):
+   HIT  similarity=1.0 latency=13.7 ms data_version=41d1242df4dd
+   answer: The course DATA-260 has 40 seats available.
+   -> STALE HIT: the cache says 'The course DATA-260 has 40 seats available.' but the database now says 12 seats
+
+5. ask again with the invalidation strategy on (the stored data version is compared with the current one):
+   MISS similarity=1.0 latency=7790.2 ms data_version=f85b15efea07 version_check=6.1 ms (stale entry invalidated)
+   answer: The course DATA-260 has 12 seats available.
+
+6. and once more: the new answer is cached under the new data version
+   HIT  similarity=1.0 latency=21.6 ms data_version=f85b15efea07 version_check=1.8 ms
+   answer: The course DATA-260 has 12 seats available.
+
+cleanup: restored seats_available to 40; courses row DATA-260: seats_available = 40; cache flushed
+RESULT: stale hit shown, invalidation corrected it

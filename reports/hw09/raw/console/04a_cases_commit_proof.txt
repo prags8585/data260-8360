@@ -1,0 +1,11 @@
+=== 2026-11-09 02:21:36 === Part 3.1: the labeled cases were committed before the sweep
+$ git log -1 --format='%h  %ad  %s' --date=format:'%Y-%m-%d %H:%M:%S' -- cache_cases.yaml
+5dc4149  2026-11-06 23:47:41  HW9: labeled cache test set (40 cases)
+$ git status --short cache_cases.yaml | wc -l | awk '{print $1" uncommitted changes to cache_cases.yaml"}'
+0 uncommitted changes to cache_cases.yaml
+$ shasum -a 256 cache_cases.yaml
+a3057d2fc09db565eaeb86e0f356f1b64f341a9d980c6f085b20869d7e7ab177  cache_cases.yaml
+$ python3 -c "import json; d=json.load(open('reports/hw09/raw/threshold_sweep.json')); print('sweep started       ', d['started']); print('sha256 at sweep time', d['cache_cases_sha256']); print('commit at sweep time', d['cache_cases_commit'])"
+sweep started        2026-11-09T02:13:53
+sha256 at sweep time a3057d2fc09db565eaeb86e0f356f1b64f341a9d980c6f085b20869d7e7ab177
+commit at sweep time 5dc41494c820202ee5cbc694cb38564142adca73 2026-11-06 23:47:41 -0800

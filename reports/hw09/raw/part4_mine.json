@@ -1,0 +1,374 @@
+{
+  "summary": {
+    "questions": 14,
+    "correct": 9,
+    "incorrect": 5,
+    "average_attempts": 1.0,
+    "average_latency_s": 1.33
+  },
+  "failures": {
+    "unsupported_answer:opinion": [
+      "tr09",
+      "tr10",
+      "tr12"
+    ],
+    "wrong_value:all_total_seats": [
+      "tr11",
+      "tr14"
+    ]
+  },
+  "results": [
+    {
+      "id": "tr01",
+      "question": "How many seats are available in DATA-245?",
+      "attempts": [
+        {
+          "answer": "There are 35 seats available in DATA-245.",
+          "lessons_used": [],
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "the answer matches the reference (value 35)",
+            "feedback": "",
+            "failure_type": null,
+            "kind": "seats_of",
+            "attempt": 1
+          }
+        }
+      ],
+      "attempt_count": 1,
+      "final_answer": "There are 35 seats available in DATA-245.",
+      "final_result": "PASS",
+      "final_failure_type": null,
+      "kind": "seats_of",
+      "latency_s": 1.22
+    },
+    {
+      "id": "tr02",
+      "question": "Who teaches Web Programming?",
+      "attempts": [
+        {
+          "answer": "Web Programming is taught by Dr. Marcus Lee.",
+          "lessons_used": [],
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "the answer matches the reference (Dr. Marcus Lee)",
+            "feedback": "",
+            "failure_type": null,
+            "kind": "instructor_of",
+            "attempt": 1
+          }
+        }
+      ],
+      "attempt_count": 1,
+      "final_answer": "Web Programming is taught by Dr. Marcus Lee.",
+      "final_result": "PASS",
+      "final_failure_type": null,
+      "kind": "instructor_of",
+      "latency_s": 0.76
+    },
+    {
+      "id": "tr03",
+      "question": "What is the total number of seats in the Data Science department?",
+      "attempts": [
+        {
+          "answer": "The total number of seats in the Data Science department is 105.",
+          "lessons_used": [],
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "the answer matches the reference (value 105; from seat counts 40 + 35 + 30)",
+            "feedback": "",
+            "failure_type": null,
+            "kind": "dept_total_seats",
+            "attempt": 1
+          }
+        }
+      ],
+      "attempt_count": 1,
+      "final_answer": "The total number of seats in the Data Science department is 105.",
+      "final_result": "PASS",
+      "final_failure_type": null,
+      "kind": "dept_total_seats",
+      "latency_s": 1.15
+    },
+    {
+      "id": "tr04",
+      "question": "Which course has the most available seats?",
+      "attempts": [
+        {
+          "answer": "CS-146 | Web Programming has the most available seats with 50 spots.",
+          "lessons_used": [],
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "the answer matches the reference (value 50; CS-146; from seat counts 40 + 35 + 45 + 30 + 50 + 25)",
+            "feedback": "",
+            "failure_type": null,
+            "kind": "course_extreme",
+            "attempt": 1
+          }
+        }
+      ],
+      "attempt_count": 1,
+      "final_answer": "CS-146 | Web Programming has the most available seats with 50 spots.",
+      "final_result": "PASS",
+      "final_failure_type": null,
+      "kind": "course_extreme",
+      "latency_s": 1.28
+    },
+    {
+      "id": "tr05",
+      "question": "How many courses does Dr. Samuel Okafor teach?",
+      "attempts": [
+        {
+          "answer": "Dr. Samuel Okafor teaches two courses: DATA-230 and ENGR-200.",
+          "lessons_used": [],
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "the answer matches the reference (value 2; from seat counts 30 + 25)",
+            "feedback": "",
+            "failure_type": null,
+            "kind": "instructor_course_count",
+            "attempt": 1
+          }
+        }
+      ],
+      "attempt_count": 1,
+      "final_answer": "Dr. Samuel Okafor teaches two courses: DATA-230 and ENGR-200.",
+      "final_result": "PASS",
+      "final_failure_type": null,
+      "kind": "instructor_course_count",
+      "latency_s": 1.52
+    },
+    {
+      "id": "tr06",
+      "question": "What is the capital of France?",
+      "attempts": [
+        {
+          "answer": "I cannot provide information about the capital of France as it is not related to the course catalogue.",
+          "lessons_used": [],
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "the answer correctly says the catalogue cannot answer this",
+            "feedback": "",
+            "failure_type": null,
+            "kind": "unrelated",
+            "attempt": 1
+          }
+        }
+      ],
+      "attempt_count": 1,
+      "final_answer": "I cannot provide information about the capital of France as it is not related to the course catalogue.",
+      "final_result": "PASS",
+      "final_failure_type": null,
+      "kind": "unrelated",
+      "latency_s": 1.24
+    },
+    {
+      "id": "tr07",
+      "question": "What time does DATA-260 meet?",
+      "attempts": [
+        {
+          "answer": "The course DATA-260 does not have meeting times listed in the provided catalogue.",
+          "lessons_used": [],
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "the answer correctly says the catalogue cannot answer this",
+            "feedback": "",
+            "failure_type": null,
+            "kind": "unavailable_field",
+            "attempt": 1
+          }
+        }
+      ],
+      "attempt_count": 1,
+      "final_answer": "The course DATA-260 does not have meeting times listed in the provided catalogue.",
+      "final_result": "PASS",
+      "final_failure_type": null,
+      "kind": "unavailable_field",
+      "latency_s": 1.2
+    },
+    {
+      "id": "tr08",
+      "question": "How many seats are available in DATA-999?",
+      "attempts": [
+        {
+          "answer": "There are no seats available for DATA-999 as it is not listed in the course catalogue.",
+          "lessons_used": [],
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "the answer correctly says the catalogue cannot answer this",
+            "feedback": "",
+            "failure_type": null,
+            "kind": "unknown_entity",
+            "attempt": 1
+          }
+        }
+      ],
+      "attempt_count": 1,
+      "final_answer": "There are no seats available for DATA-999 as it is not listed in the course catalogue.",
+      "final_result": "PASS",
+      "final_failure_type": null,
+      "kind": "unknown_entity",
+      "latency_s": 1.39
+    },
+    {
+      "id": "tr09",
+      "question": "Is DATA-260 a difficult course?",
+      "attempts": [
+        {
+          "answer": "The difficulty of DATA-260 can vary by individual, but it is a foundational course in distributed systems, which can be challenging due to its complex concepts.",
+          "lessons_used": [],
+          "evaluation": {
+            "result": "REVISE",
+            "explanation": "the answer gives details although the catalogue holds facts, not opinions, advice or recommendations",
+            "feedback": "The reference catalogue only holds course code, title, department, seats available and instructor. It has nothing that answers this question (the catalogue holds facts, not opinions, advice or recommendations). Say that the catalogue cannot answer it; do not guess or use general knowledge.",
+            "failure_type": "unsupported_answer",
+            "kind": "opinion",
+            "attempt": 1
+          }
+        }
+      ],
+      "attempt_count": 1,
+      "final_answer": "The difficulty of DATA-260 can vary by individual, but it is a foundational course in distributed systems, which can be challenging due to its complex concepts.",
+      "final_result": "REVISE",
+      "final_failure_type": "unsupported_answer",
+      "kind": "opinion",
+      "latency_s": 2.03
+    },
+    {
+      "id": "tr10",
+      "question": "Who is the best instructor in the Data Science department?",
+      "attempts": [
+        {
+          "answer": "The best instructor in the Data Science department is Dr. Priya Nair, Dr. Elena Rossi, and Dr. Samuel Okafor, as they all teach courses in that department.",
+          "lessons_used": [],
+          "evaluation": {
+            "result": "REVISE",
+            "explanation": "the answer gives details although the catalogue holds facts, not opinions, advice or recommendations",
+            "feedback": "The reference catalogue only holds course code, title, department, seats available and instructor. It has nothing that answers this question (the catalogue holds facts, not opinions, advice or recommendations). Say that the catalogue cannot answer it; do not guess or use general knowledge.",
+            "failure_type": "unsupported_answer",
+            "kind": "opinion",
+            "attempt": 1
+          }
+        }
+      ],
+      "attempt_count": 1,
+      "final_answer": "The best instructor in the Data Science department is Dr. Priya Nair, Dr. Elena Rossi, and Dr. Samuel Okafor, as they all teach courses in that department.",
+      "final_result": "REVISE",
+      "final_failure_type": "unsupported_answer",
+      "kind": "opinion",
+      "latency_s": 2.34
+    },
+    {
+      "id": "tr11",
+      "question": "How many seats are available across all courses?",
+      "attempts": [
+        {
+          "answer": "The total number of seats available across all courses is 175.",
+          "lessons_used": [],
+          "evaluation": {
+            "result": "REVISE",
+            "explanation": "the answer contains the number 175 that the reference does not support",
+            "feedback": "The answer states the number 175, which does not match the reference. Reference facts: value 225; from seat counts 40 + 35 + 45 + 30 + 50 + 25. Correct the answer.",
+            "failure_type": "wrong_value",
+            "kind": "all_total_seats",
+            "attempt": 1
+          }
+        }
+      ],
+      "attempt_count": 1,
+      "final_answer": "The total number of seats available across all courses is 175.",
+      "final_result": "REVISE",
+      "final_failure_type": "wrong_value",
+      "kind": "all_total_seats",
+      "latency_s": 1.06
+    },
+    {
+      "id": "tr12",
+      "question": "Recommend a course for someone who likes databases.",
+      "attempts": [
+        {
+          "answer": "CS-157A | Database Systems | Computer Science | 45 | Dr. Marcus Lee",
+          "lessons_used": [],
+          "evaluation": {
+            "result": "REVISE",
+            "explanation": "the answer gives details although the catalogue holds facts, not opinions, advice or recommendations",
+            "feedback": "The reference catalogue only holds course code, title, department, seats available and instructor. It has nothing that answers this question (the catalogue holds facts, not opinions, advice or recommendations). Say that the catalogue cannot answer it; do not guess or use general knowledge.",
+            "failure_type": "unsupported_answer",
+            "kind": "opinion",
+            "attempt": 1
+          }
+        }
+      ],
+      "attempt_count": 1,
+      "final_answer": "CS-157A | Database Systems | Computer Science | 45 | Dr. Marcus Lee",
+      "final_result": "REVISE",
+      "final_failure_type": "unsupported_answer",
+      "kind": "opinion",
+      "latency_s": 1.37
+    },
+    {
+      "id": "tr13",
+      "question": "What is the tuition for CS-157A?",
+      "attempts": [
+        {
+          "answer": "The tuition for CS-157A is not provided in the course catalogue.",
+          "lessons_used": [],
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "the answer correctly says the catalogue cannot answer this",
+            "feedback": "",
+            "failure_type": null,
+            "kind": "unavailable_field",
+            "attempt": 1
+          }
+        }
+      ],
+      "attempt_count": 1,
+      "final_answer": "The tuition for CS-157A is not provided in the course catalogue.",
+      "final_result": "PASS",
+      "final_failure_type": null,
+      "kind": "unavailable_field",
+      "latency_s": 1.18
+    },
+    {
+      "id": "tr14",
+      "question": "How many seats does the catalogue offer in total?",
+      "attempts": [
+        {
+          "answer": "The catalogue offers a total of 175 seats.",
+          "lessons_used": [],
+          "evaluation": {
+            "result": "REVISE",
+            "explanation": "the answer contains the number 175 that the reference does not support",
+            "feedback": "The answer states the number 175, which does not match the reference. Reference facts: value 225; from seat counts 40 + 35 + 45 + 30 + 50 + 25. Correct the answer.",
+            "failure_type": "wrong_value",
+            "kind": "all_total_seats",
+            "attempt": 1
+          }
+        }
+      ],
+      "attempt_count": 1,
+      "final_answer": "The catalogue offers a total of 175 seats.",
+      "final_result": "REVISE",
+      "final_failure_type": "wrong_value",
+      "kind": "all_total_seats",
+      "latency_s": 0.91
+    }
+  ],
+  "candidates": [
+    {
+      "lesson_id": "lesson_001",
+      "failure_pattern": "The answer gives an opinion, a recommendation or a judgement (best, easy, difficult, worth taking) although the catalogue holds only facts. Example question: Is DATA-260 a difficult course?",
+      "correction": "The catalogue holds facts only: course code, title, department, seats and instructor. When a question asks for an opinion, a recommendation, how hard a course is or who is the best, begin with a sentence saying that the catalogue cannot judge or recommend; do not give an opinion.",
+      "created_at": "2026-11-09",
+      "use_count": 0
+    },
+    {
+      "lesson_id": "lesson_002",
+      "failure_pattern": "The answer gives a wrong total for the seats of all courses in the catalogue. Example question: How many seats are available across all courses?",
+      "correction": "For a total over the whole catalogue, write down the seats of every row of the table one by one, add them up in order and state the sum.",
+      "created_at": "2026-11-09",
+      "use_count": 0
+    }
+  ]
+}

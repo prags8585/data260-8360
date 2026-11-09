@@ -1,0 +1,31 @@
+=== 2026-11-09 02:36:43 === Offline tests and live verification
+$ PYTHONPATH=. .venv/bin/python tests_hw9.py 2>&1 | tail -6
+PASS  test_validation_rejects_a_lesson_that_breaks_a_correct_answer
+PASS  test_validation_rejects_more_unsupported_answers_and_keeps_an_unchanged_result
+PASS  test_vectors_are_stored_as_float32_bytes
+PASS  test_without_repair_there_is_exactly_one_attempt_and_no_feedback
+
+38/38 tests passed (0.1s)
+$ PYTHONPATH=. .venv/bin/python verify_hw09.py
+  [OK  ] docker: s8360-redis (Redis Stack), s8360-kafka and s8360-mysql are running -- running: ['s8360-redis', 's8360-kafka', 's8360-mysql']
+  [OK  ] Redis has the search module and the vector index exists -- modules ['ReJSON', 'redisgears_2', 'search', 'bf', 'timeseries', 'RedisCompat']; index s8360_cache_idx on s8360:cache:entry:*
+  [OK  ] courses.views column exists in s8360_rel -- courses.views exists
+  [OK  ] Part 1: increment_course_views returns the running total and syncs to MySQL every 10th increment -- totals 1..12, Redis 12, MySQL synced at 10 -> 10
+  [OK  ] Part 2: live POST /ask - miss runs the agents, the repeated question is a cache hit with similarity and latency -- miss 8009.9 ms -> hit 29.1 ms, similarity 1.0, same answer
+  [OK  ] cache_cases.yaml has 40 labeled cases (4 categories x 10) -- 40 cases in 4 categories
+  [OK  ] Part 3: threshold sweep saved (5 thresholds x 40 cases) -- 5 thresholds x 40 cases; hit rate 72% >= 70% >= 62% >= 57% >= 42%
+  [OK  ] Part 3: cache_cases.yaml was committed before the sweep and is unchanged since -- file unchanged since the sweep (sha256 a3057d2fc09d...); first commit 23:47:41 before the sweep 02:13:53
+  [OK  ] Part 3.5: stale hit shown, then corrected by the data-version invalidation -- seats 40 -> 12: stale hit returned 'The course DATA-260 has 40 seats available.'; after invalidation 'The course DATA-260 has 12 seats available.'
+  [OK  ] Part 4: input files hold only questions, no overlap, reference dataset present -- {'training_data': 14, 'validation_data': 12, 'test_data': 18} questions, inputs only, no overlap; 6 reference courses
+  [OK  ] Part 4: lessons.json entries have the required fields -- 1 validated lessons with the 5 required fields; use counts [13]
+  [OK  ] Part 4: lessons mined on training only, validated on validation only -- lessons were mined on training ids only (14) and validated on validation ids only (12); test_data.json is used only by the final run
+  [OK  ] Part 4: four variants evaluated on the same 18 test questions, at most 2 attempts -- {'Baseline': '10/18 @ 1.0 attempts', 'Evaluator Repair': '18/18 @ 1.44 attempts', 'Lesson Memory': '17/18 @ 1.28 attempts', 'Validated Improvement': '18/18 @ 1.22 attempts'}
+  [OK  ] offline test suite passes (no Kafka / Redis / network / model) -- 38/38 tests passed (0.1s)
+  [OK  ] ruff passes on the repository -- All checks passed!
+  [OK  ] reports/hw09/RUN_LOG.txt exists and is non-empty -- reports/hw09/RUN_LOG.txt
+  [OK  ] reports/hw09/METRICS.md exists and is non-empty -- reports/hw09/METRICS.md
+  [OK  ] reports/hw09/AI_USE.md exists and is non-empty -- reports/hw09/AI_USE.md or reports/hw09/AI_Usage.md
+  [OK  ] reports/hw09/Pragada_HW9.pdf exists and is non-empty -- reports/hw09/Pragada_HW9.pdf
+
+19/19 checks passed.
+Wrote reports/hw09/verification.json

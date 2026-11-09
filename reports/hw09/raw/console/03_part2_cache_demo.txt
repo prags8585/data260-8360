@@ -1,0 +1,50 @@
+=== 2026-11-09 02:21:11 === Part 2: semantic cache at the ingress (12 queries)
+$ PYTHONPATH=. .venv/bin/python scripts/hw9_part2_cache_demo.py
+=== 2026-11-09 02:21:11 === Part 2 semantic cache, threshold 0.85, 12 queries
+flushed the cache: {'deleted_entries': 10}
+
+#1  MISS is_cached=false similarity=  -   latency=  4176.6 ms  [new]
+      Q: How many seats are available in DATA-260?
+      A: The course DATA-260 has 40 seats available.
+#2  HIT  is_cached=true  similarity=1.0000 latency=    13.6 ms  [exact duplicate of #1]
+      Q: How many seats are available in DATA-260?
+      A: The course DATA-260 has 40 seats available.
+#3  MISS is_cached=false similarity=0.8334 latency=  3502.2 ms  [paraphrase of #1]
+      Q: What is the seat availability for course DATA-260?
+      A: The seat availability for course DATA-260 is 40.
+#4  MISS is_cached=false similarity=0.3326 latency=  4355.3 ms  [new]
+      Q: Who teaches CS-157A?
+      A: The course CS-157A is taught by Dr. Marcus Lee.
+#5  HIT  is_cached=true  similarity=0.9012 latency=    33.8 ms  [paraphrase of #4]
+      Q: Which instructor is teaching CS-157A?
+      A: The course CS-157A is taught by Dr. Marcus Lee.
+      served from the cached query: 'Who teaches CS-157A?'
+#6  HIT  is_cached=true  similarity=1.0000 latency=    17.0 ms  [exact duplicate of #4]
+      Q: Who teaches CS-157A?
+      A: The course CS-157A is taught by Dr. Marcus Lee.
+#7  MISS is_cached=false similarity=0.5950 latency=  3993.6 ms  [new]
+      Q: Which department has the most available seats?
+      A: The department with the most available seats is Data Science with a total of 105 seats.
+#8  HIT  is_cached=true  similarity=0.9024 latency=    37.3 ms  [paraphrase of #7]
+      Q: Which department has the largest number of open seats?
+      A: The department with the most available seats is Data Science with a total of 105 seats.
+      served from the cached query: 'Which department has the most available seats?'
+#9  HIT  is_cached=true  similarity=0.9388 latency=    13.0 ms  [new, similar wording to #1]
+      Q: How many seats are available in DATA-230?
+      A: The course DATA-260 has 40 seats available.
+      served from the cached query: 'How many seats are available in DATA-260?'
+#10 MISS is_cached=false similarity=0.2127 latency=  3624.9 ms  [new, unrelated]
+      Q: What is the capital of France?
+      A: <rejected>
+#11 MISS is_cached=false similarity=0.5083 latency=  4744.9 ms  [new]
+      Q: How many courses does Dr. Marcus Lee teach?
+      A: Dr. Marcus Lee teaches 2 courses. The courses are CS-157A and CS-146.
+#12 HIT  is_cached=true  similarity=0.9599 latency=    50.6 ms  [paraphrase of #11]
+      Q: How many classes is Dr. Marcus Lee teaching?
+      A: Dr. Marcus Lee teaches 2 courses. The courses are CS-157A and CS-146.
+      served from the cached query: 'How many courses does Dr. Marcus Lee teach?'
+
+cache hit rate: 6/12 = 50.0%
+average latency, served from cache: 27.5 ms (6 queries)
+average latency, agent pipeline:    4066.2 ms (6 queries)
+GET /cache/stats -> {'queries': 12, 'hits': 6, 'misses': 6, 'stale_invalidated': 0, 'hit_rate': 0.5, 'avg_latency_ms_hit': 27.56, 'avg_latency_ms_miss': 4066.24, 'cached_entries': 5}

@@ -1,0 +1,163 @@
+=== 2026-11-09 02:30:08 === Part 4: final evaluation, four variants on the test questions
+$ PYTHONPATH=. python scripts/hw9_part4_run.py final 
+=== 2026-11-09 02:30:08 === final evaluation: four variants on the same 18 test questions
+
+-- Baseline: lessons=none, evaluator feedback and revision=off
+  te01 PASS   attempts=1   1.2s  [seats_of] How many seats are available in ENGR-200?
+        -> There are 25 seats available in ENGR-200.
+  te02 PASS   attempts=1   0.9s  [instructor_of] Who teaches DATA-245?
+        -> DATA-245 is taught by Dr. Elena Rossi.
+  te03 PASS   attempts=1   1.4s  [dept_total_seats] How many seats in total do the Computer Science courses have?
+        -> The Computer Science courses have a total of 45 + 50 = 95 seats available.
+  te04 PASS   attempts=1   1.6s  [course_extreme] Which course has the fewest available seats?
+        -> The course with the fewest available seats is ENGR-200, Engineering Analytics, with 25 seats available.
+  te05 PASS   attempts=1   0.7s  [instructor_course_count] How many courses does Dr. Marcus Lee teach?
+        -> Dr. Marcus Lee teaches 2 courses.
+  te06 REVISE attempts=1   1.0s  [department_extreme] Which department has the most available seats?
+        -> Computer Science has the most available seats with a total of 95.   (failure: wrong_value)
+  te07 PASS   attempts=1   1.7s  [dept_courses] List the courses in the Data Science department.
+        -> The courses in the Data Science department are DATA-260, DATA-245, and DATA-230.
+  te08 PASS   attempts=1   0.9s  [title_of] What is the title of course DATA-230?
+        -> The title of course DATA-230 is Data Visualization.
+  te09 REVISE attempts=1   1.1s  [unavailable_field] What days does CS-146 meet?
+        -> The course CS-146 meets on Monday, Wednesday, and Friday.   (failure: unsupported_answer)
+  te10 REVISE attempts=1   0.5s  [opinion] Translate good morning into Spanish.
+        -> Buenos días.   (failure: unsupported_answer)
+  te11 REVISE attempts=1   2.1s  [opinion] Is DATA-245 worth taking?
+        -> DATA-245, Machine Learning Foundations, is worth taking if you're interested in learning the core concepts of machine learning, and it has 35 seats available.   (failure: unsupported_answer)
+  te12 REVISE attempts=1   0.9s  [opinion] Which instructor in the Computer Science department is the best?
+        -> Dr. Marcus Lee is the instructor in the Computer Science department.   (failure: unsupported_answer)
+  te13 REVISE attempts=1   1.2s  [all_total_seats] How many seats are available in all the courses combined?
+        -> The total number of seats available in all the courses combined is 175.   (failure: wrong_value)
+  te14 PASS   attempts=1   2.1s  [all_total_seats] What is the combined number of seats of every course in the catalogue?
+        -> The combined number of seats is 40 + 35 + 45 + 30 + 50 + 25 = 225.
+  te15 REVISE attempts=1   1.4s  [opinion] Suggest an easy elective for me.
+        -> ENGR-200 | Engineering Analytics | Engineering | 25 | Dr. Samuel Okafor   (failure: unsupported_answer)
+  te16 PASS   attempts=1   1.4s  [unknown_entity] How many seats are available in STAT-200?
+        -> There are no seats available for STAT-200 as it is not listed in the provided course catalogue.
+  te17 PASS   attempts=1   1.2s  [unrelated] What is the weather forecast for tomorrow?
+        -> I cannot provide weather forecasts. Please check a weather service or app for the latest forecast.
+  te18 REVISE attempts=1   1.6s  [course_extreme] Which Computer Science course has the fewest seats?
+        -> The Computer Science course with the fewest seats is ENGR-200, which has 25 seats available.   (failure: wrong_value)
+
+-- Evaluator Repair: lessons=none, evaluator feedback and revision=on
+  te01 PASS   attempts=1   1.1s  [seats_of] How many seats are available in ENGR-200?
+        -> There are 25 seats available in ENGR-200.
+  te02 PASS   attempts=1   0.9s  [instructor_of] Who teaches DATA-245?
+        -> DATA-245 is taught by Dr. Elena Rossi.
+  te03 PASS   attempts=1   1.4s  [dept_total_seats] How many seats in total do the Computer Science courses have?
+        -> The Computer Science courses have a total of 45 + 50 = 95 seats available.
+  te04 PASS   attempts=1   1.7s  [course_extreme] Which course has the fewest available seats?
+        -> The course with the fewest available seats is ENGR-200, Engineering Analytics, with 25 seats available.
+  te05 PASS   attempts=1   0.7s  [instructor_course_count] How many courses does Dr. Marcus Lee teach?
+        -> Dr. Marcus Lee teaches 2 courses.
+  te06 PASS   attempts=2   2.6s  [department_extreme] Which department has the most available seats?
+        -> Data Science has the most available seats with a total of 105.
+  te07 PASS   attempts=1   1.8s  [dept_courses] List the courses in the Data Science department.
+        -> The courses in the Data Science department are DATA-260, DATA-245, and DATA-230.
+  te08 PASS   attempts=1   0.9s  [title_of] What is the title of course DATA-230?
+        -> The title of course DATA-230 is Data Visualization.
+  te09 PASS   attempts=2   2.8s  [unavailable_field] What days does CS-146 meet?
+        -> The catalogue does not provide information about the days CS-146 meets.
+  te10 PASS   attempts=2   1.7s  [opinion] Translate good morning into Spanish.
+        -> The course catalogue cannot answer this question.
+  te11 PASS   attempts=2   4.2s  [opinion] Is DATA-245 worth taking?
+        -> The course catalogue does not provide information to determine if DATA-245 is worth taking.
+  te12 PASS   attempts=2   3.0s  [opinion] Which instructor in the Computer Science department is the best?
+        -> The catalogue cannot answer this question, as it only provides factual information and does not include opinions or recommendations.
+  te13 PASS   attempts=2   3.1s  [all_total_seats] How many seats are available in all the courses combined?
+        -> The total number of seats available in all the courses combined is 225.
+  te14 PASS   attempts=1   2.2s  [all_total_seats] What is the combined number of seats of every course in the catalogue?
+        -> The combined number of seats is 40 + 35 + 45 + 30 + 50 + 25 = 225.
+  te15 PASS   attempts=2   3.8s  [opinion] Suggest an easy elective for me.
+        -> The course catalogue cannot provide recommendations or suggestions, as it only contains factual information about available courses.
+  te16 PASS   attempts=1   1.5s  [unknown_entity] How many seats are available in STAT-200?
+        -> There are no seats available for STAT-200 as it is not listed in the provided course catalogue.
+  te17 PASS   attempts=1   1.6s  [unrelated] What is the weather forecast for tomorrow?
+        -> I cannot provide weather forecasts. Please check a weather service or app for the latest forecast.
+  te18 PASS   attempts=2   4.2s  [course_extreme] Which Computer Science course has the fewest seats?
+        -> The Computer Science course with the fewest seats is CS-157A, which has 45 seats available.
+
+-- Lesson Memory: lessons=2 from lessons_candidates.json, evaluator feedback and revision=on
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 22657.64it/s]
+  te01 PASS   attempts=1   5.0s  [seats_of] How many seats are available in ENGR-200?
+        -> ENGR-200 has 25 seats available.
+  te02 PASS   attempts=1   2.1s  [instructor_of] Who teaches DATA-245?
+        -> The course DATA-245, Machine Learning Foundations, is taught by Dr. Elena Rossi.
+  te03 PASS   attempts=1   1.9s  [dept_total_seats] How many seats in total do the Computer Science courses have?
+        -> The Computer Science courses have a total of 95 seats.
+  te04 PASS   attempts=1   1.7s  [course_extreme] Which course has the fewest available seats?
+        -> The course with the fewest available seats is ENGR-200, which has 25 seats available.
+  te05 PASS   attempts=1   2.6s  [instructor_course_count] How many courses does Dr. Marcus Lee teach?
+        -> Dr. Marcus Lee teaches two courses: CS-157A and CS-146.
+  te06 PASS   attempts=2   3.7s  [department_extreme] Which department has the most available seats?
+        -> The Data Science department has the most available seats with a total of 105.
+  te07 PASS   attempts=1   3.4s  [dept_courses] List the courses in the Data Science department.
+        -> The courses in the Data Science department are DATA-260 | Introduction to Distributed Systems, DATA-245 | Machine Learning Foundations, and DATA-230 | Data Visualization.
+  te08 PASS   attempts=1   1.7s  [title_of] What is the title of course DATA-230?
+        -> The title of course DATA-230 is Data Visualization.
+  te09 PASS   attempts=1   1.3s  [unavailable_field] What days does CS-146 meet?
+        -> The information about meeting days is not provided in the catalogue.
+  te10 PASS   attempts=2   2.2s  [opinion] Translate good morning into Spanish.
+        -> The course catalogue cannot answer this question.
+  te11 PASS   attempts=1   3.3s  [opinion] Is DATA-245 worth taking?
+        -> The catalogue cannot judge or recommend. DATA-245 is titled "Machine Learning Foundations" and is offered by the Data Science department with 35 seats available, instructed by Dr. Elena Rossi.
+  te12 PASS   attempts=1   1.3s  [opinion] Which instructor in the Computer Science department is the best?
+        -> The catalogue cannot judge or recommend.
+  te13 PASS   attempts=2   4.8s  [all_total_seats] How many seats are available in all the courses combined?
+        -> The total number of seats available in all the courses combined is 225.
+  te14 PASS   attempts=2   4.0s  [all_total_seats] What is the combined number of seats of every course in the catalogue?
+        -> The combined number of seats of every course in the catalogue is 225.
+  te15 PASS   attempts=1   3.4s  [opinion] Suggest an easy elective for me.
+        -> The catalogue cannot judge or recommend courses based on difficulty. You may consider DATA-260 or DATA-230 as electives, but difficulty can vary based on your background and interests.
+  te16 PASS   attempts=1   2.5s  [unknown_entity] How many seats are available in STAT-200?
+        -> There are no seats available for STAT-200 as it is not listed in the catalogue.
+  te17 PASS   attempts=1   1.7s  [unrelated] What is the weather forecast for tomorrow?
+        -> I cannot provide weather forecasts. Please check a weather service or app for the latest forecast.
+  te18 REVISE attempts=2   6.2s  [course_extreme] Which Computer Science course has the fewest seats?
+        -> The catalogue cannot judge or recommend. The Computer Science course with the fewest seats is CS-157A with 45 seats.   (failure: wrong_decline)
+
+-- Validated Improvement: lessons=1 from lessons.json, evaluator feedback and revision=on
+  te01 PASS   attempts=1   1.3s  [seats_of] How many seats are available in ENGR-200?
+        -> There are 25 seats available in ENGR-200.
+  te02 PASS   attempts=1   2.9s  [instructor_of] Who teaches DATA-245?
+        -> The course DATA-245, Machine Learning Foundations, is taught by Dr. Elena Rossi.
+  te03 PASS   attempts=1   2.0s  [dept_total_seats] How many seats in total do the Computer Science courses have?
+        -> The Computer Science courses, CS-157A and CS-146, have a total of 95 seats available.
+  te04 PASS   attempts=1   2.5s  [course_extreme] Which course has the fewest available seats?
+        -> The course with the fewest available seats is ENGR-200, which has 25 seats available.
+  te05 PASS   attempts=1   2.6s  [instructor_course_count] How many courses does Dr. Marcus Lee teach?
+        -> Dr. Marcus Lee teaches two courses: Database Systems (CS-157A) and Web Programming (CS-146).
+  te06 PASS   attempts=2   3.6s  [department_extreme] Which department has the most available seats?
+        -> Data Science has the most available seats with a total of 105.
+  te07 PASS   attempts=1   3.5s  [dept_courses] List the courses in the Data Science department.
+        -> The courses in the Data Science department are DATA-260 | Introduction to Distributed Systems, DATA-245 | Machine Learning Foundations, and DATA-230 | Data Visualization.
+  te08 PASS   attempts=1   1.5s  [title_of] What is the title of course DATA-230?
+        -> The title of course DATA-230 is Data Visualization.
+  te09 PASS   attempts=2   3.9s  [unavailable_field] What days does CS-146 meet?
+        -> The catalogue does not provide information about the days CS-146 meets.
+  te10 PASS   attempts=2   2.0s  [opinion] Translate good morning into Spanish.
+        -> The course catalogue cannot answer this question.
+  te11 PASS   attempts=1   3.8s  [opinion] Is DATA-245 worth taking?
+        -> The catalogue cannot judge or recommend. DATA-245 is titled "Machine Learning Foundations" and is offered by the Data Science department with 35 seats available, instructed by Dr. Elena Rossi.
+  te12 PASS   attempts=1   1.0s  [opinion] Which instructor in the Computer Science department is the best?
+        -> The catalogue cannot judge or recommend.
+  te13 PASS   attempts=2   4.1s  [all_total_seats] How many seats are available in all the courses combined?
+        -> The total number of seats available in all the courses combined is 225.
+  te14 PASS   attempts=1   2.9s  [all_total_seats] What is the combined number of seats of every course in the catalogue?
+        -> The combined number of seats for every course in the catalogue is 40 + 35 + 45 + 30 + 50 + 25 = 225.
+  te15 PASS   attempts=1   3.7s  [opinion] Suggest an easy elective for me.
+        -> The catalogue cannot judge or recommend courses based on difficulty. You may consider DATA-260 or DATA-230 as electives, but difficulty can vary based on your background and interests.
+  te16 PASS   attempts=1   1.9s  [unknown_entity] How many seats are available in STAT-200?
+        -> There are no seats available for STAT-200 as it is not listed in the provided course catalogue.
+  te17 PASS   attempts=1   1.9s  [unrelated] What is the weather forecast for tomorrow?
+        -> I cannot provide weather forecasts. Please check a weather service or app for the latest forecast.
+  te18 PASS   attempts=1   3.0s  [course_extreme] Which Computer Science course has the fewest seats?
+        -> The Computer Science course with the fewest seats is CS-157A Database Systems, which has 45 seats available.
+
+Variant                  Correct  Incorrect  Avg attempts  Avg latency
+Baseline                    10/18         8          1.0      1.29s
+Evaluator Repair            18/18         0         1.44      2.18s
+Lesson Memory               17/18         1         1.28      2.93s
+Validated Improvement       18/18         0         1.22      2.68s
+saved reports/hw09/raw/part4_final.json

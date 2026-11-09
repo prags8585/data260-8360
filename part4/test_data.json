@@ -1,0 +1,74 @@
+[
+  {
+    "id": "te01",
+    "question": "How many seats are available in ENGR-200?"
+  },
+  {
+    "id": "te02",
+    "question": "Who teaches DATA-245?"
+  },
+  {
+    "id": "te03",
+    "question": "How many seats in total do the Computer Science courses have?"
+  },
+  {
+    "id": "te04",
+    "question": "Which course has the fewest available seats?"
+  },
+  {
+    "id": "te05",
+    "question": "How many courses does Dr. Marcus Lee teach?"
+  },
+  {
+    "id": "te06",
+    "question": "Which department has the most available seats?"
+  },
+  {
+    "id": "te07",
+    "question": "List the courses in the Data Science department."
+  },
+  {
+    "id": "te08",
+    "question": "What is the title of course DATA-230?"
+  },
+  {
+    "id": "te09",
+    "question": "What days does CS-146 meet?"
+  },
+  {
+    "id": "te10",
+    "question": "Translate good morning into Spanish."
+  },
+  {
+    "id": "te11",
+    "question": "Is DATA-245 worth taking?"
+  },
+  {
+    "id": "te12",
+    "question": "Which instructor in the Computer Science department is the best?"
+  },
+  {
+    "id": "te13",
+    "question": "How many seats are available in all the courses combined?"
+  },
+  {
+    "id": "te14",
+    "question": "What is the combined number of seats of every course in the catalogue?"
+  },
+  {
+    "id": "te15",
+    "question": "Suggest an easy elective for me."
+  },
+  {
+    "id": "te16",
+    "question": "How many seats are available in STAT-200?"
+  },
+  {
+    "id": "te17",
+    "question": "What is the weather forecast for tomorrow?"
+  },
+  {
+    "id": "te18",
+    "question": "Which Computer Science course has the fewest seats?"
+  }
+]

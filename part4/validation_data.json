@@ -1,0 +1,50 @@
+[
+  {
+    "id": "va01",
+    "question": "How many seats does CS-146 have?"
+  },
+  {
+    "id": "va02",
+    "question": "Which department does DATA-230 belong to?"
+  },
+  {
+    "id": "va03",
+    "question": "Is CS-157A an easy course?"
+  },
+  {
+    "id": "va04",
+    "question": "Would you recommend ENGR-200 to a beginner?"
+  },
+  {
+    "id": "va05",
+    "question": "What is the total number of seats offered by all the courses together?"
+  },
+  {
+    "id": "va06",
+    "question": "List the courses taught by Dr. Samuel Okafor."
+  },
+  {
+    "id": "va07",
+    "question": "What are the prerequisites for DATA-245?"
+  },
+  {
+    "id": "va08",
+    "question": "Recommend a good pizza place in San Jose."
+  },
+  {
+    "id": "va09",
+    "question": "How many seats are available in CS-999?"
+  },
+  {
+    "id": "va10",
+    "question": "How many seats do the Computer Science courses offer in total?"
+  },
+  {
+    "id": "va11",
+    "question": "Which course should I take if I want to learn machine learning?"
+  },
+  {
+    "id": "va12",
+    "question": "How many seats are there in the whole catalogue?"
+  }
+]

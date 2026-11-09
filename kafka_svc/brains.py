@@ -64,12 +64,42 @@ def write_draft(brain: str, model, question: str, plan: list[str]) -> tuple[str,
     return draft, facts
 
 
+_MAX_WORDS = r"\b(most|largest|highest|biggest|greatest)\b"
+_MIN_WORDS = r"\b(fewest|least|smallest|lowest)\b"
+
+
+def expected_extreme(question: str, facts: dict) -> dict | None:
+    """What a 'most / fewest seats' question should name: a department, a course, or (HW8's question) both.
+    Returns None when the question does not ask for an extreme."""
+    q = question.lower()
+    if "seat" not in q:
+        return None
+    biggest = bool(re.search(_MAX_WORDS, q))
+    if not biggest and not re.search(_MIN_WORDS, q):
+        return None
+    pick = max if biggest else min
+    departments = facts["departments"]
+    named = [g["group"] for g in departments if g["group"].lower() in q]
+    wants_department = "department" in q and not named
+    wants_course = "course" in q
+    top_dept = pick(departments, key=lambda g: g["totalSeats"])
+    if wants_department and wants_course:  # HW8: "which department ..., and which course there ..."
+        course = pick((c for c in facts["courses"] if c["department"] == top_dept["group"]), key=lambda c: c["seatsAvailable"])
+        return {"names": [top_dept["group"], course["courseCode"]],
+                "detail": f"{top_dept['group']} ({top_dept['totalSeats']} seats) and {course['courseCode']} ({course['seatsAvailable']} seats)"}
+    if wants_department:
+        return {"names": [top_dept["group"]], "detail": f"{top_dept['group']} ({top_dept['totalSeats']} seats)"}
+    if wants_course:
+        pool = [c for c in facts["courses"] if not named or c["department"] in named]
+        course = pick(pool, key=lambda c: c["seatsAvailable"])
+        return {"names": [course["courseCode"]], "detail": f"{course['courseCode']} ({course['seatsAvailable']} seats)"}
+    return None
+
+
 def review_draft(question: str, draft: str, facts: dict) -> dict:
     allowed_numbers = {int(n) for n in _NUMBER.findall(json.dumps(facts))}
     names = [g["group"] for g in facts["departments"] + facts["instructors"]] + facts["course_codes"]
-    asks_most = bool(re.search(r"\bmost\b.*\bseats\b|\bseats\b.*\bmost\b", question.lower()))
-    expected = top_department(facts)
-    expected_course = top_course_in(facts, expected["group"])
+    extreme = expected_extreme(question, facts)
     checks = [
         ("length", 20 <= len(draft) <= 800, f"{len(draft)} characters"),
         ("numbers_grounded", all(int(n) in allowed_numbers for n in _NUMBER.findall(draft)),
@@ -78,12 +108,8 @@ def review_draft(question: str, draft: str, facts: dict) -> dict:
          f"codes in draft {sorted(set(_CODE.findall(draft)))}"),
         ("uses_catalogue", any(n.lower() in draft.lower() for n in names), "names a department, instructor or course code"),
     ]
-    if asks_most:
-        wants_course = "course" in question.lower()
-        correct = expected["group"].lower() in draft.lower() and (not wants_course or expected_course["courseCode"] in draft)
-        checks.append(("superlative_correct", correct,
-                       f"expected {expected['group']} ({expected['totalSeats']} seats)"
-                       + (f" and {expected_course['courseCode']} ({expected_course['seatsAvailable']} seats)" if wants_course else "")))
+    if extreme:
+        checks.append(("superlative_correct", all(n.lower() in draft.lower() for n in extreme["names"]), f"expected {extreme['detail']}"))
     return {"approved": all(ok for _, ok, _ in checks), "checks": [{"check": n, "passed": ok, "detail": d} for n, ok, d in checks]}
 
 

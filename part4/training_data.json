@@ -1,0 +1,58 @@
+[
+  {
+    "id": "tr01",
+    "question": "How many seats are available in DATA-245?"
+  },
+  {
+    "id": "tr02",
+    "question": "Who teaches Web Programming?"
+  },
+  {
+    "id": "tr03",
+    "question": "What is the total number of seats in the Data Science department?"
+  },
+  {
+    "id": "tr04",
+    "question": "Which course has the most available seats?"
+  },
+  {
+    "id": "tr05",
+    "question": "How many courses does Dr. Samuel Okafor teach?"
+  },
+  {
+    "id": "tr06",
+    "question": "What is the capital of France?"
+  },
+  {
+    "id": "tr07",
+    "question": "What time does DATA-260 meet?"
+  },
+  {
+    "id": "tr08",
+    "question": "How many seats are available in DATA-999?"
+  },
+  {
+    "id": "tr09",
+    "question": "Is DATA-260 a difficult course?"
+  },
+  {
+    "id": "tr10",
+    "question": "Who is the best instructor in the Data Science department?"
+  },
+  {
+    "id": "tr11",
+    "question": "How many seats are available across all courses?"
+  },
+  {
+    "id": "tr12",
+    "question": "Recommend a course for someone who likes databases."
+  },
+  {
+    "id": "tr13",
+    "question": "What is the tuition for CS-157A?"
+  },
+  {
+    "id": "tr14",
+    "question": "How many seats does the catalogue offer in total?"
+  }
+]

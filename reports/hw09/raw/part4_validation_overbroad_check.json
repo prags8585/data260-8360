@@ -1,0 +1,1004 @@
+{
+  "candidates": 3,
+  "kept": 2,
+  "log": [
+    {
+      "lesson": {
+        "lesson_id": "lesson_001",
+        "failure_pattern": "The answer gives an opinion, a recommendation or a judgement (best, easy, difficult, worth taking) although the catalogue holds only facts. Example question: Is DATA-260 a difficult course?",
+        "correction": "The catalogue holds facts only: course code, title, department, seats and instructor. When a question asks for an opinion, a recommendation, how hard a course is or who is the best, begin with a sentence saying that the catalogue cannot judge or recommend; do not give an opinion.",
+        "created_at": "2026-11-09",
+        "use_count": 0
+      },
+      "keep": true,
+      "fixed": [
+        "va03",
+        "va04",
+        "va11"
+      ],
+      "regressed": [],
+      "failing_before": 3,
+      "failing_after": 0,
+      "unsupported_before": 3,
+      "unsupported_after": 0,
+      "results_after": [
+        {
+          "id": "va01",
+          "question": "How many seats does CS-146 have?",
+          "attempts": [
+            {
+              "answer": "The course CS-146 has 50 seats available.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer matches the reference (value 50)",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "seats_of",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The course CS-146 has 50 seats available.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "seats_of",
+          "latency_s": 5.8
+        },
+        {
+          "id": "va02",
+          "question": "Which department does DATA-230 belong to?",
+          "attempts": [
+            {
+              "answer": "The course DATA-230 belongs to the Data Science department.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer matches the reference (Data Science)",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "department_of",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The course DATA-230 belongs to the Data Science department.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "department_of",
+          "latency_s": 1.03
+        },
+        {
+          "id": "va03",
+          "question": "Is CS-157A an easy course?",
+          "attempts": [
+            {
+              "answer": "The catalogue cannot judge or recommend. CS-157A is titled \"Database Systems\" and is offered by the Computer Science department with 45 seats available, instructed by Dr. Marcus Lee.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "opinion",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The catalogue cannot judge or recommend. CS-157A is titled \"Database Systems\" and is offered by the Computer Science department with 45 seats available, instructed by Dr. Marcus Lee.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "opinion",
+          "latency_s": 2.52
+        },
+        {
+          "id": "va04",
+          "question": "Would you recommend ENGR-200 to a beginner?",
+          "attempts": [
+            {
+              "answer": "The catalogue cannot judge or recommend courses. ENGR-200 is taught by Dr. Samuel Okafor and has 25 seats available.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "opinion",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The catalogue cannot judge or recommend courses. ENGR-200 is taught by Dr. Samuel Okafor and has 25 seats available.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "opinion",
+          "latency_s": 1.93
+        },
+        {
+          "id": "va05",
+          "question": "What is the total number of seats offered by all the courses together?",
+          "attempts": [
+            {
+              "answer": "The total number of seats offered by all the courses together is 40 + 35 + 45 + 30 + 50 + 25 = 225 seats.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer matches the reference (value 225; from seat counts 40 + 35 + 45 + 30 + 50 + 25)",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "all_total_seats",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The total number of seats offered by all the courses together is 40 + 35 + 45 + 30 + 50 + 25 = 225 seats.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "all_total_seats",
+          "latency_s": 2.6
+        },
+        {
+          "id": "va06",
+          "question": "List the courses taught by Dr. Samuel Okafor.",
+          "attempts": [
+            {
+              "answer": "Dr. Samuel Okafor teaches DATA-230 | Data Visualization and ENGR-200 | Engineering Analytics.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer matches the reference (courses DATA-230, ENGR-200)",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "instructor_courses",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Dr. Samuel Okafor teaches DATA-230 | Data Visualization and ENGR-200 | Engineering Analytics.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "instructor_courses",
+          "latency_s": 1.73
+        },
+        {
+          "id": "va07",
+          "question": "What are the prerequisites for DATA-245?",
+          "attempts": [
+            {
+              "answer": "The catalogue does not provide information about prerequisites for courses.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "unavailable_field",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The catalogue does not provide information about prerequisites for courses.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "unavailable_field",
+          "latency_s": 0.86
+        },
+        {
+          "id": "va08",
+          "question": "Recommend a good pizza place in San Jose.",
+          "attempts": [
+            {
+              "answer": "I can't recommend pizza places, but I can help you with course-related questions!",
+              "lessons_used": [],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "opinion",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "I can't recommend pizza places, but I can help you with course-related questions!",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "opinion",
+          "latency_s": 1.18
+        },
+        {
+          "id": "va09",
+          "question": "How many seats are available in CS-999?",
+          "attempts": [
+            {
+              "answer": "There are no seats available for CS-999 as it is not listed in the provided course catalogue.",
+              "lessons_used": [],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "unknown_entity",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "There are no seats available for CS-999 as it is not listed in the provided course catalogue.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "unknown_entity",
+          "latency_s": 1.47
+        },
+        {
+          "id": "va10",
+          "question": "How many seats do the Computer Science courses offer in total?",
+          "attempts": [
+            {
+              "answer": "The Computer Science courses, CS-157A and CS-146, offer a total of 95 seats.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer matches the reference (value 95; from seat counts 45 + 50)",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "dept_total_seats",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The Computer Science courses, CS-157A and CS-146, offer a total of 95 seats.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "dept_total_seats",
+          "latency_s": 2.37
+        },
+        {
+          "id": "va11",
+          "question": "Which course should I take if I want to learn machine learning?",
+          "attempts": [
+            {
+              "answer": "The catalogue cannot recommend specific courses. However, DATA-245 | Machine Learning Foundations is offered by the Data Science department and is designed for learning machine learning.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "opinion",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The catalogue cannot recommend specific courses. However, DATA-245 | Machine Learning Foundations is offered by the Data Science department and is designed for learning machine learning.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "opinion",
+          "latency_s": 2.05
+        },
+        {
+          "id": "va12",
+          "question": "How many seats are there in the whole catalogue?",
+          "attempts": [
+            {
+              "answer": "The total number of seats available in the whole catalogue is 40 + 35 + 45 + 30 + 50 + 25 = 225 seats.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer matches the reference (value 225; from seat counts 40 + 35 + 45 + 30 + 50 + 25)",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "all_total_seats",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The total number of seats available in the whole catalogue is 40 + 35 + 45 + 30 + 50 + 25 = 225 seats.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "all_total_seats",
+          "latency_s": 2.56
+        }
+      ]
+    },
+    {
+      "lesson": {
+        "lesson_id": "lesson_002",
+        "failure_pattern": "The answer gives a wrong total for the seats of all courses in the catalogue. Example question: How many seats are available across all courses?",
+        "correction": "For a total over the whole catalogue, write down the seats of every row of the table one by one, add them up in order and state the sum.",
+        "created_at": "2026-11-09",
+        "use_count": 0
+      },
+      "keep": false,
+      "fixed": [],
+      "regressed": [
+        "va05"
+      ],
+      "failing_before": 0,
+      "failing_after": 1,
+      "unsupported_before": 0,
+      "unsupported_after": 0,
+      "results_after": [
+        {
+          "id": "va01",
+          "question": "How many seats does CS-146 have?",
+          "attempts": [
+            {
+              "answer": "CS-146 has 50 seats.",
+              "lessons_used": [
+                "lesson_002",
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer matches the reference (value 50)",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "seats_of",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "CS-146 has 50 seats.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "seats_of",
+          "latency_s": 1.78
+        },
+        {
+          "id": "va02",
+          "question": "Which department does DATA-230 belong to?",
+          "attempts": [
+            {
+              "answer": "The course DATA-230 belongs to the Data Science department.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer matches the reference (Data Science)",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "department_of",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The course DATA-230 belongs to the Data Science department.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "department_of",
+          "latency_s": 1.45
+        },
+        {
+          "id": "va03",
+          "question": "Is CS-157A an easy course?",
+          "attempts": [
+            {
+              "answer": "The catalogue cannot judge or recommend. Easy or difficult courses depend on individual experiences and preparation.",
+              "lessons_used": [
+                "lesson_001",
+                "lesson_002"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "opinion",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The catalogue cannot judge or recommend. Easy or difficult courses depend on individual experiences and preparation.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "opinion",
+          "latency_s": 1.46
+        },
+        {
+          "id": "va04",
+          "question": "Would you recommend ENGR-200 to a beginner?",
+          "attempts": [
+            {
+              "answer": "The catalogue cannot judge or recommend courses. ENGR-200 is taught by Dr. Samuel Okafor and has 25 seats available.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "opinion",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The catalogue cannot judge or recommend courses. ENGR-200 is taught by Dr. Samuel Okafor and has 25 seats available.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "opinion",
+          "latency_s": 2.05
+        },
+        {
+          "id": "va05",
+          "question": "What is the total number of seats offered by all the courses together?",
+          "attempts": [
+            {
+              "answer": "The total number of seats offered by all the courses together is 175.",
+              "lessons_used": [
+                "lesson_002",
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "REVISE",
+                "explanation": "the answer contains the number 175 that the reference does not support",
+                "feedback": "The answer states the number 175, which does not match the reference. Reference facts: value 225; from seat counts 40 + 35 + 45 + 30 + 50 + 25. Correct the answer.",
+                "failure_type": "wrong_value",
+                "kind": "all_total_seats",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The total number of seats offered by all the courses together is 175.",
+          "final_result": "REVISE",
+          "final_failure_type": "wrong_value",
+          "kind": "all_total_seats",
+          "latency_s": 2.02
+        },
+        {
+          "id": "va06",
+          "question": "List the courses taught by Dr. Samuel Okafor.",
+          "attempts": [
+            {
+              "answer": "Dr. Samuel Okafor teaches DATA-230 Data Visualization and ENGR-200 Engineering Analytics.",
+              "lessons_used": [
+                "lesson_002",
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer matches the reference (courses DATA-230, ENGR-200)",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "instructor_courses",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Dr. Samuel Okafor teaches DATA-230 Data Visualization and ENGR-200 Engineering Analytics.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "instructor_courses",
+          "latency_s": 1.68
+        },
+        {
+          "id": "va07",
+          "question": "What are the prerequisites for DATA-245?",
+          "attempts": [
+            {
+              "answer": "The catalogue does not provide information about prerequisites for courses.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "unavailable_field",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The catalogue does not provide information about prerequisites for courses.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "unavailable_field",
+          "latency_s": 1.45
+        },
+        {
+          "id": "va08",
+          "question": "Recommend a good pizza place in San Jose.",
+          "attempts": [
+            {
+              "answer": "I can't recommend pizza places, but I can help you with course-related questions!",
+              "lessons_used": [],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "opinion",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "I can't recommend pizza places, but I can help you with course-related questions!",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "opinion",
+          "latency_s": 1.3
+        },
+        {
+          "id": "va09",
+          "question": "How many seats are available in CS-999?",
+          "attempts": [
+            {
+              "answer": "There are no seats available for CS-999 as it is not listed in the catalogue.",
+              "lessons_used": [
+                "lesson_002"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "unknown_entity",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "There are no seats available for CS-999 as it is not listed in the catalogue.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "unknown_entity",
+          "latency_s": 1.88
+        },
+        {
+          "id": "va10",
+          "question": "How many seats do the Computer Science courses offer in total?",
+          "attempts": [
+            {
+              "answer": "The Computer Science courses offer a total of 95 seats.",
+              "lessons_used": [
+                "lesson_002",
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer matches the reference (value 95; from seat counts 45 + 50)",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "dept_total_seats",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The Computer Science courses offer a total of 95 seats.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "dept_total_seats",
+          "latency_s": 1.5
+        },
+        {
+          "id": "va11",
+          "question": "Which course should I take if I want to learn machine learning?",
+          "attempts": [
+            {
+              "answer": "The catalogue cannot recommend specific courses. However, DATA-245 | Machine Learning Foundations is offered by the Data Science department and is designed for learning machine learning.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "opinion",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The catalogue cannot recommend specific courses. However, DATA-245 | Machine Learning Foundations is offered by the Data Science department and is designed for learning machine learning.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "opinion",
+          "latency_s": 2.61
+        },
+        {
+          "id": "va12",
+          "question": "How many seats are there in the whole catalogue?",
+          "attempts": [
+            {
+              "answer": "The total number of seats in the whole catalogue is 40 + 35 + 45 + 30 + 50 + 25 = 225.",
+              "lessons_used": [
+                "lesson_002",
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer matches the reference (value 225; from seat counts 40 + 35 + 45 + 30 + 50 + 25)",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "all_total_seats",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The total number of seats in the whole catalogue is 40 + 35 + 45 + 30 + 50 + 25 = 225.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "all_total_seats",
+          "latency_s": 3.48
+        }
+      ]
+    },
+    {
+      "lesson": {
+        "lesson_id": "lesson_x01",
+        "failure_pattern": "If you are not completely sure of an answer, do not answer; reply that you do not have that information.",
+        "correction": "Whenever there is any doubt, say that you do not have the information instead of answering.",
+        "created_at": "controlled",
+        "use_count": 0
+      },
+      "keep": true,
+      "fixed": [],
+      "regressed": [],
+      "failing_before": 0,
+      "failing_after": 0,
+      "unsupported_before": 0,
+      "unsupported_after": 0,
+      "results_after": [
+        {
+          "id": "va01",
+          "question": "How many seats does CS-146 have?",
+          "attempts": [
+            {
+              "answer": "The course CS-146 has 50 seats available.",
+              "lessons_used": [
+                "lesson_x01",
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer matches the reference (value 50)",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "seats_of",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The course CS-146 has 50 seats available.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "seats_of",
+          "latency_s": 2.03
+        },
+        {
+          "id": "va02",
+          "question": "Which department does DATA-230 belong to?",
+          "attempts": [
+            {
+              "answer": "The course DATA-230 belongs to the Data Science department.",
+              "lessons_used": [
+                "lesson_001",
+                "lesson_x01"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer matches the reference (Data Science)",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "department_of",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The course DATA-230 belongs to the Data Science department.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "department_of",
+          "latency_s": 1.85
+        },
+        {
+          "id": "va03",
+          "question": "Is CS-157A an easy course?",
+          "attempts": [
+            {
+              "answer": "The catalogue cannot judge or recommend. CS-157A is titled \"Database Systems\" and is offered by the Computer Science department with 45 seats available, instructed by Dr. Marcus Lee.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "opinion",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The catalogue cannot judge or recommend. CS-157A is titled \"Database Systems\" and is offered by the Computer Science department with 45 seats available, instructed by Dr. Marcus Lee.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "opinion",
+          "latency_s": 2.63
+        },
+        {
+          "id": "va04",
+          "question": "Would you recommend ENGR-200 to a beginner?",
+          "attempts": [
+            {
+              "answer": "The catalogue cannot judge or recommend courses. ENGR-200 is taught by Dr. Samuel Okafor and has 25 seats available.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "opinion",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The catalogue cannot judge or recommend courses. ENGR-200 is taught by Dr. Samuel Okafor and has 25 seats available.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "opinion",
+          "latency_s": 2.68
+        },
+        {
+          "id": "va05",
+          "question": "What is the total number of seats offered by all the courses together?",
+          "attempts": [
+            {
+              "answer": "The total number of seats offered by all the courses together is 40 + 35 + 45 + 30 + 50 + 25 = 225 seats.",
+              "lessons_used": [
+                "lesson_001",
+                "lesson_x01"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer matches the reference (value 225; from seat counts 40 + 35 + 45 + 30 + 50 + 25)",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "all_total_seats",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The total number of seats offered by all the courses together is 40 + 35 + 45 + 30 + 50 + 25 = 225 seats.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "all_total_seats",
+          "latency_s": 3.14
+        },
+        {
+          "id": "va06",
+          "question": "List the courses taught by Dr. Samuel Okafor.",
+          "attempts": [
+            {
+              "answer": "Dr. Samuel Okafor teaches DATA-230 | Data Visualization and ENGR-200 | Engineering Analytics.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer matches the reference (courses DATA-230, ENGR-200)",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "instructor_courses",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "Dr. Samuel Okafor teaches DATA-230 | Data Visualization and ENGR-200 | Engineering Analytics.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "instructor_courses",
+          "latency_s": 2.02
+        },
+        {
+          "id": "va07",
+          "question": "What are the prerequisites for DATA-245?",
+          "attempts": [
+            {
+              "answer": "The catalogue does not provide information about prerequisites for courses.",
+              "lessons_used": [
+                "lesson_001",
+                "lesson_x01"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "unavailable_field",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The catalogue does not provide information about prerequisites for courses.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "unavailable_field",
+          "latency_s": 1.6
+        },
+        {
+          "id": "va08",
+          "question": "Recommend a good pizza place in San Jose.",
+          "attempts": [
+            {
+              "answer": "I can't recommend pizza places, but I can help you with course-related questions!",
+              "lessons_used": [],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "opinion",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "I can't recommend pizza places, but I can help you with course-related questions!",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "opinion",
+          "latency_s": 1.3
+        },
+        {
+          "id": "va09",
+          "question": "How many seats are available in CS-999?",
+          "attempts": [
+            {
+              "answer": "I do not have the information about the seats available in CS-999.",
+              "lessons_used": [
+                "lesson_x01"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "unknown_entity",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "I do not have the information about the seats available in CS-999.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "unknown_entity",
+          "latency_s": 1.67
+        },
+        {
+          "id": "va10",
+          "question": "How many seats do the Computer Science courses offer in total?",
+          "attempts": [
+            {
+              "answer": "The Computer Science courses, CS-157A and CS-146, offer a total of 95 seats.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer matches the reference (value 95; from seat counts 45 + 50)",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "dept_total_seats",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The Computer Science courses, CS-157A and CS-146, offer a total of 95 seats.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "dept_total_seats",
+          "latency_s": 2.61
+        },
+        {
+          "id": "va11",
+          "question": "Which course should I take if I want to learn machine learning?",
+          "attempts": [
+            {
+              "answer": "The catalogue cannot recommend specific courses. However, DATA-245 | Machine Learning Foundations is offered by the Data Science department and is designed for learning machine learning.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer correctly says the catalogue cannot answer this",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "opinion",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The catalogue cannot recommend specific courses. However, DATA-245 | Machine Learning Foundations is offered by the Data Science department and is designed for learning machine learning.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "opinion",
+          "latency_s": 2.56
+        },
+        {
+          "id": "va12",
+          "question": "How many seats are there in the whole catalogue?",
+          "attempts": [
+            {
+              "answer": "The total number of seats available in the whole catalogue is 40 + 35 + 45 + 30 + 50 + 25 = 225 seats.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "the answer matches the reference (value 225; from seat counts 40 + 35 + 45 + 30 + 50 + 25)",
+                "feedback": "",
+                "failure_type": null,
+                "kind": "all_total_seats",
+                "attempt": 1
+              }
+            }
+          ],
+          "attempt_count": 1,
+          "final_answer": "The total number of seats available in the whole catalogue is 40 + 35 + 45 + 30 + 50 + 25 = 225 seats.",
+          "final_result": "PASS",
+          "final_failure_type": null,
+          "kind": "all_total_seats",
+          "latency_s": 3.53
+        }
+      ]
+    }
+  ]
+}

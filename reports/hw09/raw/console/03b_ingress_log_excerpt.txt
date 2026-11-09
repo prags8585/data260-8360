@@ -1,0 +1,14 @@
+=== 2026-11-09 02:21:36 === Part 2: ingress log lines for the demo
+$ grep -E 'cache (HIT|MISS)' kafka_state/logs/api.log | tail -12 | cut -c1-260
+2026-11-09T10:21:11.442Z ingress INFO cache MISS best_similarity=None threshold=0.85 -> running the agent pipeline
+2026-11-09T10:21:15.581Z ingress INFO cache HIT similarity=1.0000 threshold=0.85 matched_query='How many seats are available in DATA-260?' latency_ms=13.6
+2026-11-09T10:21:15.595Z ingress INFO cache MISS best_similarity=0.8334 threshold=0.85 -> running the agent pipeline
+2026-11-09T10:21:19.106Z ingress INFO cache MISS best_similarity=0.3326 threshold=0.85 -> running the agent pipeline
+2026-11-09T10:21:23.485Z ingress INFO cache HIT similarity=0.9012 threshold=0.85 matched_query='Who teaches CS-157A?' latency_ms=33.8
+2026-11-09T10:21:23.507Z ingress INFO cache HIT similarity=1.0000 threshold=0.85 matched_query='Who teaches CS-157A?' latency_ms=17.0
+2026-11-09T10:21:23.521Z ingress INFO cache MISS best_similarity=0.595 threshold=0.85 -> running the agent pipeline
+2026-11-09T10:21:27.551Z ingress INFO cache HIT similarity=0.9024 threshold=0.85 matched_query='Which department has the most available seats?' latency_ms=37.3
+2026-11-09T10:21:27.567Z ingress INFO cache HIT similarity=0.9388 threshold=0.85 matched_query='How many seats are available in DATA-260?' latency_ms=13.0
+2026-11-09T10:21:27.576Z ingress INFO cache MISS best_similarity=0.2127 threshold=0.85 -> running the agent pipeline
+2026-11-09T10:21:31.223Z ingress INFO cache MISS best_similarity=0.5083 threshold=0.85 -> running the agent pipeline
+2026-11-09T10:21:36.001Z ingress INFO cache HIT similarity=0.9599 threshold=0.85 matched_query='How many courses does Dr. Marcus Lee teach?' latency_ms=50.6

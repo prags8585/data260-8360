@@ -1,0 +1,15 @@
+# HW9: Redis with the Query Engine (vector index). Uses the redis-stack-server image that is already on this machine.
+# The Homebrew Redis on 6379 has no search module and belongs to other projects, so this one has its own port.
+name: s8360-hw9
+services:
+  redis:
+    image: redis/redis-stack-server:latest
+    container_name: s8360-redis
+    restart: unless-stopped
+    ports:
+      - "6382:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10

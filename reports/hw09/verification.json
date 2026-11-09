@@ -1,0 +1,109 @@
+{
+  "homework": "HW9",
+  "sid4": "8360",
+  "commit_hash": "5dc41494c820202ee5cbc694cb38564142adca73",
+  "model": "qwen3:8b via Ollama (temperature 0, seed 8360); embeddings sentence-transformers/all-MiniLM-L6-v2",
+  "seed": 8360,
+  "timestamp": "2026-11-09T10:36:53.071591+00:00",
+  "checks": [
+    {
+      "name": "docker: s8360-redis (Redis Stack), s8360-kafka and s8360-mysql are running",
+      "passed": true,
+      "detail": "running: ['s8360-redis', 's8360-kafka', 's8360-mysql']"
+    },
+    {
+      "name": "Redis has the search module and the vector index exists",
+      "passed": true,
+      "detail": "modules ['ReJSON', 'redisgears_2', 'search', 'bf', 'timeseries', 'RedisCompat']; index s8360_cache_idx on s8360:cache:entry:*"
+    },
+    {
+      "name": "courses.views column exists in s8360_rel",
+      "passed": true,
+      "detail": "courses.views exists"
+    },
+    {
+      "name": "Part 1: increment_course_views returns the running total and syncs to MySQL every 10th increment",
+      "passed": true,
+      "detail": "totals 1..12, Redis 12, MySQL synced at 10 -> 10"
+    },
+    {
+      "name": "Part 2: live POST /ask - miss runs the agents, the repeated question is a cache hit with similarity and latency",
+      "passed": true,
+      "detail": "miss 8009.9 ms -> hit 29.1 ms, similarity 1.0, same answer"
+    },
+    {
+      "name": "cache_cases.yaml has 40 labeled cases (4 categories x 10)",
+      "passed": true,
+      "detail": "40 cases in 4 categories"
+    },
+    {
+      "name": "Part 3: threshold sweep saved (5 thresholds x 40 cases)",
+      "passed": true,
+      "detail": "5 thresholds x 40 cases; hit rate 72% >= 70% >= 62% >= 57% >= 42%"
+    },
+    {
+      "name": "Part 3: cache_cases.yaml was committed before the sweep and is unchanged since",
+      "passed": true,
+      "detail": "file unchanged since the sweep (sha256 a3057d2fc09d...); first commit 23:47:41 before the sweep 02:13:53"
+    },
+    {
+      "name": "Part 3.5: stale hit shown, then corrected by the data-version invalidation",
+      "passed": true,
+      "detail": "seats 40 -> 12: stale hit returned 'The course DATA-260 has 40 seats available.'; after invalidation 'The course DATA-260 has 12 seats available.'"
+    },
+    {
+      "name": "Part 4: input files hold only questions, no overlap, reference dataset present",
+      "passed": true,
+      "detail": "{'training_data': 14, 'validation_data': 12, 'test_data': 18} questions, inputs only, no overlap; 6 reference courses"
+    },
+    {
+      "name": "Part 4: lessons.json entries have the required fields",
+      "passed": true,
+      "detail": "1 validated lessons with the 5 required fields; use counts [13]"
+    },
+    {
+      "name": "Part 4: lessons mined on training only, validated on validation only",
+      "passed": true,
+      "detail": "lessons were mined on training ids only (14) and validated on validation ids only (12); test_data.json is used only by the final run"
+    },
+    {
+      "name": "Part 4: four variants evaluated on the same 18 test questions, at most 2 attempts",
+      "passed": true,
+      "detail": "{'Baseline': '10/18 @ 1.0 attempts', 'Evaluator Repair': '18/18 @ 1.44 attempts', 'Lesson Memory': '17/18 @ 1.28 attempts', 'Validated Improvement': '18/18 @ 1.22 attempts'}"
+    },
+    {
+      "name": "offline test suite passes (no Kafka / Redis / network / model)",
+      "passed": true,
+      "detail": "38/38 tests passed (0.1s)"
+    },
+    {
+      "name": "ruff passes on the repository",
+      "passed": true,
+      "detail": "All checks passed!"
+    },
+    {
+      "name": "reports/hw09/RUN_LOG.txt exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw09/RUN_LOG.txt"
+    },
+    {
+      "name": "reports/hw09/METRICS.md exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw09/METRICS.md"
+    },
+    {
+      "name": "reports/hw09/AI_USE.md exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw09/AI_USE.md or reports/hw09/AI_Usage.md"
+    },
+    {
+      "name": "reports/hw09/Pragada_HW9.pdf exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw09/Pragada_HW9.pdf"
+    }
+  ],
+  "passed": 19,
+  "failed": 0,
+  "total": 19,
+  "overall": "PASS"
+}

@@ -1,0 +1,67 @@
+{
+  "domain": "Campus Course Catalogue and Enrolment (DOMAIN_ID 0)",
+  "source": "MySQL s8360_rel, tables courses and instructors",
+  "scope": "The catalogue holds only course code, title, department, seats available and instructor. It has no schedule, room, tuition, prerequisite, credit, grade or enrolment information.",
+  "instructors": [
+    {
+      "name": "Dr. Priya Nair",
+      "department": "Data Science"
+    },
+    {
+      "name": "Dr. Marcus Lee",
+      "department": "Computer Science"
+    },
+    {
+      "name": "Dr. Elena Rossi",
+      "department": "Data Science"
+    },
+    {
+      "name": "Dr. Samuel Okafor",
+      "department": "Engineering"
+    }
+  ],
+  "courses": [
+    {
+      "courseCode": "DATA-260",
+      "courseTitle": "Introduction to Distributed Systems",
+      "department": "Data Science",
+      "seatsAvailable": 40,
+      "instructor": "Dr. Priya Nair"
+    },
+    {
+      "courseCode": "DATA-245",
+      "courseTitle": "Machine Learning Foundations",
+      "department": "Data Science",
+      "seatsAvailable": 35,
+      "instructor": "Dr. Elena Rossi"
+    },
+    {
+      "courseCode": "CS-157A",
+      "courseTitle": "Database Systems",
+      "department": "Computer Science",
+      "seatsAvailable": 45,
+      "instructor": "Dr. Marcus Lee"
+    },
+    {
+      "courseCode": "DATA-230",
+      "courseTitle": "Data Visualization",
+      "department": "Data Science",
+      "seatsAvailable": 30,
+      "instructor": "Dr. Samuel Okafor"
+    },
+    {
+      "courseCode": "CS-146",
+      "courseTitle": "Web Programming",
+      "department": "Computer Science",
+      "seatsAvailable": 50,
+      "instructor": "Dr. Marcus Lee"
+    },
+    {
+      "courseCode": "ENGR-200",
+      "courseTitle": "Engineering Analytics",
+      "department": "Engineering",
+      "seatsAvailable": 25,
+      "instructor": "Dr. Samuel Okafor"
+    }
+  ]
+}

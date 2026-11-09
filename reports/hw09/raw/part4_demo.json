@@ -1,0 +1,120 @@
+{
+  "revision": {
+    "id": "controlled",
+    "question": "How many seats are available in DATA-260?",
+    "attempts": [
+      {
+        "answer": "DATA-260 still has seats available.",
+        "lessons_used": [],
+        "evaluation": {
+          "result": "REVISE",
+          "explanation": "the answer omits the value 40",
+          "feedback": "The answer does not state the value 40. Reference facts: value 40. State the requested value explicitly.",
+          "failure_type": "missing_value",
+          "kind": "seats_of",
+          "attempt": 1
+        }
+      },
+      {
+        "answer": "DATA-260 has 40 seats available.",
+        "lessons_used": [],
+        "evaluation": {
+          "result": "PASS",
+          "explanation": "the answer matches the reference (value 40)",
+          "feedback": "",
+          "failure_type": null,
+          "kind": "seats_of",
+          "attempt": 2
+        }
+      }
+    ],
+    "attempt_count": 2,
+    "final_answer": "DATA-260 has 40 seats available.",
+    "final_result": "PASS",
+    "final_failure_type": null,
+    "kind": "seats_of",
+    "latency_s": 1.39
+  },
+  "lesson": {
+    "lesson_id": "lesson_001",
+    "failure_pattern": "The answer gives an opinion, a recommendation or a judgement (best, easy, difficult, worth taking) although the catalogue holds only facts. Example question: Is CS-146 a fun course?",
+    "correction": "The catalogue holds facts only: course code, title, department, seats and instructor. When a question asks for an opinion, a recommendation, how hard a course is or who is the best, begin with a sentence saying that the catalogue cannot judge or recommend; do not give an opinion.",
+    "created_at": "2026-11-09",
+    "use_count": 1
+  },
+  "first": {
+    "id": "first",
+    "question": "Is CS-146 a fun course?",
+    "attempts": [
+      {
+        "answer": "The course CS-146, Web Programming, is taught by Dr. Marcus Lee and has 50 seats available.",
+        "lessons_used": [],
+        "evaluation": {
+          "result": "REVISE",
+          "explanation": "the answer gives details although the catalogue holds facts, not opinions, advice or recommendations",
+          "feedback": "The reference catalogue only holds course code, title, department, seats available and instructor. It has nothing that answers this question (the catalogue holds facts, not opinions, advice or recommendations). Say that the catalogue cannot answer it; do not guess or use general knowledge.",
+          "failure_type": "unsupported_answer",
+          "kind": "opinion",
+          "attempt": 1
+        }
+      }
+    ],
+    "attempt_count": 1,
+    "final_answer": "The course CS-146, Web Programming, is taught by Dr. Marcus Lee and has 50 seats available.",
+    "final_result": "REVISE",
+    "final_failure_type": "unsupported_answer",
+    "kind": "opinion",
+    "latency_s": 1.69
+  },
+  "later": {
+    "id": "later",
+    "question": "Which Data Science course is the easiest to pass?",
+    "attempts": [
+      {
+        "answer": "The catalogue cannot judge or recommend which course is the easiest to pass.",
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "evaluation": {
+          "result": "PASS",
+          "explanation": "the answer correctly says the catalogue cannot answer this",
+          "feedback": "",
+          "failure_type": null,
+          "kind": "opinion",
+          "attempt": 1
+        }
+      }
+    ],
+    "attempt_count": 1,
+    "final_answer": "The catalogue cannot judge or recommend which course is the easiest to pass.",
+    "final_result": "PASS",
+    "final_failure_type": null,
+    "kind": "opinion",
+    "latency_s": 4.9
+  },
+  "use_count_after": 1,
+  "control_without_lesson": {
+    "id": "later",
+    "question": "Which Data Science course is the easiest to pass?",
+    "attempts": [
+      {
+        "answer": "The easiest Data Science course to pass is likely DATA-260 | Introduction to Distributed Systems, as it has the most seats available.",
+        "lessons_used": [],
+        "evaluation": {
+          "result": "REVISE",
+          "explanation": "the answer gives details although the catalogue holds facts, not opinions, advice or recommendations",
+          "feedback": "The reference catalogue only holds course code, title, department, seats available and instructor. It has nothing that answers this question (the catalogue holds facts, not opinions, advice or recommendations). Say that the catalogue cannot answer it; do not guess or use general knowledge.",
+          "failure_type": "unsupported_answer",
+          "kind": "opinion",
+          "attempt": 1
+        }
+      }
+    ],
+    "attempt_count": 1,
+    "final_answer": "The easiest Data Science course to pass is likely DATA-260 | Introduction to Distributed Systems, as it has the most seats available.",
+    "final_result": "REVISE",
+    "final_failure_type": "unsupported_answer",
+    "kind": "opinion",
+    "latency_s": 1.81
+  }
+}

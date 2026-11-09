@@ -1,0 +1,178 @@
+{
+  "table": {
+    "0.75": {
+      "hits": 29,
+      "misses": 11,
+      "false_hits": 9,
+      "should_miss_cases": 20,
+      "hit_rate": 0.725,
+      "false_hit_rate": 0.45,
+      "mean_latency_ms": 1201.7,
+      "mean_latency_ms_hit": 11.3,
+      "mean_latency_ms_miss": 4340.1,
+      "total_cost": 9.1129
+    },
+    "0.80": {
+      "hits": 28,
+      "misses": 12,
+      "false_hits": 8,
+      "should_miss_cases": 20,
+      "hit_rate": 0.7,
+      "false_hit_rate": 0.4,
+      "mean_latency_ms": 1352.5,
+      "mean_latency_ms_hit": 14.9,
+      "mean_latency_ms_miss": 4473.5,
+      "total_cost": 8.1228
+    },
+    "0.85": {
+      "hits": 25,
+      "misses": 15,
+      "false_hits": 6,
+      "should_miss_cases": 20,
+      "hit_rate": 0.625,
+      "false_hit_rate": 0.3,
+      "mean_latency_ms": 1942.3,
+      "mean_latency_ms_hit": 18.9,
+      "mean_latency_ms_miss": 5148.2,
+      "total_cost": 6.1525
+    },
+    "0.90": {
+      "hits": 23,
+      "misses": 17,
+      "false_hits": 4,
+      "should_miss_cases": 20,
+      "hit_rate": 0.575,
+      "false_hit_rate": 0.2,
+      "mean_latency_ms": 2121.6,
+      "mean_latency_ms_hit": 17.5,
+      "mean_latency_ms_miss": 4968.4,
+      "total_cost": 4.1723
+    },
+    "0.95": {
+      "hits": 17,
+      "misses": 23,
+      "false_hits": 2,
+      "should_miss_cases": 20,
+      "hit_rate": 0.425,
+      "false_hit_rate": 0.1,
+      "mean_latency_ms": 3154.1,
+      "mean_latency_ms_hit": 26.2,
+      "mean_latency_ms_miss": 5466.1,
+      "total_cost": 2.2317
+    }
+  },
+  "category_similarity": {
+    "exact_duplicate": {
+      "min": 1.0,
+      "mean": 1.0,
+      "max": 1.0
+    },
+    "paraphrase": {
+      "min": 0.8334,
+      "mean": 0.9325,
+      "max": 0.9867
+    },
+    "superficially_similar": {
+      "min": 0.6332,
+      "mean": 0.8647,
+      "max": 0.9676
+    },
+    "unrelated": {
+      "min": 0.1017,
+      "mean": 0.1663,
+      "max": 0.2456
+    }
+  },
+  "wrong_cases": {
+    "0.75": {
+      "false_hits": [
+        "sd01",
+        "sd02",
+        "sd03",
+        "sd04",
+        "sd05",
+        "sd06",
+        "sd07",
+        "sd08",
+        "sd09"
+      ],
+      "missed_hits": []
+    },
+    "0.80": {
+      "false_hits": [
+        "sd01",
+        "sd03",
+        "sd04",
+        "sd05",
+        "sd06",
+        "sd07",
+        "sd08",
+        "sd09"
+      ],
+      "missed_hits": []
+    },
+    "0.85": {
+      "false_hits": [
+        "sd01",
+        "sd03",
+        "sd05",
+        "sd06",
+        "sd07",
+        "sd08"
+      ],
+      "missed_hits": [
+        "pa01"
+      ]
+    },
+    "0.90": {
+      "false_hits": [
+        "sd01",
+        "sd03",
+        "sd06",
+        "sd07"
+      ],
+      "missed_hits": [
+        "pa01"
+      ]
+    },
+    "0.95": {
+      "false_hits": [
+        "sd03",
+        "sd06"
+      ],
+      "missed_hits": [
+        "pa01",
+        "pa02",
+        "pa03",
+        "pa06",
+        "pa08"
+      ]
+    }
+  },
+  "chosen_threshold": "0.95",
+  "sensitivity_best_threshold_by_cost_ratio": {
+    "1": "0.80",
+    "3": "0.95",
+    "10": "0.95",
+    "30": "0.95",
+    "100": "0.95",
+    "300": "0.95"
+  },
+  "false_hit_in_full": {
+    "threshold": 0.85,
+    "case_id": "sd03",
+    "incoming_query": "Which department has the fewest available seats?",
+    "cached_query": "Which department has the most available seats?",
+    "similarity": 0.9676,
+    "cached_answer_returned": "The department with the most available seats is Data Science with a total of 105 seats.",
+    "correct_answer": "Engineering, with 25 seats (not Data Science).",
+    "words_only_in_incoming": [
+      "fewest"
+    ],
+    "words_only_in_cached": [
+      "most"
+    ],
+    "shared_words": 6,
+    "incoming_words": 7
+  }
+}

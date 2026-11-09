@@ -1,0 +1,14 @@
+=== 2026-11-09 02:27:29 === Part 4: validation gate for each candidate lesson
+$ PYTHONPATH=. python scripts/hw9_part4_run.py validate 
+=== 2026-11-09 02:27:29 === validate 2 candidate lessons on 12 validation questions (single attempt, no revision)
+before any lesson: 9/12 correct
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 22632.72it/s]
+
+lesson_001 (The answer gives an opinion, a recommendation or a judgement (best, ea...)
+  kept: fixed ['va03', 'va04', 'va11'], regressed none, failing 3 -> 0, unsupported answers 3 -> 0
+
+lesson_002 (The answer gives a wrong total for the seats of all courses in the cat...)
+  rejected: fixed none, regressed ['va05'], failing 0 -> 1, unsupported answers 0 -> 0
+
+kept 1 of 2 lessons -> part4/lessons.json; validation now 12/12 correct
+saved reports/hw09/raw/part4_validation.json

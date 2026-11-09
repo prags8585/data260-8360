@@ -1,0 +1,38 @@
+=== 2026-11-09 02:25:12 === Part 4: mine lessons from the training questions
+$ PYTHONPATH=. python scripts/hw9_part4_run.py mine 
+=== 2026-11-09 02:25:12 === mine lessons: baseline Answering Agent on 14 training questions (no lessons, no revision)
+  tr01 PASS   attempts=1   1.2s  [seats_of] How many seats are available in DATA-245?
+        -> There are 35 seats available in DATA-245.
+  tr02 PASS   attempts=1   0.8s  [instructor_of] Who teaches Web Programming?
+        -> Web Programming is taught by Dr. Marcus Lee.
+  tr03 PASS   attempts=1   1.1s  [dept_total_seats] What is the total number of seats in the Data Science department?
+        -> The total number of seats in the Data Science department is 105.
+  tr04 PASS   attempts=1   1.3s  [course_extreme] Which course has the most available seats?
+        -> CS-146 | Web Programming has the most available seats with 50 spots.
+  tr05 PASS   attempts=1   1.5s  [instructor_course_count] How many courses does Dr. Samuel Okafor teach?
+        -> Dr. Samuel Okafor teaches two courses: DATA-230 and ENGR-200.
+  tr06 PASS   attempts=1   1.2s  [unrelated] What is the capital of France?
+        -> I cannot provide information about the capital of France as it is not related to the course catalogue.
+  tr07 PASS   attempts=1   1.2s  [unavailable_field] What time does DATA-260 meet?
+        -> The course DATA-260 does not have meeting times listed in the provided catalogue.
+  tr08 PASS   attempts=1   1.4s  [unknown_entity] How many seats are available in DATA-999?
+        -> There are no seats available for DATA-999 as it is not listed in the course catalogue.
+  tr09 REVISE attempts=1   2.0s  [opinion] Is DATA-260 a difficult course?
+        -> The difficulty of DATA-260 can vary by individual, but it is a foundational course in distributed systems, which can be challenging due to its complex concepts.   (failure: unsupported_answer)
+  tr10 REVISE attempts=1   2.3s  [opinion] Who is the best instructor in the Data Science department?
+        -> The best instructor in the Data Science department is Dr. Priya Nair, Dr. Elena Rossi, and Dr. Samuel Okafor, as they all teach courses in that department.   (failure: unsupported_answer)
+  tr11 REVISE attempts=1   1.1s  [all_total_seats] How many seats are available across all courses?
+        -> The total number of seats available across all courses is 175.   (failure: wrong_value)
+  tr12 REVISE attempts=1   1.4s  [opinion] Recommend a course for someone who likes databases.
+        -> CS-157A | Database Systems | Computer Science | 45 | Dr. Marcus Lee   (failure: unsupported_answer)
+  tr13 PASS   attempts=1   1.2s  [unavailable_field] What is the tuition for CS-157A?
+        -> The tuition for CS-157A is not provided in the course catalogue.
+  tr14 REVISE attempts=1   0.9s  [all_total_seats] How many seats does the catalogue offer in total?
+        -> The catalogue offers a total of 175 seats.   (failure: wrong_value)
+
+failure patterns found (a pattern seen at least twice is a repeated failure):
+  unsupported_answer:opinion x3  ['tr09', 'tr10', 'tr12']  -> lesson_001
+  wrong_value:all_total_seats x2  ['tr11', 'tr14']  -> lesson_002
+
+2 candidate lessons written to part4/lessons_candidates.json
+saved reports/hw09/raw/part4_mine.json

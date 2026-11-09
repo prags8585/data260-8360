@@ -1,0 +1,18 @@
+=== 2026-11-09 02:21:04 === Redis Stack (vector index), Kafka and MySQL for HW9
+$ docker compose -f docker-compose.cache.yml up -d
+ Container s8360-redis  Running
+$ docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}' | grep -E 'NAMES|s8360'
+NAMES         IMAGE                             STATUS                PORTS
+s8360-redis   redis/redis-stack-server:latest   Up 2 days (healthy)   0.0.0.0:6382->6379/tcp, [::]:6382->6379/tcp
+s8360-kafka   apache/kafka:3.8.0                Up 2 days (healthy)   0.0.0.0:9092->9092/tcp, [::]:9092->9092/tcp
+s8360-mongo   mongo:7.0                         Up 2 days             0.0.0.0:27017->27017/tcp, [::]:27017->27017/tcp
+s8360-mysql   mysql:8.0                         Up 2 days             0.0.0.0:3306->3306/tcp, [::]:3306->3306/tcp
+$ redis-cli -p 6382 MODULE LIST | grep -A1 '^name' | grep -v -E '^--' | paste - - | awk '{print $2, $4}'
+ReJSON 
+redisgears_2 
+search 
+bf 
+timeseries 
+RedisCompat 
+$ redis-cli -p 6382 FT.INFO s8360_cache_idx | head -26 | paste -sd' ' | fold -w 150 -s
+usage: paste [-s] [-d delimiters] file ...

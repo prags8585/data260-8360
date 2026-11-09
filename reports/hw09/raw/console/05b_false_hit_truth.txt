@@ -1,0 +1,9 @@
+=== 2026-11-09 02:21:36 === Part 3.3: what MySQL says is the correct answer
+$ docker exec s8360-mysql mysql -uroot -phw4pass s8360_rel -t -e "SELECT department, SUM(seats_available) AS total_seats FROM courses GROUP BY department ORDER BY total_seats" 2>/dev/null
++------------------+-------------+
+| department       | total_seats |
++------------------+-------------+
+| Engineering      |          25 |
+| Computer Science |          95 |
+| Data Science     |         105 |
++------------------+-------------+

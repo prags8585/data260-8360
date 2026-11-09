@@ -160,3 +160,22 @@ python tests_hw8.py && PYTHONPATH=. python verify_hw08.py        # offline tests
 ```
 
 Writer switches used for the "before fix" runs: `--no-idempotency`, `--auto-commit`, `--no-dlq` (or `--naive` for all three). Port 8260 is also used by the HW7 `uvicorn main:app`; stop that first.
+
+## HW9 - Redis counter, semantic response cache, self-improving agents
+
+PREFIX `s8360`, PORT_BASE 8260, primary entity Course. Redis Stack runs in Docker on port 6382 (the Homebrew Redis on 6379 has no search module); all keys start with `s8360:`.
+Code: `cache_svc/` (counter on `CourseDB`, vector cache, ingress API), `selfimprove/` (Answering Agent, Evaluator Agent, lessons), data in `cache_cases.yaml` and `part4/`.
+
+```bash
+docker compose -f docker-compose.cache.yml up -d                  # Redis Stack (vector index) on 6382
+docker compose -f docker-compose.kafka.yml up -d kafka kafka-init # HW8 broker; planner.py / writer.py / reviewer.py as in HW8, with CATALOGUE_SOURCE=mysql for the writer
+PYTHONPATH=. python scripts/hw9_migrate.py                        # adds courses.views
+PYTHONPATH=. python scripts/hw9_part1_counter.py                  # Part 1: 25 accesses, sync to MySQL every 10th
+PYTHONPATH=. uvicorn cache_svc.api:app --port 8260                # Part 2: POST /ask (semantic cache in front of the HW8 agents)
+PYTHONPATH=. python scripts/hw9_part2_cache_demo.py               # Part 2: 12 queries, hit rate and latency
+PYTHONPATH=. python scripts/hw9_threshold_sweep.py                # Part 3: 40 labeled cases (cache_cases.yaml) at 0.75 ... 0.95
+PYTHONPATH=. python scripts/hw9_stale_demo.py                     # Part 3.5: stale hit and invalidation by data version
+PYTHONPATH=. python scripts/hw9_export_reference.py               # Part 4: reference dataset from s8360_rel
+PYTHONPATH=. python scripts/hw9_part4_run.py mine|validate|demo|final
+python tests_hw9.py && PYTHONPATH=. python verify_hw09.py         # offline tests, then the live smoke test (writes verification.json)
+```
