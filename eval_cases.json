@@ -1,0 +1,2312 @@
+{
+  "description": "20 Writer drafts from the s8360 course-catalogue system (HW8/HW9 Writer). Frozen before any judge score was computed.",
+  "writer_model": "qwen3:8b",
+  "writer_settings": {
+    "temperature": 0.0,
+    "seed": 8360,
+    "num_predict": 400,
+    "catalogue_source": "mysql"
+  },
+  "collected_with": "scripts/hw10_collect_drafts.py",
+  "cases": [
+    {
+      "case_id": "e01",
+      "question": "How many seats are available in CS-146?",
+      "writer_brain": "rule",
+      "plan": [
+        "Identify which catalogue facts the question needs",
+        "Look up those facts in the catalogue tools",
+        "Answer in two or three sentences using only those facts"
+      ],
+      "plan_source": "rule",
+      "draft": "Data Science has the most available seats (105 across 3 courses); its largest course is DATA-260 (Introduction to Distributed Systems) with 40 seats.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e02",
+      "question": "Which instructor teaches DATA-230?",
+      "writer_brain": "llm",
+      "plan": [
+        "Identify the course DATA-230 in the catalogue data.",
+        "Retrieve the list of instructors associated with DATA-230.",
+        "Return the name of the instructor."
+      ],
+      "plan_source": "llm",
+      "draft": "The instructor who teaches DATA-230 is Dr. Samuel Okafor.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e03",
+      "question": "Who teaches DATA-260?",
+      "writer_brain": "rule",
+      "plan": [
+        "Identify which catalogue facts the question needs",
+        "Look up those facts in the catalogue tools",
+        "Answer in two or three sentences using only those facts"
+      ],
+      "plan_source": "rule",
+      "draft": "Data Science has the most available seats (105 across 3 courses); its largest course is DATA-260 (Introduction to Distributed Systems) with 40 seats.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e04",
+      "question": "Which course has the fewest available seats?",
+      "writer_brain": "llm",
+      "plan": [
+        "Identify all courses with their available seat counts from the catalogue data.",
+        "Find the course with the minimum available seat count.",
+        "Return the course name with the fewest available seats."
+      ],
+      "plan_source": "llm",
+      "draft": "The course with the fewest available seats is DATA-230, which has 30 seats available.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e05",
+      "question": "What time does DATA-245 meet?",
+      "writer_brain": "llm",
+      "plan": [
+        "Find the course DATA-245 in the catalogue data.",
+        "Retrieve the meeting time associated with DATA-245.",
+        "Return the meeting time to the user."
+      ],
+      "plan_source": "llm",
+      "draft": "The course DATA-245 meets at 10:00 AM.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e06",
+      "question": "How many courses does Dr. Samuel Okafor teach?",
+      "writer_brain": "llm",
+      "plan": [
+        "Identify Dr. Samuel Okafor's faculty profile in the catalogue data.",
+        "Count the number of courses associated with Dr. Samuel Okafor.",
+        "Return the total count as the answer."
+      ],
+      "plan_source": "llm",
+      "draft": "Dr. Samuel Okafor teaches 2 courses.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e07",
+      "question": "Which department has the most available seats, and which course there has the most seats?",
+      "writer_brain": "rule",
+      "plan": [
+        "Identify which catalogue facts the question needs",
+        "Look up those facts in the catalogue tools",
+        "Answer in two or three sentences using only those facts"
+      ],
+      "plan_source": "rule",
+      "draft": "Data Science has the most available seats (105 across 3 courses); its largest course is DATA-260 (Introduction to Distributed Systems) with 40 seats.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e08",
+      "question": "How many courses does the Engineering department offer?",
+      "writer_brain": "rule",
+      "plan": [
+        "Identify which catalogue facts the question needs",
+        "Look up those facts in the catalogue tools",
+        "Answer in two or three sentences using only those facts"
+      ],
+      "plan_source": "rule",
+      "draft": "Data Science has the most available seats (105 across 3 courses); its largest course is DATA-260 (Introduction to Distributed Systems) with 40 seats.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e09",
+      "question": "What are the prerequisites for DATA-230?",
+      "writer_brain": "llm",
+      "plan": [
+        "Identify the course DATA-230 in the catalogue data.",
+        "Retrieve the prerequisites associated with DATA-230.",
+        "Present the prerequisites in a clear format."
+      ],
+      "plan_source": "llm",
+      "draft": "The prerequisites for DATA-230 are none.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e10",
+      "question": "Which Computer Science course has the most seats?",
+      "writer_brain": "llm",
+      "plan": [
+        "Identify all Computer Science courses in the catalogue data.",
+        "Determine the number of seats available for each course.",
+        "Select the course with the highest number of seats."
+      ],
+      "plan_source": "llm",
+      "draft": "The Computer Science course with the most seats is CS-146, which has 50 seats available.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e11",
+      "question": "How many seats are available across all courses?",
+      "writer_brain": "llm",
+      "plan": [
+        "Sum the seat counts for each course in the catalogue data.",
+        "Return the total sum as the number of available seats across all courses."
+      ],
+      "plan_source": "llm",
+      "draft": "The total number of seats available across all courses is 225.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e12",
+      "question": "How many seats are available in DATA-245?",
+      "writer_brain": "llm",
+      "plan": [
+        "Identify the course DATA-245 in the catalogue data.",
+        "Retrieve the seat availability information for DATA-245.",
+        "Return the number of available seats for DATA-245."
+      ],
+      "plan_source": "llm",
+      "draft": "The course DATA-245 has 35 seats available.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e13",
+      "question": "List the courses taught by Dr. Marcus Lee.",
+      "writer_brain": "llm",
+      "plan": [
+        "Identify Dr. Marcus Lee's faculty ID or equivalent identifier from the catalogue data.",
+        "Search for all courses associated with Dr. Marcus Lee using the identified identifier.",
+        "Extract and list the course names or codes taught by Dr. Marcus Lee."
+      ],
+      "plan_source": "llm",
+      "draft": "Dr. Marcus Lee teaches the courses CS-157A and CS-146.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e14",
+      "question": "Who teaches Machine Learning Foundations?",
+      "writer_brain": "llm",
+      "plan": [
+        "Identify the course titled 'Machine Learning Foundations' in the catalogue data.",
+        "Retrieve the list of instructors or teachers associated with that course.",
+        "Return the names of the instructors who teach the course."
+      ],
+      "plan_source": "llm",
+      "draft": "The course \"Machine Learning Foundations\" is taught by Dr. Elena Rossi.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e15",
+      "question": "Is DATA-260 a difficult course?",
+      "writer_brain": "llm",
+      "plan": [
+        "Identify the course DATA-260 in the catalogue data.",
+        "Check the course description and prerequisites for indicators of difficulty.",
+        "Look for student reviews or difficulty ratings associated with the course."
+      ],
+      "plan_source": "llm",
+      "draft": "The course DATA-260 is titled \"Introduction to Distributed Systems\" and is offered by the Data Science department. It is taught by Dr. Priya Nair. The course does not have any listed prerequisites, but its limited seats (40) may indicate it is a popular or challenging course. There are no student reviews or difficulty ratings provided in the data.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e16",
+      "question": "Recommend a course for someone who likes databases.",
+      "writer_brain": "llm",
+      "plan": [
+        "Identify courses related to databases from the catalogue data.",
+        "Select a course that aligns with the user's interest in databases.",
+        "Provide a recommendation with a brief description of the course."
+      ],
+      "plan_source": "llm",
+      "draft": "For someone who likes databases, I recommend the course \"CS-157A: Database Systems\" offered by Dr. Marcus Lee in the Computer Science department. This course focuses on the design, implementation, and management of database systems, making it ideal for those interested in databases. It has 45 seats available, ensuring a good opportunity to enroll.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e17",
+      "question": "Which department has the most available seats?",
+      "writer_brain": "rule",
+      "plan": [
+        "Identify which catalogue facts the question needs",
+        "Look up those facts in the catalogue tools",
+        "Answer in two or three sentences using only those facts"
+      ],
+      "plan_source": "rule",
+      "draft": "Data Science has the most available seats (105 across 3 courses); its largest course is DATA-260 (Introduction to Distributed Systems) with 40 seats.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e18",
+      "question": "What is the total number of seats in the Data Science department?",
+      "writer_brain": "llm",
+      "plan": [
+        "Identify the Data Science department in the course catalog data.",
+        "Sum the seat numbers for all courses under the Data Science department.",
+        "Return the total number of seats as the final answer."
+      ],
+      "plan_source": "llm",
+      "draft": "The total number of seats in the Data Science department is 105.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e19",
+      "question": "Which department does ENGR-200 belong to?",
+      "writer_brain": "llm",
+      "plan": [
+        "Identify the department code associated with the course ENGR-200.",
+        "Retrieve the department name corresponding to the identified code from the catalogue data.",
+        "Return the department name as the answer."
+      ],
+      "plan_source": "llm",
+      "draft": "The course ENGR-200 belongs to the Engineering department.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    },
+    {
+      "case_id": "e20",
+      "question": "What is the title of DATA-245?",
+      "writer_brain": "rule",
+      "plan": [
+        "Identify which catalogue facts the question needs",
+        "Look up those facts in the catalogue tools",
+        "Answer in two or three sentences using only those facts"
+      ],
+      "plan_source": "rule",
+      "draft": "Data Science has the most available seats (105 across 3 courses); its largest course is DATA-260 (Introduction to Distributed Systems) with 40 seats.",
+      "facts": {
+        "departments": [
+          {
+            "group": "Computer Science",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Data Science",
+            "courses": 3,
+            "totalSeats": 105
+          },
+          {
+            "group": "Engineering",
+            "courses": 1,
+            "totalSeats": 25
+          }
+        ],
+        "instructors": [
+          {
+            "group": "Dr. Elena Rossi",
+            "courses": 1,
+            "totalSeats": 35
+          },
+          {
+            "group": "Dr. Marcus Lee",
+            "courses": 2,
+            "totalSeats": 95
+          },
+          {
+            "group": "Dr. Priya Nair",
+            "courses": 1,
+            "totalSeats": 40
+          },
+          {
+            "group": "Dr. Samuel Okafor",
+            "courses": 2,
+            "totalSeats": 55
+          }
+        ],
+        "courses": [
+          {
+            "id": 3,
+            "courseCode": "CS-157A",
+            "courseTitle": "Database Systems",
+            "department": "Computer Science",
+            "seatsAvailable": 45,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 14,
+            "courseCode": "CS-146",
+            "courseTitle": "Web Programming",
+            "department": "Computer Science",
+            "seatsAvailable": 50,
+            "instructorName": "Dr. Marcus Lee"
+          },
+          {
+            "id": 1,
+            "courseCode": "DATA-260",
+            "courseTitle": "Introduction to Distributed Systems",
+            "department": "Data Science",
+            "seatsAvailable": 40,
+            "instructorName": "Dr. Priya Nair"
+          },
+          {
+            "id": 2,
+            "courseCode": "DATA-245",
+            "courseTitle": "Machine Learning Foundations",
+            "department": "Data Science",
+            "seatsAvailable": 35,
+            "instructorName": "Dr. Elena Rossi"
+          },
+          {
+            "id": 13,
+            "courseCode": "DATA-230",
+            "courseTitle": "Data Visualization",
+            "department": "Data Science",
+            "seatsAvailable": 30,
+            "instructorName": "Dr. Samuel Okafor"
+          },
+          {
+            "id": 15,
+            "courseCode": "ENGR-200",
+            "courseTitle": "Engineering Analytics",
+            "department": "Engineering",
+            "seatsAvailable": 25,
+            "instructorName": "Dr. Samuel Okafor"
+          }
+        ],
+        "totals": {
+          "courses": 6,
+          "seats": 225
+        },
+        "course_codes": [
+          "DATA-260",
+          "DATA-245",
+          "CS-157A",
+          "DATA-230",
+          "CS-146",
+          "ENGR-200"
+        ]
+      }
+    }
+  ]
+}
