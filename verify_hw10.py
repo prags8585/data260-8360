@@ -195,7 +195,7 @@ for name, fn in [
     ("ruff passes on the repository", ruff_clean),
 ]:
     check(name, fn)
-for f in ["reports/hw10/RUN_LOG.txt", "reports/hw10/METRICS.md", "reports/hw10/AI_USE.md|AI_Usage.md", "reports/hw10/Pragada_HW10.pdf"]:
+for f in ["reports/hw10/RUN_LOG.txt", "reports/hw10/METRICS.md", "reports/hw10/HW10_AI_USE.md|AI_USE.md|AI_Usage.md", "reports/hw10/Pragada_HW10.pdf"]:
     names = [f.rsplit("/", 1)[0] + "/" + n for n in f.rsplit("/", 1)[1].split("|")]
     check(f"{names[0]} exists and is non-empty", lambda names=names: (any((ROOT / n).exists() and (ROOT / n).stat().st_size > 0 for n in names), " or ".join(names)))
 check("the PDF is within the 35-page limit", pdf_pages)

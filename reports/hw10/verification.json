@@ -1,10 +1,10 @@
 {
   "homework": "HW10",
   "sid4": "8360",
-  "commit_hash": "fa2b717f55783cb5c77836e4c096d96fa0b11682",
+  "commit_hash": "f43ad309bf7ae479142bd33a83cdc8d7a67f895a",
   "model": "qwen3:8b via Ollama (temperature 0, seed 8360); judge: DeepEval GEval on the same local model",
   "seed": 8360,
-  "timestamp": "2026-11-16T08:55:42.556328+00:00",
+  "timestamp": "2026-11-16T09:43:10.576322+00:00",
   "checks": [
     {
       "name": "docker: s8360-redis, s8360-kafka and s8360-mysql are running",
@@ -64,7 +64,7 @@
     {
       "name": "offline tests pass (HW10, HW9, HW8; no Kafka / Redis / network / model)",
       "passed": true,
-      "detail": "tests_hw10.py: 40/40 tests passed (1.0s); tests_hw9.py: 38/38 tests passed (0.0s); tests_hw8.py: 24/24 tests passed (0.0s)"
+      "detail": "tests_hw10.py: 40/40 tests passed (1.1s); tests_hw9.py: 38/38 tests passed (0.1s); tests_hw8.py: 24/24 tests passed (0.0s)"
     },
     {
       "name": "ruff passes on the repository",
@@ -82,9 +82,9 @@
       "detail": "reports/hw10/METRICS.md"
     },
     {
-      "name": "reports/hw10/AI_USE.md exists and is non-empty",
+      "name": "reports/hw10/HW10_AI_USE.md exists and is non-empty",
       "passed": true,
-      "detail": "reports/hw10/AI_USE.md or reports/hw10/AI_Usage.md"
+      "detail": "reports/hw10/HW10_AI_USE.md or reports/hw10/AI_USE.md or reports/hw10/AI_Usage.md"
     },
     {
       "name": "reports/hw10/Pragada_HW10.pdf exists and is non-empty",
@@ -94,7 +94,7 @@
     {
       "name": "the PDF is within the 35-page limit",
       "passed": true,
-      "detail": "32 pages (limit 35)"
+      "detail": "24 pages (limit 35)"
     }
   ],
   "passed": 18,
