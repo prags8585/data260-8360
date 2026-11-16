@@ -1,0 +1,74 @@
+[
+  {
+    "case": "c01",
+    "question": "How many seats are available in DATA-260?",
+    "trace_id": "86141204-40cc-440d-ae91-d50d3094c406",
+    "is_cached": false,
+    "status": "approved",
+    "answer": "The course DATA-260 has 40 seats available.",
+    "latency_ms": 8843.3
+  },
+  {
+    "case": "c02",
+    "question": "Who teaches Web Programming?",
+    "trace_id": "a871bec7-320a-40c6-8909-c5e9df4159f3",
+    "is_cached": false,
+    "status": "approved",
+    "answer": "The course \"Web Programming\" is taught by Dr. Marcus Lee.",
+    "latency_ms": 9071.5
+  },
+  {
+    "case": "c03",
+    "question": "How many seats do the Computer Science courses offer in total?",
+    "trace_id": "3d759a78-56a1-43d0-94f9-6eef419b1c9a",
+    "is_cached": false,
+    "status": "approved",
+    "answer": "The Computer Science courses offer a total of 95 seats.",
+    "latency_ms": 8169.1
+  },
+  {
+    "case": "c04",
+    "question": "Which course has the most available seats?",
+    "trace_id": "f207b4fe-1cd1-440c-8711-b6ffc8e65ce8",
+    "is_cached": false,
+    "status": "approved",
+    "answer": "The course with the most available seats is CS-146, which has 50 seats available.",
+    "latency_ms": 9088.2
+  },
+  {
+    "case": "c05",
+    "question": "How many courses does Dr. Marcus Lee teach?",
+    "trace_id": "b7ed48d7-eaa7-4a1a-b6e5-61705e4a678c",
+    "is_cached": false,
+    "status": "approved",
+    "answer": "Dr. Marcus Lee teaches 2 courses. The courses are CS-157A and CS-146.",
+    "latency_ms": 9725.9
+  },
+  {
+    "case": "c06",
+    "question": "Which department has the most available seats, and which course there has the most seats?",
+    "trace_id": "bf4e76c1-692b-414d-8b48-7e1f8ede152d",
+    "is_cached": false,
+    "status": "approved",
+    "answer": "The department with the most available seats is Data Science, and the course within that department with the most seats is DATA-260 with 40 seats available.",
+    "latency_ms": 9501.5
+  },
+  {
+    "case": "c07",
+    "question": "List the courses in the Data Science department.",
+    "trace_id": "6d6fcea1-e590-4f2d-9d22-2f207f28a4ba",
+    "is_cached": false,
+    "status": "approved",
+    "answer": "The courses in the Data Science department are: Introduction to Distributed Systems (DATA-260), Machine Learning Foundations (DATA-245), and Data Visualization (DATA-230).",
+    "latency_ms": 10383.4
+  },
+  {
+    "case": "c08",
+    "question": "What time does DATA-260 meet?",
+    "trace_id": "fc1aa986-8493-431a-bb65-86053bb52733",
+    "is_cached": false,
+    "status": "rejected",
+    "answer": null,
+    "latency_ms": 8991.2
+  }
+]

@@ -2,26 +2,33 @@
 import argparse
 import logging
 import signal
+import time
 
 from kafka_svc import config
 from kafka_svc.brains import make_model, plan_llm, plan_rule
 from kafka_svc.bus import compact, dead_letter, decode, make_consumer, make_producer, send, setup_logging, utc_now
+from tracing.spans import queue_span, span
 
 log = logging.getLogger("planner")
 
 
 def handle(msg, producer, model) -> None:
+    started = time.time()
     body = decode(msg)
-    if body is None or not isinstance(body.get("correlation_id"), str) or not isinstance(body.get("question"), str):
-        raise ValueError("inbox message needs a correlation_id and a question")
-    cid = body["correlation_id"]
-    log.info("received question from %s partition=%d offset=%d correlation_id=%s message=%s",
-             msg.topic(), msg.partition(), msg.offset(), cid, compact(body))
-    plan, source = plan_llm(model, body["question"]) if model else (plan_rule(body["question"]), "rule")
-    task = {"correlation_id": cid, "question": body["question"], "plan": plan, "plan_source": source, "planned_at": utc_now()}
-    log.info("sending plan to %s correlation_id=%s message=%s", config.TASKS_TOPIC, cid, compact(task))
-    partition, offset = send(producer, config.TASKS_TOPIC, task, key=cid)
-    log.info("plan acknowledged by the broker partition=%d offset=%d correlation_id=%s", partition, offset, cid)
+    cid_key = msg.key().decode("utf-8", "replace") if msg.key() else None
+    queue_span(cid_key, "queue_inbox", msg, started, service="planner")  # trace_id = correlation_id = the message key
+    with span(cid_key, "planner") as sp:
+        if body is None or not isinstance(body.get("correlation_id"), str) or not isinstance(body.get("question"), str):
+            raise ValueError("inbox message needs a correlation_id and a question")
+        cid = body["correlation_id"]
+        log.info("received question from %s partition=%d offset=%d correlation_id=%s message=%s",
+                 msg.topic(), msg.partition(), msg.offset(), cid, compact(body))
+        plan, source = plan_llm(model, body["question"]) if model else (plan_rule(body["question"]), "rule")
+        task = {"correlation_id": cid, "question": body["question"], "plan": plan, "plan_source": source, "planned_at": utc_now()}
+        log.info("sending plan to %s correlation_id=%s message=%s", config.TASKS_TOPIC, cid, compact(task))
+        partition, offset = send(producer, config.TASKS_TOPIC, task, key=cid)
+        log.info("plan acknowledged by the broker partition=%d offset=%d correlation_id=%s", partition, offset, cid)
+        sp.set(plan_source=source, plan_steps=len(plan), partition=partition, offset=offset)
 
 
 def main() -> None:

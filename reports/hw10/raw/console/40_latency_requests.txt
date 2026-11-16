@@ -1,0 +1,55 @@
+=== 2026-11-15 01:25:18 === Part 4.3: 50 confirmed cache-miss requests and 30 cache hits
+$ .venv/bin/python scripts/hw10_latency_experiment.py
+miss  1/50 approved      9918 ms sim=0.8804 Does DATA-260 still have open seats, and how many?
+miss  2/50 approved      8854 ms sim=0.5446 What is the department of DATA-245?
+miss  3/50 approved      8937 ms sim=0.8147 How many courses does the Data Science department offer?
+miss  4/50 approved      9383 ms sim=0.4965 What is the title of the course CS-157A?
+miss  5/50 approved      9574 ms sim=0.618 How many courses does the Engineering department offer?
+miss  6/50 approved     10528 ms sim=0.8285 Does DATA-230 still have open seats, and how many?
+miss  7/50 approved     10097 ms sim=0.8939 Which department has the fewest available seats?
+miss  8/50 approved     11058 ms sim=0.5664 Which instructor is assigned to ENGR-200?
+miss  9/50 approved     11374 ms sim=0.348 What is the department of ENGR-200?
+miss 10/50 approved     10464 ms sim=0.4887 What is the title of the course ENGR-200?
+miss 11/50 approved     10534 ms sim=0.9372 Which course has the most seats left?
+miss 12/50 approved     11631 ms sim=0.8451 How many courses does the Computer Science department offer?
+miss 13/50 approved     11782 ms sim=0.6062 I want to enrol in DATA-260; how many places are left?
+miss 14/50 approved     10970 ms sim=0.7789 What is the title of the course DATA-230?
+miss 15/50 approved     12289 ms sim=0.6313 How many courses does Dr. Elena Rossi teach?
+miss 16/50 approved     12176 ms sim=0.6155 Which instructor is assigned to CS-146?
+miss 17/50 approved     11018 ms sim=0.5855 I want to enrol in CS-146; how many places are left?
+miss 18/50 approved     12196 ms sim=0.5682 I want to enrol in DATA-245; how many places are left?
+miss 19/50 approved     11396 ms sim=0.3192 What is the department of CS-157A?
+miss 20/50 approved     12473 ms sim=0.8948 What courses does Dr. Marcus Lee teach, and how many seats do they have in total?
+miss 21/50 approved     14371 ms sim=0.8909 List every course offered by Data Science.
+miss 22/50 approved     11950 ms sim=0.4121 I want to enrol in ENGR-200; how many places are left?
+miss 23/50 approved     11424 ms sim=0.3565 What is the department of CS-146?
+miss 24/50 approved     11228 ms sim=0.8884 Which instructor is assigned to DATA-230?
+miss 25/50 approved     11131 ms sim=0.6483 What is the total seat count of the Engineering department?
+miss 26/50 approved     14052 ms sim=0.5575 What courses does Dr. Priya Nair teach, and how many seats do they have in total?
+miss 27/50 approved     10428 ms sim=0.833 Which instructor is assigned to DATA-245?
+miss 28/50 approved     11732 ms sim=0.6651 Does CS-157A still have open seats, and how many?
+miss 29/50 approved     11249 ms sim=0.7201 What is the title of the course DATA-245?
+miss 30/50 approved     11843 ms sim=0.5728 What is the department of DATA-230?
+miss 31/50 rejected     13436 ms sim=0.7057 How many seats are open across the whole catalogue?
+miss 32/50 approved     12195 ms sim=0.7226 Which course has the least room left?
+miss 33/50 approved     12770 ms sim=0.6326 How many courses does Dr. Priya Nair teach?
+miss 34/50 approved     12006 ms sim=0.8441 Does DATA-245 still have open seats, and how many?
+miss 35/50 approved     12773 ms sim=0.8274 What is the total seat count of the Computer Science department?
+miss 36/50 approved     13592 ms sim=0.583 What courses does Dr. Samuel Okafor teach, and how many seats do they have in total?
+miss 37/50 approved     14144 ms sim=0.552 I want to enrol in DATA-230; how many places are left?
+miss 38/50 approved     11576 ms sim=0.7425 What is the title of the course DATA-260?
+miss 39/50 approved     11524 ms sim=0.5198 What is the title of the course CS-146?
+miss 39/50 DISCARDED (cache hit)      143 ms sim=1.0 How many courses does Dr. Marcus Lee teach?
+miss 40/50 approved     13620 ms sim=0.5601 What courses does Dr. Elena Rossi teach, and how many seats do they have in total?
+miss 41/50 approved     12150 ms sim=0.6639 List every course offered by Computer Science.
+miss 42/50 approved     11040 ms sim=0.6582 Which instructor teaches the most courses?
+miss 43/50 approved     11452 ms sim=0.556 What is the department of DATA-260?
+miss 44/50 approved     12169 ms sim=0.676 Does CS-146 still have open seats, and how many?
+miss 45/50 approved     11206 ms sim=0.8328 Which instructor is assigned to DATA-260?
+miss 46/50 approved     12408 ms sim=0.6592 What is the total seat count of the Data Science department?
+miss 47/50 approved     13161 ms sim=0.6743 Does ENGR-200 still have open seats, and how many?
+miss 48/50 rejected     10286 ms sim=0.5915 How many courses are in the catalogue?
+miss 49/50 approved     12081 ms sim=0.6005 Which instructor is assigned to CS-157A?
+miss 50/50 approved     12417 ms sim=0.5322 I want to enrol in CS-157A; how many places are left?
+phase B: 30/30 requests were cache hits; median 12.3 ms
+saved reports/hw10/raw/latency_requests.json (started at epoch 1794734718)

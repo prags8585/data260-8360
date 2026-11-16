@@ -1,0 +1,9 @@
+=== 2026-11-15 04:08:56 === Part 3.1: the frozen evaluation files were committed before any judge score existed
+$ git log --format='%h  %aI  %s' -- eval_cases.json human_labels.csv
+fa2b717  2026-11-15T03:46:22-08:00  HW10: freeze eval_cases.json and human_labels.csv before any judge score
+$ git status --short -- eval_cases.json human_labels.csv | wc -l | awk '{print $1" uncommitted changes to eval_cases.json / human_labels.csv"}'
+0 uncommitted changes to eval_cases.json / human_labels.csv
+$ python3 -c "import json; d=json.load(open('reports/hw10/raw/judge_validation.json')); f=d['frozen_files']; print('judge scores were computed against commit', f['commit'][:7], 'committed at', f['committed_at'])"
+judge scores were computed against commit fa2b717 committed at 2026-11-15T03:46:22-08:00
+$ ls -l --time-style=full-iso reports/hw10/raw/judge_validation.json 2>/dev/null || stat -f '%Sm %N' -t '%Y-%m-%dT%H:%M:%S' reports/hw10/raw/judge_validation.json
+2026-11-15T04:05:35 reports/hw10/raw/judge_validation.json

@@ -1,0 +1,32 @@
+=== 2026-11-15 04:12:45 === Offline tests and live verification
+$ PYTHONPATH=. .venv/bin/python tests_hw10.py 2>&1 | grep -v -E 'WARNING|use_container|Please replace|removed after|^$' | tail -9
+PASS  test_the_judge_timeout_is_part_of_the_client_configuration
+PASS  test_the_labeling_page_renders_and_does_not_show_judge_scores
+PASS  test_the_per_trace_deadline_stops_the_remaining_judge_calls
+PASS  test_the_record_keeps_kafka_metadata_and_the_criteria_text_needed_to_reproduce_the_scores
+PASS  test_trace_paths_are_hit_miss_or_failed_and_the_failing_stage_is_the_root_cause
+PASS  test_verdict_refuses_a_deployment_gate_with_few_cases_even_when_everything_else_is_perfect
+PASS  test_writer_failure_after_all_attempts_writes_an_error_span_and_dead_letters
+PASS  test_writer_success_writes_an_ok_span
+40/40 tests passed (1.2s)
+$ PYTHONPATH=. .venv/bin/python verify_hw10.py 2>&1 | grep -v -E 'WARNING|use_container|Please replace|removed after|^$'
+  [OK  ] docker: s8360-redis, s8360-kafka and s8360-mysql are running -- running: ['s8360-redis', 's8360-kafka', 's8360-mysql']
+  [OK  ] the ingress API answers /health and Ollama serves qwen3:8b -- ingress http://127.0.0.1:8260 ok (8 cached entries); Ollama has qwen3:8b
+  [OK  ] Part 4.1: every span is valid JSON with trace_id, stage, start, end, status and error -- 727 spans, every one has trace_id, stage, start, end, status, error, duration_ms; statuses ok/error only
+  [OK  ] Part 4.1: trace_id (= correlation_id) is propagated through cache lookup, inbox, tasks, drafts, final and the evaluator -- 50 cache-miss traces carry cache_lookup, queue_inbox, planner, queue_tasks, writer, queue_drafts, reviewer, queue_final and evaluation spans, and the plan, draft and final messages share the trace_id (= HW8 correlation_id)
+  [OK  ] Part 4.2: one cache-hit, one successful cache-miss and one failed trace exist, with the failing stage identified -- cache hit b86ddd2a..., cache miss 7c6d4004..., failed dad26c70... (writer: OperationalError: (pymysql.err.OperationalError) (2003, "Can)
+  [OK  ] Part 2: evaluation results for the four criteria, joined by correlation_id -- 8 requests scored on the four criteria (1-5); plan, draft and final share the correlation_id; judge settings, original messages, Kafka topic/partition/offset/timestamp and the criteria text stored
+  [OK  ] Part 3.1: eval_cases.json (20 drafts) and human_labels.csv (20 hand labels) are complete -- 20 drafts, 20 hand-assigned labels (distribution {1: 5, 2: 0, 3: 0, 4: 1, 5: 14})
+  [OK  ] Part 3.1: both files were committed before any judge score was computed and are unchanged -- committed in fa2b717 at 2026-11-15T03:46:22-08:00, before the judge scores were written (2026-11-15T12:05:35+00:00); unchanged since
+  [OK  ] Part 3.2/3.3: Spearman and mean absolute difference can be recomputed from the raw per-case data (3 runs) -- Spearman 0.120 and mean absolute difference 1.450 recomputed from the per-case data of 3 runs
+  [OK  ] Part 4.3: 50 confirmed cache misses, six-stage p50/p95 table, cache-hit latency kept separate -- 50 confirmed cache misses (1 candidate questions were discarded because the cache answered); p50 <= p95 for all six stages; cache-hit p50 13.1 ms (n=30)
+  [OK  ] Part 1: the three Streamlit pages render and look up a trace -- Summary, Evaluation and Trace lookup render from the committed spans; the failed example trace is looked up by trace_id
+  [OK  ] offline tests pass (HW10, HW9, HW8; no Kafka / Redis / network / model) -- tests_hw10.py: 40/40 tests passed (1.0s); tests_hw9.py: 38/38 tests passed (0.1s); tests_hw8.py: 24/24 tests passed (0.0s)
+  [OK  ] ruff passes on the repository -- All checks passed!
+  [OK  ] reports/hw10/RUN_LOG.txt exists and is non-empty -- reports/hw10/RUN_LOG.txt
+  [OK  ] reports/hw10/METRICS.md exists and is non-empty -- reports/hw10/METRICS.md
+  [OK  ] reports/hw10/AI_USE.md exists and is non-empty -- reports/hw10/AI_USE.md or reports/hw10/AI_Usage.md
+  [OK  ] reports/hw10/Pragada_HW10.pdf exists and is non-empty -- reports/hw10/Pragada_HW10.pdf
+  [OK  ] the PDF is within the 35-page limit -- 32 pages (limit 35)
+18/18 checks passed.
+Wrote reports/hw10/verification.json

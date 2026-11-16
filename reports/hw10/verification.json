@@ -1,0 +1,104 @@
+{
+  "homework": "HW10",
+  "sid4": "8360",
+  "commit_hash": "fa2b717f55783cb5c77836e4c096d96fa0b11682",
+  "model": "qwen3:8b via Ollama (temperature 0, seed 8360); judge: DeepEval GEval on the same local model",
+  "seed": 8360,
+  "timestamp": "2026-11-16T08:55:42.556328+00:00",
+  "checks": [
+    {
+      "name": "docker: s8360-redis, s8360-kafka and s8360-mysql are running",
+      "passed": true,
+      "detail": "running: ['s8360-redis', 's8360-kafka', 's8360-mysql']"
+    },
+    {
+      "name": "the ingress API answers /health and Ollama serves qwen3:8b",
+      "passed": true,
+      "detail": "ingress http://127.0.0.1:8260 ok (8 cached entries); Ollama has qwen3:8b"
+    },
+    {
+      "name": "Part 4.1: every span is valid JSON with trace_id, stage, start, end, status and error",
+      "passed": true,
+      "detail": "727 spans, every one has trace_id, stage, start, end, status, error, duration_ms; statuses ok/error only"
+    },
+    {
+      "name": "Part 4.1: trace_id (= correlation_id) is propagated through cache lookup, inbox, tasks, drafts, final and the evaluator",
+      "passed": true,
+      "detail": "50 cache-miss traces carry cache_lookup, queue_inbox, planner, queue_tasks, writer, queue_drafts, reviewer, queue_final and evaluation spans, and the plan, draft and final messages share the trace_id (= HW8 correlation_id)"
+    },
+    {
+      "name": "Part 4.2: one cache-hit, one successful cache-miss and one failed trace exist, with the failing stage identified",
+      "passed": true,
+      "detail": "cache hit b86ddd2a..., cache miss 7c6d4004..., failed dad26c70... (writer: OperationalError: (pymysql.err.OperationalError) (2003, \"Can)"
+    },
+    {
+      "name": "Part 2: evaluation results for the four criteria, joined by correlation_id",
+      "passed": true,
+      "detail": "8 requests scored on the four criteria (1-5); plan, draft and final share the correlation_id; judge settings, original messages, Kafka topic/partition/offset/timestamp and the criteria text stored"
+    },
+    {
+      "name": "Part 3.1: eval_cases.json (20 drafts) and human_labels.csv (20 hand labels) are complete",
+      "passed": true,
+      "detail": "20 drafts, 20 hand-assigned labels (distribution {1: 5, 2: 0, 3: 0, 4: 1, 5: 14})"
+    },
+    {
+      "name": "Part 3.1: both files were committed before any judge score was computed and are unchanged",
+      "passed": true,
+      "detail": "committed in fa2b717 at 2026-11-15T03:46:22-08:00, before the judge scores were written (2026-11-15T12:05:35+00:00); unchanged since"
+    },
+    {
+      "name": "Part 3.2/3.3: Spearman and mean absolute difference can be recomputed from the raw per-case data (3 runs)",
+      "passed": true,
+      "detail": "Spearman 0.120 and mean absolute difference 1.450 recomputed from the per-case data of 3 runs"
+    },
+    {
+      "name": "Part 4.3: 50 confirmed cache misses, six-stage p50/p95 table, cache-hit latency kept separate",
+      "passed": true,
+      "detail": "50 confirmed cache misses (1 candidate questions were discarded because the cache answered); p50 <= p95 for all six stages; cache-hit p50 13.1 ms (n=30)"
+    },
+    {
+      "name": "Part 1: the three Streamlit pages render and look up a trace",
+      "passed": true,
+      "detail": "Summary, Evaluation and Trace lookup render from the committed spans; the failed example trace is looked up by trace_id"
+    },
+    {
+      "name": "offline tests pass (HW10, HW9, HW8; no Kafka / Redis / network / model)",
+      "passed": true,
+      "detail": "tests_hw10.py: 40/40 tests passed (1.0s); tests_hw9.py: 38/38 tests passed (0.0s); tests_hw8.py: 24/24 tests passed (0.0s)"
+    },
+    {
+      "name": "ruff passes on the repository",
+      "passed": true,
+      "detail": "All checks passed!"
+    },
+    {
+      "name": "reports/hw10/RUN_LOG.txt exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw10/RUN_LOG.txt"
+    },
+    {
+      "name": "reports/hw10/METRICS.md exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw10/METRICS.md"
+    },
+    {
+      "name": "reports/hw10/AI_USE.md exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw10/AI_USE.md or reports/hw10/AI_Usage.md"
+    },
+    {
+      "name": "reports/hw10/Pragada_HW10.pdf exists and is non-empty",
+      "passed": true,
+      "detail": "reports/hw10/Pragada_HW10.pdf"
+    },
+    {
+      "name": "the PDF is within the 35-page limit",
+      "passed": true,
+      "detail": "32 pages (limit 35)"
+    }
+  ],
+  "passed": 18,
+  "failed": 0,
+  "total": 18,
+  "overall": "PASS"
+}

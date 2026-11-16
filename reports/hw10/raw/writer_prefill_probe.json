@@ -1,0 +1,90 @@
+{
+  "as_sent_today": [
+    {
+      "wall_ms": 13014.198916964233,
+      "prompt_tokens": 690,
+      "prefill_ms": 8880.539,
+      "generate_ms": 4119.595999,
+      "output_tokens": 49
+    },
+    {
+      "wall_ms": 10172.742875060067,
+      "prompt_tokens": 691,
+      "prefill_ms": 7163.987,
+      "generate_ms": 2942.394,
+      "output_tokens": 32
+    },
+    {
+      "wall_ms": 9618.56374994386,
+      "prompt_tokens": 691,
+      "prefill_ms": 7329.395,
+      "generate_ms": 2229.128,
+      "output_tokens": 35
+    },
+    {
+      "wall_ms": 10674.971290980466,
+      "prompt_tokens": 688,
+      "prefill_ms": 7993.524,
+      "generate_ms": 2639.82,
+      "output_tokens": 34
+    },
+    {
+      "wall_ms": 11897.864667000249,
+      "prompt_tokens": 687,
+      "prefill_ms": 7482.634,
+      "generate_ms": 4374.225,
+      "output_tokens": 43
+    },
+    {
+      "wall_ms": 11742.240375024267,
+      "prompt_tokens": 690,
+      "prefill_ms": 7381.712,
+      "generate_ms": 4278.804,
+      "output_tokens": 45
+    }
+  ],
+  "facts_first": [
+    {
+      "wall_ms": 2376.7625419422984,
+      "prompt_tokens": 691,
+      "prefill_ms": 538.169,
+      "generate_ms": 1640.786,
+      "output_tokens": 17
+    },
+    {
+      "wall_ms": 2495.7384589361027,
+      "prompt_tokens": 689,
+      "prefill_ms": 483.236,
+      "generate_ms": 1994.992,
+      "output_tokens": 26
+    },
+    {
+      "wall_ms": 3871.1098328931257,
+      "prompt_tokens": 689,
+      "prefill_ms": 417.837,
+      "generate_ms": 3427.666,
+      "output_tokens": 31
+    },
+    {
+      "wall_ms": 2075.5253339884803,
+      "prompt_tokens": 688,
+      "prefill_ms": 457.33,
+      "generate_ms": 1597.373,
+      "output_tokens": 22
+    },
+    {
+      "wall_ms": 4047.6317079737782,
+      "prompt_tokens": 690,
+      "prefill_ms": 378.324,
+      "generate_ms": 3649.811,
+      "output_tokens": 35
+    },
+    {
+      "wall_ms": 5207.05575007014,
+      "prompt_tokens": 689,
+      "prefill_ms": 780.945,
+      "generate_ms": 4381.756,
+      "output_tokens": 43
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+=== 2026-11-15 01:19:33 === Part 2: eight test questions through the ingress, cache and Kafka pipeline
+$ .venv/bin/python scripts/hw10_part2_run.py
+c01 MISS approved      8843 ms trace_id=86141204-40cc-440d-ae91-d50d3094c406
+     Q: How many seats are available in DATA-260?
+     A: The course DATA-260 has 40 seats available.
+c02 MISS approved      9072 ms trace_id=a871bec7-320a-40c6-8909-c5e9df4159f3
+     Q: Who teaches Web Programming?
+     A: The course "Web Programming" is taught by Dr. Marcus Lee.
+c03 MISS approved      8169 ms trace_id=3d759a78-56a1-43d0-94f9-6eef419b1c9a
+     Q: How many seats do the Computer Science courses offer in total?
+     A: The Computer Science courses offer a total of 95 seats.
+c04 MISS approved      9088 ms trace_id=f207b4fe-1cd1-440c-8711-b6ffc8e65ce8
+     Q: Which course has the most available seats?
+     A: The course with the most available seats is CS-146, which has 50 seats available.
+c05 MISS approved      9726 ms trace_id=b7ed48d7-eaa7-4a1a-b6e5-61705e4a678c
+     Q: How many courses does Dr. Marcus Lee teach?
+     A: Dr. Marcus Lee teaches 2 courses. The courses are CS-157A and CS-146.
+c06 MISS approved      9502 ms trace_id=bf4e76c1-692b-414d-8b48-7e1f8ede152d
+     Q: Which department has the most available seats, and which course there has the most seats?
+     A: The department with the most available seats is Data Science, and the course within that department with the most seats is DATA-260 with 40 seats available.
+c07 MISS approved     10383 ms trace_id=6d6fcea1-e590-4f2d-9d22-2f207f28a4ba
+     Q: List the courses in the Data Science department.
+     A: The courses in the Data Science department are: Introduction to Distributed Systems (DATA-260), Machine Learning Foundations (DATA-245), and Data Visualization (DATA-230).
+c08 MISS rejected      8991 ms trace_id=fc1aa986-8493-431a-bb65-86053bb52733
+     Q: What time does DATA-260 meet?
+     A: None
+saved 8 requests to reports/hw10/raw/part2_requests.json

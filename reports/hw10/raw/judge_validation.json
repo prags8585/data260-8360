@@ -1,0 +1,390 @@
+{
+  "frozen_files": {
+    "commit": "fa2b717f55783cb5c77836e4c096d96fa0b11682",
+    "committed_at": "2026-11-15T03:46:22-08:00"
+  },
+  "judge_settings": {
+    "model": "qwen3:8b",
+    "temperature": 0.0,
+    "seed": 8360,
+    "num_predict": 400,
+    "think": false,
+    "timeout_s": 90,
+    "max_attempts": 2,
+    "framework": "deepeval GEval",
+    "scale": "1 (very poor) to 5 (excellent)"
+  },
+  "n": 20,
+  "spearman": {
+    "rho": 0.12018603552997517,
+    "p_value": 0.6137585215796385,
+    "note": ""
+  },
+  "spearman_each_run": [
+    {
+      "rho": 0.12018603552997517,
+      "p_value": 0.6137585215796385,
+      "note": ""
+    },
+    {
+      "rho": 0.12018603552997517,
+      "p_value": 0.6137585215796385,
+      "note": ""
+    },
+    {
+      "rho": 0.12018603552997517,
+      "p_value": 0.6137585215796385,
+      "note": ""
+    }
+  ],
+  "mean_absolute_difference": 1.45,
+  "bias": -0.15,
+  "exact_agreement": 0.25,
+  "within_one": 0.6,
+  "max_absolute_difference": 4,
+  "repeatability": {
+    "runs": 3,
+    "pairs": 3,
+    "cases_with_any_change": 0,
+    "changed_cases": [],
+    "fraction_of_pair_scores_changed": 0.0,
+    "mean_abs_change": 0.0,
+    "max_abs_change": 0,
+    "max_spread_across_runs": 0
+  },
+  "verdict": "I would NOT trust this judge to gate a deployment yet: rank agreement with the humans is 0.12 (threshold 0.80); the judge is off by 1.45 points on average (threshold 0.50); only 20 labeled cases are far too few to set a deployment gate (at least 100 are needed).",
+  "cases": [
+    {
+      "case_id": "e01",
+      "question": "How many seats are available in CS-146?",
+      "writer_brain": "rule",
+      "human": 5,
+      "judge_run1": 2,
+      "judge_run2": 2,
+      "judge_run3": 2,
+      "difference_run1": -3,
+      "judge_reason_run1": "The response fails to directly answer the question about the number of seats available in CS-146. Instead, it discusses Data Science courses and their total seats, which is irrelevant to the specific query. The response does not mention CS-146 or its seat count, which is explicitly provided in the retrieval context."
+    },
+    {
+      "case_id": "e02",
+      "question": "Which instructor teaches DATA-230?",
+      "writer_brain": "llm",
+      "human": 5,
+      "judge_run1": 5,
+      "judge_run2": 5,
+      "judge_run3": 5,
+      "difference_run1": 0,
+      "judge_reason_run1": "The response correctly identifies Dr. Samuel Okafor as the instructor for DATA-230, which is directly supported by the retrieval context. The answer is accurate, complete, and directly addresses the question without inventing information."
+    },
+    {
+      "case_id": "e03",
+      "question": "Who teaches DATA-260?",
+      "writer_brain": "rule",
+      "human": 5,
+      "judge_run1": 3,
+      "judge_run2": 3,
+      "judge_run3": 3,
+      "difference_run1": -2,
+      "judge_reason_run1": "The response does not directly answer the question 'Who teaches DATA-260?' Instead, it provides information about seat availability and course sizes, which is irrelevant to the specific question. The correct instructor for DATA-260, Dr. Priya Nair, is mentioned in the retrieval context but not explicitly stated in the response."
+    },
+    {
+      "case_id": "e04",
+      "question": "Which course has the fewest available seats?",
+      "writer_brain": "llm",
+      "human": 5,
+      "judge_run1": 4,
+      "judge_run2": 4,
+      "judge_run3": 4,
+      "difference_run1": -1,
+      "judge_reason_run1": "The response correctly identifies DATA-230 as the course with the fewest available seats (30), which matches the data in the retrieval context. However, it does not mention that ENGR-200 also has 25 seats available, which is fewer than DATA-230. This omission is a minor gap but does not significantly affect the correctness of the answer."
+    },
+    {
+      "case_id": "e05",
+      "question": "What time does DATA-245 meet?",
+      "writer_brain": "llm",
+      "human": 1,
+      "judge_run1": 3,
+      "judge_run2": 3,
+      "judge_run3": 3,
+      "difference_run1": 2,
+      "judge_reason_run1": "The score is 3 because the output correctly identifies the course code and title for DATA-245 but fails to provide the meeting time, which was explicitly asked for in the input. The retrieval context does not include meeting times, so the answer is incomplete."
+    },
+    {
+      "case_id": "e06",
+      "question": "How many courses does Dr. Samuel Okafor teach?",
+      "writer_brain": "llm",
+      "human": 5,
+      "judge_run1": 5,
+      "judge_run2": 5,
+      "judge_run3": 5,
+      "difference_run1": 0,
+      "judge_reason_run1": "The score is 5 because the actual output correctly states that Dr. Samuel Okafor teaches 2 courses, which matches the exact number provided in the retrieval context under the instructors section. The answer is directly relevant, accurate, and fully addresses the question without inventing any information."
+    },
+    {
+      "case_id": "e07",
+      "question": "Which department has the most available seats, and which course there has the most seats?",
+      "writer_brain": "rule",
+      "human": 5,
+      "judge_run1": 4,
+      "judge_run2": 4,
+      "judge_run3": 4,
+      "difference_run1": -1,
+      "judge_reason_run1": "The response correctly identifies Data Science as the department with the most available seats (105) and correctly states that its largest course is DATA-260 with 40 seats. However, it fails to mention that DATA-260 is not the largest course in Data Science, as DATA-245 has 35 seats and DATA-230 has 30 seats, making DATA-260 the largest. The response is accurate but incomplete in its course comparison."
+    },
+    {
+      "case_id": "e08",
+      "question": "How many courses does the Engineering department offer?",
+      "writer_brain": "rule",
+      "human": 5,
+      "judge_run1": 2,
+      "judge_run2": 2,
+      "judge_run3": 2,
+      "difference_run1": -3,
+      "judge_reason_run1": "The response does not answer the question about how many courses the Engineering department offers. Instead, it discusses Data Science courses and their seats, which is irrelevant to the query. The retrieval context shows that the Engineering department offers 1 course, but this information is not included in the response."
+    },
+    {
+      "case_id": "e09",
+      "question": "What are the prerequisites for DATA-230?",
+      "writer_brain": "llm",
+      "human": 1,
+      "judge_run1": 2,
+      "judge_run2": 2,
+      "judge_run3": 2,
+      "difference_run1": 1,
+      "judge_reason_run1": "The actual output incorrectly states that the prerequisites for DATA-230 are none, but the retrieval context does not provide any information about prerequisites for DATA-230. The response invents an answer rather than acknowledging the lack of information, which violates the rubric's requirement to state that the catalogue facts do not contain the requested information."
+    },
+    {
+      "case_id": "e10",
+      "question": "Which Computer Science course has the most seats?",
+      "writer_brain": "llm",
+      "human": 5,
+      "judge_run1": 4,
+      "judge_run2": 4,
+      "judge_run3": 4,
+      "difference_run1": -1,
+      "judge_reason_run1": "The response correctly identifies CS-146 as the course with the most seats (50), which matches the data in the retrieval context. However, it does not mention that CS-146 is part of the Computer Science department, which is relevant to the question. The answer is accurate and directly addresses the question, but it could have been more complete by specifying the department."
+    },
+    {
+      "case_id": "e11",
+      "question": "How many seats are available across all courses?",
+      "writer_brain": "llm",
+      "human": 1,
+      "judge_run1": 5,
+      "judge_run2": 5,
+      "judge_run3": 5,
+      "difference_run1": 4,
+      "judge_reason_run1": "The score is 5 because the Actual Output correctly answers the question by stating the total number of seats available across all courses is 225, which matches the value in the retrieval context's 'totals' field. The response is accurate, complete, and directly addresses the question without inventing any information."
+    },
+    {
+      "case_id": "e12",
+      "question": "How many seats are available in DATA-245?",
+      "writer_brain": "llm",
+      "human": 5,
+      "judge_run1": 5,
+      "judge_run2": 5,
+      "judge_run3": 5,
+      "difference_run1": 0,
+      "judge_reason_run1": "The response correctly identifies the number of seats available for DATA-245 as 35, which matches the exact value in the retrieval context. This directly answers the question with the correct information from the provided data."
+    },
+    {
+      "case_id": "e13",
+      "question": "List the courses taught by Dr. Marcus Lee.",
+      "writer_brain": "llm",
+      "human": 5,
+      "judge_run1": 4,
+      "judge_run2": 4,
+      "judge_run3": 4,
+      "difference_run1": -1,
+      "judge_reason_run1": "The response correctly lists the courses taught by Dr. Marcus Lee as CS-157A and CS-146, which matches the course codes in the retrieval context. However, it omits the course title for each course, which was explicitly requested in the question. This minor gap reduces the completeness of the answer."
+    },
+    {
+      "case_id": "e14",
+      "question": "Who teaches Machine Learning Foundations?",
+      "writer_brain": "llm",
+      "human": 5,
+      "judge_run1": 5,
+      "judge_run2": 5,
+      "judge_run3": 5,
+      "difference_run1": 0,
+      "judge_reason_run1": "The response correctly identifies that Dr. Elena Rossi teaches 'Machine Learning Foundations' as per the retrieval context. The score is 5 because the answer is accurate, directly addresses the question, and aligns with the catalogue facts without any errors or omissions."
+    },
+    {
+      "case_id": "e15",
+      "question": "Is DATA-260 a difficult course?",
+      "writer_brain": "llm",
+      "human": 1,
+      "judge_run1": 3,
+      "judge_run2": 3,
+      "judge_run3": 3,
+      "difference_run1": 2,
+      "judge_reason_run1": "The response correctly identifies the course title, department, instructor, and seat availability for DATA-260. However, it fails to directly answer the question about whether the course is difficult. While it mentions limited seats as a possible indicator of difficulty, it does not provide a clear, direct answer to the question. The response is incomplete and does not fully address the query as required by the rubric."
+    },
+    {
+      "case_id": "e16",
+      "question": "Recommend a course for someone who likes databases.",
+      "writer_brain": "llm",
+      "human": 1,
+      "judge_run1": 4,
+      "judge_run2": 4,
+      "judge_run3": 4,
+      "difference_run1": 3,
+      "judge_reason_run1": "The response correctly recommends the course 'CS-157A: Database Systems' which matches the catalogue facts, including the instructor, department, and available seats. It directly answers the question about recommending a course for someone who likes databases. However, it does not mention the course code in the recommendation, which is a minor gap but does not detract significantly from the correctness and completeness of the response."
+    },
+    {
+      "case_id": "e17",
+      "question": "Which department has the most available seats?",
+      "writer_brain": "rule",
+      "human": 5,
+      "judge_run1": 4,
+      "judge_run2": 4,
+      "judge_run3": 4,
+      "difference_run1": -1,
+      "judge_reason_run1": "The response correctly identifies Data Science as the department with the most available seats, aligning with the totalSeats value of 105 from the retrieval context. However, it incorrectly states that the largest course is DATA-260 with 40 seats, while the actual largest course in Data Science is DATA-260 with 40 seats, which is accurate. The response is correct and directly answers the question, but it could have been more precise by explicitly mentioning the total seats for Data Science rather than focusing on the largest course. This minor gap results in a score of 4."
+    },
+    {
+      "case_id": "e18",
+      "question": "What is the total number of seats in the Data Science department?",
+      "writer_brain": "llm",
+      "human": 4,
+      "judge_run1": 5,
+      "judge_run2": 5,
+      "judge_run3": 5,
+      "difference_run1": 1,
+      "judge_reason_run1": "The response correctly states the total number of seats in the Data Science department as 105, which matches the value directly provided in the retrieval context. This directly answers the question without error or omission."
+    },
+    {
+      "case_id": "e19",
+      "question": "Which department does ENGR-200 belong to?",
+      "writer_brain": "llm",
+      "human": 5,
+      "judge_run1": 5,
+      "judge_run2": 5,
+      "judge_run3": 5,
+      "difference_run1": 0,
+      "judge_reason_run1": "The response correctly identifies that ENGR-200 belongs to the Engineering department, which matches the information in the retrieval context. The answer is accurate, directly addresses the question, and aligns with the catalogue facts."
+    },
+    {
+      "case_id": "e20",
+      "question": "What is the title of DATA-245?",
+      "writer_brain": "rule",
+      "human": 5,
+      "judge_run1": 2,
+      "judge_run2": 2,
+      "judge_run3": 2,
+      "difference_run1": -3,
+      "judge_reason_run1": "The actual output does not answer the question about the title of DATA-245. Instead, it provides information about Data Science department and DATA-260, which is irrelevant to the specific query. The response fails to directly address the question and lacks the required specific detail about the course title."
+    }
+  ],
+  "sampling_check": {
+    "settings": {
+      "model": "qwen3:8b",
+      "temperature": 0.7,
+      "seed": null,
+      "num_predict": 400,
+      "think": false,
+      "timeout_s": 90,
+      "max_attempts": 2,
+      "framework": "deepeval GEval",
+      "scale": "1 (very poor) to 5 (excellent)"
+    },
+    "scores": [
+      [
+        2,
+        5,
+        2,
+        3,
+        3,
+        5,
+        4,
+        2,
+        2,
+        4,
+        5,
+        5,
+        4,
+        4,
+        3,
+        4,
+        4,
+        5,
+        5,
+        2
+      ],
+      [
+        2,
+        5,
+        2,
+        5,
+        3,
+        5,
+        4,
+        2,
+        2,
+        4,
+        5,
+        5,
+        4,
+        5,
+        3,
+        4,
+        4,
+        5,
+        5,
+        3
+      ],
+      [
+        2,
+        5,
+        2,
+        3,
+        4,
+        5,
+        4,
+        2,
+        3,
+        4,
+        5,
+        5,
+        4,
+        5,
+        3,
+        4,
+        4,
+        5,
+        5,
+        2
+      ]
+    ],
+    "repeatability": {
+      "runs": 3,
+      "pairs": 3,
+      "cases_with_any_change": 5,
+      "changed_cases": [
+        3,
+        4,
+        8,
+        13,
+        19
+      ],
+      "fraction_of_pair_scores_changed": 0.16666666666666666,
+      "mean_abs_change": 0.2,
+      "max_abs_change": 2,
+      "max_spread_across_runs": 2
+    },
+    "vs_human_run1": {
+      "rho": 0.03064208133754926,
+      "p_value": 0.8979579485419912,
+      "note": ""
+    },
+    "vs_human_run2": {
+      "rho": 0.14882581364473552,
+      "p_value": 0.5311728547446183,
+      "note": ""
+    },
+    "vs_human_run3": {
+      "rho": -0.043970500803649455,
+      "p_value": 0.8539595513896608,
+      "note": ""
+    }
+  }
+}

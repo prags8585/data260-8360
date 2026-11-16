@@ -1,3 +1,4 @@
+import inspect
 import logging
 import re
 import time
@@ -7,6 +8,8 @@ from cache_svc import config
 from cache_svc.course_db import CourseDB
 from cache_svc.embedding import embed
 from cache_svc.semantic_cache import SemanticCache
+from kafka_svc.bus import new_correlation_id
+from tracing.spans import emit_span
 
 log = logging.getLogger("ingress")
 COURSE_CODE = re.compile(r"\b[A-Z]{2,5}-\d{2,3}[A-Z]?\b")
@@ -28,14 +31,17 @@ class QAIngress:
     def __init__(self, cache: SemanticCache, db: CourseDB, agent: Callable[[str], dict],
                  threshold: float = config.DEFAULT_THRESHOLD, validate_version: bool = True):
         self.cache, self.db, self.agent = cache, db, agent
+        self._agent_takes_trace = "trace_id" in inspect.signature(agent).parameters
         self.threshold, self.validate_version = threshold, validate_version
 
     def ask(self, question: str, *, threshold: float | None = None, validate_version: bool | None = None,
-            store: bool = True, track: bool = True) -> dict:
+            store: bool = True, track: bool = True, trace_id: str | None = None, timeout_s: float | None = None) -> dict:
         threshold = self.threshold if threshold is None else threshold
         validate_version = self.validate_version if validate_version is None else validate_version
         t0 = time.perf_counter()
-        log.info("ask start question=%r threshold=%.2f", question, threshold)
+        trace_id = trace_id or new_correlation_id()  # the HW8 correlation_id doubles as trace_id; a cache hit never reaches Kafka, so it is minted here
+        wall0 = time.time()
+        log.info("ask start trace_id=%s question=%r threshold=%.2f", trace_id, question, threshold)
 
         t = time.perf_counter()
         vector = embed([question])[0]
@@ -57,11 +63,14 @@ class QAIngress:
                 log.info("data-version check %.1f ms: stored=%s current=%s -> %s", check_ms, nearest["data_version"], current,
                          "STALE" if stale else "fresh")
             if not stale:
+                emit_span(trace_id, "cache_lookup", wall0, time.time(), service="ingress", hit=True, similarity=similarity, threshold=threshold,
+                          embed_ms=round(embed_ms, 2), search_ms=round(search_ms, 2), version_check_ms=None if check_ms is None else round(check_ms, 2))
                 latency_ms = (time.perf_counter() - t0) * 1000
                 log.info("cache HIT similarity=%.4f threshold=%.2f matched_query=%r latency_ms=%.1f", similarity, threshold, nearest["query"], latency_ms)
                 if track:
                     self.cache.record("hit", latency_ms)
-                return {"question": question, "answer": nearest["answer"], "status": "approved", "is_cached": True, "similarity": similarity,
+                emit_span(trace_id, "request", wall0, time.time(), service="ingress", path="cache_hit", is_cached=True, review_status="approved")
+                return {"question": question, "answer": nearest["answer"], "status": "approved", "is_cached": True, "similarity": similarity, "trace_id": trace_id,
                         "latency_ms": round(latency_ms, 1), "cached_query": nearest["query"], "cache_key": nearest["key"],
                         "stale_invalidated": False, "threshold": threshold, "data_version": nearest["data_version"],
                         "version_check_ms": None if check_ms is None else round(check_ms, 1)}
@@ -69,9 +78,16 @@ class QAIngress:
             if track:
                 self.cache.client.hincrby(config.STATS_KEY, "stale", 1)
 
+        emit_span(trace_id, "cache_lookup", wall0, time.time(), service="ingress", hit=False, similarity=similarity, threshold=threshold, stale_invalidated=stale,
+                  embed_ms=round(embed_ms, 2), search_ms=round(search_ms, 2), version_check_ms=None if check_ms is None else round(check_ms, 2))
         log.info("cache MISS best_similarity=%s threshold=%.2f -> running the agent pipeline", similarity, threshold)
         t = time.perf_counter()
-        final = self.agent(question)
+        extra = {}
+        if self._agent_takes_trace:
+            extra["trace_id"] = trace_id
+            if timeout_s:
+                extra["timeout"] = timeout_s
+        final = self.agent(question, **extra)
         agent_ms = (time.perf_counter() - t) * 1000
         answer = final.get("answer")
         log.info("agent pipeline finished status=%s in %.0f ms", final.get("status"), agent_ms)
@@ -80,12 +96,17 @@ class QAIngress:
         if store and final.get("status") == "approved" and answer:
             codes = deps_of(question)
             version = self.db.data_version(codes or None)
+            store_start = time.time()
             key = self.cache.store(question, vector, answer, version, ",".join(codes) or "*")
+            emit_span(trace_id, "cache_store", store_start, time.time(), service="ingress", key=key)
             log.info("cache STORE key=%s data_version=%s deps=%s", key, version, ",".join(codes) or "*")
         latency_ms = (time.perf_counter() - t0) * 1000
         if track:
             self.cache.record("miss", latency_ms)
-        return {"question": question, "answer": answer, "status": final.get("status"), "is_cached": False, "similarity": similarity,
+        failed = final.get("status") == "timeout"
+        emit_span(trace_id, "request", wall0, time.time(), "error" if failed else "ok", "agent pipeline did not answer in time" if failed else None, service="ingress",
+                  path="cache_miss", is_cached=False, review_status=final.get("status"))
+        return {"question": question, "answer": answer, "status": final.get("status"), "is_cached": False, "similarity": similarity, "trace_id": trace_id,
                 "latency_ms": round(latency_ms, 1), "cached_query": nearest["query"] if nearest else None, "cache_key": key,
                 "stale_invalidated": stale, "threshold": threshold, "correlation_id": final.get("correlation_id"),
                 "data_version": version, "version_check_ms": None if check_ms is None else round(check_ms, 1)}

@@ -1,0 +1,5 @@
+=== 2026-11-15 02:03:35 === Part 4.3: why the Writer dominates - Ollama's own timings for the Writer prompt
+$ PYTHONPATH=. .venv/bin/python scripts/hw10_writer_prefill_probe.py 2>&1 | grep -v -E 'Loading|WARNING'
+Writer prompt as sent today        wall   11187 ms   prefill    7705 ms (690 tokens read)   generate   3431 ms (40 tokens)
+facts first (shared prefix)        wall    3346 ms   prefill     509 ms (689 tokens read)   generate   2782 ms (29 tokens)
+-> Ollama prefill is 69% of the Writer's wall time today; with the facts first it is 15%.

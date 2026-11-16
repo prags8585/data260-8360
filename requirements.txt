@@ -27,3 +27,6 @@ ruff
 pre-commit
 confluent-kafka  # HW8: Kafka client
 redis  # HW9: view counter + semantic cache (Redis Stack for the vector index)
+scipy  # HW10: Spearman correlation for the judge validation
+streamlit  # HW10: operations dashboard
+deepeval  # HW10: GEval judge (telemetry is switched off in evaluation/judge.py)

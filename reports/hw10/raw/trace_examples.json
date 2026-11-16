@@ -1,0 +1,33 @@
+{
+  "cache_hit": {
+    "trace_id": "b86ddd2a-ea86-43b1-a33a-b427fcec3b86",
+    "question": "How many seats are available in DATA-260?",
+    "result": {
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 207.1,
+      "answer": "The course DATA-260 has 40 seats available."
+    }
+  },
+  "cache_miss": {
+    "trace_id": "7c6d4004-62b8-4ff2-9543-ba63dfc36cfd",
+    "question": "Which instructor teaches DATA-230?",
+    "result": {
+      "is_cached": false,
+      "status": "approved",
+      "latency_ms": 11785.4,
+      "answer": "The instructor who teaches DATA-230 is Dr. Samuel Okafor."
+    }
+  },
+  "failed": {
+    "trace_id": "dad26c70-f9ad-4657-a0e9-8413fc0b173d",
+    "question": "How many seats are available in CS-146?",
+    "result": {
+      "is_cached": false,
+      "status": "timeout",
+      "latency_ms": 25810.9,
+      "answer": null
+    },
+    "cause": "s8360-mysql was stopped; the Writer could not read the live catalogue"
+  }
+}

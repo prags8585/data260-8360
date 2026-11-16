@@ -1,0 +1,15 @@
+=== 2026-11-15 04:06:13 === Part 4.3: p50 / p95 per stage from the spans
+$ PYTHONPATH=. python scripts/hw10_latency_report.py
+50 confirmed cache-miss requests (none served from the cache: True); spans from /Users/prags/Desktop/HW1_DATA260/kafka_state/traces/spans.jsonl
+Stage                    n   p50 (ms)   p95 (ms)  % of cache-miss end-to-end (mean of per-request shares)
+Cache lookup            50       31.8       52.2                                                      0.3
+Planner                 50     3569.6     4231.8                                                     30.3
+Writer                  50     7865.3    10039.0                                                     69.1
+Reviewer                50        4.8       12.9                                                      0.1
+Queue wait (total)      50       43.7       58.4                                                      0.4
+Evaluation              50    29958.4    36011.3                                                    262.4
+End-to-end (request)    50    11614.3    13866.6                                                    100.0
+request-path stages (cache lookup, planner, writer, reviewer, queue wait, cache store) account for 100.1% of the end-to-end time; the rest is -0.1% other (HTTP handling, JSON, the ingress's own bookkeeping). Evaluation runs after the answer is returned, in the evaluator process, so it is not part of the request path.
+dominant contributor: Writer (69.1% of the end-to-end time, p50 7865.3 ms)
+cache-hit latency (30 hits, request spans): p50 13.1 ms, p95 20.1 ms
+saved reports/hw10/raw/latency_table.json

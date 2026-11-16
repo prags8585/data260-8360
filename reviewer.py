@@ -2,37 +2,44 @@
 import argparse
 import logging
 import signal
+import time
 
 from kafka_svc import config
 from kafka_svc.brains import review_draft
 from kafka_svc.bus import compact, dead_letter, decode, make_consumer, make_producer, send, setup_logging, utc_now
+from tracing.spans import queue_span, span
 
 log = logging.getLogger("reviewer")
 
 
 def handle(msg, producer) -> None:
+    started = time.time()
     body = decode(msg)
-    if body is None or not isinstance(body.get("correlation_id"), str) or not isinstance(body.get("draft"), str):
-        raise ValueError("draft message needs a correlation_id and a draft")
-    cid = body["correlation_id"]
-    if body.get("test"):
-        log.info("skipping %s test draft correlation_id=%s", body["test"], cid)
+    cid_key = msg.key().decode("utf-8", "replace") if msg.key() else None
+    if body is not None and body.get("test"):
+        log.info("skipping %s test draft correlation_id=%s", body["test"], body.get("correlation_id"))
         return
-    log.info("received draft from %s partition=%d offset=%d correlation_id=%s message=%s",
-             msg.topic(), msg.partition(), msg.offset(), cid, compact(body))
-    review = review_draft(body["question"], body["draft"], body["facts"])
-    final = {
-        "correlation_id": cid,
-        "status": "approved" if review["approved"] else "rejected",
-        "answer": body["draft"] if review["approved"] else None,
-        "question": body["question"],
-        "review": review["checks"],
-        "reviewed_at": utc_now(),
-    }
-    log.info("review %s correlation_id=%s checks=%s", final["status"], cid, compact(review["checks"]))
-    log.info("sending final message to %s correlation_id=%s message=%s", config.FINAL_TOPIC, cid, compact(final))
-    partition, offset = send(producer, config.FINAL_TOPIC, final, key=cid)
-    log.info("final message acknowledged by the broker partition=%d offset=%d correlation_id=%s", partition, offset, cid)
+    queue_span(cid_key, "queue_drafts", msg, started, service="reviewer")
+    with span(cid_key, "reviewer") as sp:
+        if body is None or not isinstance(body.get("correlation_id"), str) or not isinstance(body.get("draft"), str):
+            raise ValueError("draft message needs a correlation_id and a draft")
+        cid = body["correlation_id"]
+        log.info("received draft from %s partition=%d offset=%d correlation_id=%s message=%s",
+                 msg.topic(), msg.partition(), msg.offset(), cid, compact(body))
+        review = review_draft(body["question"], body["draft"], body["facts"])
+        final = {
+            "correlation_id": cid,
+            "status": "approved" if review["approved"] else "rejected",
+            "answer": body["draft"] if review["approved"] else None,
+            "question": body["question"],
+            "review": review["checks"],
+            "reviewed_at": utc_now(),
+        }
+        log.info("review %s correlation_id=%s checks=%s", final["status"], cid, compact(review["checks"]))
+        log.info("sending final message to %s correlation_id=%s message=%s", config.FINAL_TOPIC, cid, compact(final))
+        partition, offset = send(producer, config.FINAL_TOPIC, final, key=cid)
+        log.info("final message acknowledged by the broker partition=%d offset=%d correlation_id=%s", partition, offset, cid)
+        sp.set(review_status=final["status"], failed_checks=[c["check"] for c in review["checks"] if not c["passed"]])
 
 
 def main() -> None:

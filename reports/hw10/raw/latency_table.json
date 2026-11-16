@@ -1,0 +1,75 @@
+{
+  "requests": 50,
+  "table": [
+    {
+      "stage": "Cache lookup",
+      "n": 50,
+      "p50_ms": 31.8,
+      "p95_ms": 52.2,
+      "share_pct": 0.3,
+      "share_of_median_pct": 0.3
+    },
+    {
+      "stage": "Planner",
+      "n": 50,
+      "p50_ms": 3569.6,
+      "p95_ms": 4231.8,
+      "share_pct": 30.3,
+      "share_of_median_pct": 30.7
+    },
+    {
+      "stage": "Writer",
+      "n": 50,
+      "p50_ms": 7865.3,
+      "p95_ms": 10039.0,
+      "share_pct": 69.1,
+      "share_of_median_pct": 67.7
+    },
+    {
+      "stage": "Reviewer",
+      "n": 50,
+      "p50_ms": 4.8,
+      "p95_ms": 12.9,
+      "share_pct": 0.1,
+      "share_of_median_pct": 0.0
+    },
+    {
+      "stage": "Queue wait (total)",
+      "n": 50,
+      "p50_ms": 43.7,
+      "p95_ms": 58.4,
+      "share_pct": 0.4,
+      "share_of_median_pct": 0.4
+    },
+    {
+      "stage": "Evaluation",
+      "n": 50,
+      "p50_ms": 29958.4,
+      "p95_ms": 36011.3,
+      "share_pct": 262.4,
+      "share_of_median_pct": 257.9
+    }
+  ],
+  "end_to_end": {
+    "p50_ms": 11614.3,
+    "p95_ms": 13866.6,
+    "mean_ms": 11649.3
+  },
+  "other_pct": -0.1,
+  "dominant": {
+    "stage": "Writer",
+    "n": 50,
+    "p50_ms": 7865.3,
+    "p95_ms": 10039.0,
+    "share_pct": 69.1,
+    "share_of_median_pct": 67.7
+  },
+  "cache_hit": {
+    "n": 30,
+    "p50_ms": 13.1,
+    "p95_ms": 20.1,
+    "client_p50_ms": 11.9
+  },
+  "max_similarity_of_misses": 0.9372,
+  "spans_file": "/Users/prags/Desktop/HW1_DATA260/kafka_state/traces/spans.jsonl"
+}

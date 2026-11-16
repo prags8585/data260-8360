@@ -10,6 +10,7 @@ from kafka_svc import config
 from kafka_svc.brains import make_model, write_draft
 from kafka_svc.bus import compact, dead_letter, decode, make_consumer, make_producer, send, setup_logging, utc_now
 from kafka_svc.idempotency import ProcessedStore
+from tracing.spans import emit_span, first_line, queue_span
 
 log = logging.getLogger("writer")
 BACKOFF_SECONDS = 0.5
@@ -36,6 +37,9 @@ def handle(msg, args, model, producer, consumer, processed: ProcessedStore | Non
     cid = body.get("correlation_id") if body else (msg.key().decode("utf-8", "replace") if msg.key() else None)
     log.info("received task from %s correlation_id=%s", where, cid)
     started = utc_now()
+    started_ts = time.time()
+    queue_span(cid, "queue_tasks", msg, started_ts, service="writer")
+    last_error, succeeded = None, False
 
     if processed is not None and cid and processed.seen(cid):
         log.warning("DUPLICATE correlation_id=%s already processed, skipping the side effect", cid)
@@ -52,11 +56,13 @@ def handle(msg, args, model, producer, consumer, processed: ProcessedStore | Non
             produce_draft(msg, body, args, model, producer)
             if processed is not None:
                 processed.mark(cid, args.id)
+            succeeded = True
             break
         except Exception as exc:
             if not args.dlq:
                 raise
             log.warning("attempt %d/%d failed for %s offset=%d: %s: %s", attempts, args.max_attempts, msg.topic(), msg.offset(), type(exc).__name__, exc)
+            last_error = first_line(f"{type(exc).__name__}: {exc}")
             if attempts >= args.max_attempts:
                 partition, offset = dead_letter(producer, msg, f"{type(exc).__name__}: {exc}", attempts)
                 log.error("gave up after %d attempts, moved %s offset=%d to %s partition=%d offset=%d",
@@ -64,6 +70,8 @@ def handle(msg, args, model, producer, consumer, processed: ProcessedStore | Non
                 break
             time.sleep(BACKOFF_SECONDS * 2 ** (attempts - 1))
 
+    emit_span(cid, "writer", started_ts, time.time(), "ok" if succeeded else "error", None if succeeded else last_error, attempts=attempts,
+              dead_lettered=not succeeded)
     if trace and body:
         with open(trace, "a") as handle_file:
             handle_file.write(json.dumps({"writer": args.id, "partition": msg.partition(), "offset": msg.offset(), "correlation_id": cid,

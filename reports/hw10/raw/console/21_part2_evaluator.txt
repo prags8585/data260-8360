@@ -1,0 +1,20 @@
+=== 2026-11-15 02:26:11 === Part 2: the evaluator joins plan, draft and final by correlation_id and scores them
+$ python evaluator.py --once --since 2026-11-15T09:19:30Z --only <the 8 trace ids> --out reports/hw10/raw/part2_evals.jsonl
+2026-11-15T10:26:12.359Z evaluator INFO evaluator ready: topics ['s8360_tasks', 's8360_drafts', 's8360_final'], judge qwen3:8b (ollama, temperature 0.0, seed 8360), output reports/hw10/raw/part2_evals.jsonl, 0 requests already scored
+2026-11-15T10:26:12.549Z evaluator INFO plan, draft and final joined for correlation_id=86141204-40cc-440d-ae91-d50d3094c406; judging
+2026-11-15T10:26:40.151Z evaluator INFO scored correlation_id=86141204-40cc-440d-ae91-d50d3094c406 plan=4 writer=5 final=5 in 27.6s errors=none
+2026-11-15T10:26:40.151Z evaluator INFO plan, draft and final joined for correlation_id=a871bec7-320a-40c6-8909-c5e9df4159f3; judging
+2026-11-15T10:26:59.589Z evaluator INFO scored correlation_id=a871bec7-320a-40c6-8909-c5e9df4159f3 plan=3 writer=4 final=5 in 19.4s errors=none
+2026-11-15T10:26:59.589Z evaluator INFO plan, draft and final joined for correlation_id=3d759a78-56a1-43d0-94f9-6eef419b1c9a; judging
+2026-11-15T10:27:19.461Z evaluator INFO scored correlation_id=3d759a78-56a1-43d0-94f9-6eef419b1c9a plan=4 writer=4 final=5 in 19.9s errors=none
+2026-11-15T10:27:19.461Z evaluator INFO plan, draft and final joined for correlation_id=f207b4fe-1cd1-440c-8711-b6ffc8e65ce8; judging
+2026-11-15T10:27:41.952Z evaluator INFO scored correlation_id=f207b4fe-1cd1-440c-8711-b6ffc8e65ce8 plan=3 writer=4 final=5 in 22.5s errors=none
+2026-11-15T10:27:41.953Z evaluator INFO plan, draft and final joined for correlation_id=b7ed48d7-eaa7-4a1a-b6e5-61705e4a678c; judging
+2026-11-15T10:28:02.188Z evaluator INFO scored correlation_id=b7ed48d7-eaa7-4a1a-b6e5-61705e4a678c plan=3 writer=5 final=5 in 20.2s errors=none
+2026-11-15T10:28:02.189Z evaluator INFO plan, draft and final joined for correlation_id=bf4e76c1-692b-414d-8b48-7e1f8ede152d; judging
+2026-11-15T10:28:25.891Z evaluator INFO scored correlation_id=bf4e76c1-692b-414d-8b48-7e1f8ede152d plan=3 writer=4 final=4 in 23.7s errors=none
+2026-11-15T10:28:25.892Z evaluator INFO plan, draft and final joined for correlation_id=6d6fcea1-e590-4f2d-9d22-2f207f28a4ba; judging
+2026-11-15T10:28:46.810Z evaluator INFO scored correlation_id=6d6fcea1-e590-4f2d-9d22-2f207f28a4ba plan=3 writer=4 final=5 in 20.9s errors=none
+2026-11-15T10:28:46.810Z evaluator INFO plan, draft and final joined for correlation_id=fc1aa986-8493-431a-bb65-86053bb52733; judging
+2026-11-15T10:29:08.517Z evaluator INFO scored correlation_id=fc1aa986-8493-431a-bb65-86053bb52733 plan=4 writer=2 final=1 in 21.7s errors=none
+2026-11-15T10:29:23.762Z evaluator INFO evaluator finished: 8 scored, 0 malformed or skipped, 2 incomplete joins

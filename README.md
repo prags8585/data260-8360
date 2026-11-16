@@ -179,3 +179,21 @@ PYTHONPATH=. python scripts/hw9_export_reference.py               # Part 4: refe
 PYTHONPATH=. python scripts/hw9_part4_run.py mine|validate|demo|final
 python tests_hw9.py && PYTHONPATH=. python verify_hw09.py         # offline tests, then the live smoke test (writes verification.json)
 ```
+
+## HW10 - evaluation, judge validation, tracing and the Streamlit dashboard
+
+PREFIX `s8360`, PORT_BASE 8260. Code: `tracing/` (structured JSON spans, trace_id = HW8 correlation_id), `evaluation/` + `evaluator.py` (DeepEval GEval judge on qwen3:8b), `dashboard/` (Streamlit),
+plus spans in `planner.py`, `writer.py`, `reviewer.py` and the HW9 ingress. Frozen Part 3 files: `eval_cases.json`, `human_labels.csv` (labels are assigned by hand, rubric in `eval_rubric.md`).
+
+```bash
+# same stack as HW9 (Redis Stack, Kafka, MySQL, Ollama), agents and ingress started as before; spans go to kafka_state/traces/spans.jsonl
+PYTHONPATH=. python scripts/hw10_part2_run.py                      # Part 2: eight test questions through the system
+PYTHONPATH=. python evaluator.py --once --since <ISO time> --out reports/hw10/raw/part2_evals.jsonl   # Part 2: join plan/draft/final by correlation_id and score them
+PYTHONPATH=. python scripts/hw10_collect_drafts.py                 # Part 3.1: 20 Writer drafts -> eval_cases.json, empty human_labels.csv
+streamlit run dashboard/label_cases.py                             # Part 3.1: label the drafts by hand (or edit human_labels.csv), then COMMIT both files
+PYTHONPATH=. python scripts/hw10_judge_validation.py --sampling-check   # Part 3.2 / 3.3 (refuses to run unless both files are committed and complete)
+PYTHONPATH=. python scripts/hw10_trace_examples.py                 # Part 4.2: cache hit, cache miss and failed trace (briefly stops s8360-mysql)
+PYTHONPATH=. python scripts/hw10_latency_experiment.py && PYTHONPATH=. python scripts/hw10_latency_report.py   # Part 4.3: 50 confirmed misses
+streamlit run dashboard/app.py                                     # Part 1: Summary / Evaluation / Trace lookup
+python tests_hw10.py && PYTHONPATH=. python verify_hw10.py         # offline tests, then the live smoke test (writes verification.json)
+```

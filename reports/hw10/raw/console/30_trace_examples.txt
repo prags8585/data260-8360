@@ -1,0 +1,8 @@
+=== 2026-11-15 01:24:36 === Part 4.2: a cache-hit, a cache-miss and a failed request
+$ .venv/bin/python scripts/hw10_trace_examples.py
+1. cache hit   : is_cached=True similarity=1.0 latency=207.1 ms trace_id=b86ddd2a-ea86-43b1-a33a-b427fcec3b86
+2. cache miss  : is_cached=False status=approved latency=11785.4 ms trace_id=7c6d4004-62b8-4ff2-9543-ba63dfc36cfd
+3. failed trace: stopping s8360-mysql, then asking a new question (the Writer needs the live catalogue)
+   result: status=timeout answer=None latency=25810.9 ms trace_id=dad26c70-f9ad-4657-a0e9-8413fc0b173d
+   s8360-mysql is back: True
+saved reports/hw10/raw/trace_examples.json

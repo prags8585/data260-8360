@@ -44,7 +44,8 @@ def ask(body: dict = Body(...)):
     question = body.get("question")
     if not isinstance(question, str) or not question.strip():
         raise HTTPException(422, "question must be a non-empty string")
-    return app.state.ingress.ask(question.strip(), threshold=body.get("threshold"), validate_version=body.get("validate_version"))
+    return app.state.ingress.ask(question.strip(), threshold=body.get("threshold"), validate_version=body.get("validate_version"),
+                                 store=body.get("store", True), timeout_s=body.get("timeout_s"))
 
 
 @app.get("/courses/{course_id}")

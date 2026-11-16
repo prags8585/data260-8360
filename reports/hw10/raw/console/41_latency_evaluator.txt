@@ -1,0 +1,103 @@
+=== 2026-11-15 02:29:23 === Part 4.3: the evaluation stage for the 50 requests (evaluator runs after the pipeline is idle)
+$ python evaluator.py --once --since 2026-11-15T09:35:00Z --only <the 50 trace ids> --out reports/hw10/raw/latency_evals.jsonl
+2026-11-15T10:29:25.055Z evaluator INFO evaluator ready: topics ['s8360_tasks', 's8360_drafts', 's8360_final'], judge qwen3:8b (ollama, temperature 0.0, seed 8360), output reports/hw10/raw/latency_evals.jsonl, 0 requests already scored
+2026-11-15T10:29:25.273Z evaluator INFO plan, draft and final joined for correlation_id=eb5ad15c-a8bd-4e40-a231-6d6c823f9c14; judging
+2026-11-15T10:29:44.561Z evaluator INFO scored correlation_id=eb5ad15c-a8bd-4e40-a231-6d6c823f9c14 plan=4 writer=5 final=5 in 19.3s errors=none
+2026-11-15T10:29:44.562Z evaluator INFO plan, draft and final joined for correlation_id=d72562d8-6a33-481b-959d-cc4d976aef0f; judging
+2026-11-15T10:30:05.344Z evaluator INFO scored correlation_id=d72562d8-6a33-481b-959d-cc4d976aef0f plan=4 writer=4 final=5 in 20.8s errors=none
+2026-11-15T10:30:05.345Z evaluator INFO plan, draft and final joined for correlation_id=4baa19aa-9513-46b5-adea-15bcfa0514c8; judging
+2026-11-15T10:30:43.314Z evaluator INFO scored correlation_id=4baa19aa-9513-46b5-adea-15bcfa0514c8 plan=5 writer=5 final=5 in 38.0s errors=none
+2026-11-15T10:30:43.314Z evaluator INFO plan, draft and final joined for correlation_id=ba47c1d6-988e-45dd-aaa5-680ea216fb63; judging
+2026-11-15T10:31:25.825Z evaluator INFO scored correlation_id=ba47c1d6-988e-45dd-aaa5-680ea216fb63 plan=4 writer=4 final=4 in 42.5s errors=none
+2026-11-15T10:31:25.825Z evaluator INFO plan, draft and final joined for correlation_id=26598092-5dec-4ef9-9846-0e8eeface0ce; judging
+2026-11-15T10:32:04.986Z evaluator INFO scored correlation_id=26598092-5dec-4ef9-9846-0e8eeface0ce plan=3 writer=4 final=5 in 39.2s errors=none
+2026-11-15T10:32:04.986Z evaluator INFO plan, draft and final joined for correlation_id=7fe59eb0-ceb4-4997-a190-a268abfd18cd; judging
+2026-11-15T10:32:43.371Z evaluator INFO scored correlation_id=7fe59eb0-ceb4-4997-a190-a268abfd18cd plan=3 writer=2 final=2 in 38.4s errors=none
+2026-11-15T10:32:43.371Z evaluator INFO plan, draft and final joined for correlation_id=2891fc5a-bc90-4286-ac62-db3e8f10f3e6; judging
+2026-11-15T10:33:22.537Z evaluator INFO scored correlation_id=2891fc5a-bc90-4286-ac62-db3e8f10f3e6 plan=4 writer=5 final=5 in 39.2s errors=none
+2026-11-15T10:33:22.538Z evaluator INFO plan, draft and final joined for correlation_id=ca60997b-f258-47a8-8a2f-ab3a0bac87ff; judging
+2026-11-15T10:33:59.042Z evaluator INFO scored correlation_id=ca60997b-f258-47a8-8a2f-ab3a0bac87ff plan=4 writer=5 final=5 in 36.5s errors=none
+2026-11-15T10:33:59.042Z evaluator INFO plan, draft and final joined for correlation_id=b939bc53-fc68-4f24-b838-424ca65040b1; judging
+2026-11-15T10:34:35.820Z evaluator INFO scored correlation_id=b939bc53-fc68-4f24-b838-424ca65040b1 plan=5 writer=5 final=5 in 36.8s errors=none
+2026-11-15T10:34:35.820Z evaluator INFO plan, draft and final joined for correlation_id=a558ab23-de3d-49a7-8e75-1f608cd2454b; judging
+2026-11-15T10:35:14.878Z evaluator INFO scored correlation_id=a558ab23-de3d-49a7-8e75-1f608cd2454b plan=3 writer=4 final=5 in 39.1s errors=none
+2026-11-15T10:35:14.879Z evaluator INFO plan, draft and final joined for correlation_id=6f2b58be-17e8-42fa-98f6-ee469ada595d; judging
+2026-11-15T10:35:55.445Z evaluator INFO scored correlation_id=6f2b58be-17e8-42fa-98f6-ee469ada595d plan=4 writer=4 final=5 in 40.6s errors=none
+2026-11-15T10:35:55.445Z evaluator INFO plan, draft and final joined for correlation_id=4096f49d-9bbe-481f-a023-8ea8d1a6defc; judging
+2026-11-15T10:36:29.614Z evaluator INFO scored correlation_id=4096f49d-9bbe-481f-a023-8ea8d1a6defc plan=3 writer=5 final=5 in 34.2s errors=none
+2026-11-15T10:36:29.614Z evaluator INFO plan, draft and final joined for correlation_id=335375a7-c98d-4d46-a0b2-9100f64e937f; judging
+2026-11-15T10:37:06.644Z evaluator INFO scored correlation_id=335375a7-c98d-4d46-a0b2-9100f64e937f plan=5 writer=5 final=5 in 37.0s errors=none
+2026-11-15T10:37:06.644Z evaluator INFO plan, draft and final joined for correlation_id=d0e683e6-5d9f-4d79-a05e-7d072295b38a; judging
+2026-11-15T10:37:46.789Z evaluator INFO scored correlation_id=d0e683e6-5d9f-4d79-a05e-7d072295b38a plan=3 writer=5 final=5 in 40.1s errors=none
+2026-11-15T10:37:46.790Z evaluator INFO plan, draft and final joined for correlation_id=73958814-2599-4db0-9d26-2f0df166f8b0; judging
+2026-11-15T10:38:23.412Z evaluator INFO scored correlation_id=73958814-2599-4db0-9d26-2f0df166f8b0 plan=3 writer=5 final=5 in 36.6s errors=none
+2026-11-15T10:38:23.414Z evaluator INFO plan, draft and final joined for correlation_id=1cf57d22-5f97-478f-9558-8c03b2ca51c8; judging
+2026-11-15T10:39:02.719Z evaluator INFO scored correlation_id=1cf57d22-5f97-478f-9558-8c03b2ca51c8 plan=3 writer=5 final=5 in 39.3s errors=none
+2026-11-15T10:39:02.719Z evaluator INFO plan, draft and final joined for correlation_id=6ad43038-d653-441b-9748-acee70ebf4fb; judging
+2026-11-15T10:39:39.139Z evaluator INFO scored correlation_id=6ad43038-d653-441b-9748-acee70ebf4fb plan=3 writer=5 final=5 in 36.4s errors=none
+2026-11-15T10:39:39.139Z evaluator INFO plan, draft and final joined for correlation_id=3208592d-deb0-47fa-b5e6-f1211e2c368c; judging
+2026-11-15T10:40:19.401Z evaluator INFO scored correlation_id=3208592d-deb0-47fa-b5e6-f1211e2c368c plan=4 writer=4 final=5 in 40.3s errors=none
+2026-11-15T10:40:19.401Z evaluator INFO plan, draft and final joined for correlation_id=c00728d0-1a51-469b-8d6b-652388fb2eab; judging
+2026-11-15T10:41:05.888Z evaluator INFO scored correlation_id=c00728d0-1a51-469b-8d6b-652388fb2eab plan=3 writer=4 final=4 in 46.3s errors=none
+2026-11-15T10:41:05.892Z evaluator INFO plan, draft and final joined for correlation_id=3be2778d-56f2-4412-a634-7533ef8fed0f; judging
+2026-11-15T10:41:43.573Z evaluator INFO scored correlation_id=3be2778d-56f2-4412-a634-7533ef8fed0f plan=3 writer=4 final=5 in 37.7s errors=none
+2026-11-15T10:41:43.573Z evaluator INFO plan, draft and final joined for correlation_id=3129aa80-8015-408f-9e7c-e452f086bb9a; judging
+2026-11-15T10:42:17.236Z evaluator INFO scored correlation_id=3129aa80-8015-408f-9e7c-e452f086bb9a plan=3 writer=5 final=5 in 33.7s errors=none
+2026-11-15T10:42:17.237Z evaluator INFO plan, draft and final joined for correlation_id=e5d2fc37-661f-4c72-9f68-8fb2a7570d5c; judging
+2026-11-15T10:42:57.135Z evaluator INFO scored correlation_id=e5d2fc37-661f-4c72-9f68-8fb2a7570d5c plan=4 writer=4 final=5 in 39.9s errors=none
+2026-11-15T10:42:57.135Z evaluator INFO plan, draft and final joined for correlation_id=34b2981a-cd6f-474d-9c76-e667aa36a4fc; judging
+2026-11-15T10:43:33.842Z evaluator INFO scored correlation_id=34b2981a-cd6f-474d-9c76-e667aa36a4fc plan=4 writer=5 final=5 in 36.7s errors=none
+2026-11-15T10:43:33.843Z evaluator INFO plan, draft and final joined for correlation_id=901365d1-edc7-41e7-bb09-1afe4adb63fe; judging
+2026-11-15T10:45:40.198Z evaluator INFO scored correlation_id=901365d1-edc7-41e7-bb09-1afe4adb63fe plan=3 writer=5 final=5 in 126.3s errors=none
+2026-11-15T10:45:40.614Z evaluator INFO plan, draft and final joined for correlation_id=55a0ae94-e6d3-4731-91be-c8d61364f311; judging
+2026-11-15T10:46:40.946Z evaluator INFO scored correlation_id=55a0ae94-e6d3-4731-91be-c8d61364f311 plan=3 writer=4 final=4 in 60.3s errors=none
+2026-11-15T10:46:40.947Z evaluator INFO plan, draft and final joined for correlation_id=9b5e5fdb-82c5-4810-8239-030d67233537; judging
+2026-11-15T10:47:25.804Z evaluator INFO scored correlation_id=9b5e5fdb-82c5-4810-8239-030d67233537 plan=4 writer=5 final=5 in 44.8s errors=none
+2026-11-15T10:47:25.806Z evaluator INFO plan, draft and final joined for correlation_id=bd8a68c1-30c6-4003-aec4-9fc76ae91359; judging
+2026-11-15T10:48:11.771Z evaluator INFO scored correlation_id=bd8a68c1-30c6-4003-aec4-9fc76ae91359 plan=3 writer=5 final=5 in 45.9s errors=none
+2026-11-15T10:48:11.774Z evaluator INFO plan, draft and final joined for correlation_id=9d8e5f91-4e6c-44ac-b3a6-09a75d6d12b2; judging
+2026-11-15T10:48:53.075Z evaluator INFO scored correlation_id=9d8e5f91-4e6c-44ac-b3a6-09a75d6d12b2 plan=5 writer=5 final=5 in 41.3s errors=none
+2026-11-15T10:48:53.075Z evaluator INFO plan, draft and final joined for correlation_id=6496c33c-b393-414e-95ca-f67b5a40c4d0; judging
+2026-11-15T10:49:37.150Z evaluator INFO scored correlation_id=6496c33c-b393-414e-95ca-f67b5a40c4d0 plan=4 writer=4 final=5 in 44.1s errors=none
+2026-11-15T10:49:37.151Z evaluator INFO plan, draft and final joined for correlation_id=0e98b285-f311-46c2-bd0a-98cbe325b09c; judging
+2026-11-15T10:50:24.920Z evaluator INFO scored correlation_id=0e98b285-f311-46c2-bd0a-98cbe325b09c plan=4 writer=4 final=1 in 47.7s errors=none
+2026-11-15T10:50:24.921Z evaluator INFO plan, draft and final joined for correlation_id=9c49f5fa-d001-4347-9ed2-ff36152c4834; judging
+2026-11-15T10:51:08.311Z evaluator INFO scored correlation_id=9c49f5fa-d001-4347-9ed2-ff36152c4834 plan=3 writer=4 final=5 in 43.4s errors=none
+2026-11-15T10:51:08.311Z evaluator INFO plan, draft and final joined for correlation_id=d6e59a43-d3a5-4c10-83b1-0ad2fdd00d53; judging
+2026-11-15T10:51:58.399Z evaluator INFO scored correlation_id=d6e59a43-d3a5-4c10-83b1-0ad2fdd00d53 plan=3 writer=4 final=4 in 50.1s errors=none
+2026-11-15T10:51:58.400Z evaluator INFO plan, draft and final joined for correlation_id=f8de8220-b548-4051-a2f5-691233e7d12d; judging
+2026-11-15T10:52:45.927Z evaluator INFO scored correlation_id=f8de8220-b548-4051-a2f5-691233e7d12d plan=3 writer=4 final=5 in 47.5s errors=none
+2026-11-15T10:52:45.927Z evaluator INFO plan, draft and final joined for correlation_id=6cda313b-f514-4712-92a5-ddc3e94dbcbc; judging
+2026-11-15T10:53:35.965Z evaluator INFO scored correlation_id=6cda313b-f514-4712-92a5-ddc3e94dbcbc plan=3 writer=4 final=4 in 50.0s errors=none
+2026-11-15T10:53:35.965Z evaluator INFO plan, draft and final joined for correlation_id=7307b8e6-80ea-4982-ac9b-b86b063abf6f; judging
+2026-11-15T10:54:32.260Z evaluator INFO scored correlation_id=7307b8e6-80ea-4982-ac9b-b86b063abf6f plan=3 writer=5 final=5 in 56.2s errors=none
+2026-11-15T10:54:32.260Z evaluator INFO plan, draft and final joined for correlation_id=2e2a8db5-3740-4adf-85d5-80d2df4f6e0b; judging
+2026-11-15T10:55:22.164Z evaluator INFO scored correlation_id=2e2a8db5-3740-4adf-85d5-80d2df4f6e0b plan=3 writer=4 final=4 in 49.9s errors=none
+2026-11-15T10:55:22.166Z evaluator INFO plan, draft and final joined for correlation_id=7c11ad90-857f-4472-bcdd-60ad04acea9a; judging
+2026-11-15T10:56:09.615Z evaluator INFO scored correlation_id=7c11ad90-857f-4472-bcdd-60ad04acea9a plan=5 writer=5 final=5 in 47.4s errors=none
+2026-11-15T10:56:09.616Z evaluator INFO plan, draft and final joined for correlation_id=4d3c937f-1f93-4ec5-b722-8a7c96816363; judging
+2026-11-15T10:56:58.309Z evaluator INFO scored correlation_id=4d3c937f-1f93-4ec5-b722-8a7c96816363 plan=5 writer=5 final=5 in 48.7s errors=none
+2026-11-15T10:56:58.310Z evaluator INFO plan, draft and final joined for correlation_id=4c00b7ac-14d5-4469-8ddb-882579319481; judging
+2026-11-15T10:59:09.313Z evaluator INFO scored correlation_id=4c00b7ac-14d5-4469-8ddb-882579319481 plan=4 writer=4 final=4 in 131.0s errors=none
+2026-11-15T10:59:09.313Z evaluator INFO plan, draft and final joined for correlation_id=c96dee2f-5bfe-4015-b1da-f548d69537d7; judging
+2026-11-15T10:59:33.589Z evaluator INFO scored correlation_id=c96dee2f-5bfe-4015-b1da-f548d69537d7 plan=3 writer=4 final=3 in 24.3s errors=none
+2026-11-15T10:59:33.589Z evaluator INFO plan, draft and final joined for correlation_id=8bad0d46-2047-48fc-8858-014a668830d6; judging
+2026-11-15T11:00:19.653Z evaluator INFO scored correlation_id=8bad0d46-2047-48fc-8858-014a668830d6 plan=4 writer=3 final=2 in 46.1s errors=none
+2026-11-15T11:00:19.654Z evaluator INFO plan, draft and final joined for correlation_id=4d984838-1c59-4fe7-a4e7-8f8bcf769ac0; judging
+2026-11-15T11:00:59.655Z evaluator INFO scored correlation_id=4d984838-1c59-4fe7-a4e7-8f8bcf769ac0 plan=3 writer=5 final=5 in 40.0s errors=none
+2026-11-15T11:00:59.655Z evaluator INFO plan, draft and final joined for correlation_id=2ca3d6b7-ee39-419a-ae57-fc36d671af86; judging
+2026-11-15T11:06:49.874Z evaluator INFO scored correlation_id=2ca3d6b7-ee39-419a-ae57-fc36d671af86 plan=3 writer=4 final=5 in 350.2s errors=none
+2026-11-15T11:06:49.879Z evaluator WARNING consumer error: KafkaError{code=_MAX_POLL_EXCEEDED,val=-147,str="Application maximum poll interval (300000ms) exceeded by 48192ms"}
+2026-11-15T11:06:51.011Z evaluator INFO evaluator finished: 43 scored, 0 malformed or skipped, 6 incomplete joins
+
+--- follow-up: the first re-run stopped after 43 requests (one request took 350 s under heavy machine load, the evaluator's consumer exceeded Kafka's 300 s poll limit and was dropped from its group).
+--- Fixed in evaluator.py (max.poll.interval.ms = 1 500 000). The 7 missing requests were then scored; one more needed a corrected --since cutoff:
+2026-11-15T11:46:34.319Z evaluator INFO evaluator ready: topics ['s8360_tasks', 's8360_drafts', 's8360_final'], judge qwen3:8b (ollama, temperature 0.0, seed 8360), output reports/hw10/raw/latency_evals.jsonl, 43 requests already scored
+2026-11-15T11:47:02.477Z evaluator INFO scored correlation_id=b2fd2ff9-47cc-4737-a06a-26c3f9cfa32e plan=4 writer=5 final=5 in 27.9s errors=none
+2026-11-15T11:47:19.063Z evaluator INFO scored correlation_id=5f15abe5-2175-4e85-97b5-70fd9c5ef2cd plan=3 writer=5 final=5 in 16.6s errors=none
+2026-11-15T11:47:39.563Z evaluator INFO scored correlation_id=d1bb1bff-46ca-452b-a61e-18be6887c5d7 plan=3 writer=4 final=4 in 20.5s errors=none
+2026-11-15T11:47:58.264Z evaluator INFO scored correlation_id=a8f3ed2c-9d8f-466c-9301-e27d0e0aa72e plan=4 writer=5 final=2 in 18.7s errors=none
+2026-11-15T11:48:16.475Z evaluator INFO scored correlation_id=e9ff99b8-7f4a-4477-84c5-ebe7d517cd0c plan=4 writer=5 final=5 in 18.2s errors=none
+2026-11-15T11:48:35.640Z evaluator INFO scored correlation_id=40947013-a32d-4ae6-82e6-8e94fc175b6e plan=3 writer=5 final=5 in 19.2s errors=none
+2026-11-15T11:48:36.685Z evaluator INFO evaluator finished: 6 scored, 0 malformed or skipped, 0 incomplete joins
+2026-11-15T12:07:16Z evaluator INFO scored correlation_id=089c4033-a946-4a43-9711-df864673dad1 plan=3 writer=4 final=5 (the last request)

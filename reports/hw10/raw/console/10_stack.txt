@@ -1,0 +1,18 @@
+=== 2026-11-15 04:11:32 === The system the dashboard watches: containers, agents, ingress, evaluator model
+$ docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}' | grep -E 'NAMES|s8360'
+NAMES                    IMAGE                             STATUS
+s8360-redis              redis/redis-stack-server:latest   Up 2 days (healthy)
+s8360-kafka              apache/kafka:3.8.0                Up 3 hours (healthy)
+s8360-mongo              mongo:7.0                         Up 2 days
+s8360-mysql              mysql:8.0                         Up 3 hours
+$ ps -Ao command | grep -E 'planner.py|writer.py|reviewer.py|uvicorn cache_svc|streamlit run' | grep -v -E 'grep|caffeinate' | sed -E 's#^.*/Python (-m )?##' | cut -c1-90
+writer.py
+planner.py
+reviewer.py
+uvicorn cache_svc.api:app --host 127.0.0.1 --port 8260
+streamlit run dashboard/label_cases.py --server.port 8502 --server.headless true --browser
+streamlit run dashboard/app.py --server.port 8501 --server.headless true --browser.gatherU
+$ curl -s localhost:8260/health
+{"status":"ok","port":8260,"cached_entries":8}
+$ curl -s localhost:11434/api/tags | python3 -c "import sys,json; print([m['name'] for m in json.load(sys.stdin)['models']])"
+['qwen3:8b', 'codellama:7b']

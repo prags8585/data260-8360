@@ -1,0 +1,628 @@
+{
+  "started": 1794734718.19342,
+  "threshold": 0.95,
+  "misses": [
+    {
+      "question": "Does DATA-260 still have open seats, and how many?",
+      "trace_id": "089c4033-a946-4a43-9711-df864673dad1",
+      "is_cached": false,
+      "similarity": 0.8804,
+      "status": "approved",
+      "latency_ms": 9917.8
+    },
+    {
+      "question": "What is the department of DATA-245?",
+      "trace_id": "eb5ad15c-a8bd-4e40-a231-6d6c823f9c14",
+      "is_cached": false,
+      "similarity": 0.5446,
+      "status": "approved",
+      "latency_ms": 8854.1
+    },
+    {
+      "question": "How many courses does the Data Science department offer?",
+      "trace_id": "d72562d8-6a33-481b-959d-cc4d976aef0f",
+      "is_cached": false,
+      "similarity": 0.8147,
+      "status": "approved",
+      "latency_ms": 8937.4
+    },
+    {
+      "question": "What is the title of the course CS-157A?",
+      "trace_id": "4baa19aa-9513-46b5-adea-15bcfa0514c8",
+      "is_cached": false,
+      "similarity": 0.4965,
+      "status": "approved",
+      "latency_ms": 9382.6
+    },
+    {
+      "question": "How many courses does the Engineering department offer?",
+      "trace_id": "ba47c1d6-988e-45dd-aaa5-680ea216fb63",
+      "is_cached": false,
+      "similarity": 0.618,
+      "status": "approved",
+      "latency_ms": 9574.1
+    },
+    {
+      "question": "Does DATA-230 still have open seats, and how many?",
+      "trace_id": "26598092-5dec-4ef9-9846-0e8eeface0ce",
+      "is_cached": false,
+      "similarity": 0.8285,
+      "status": "approved",
+      "latency_ms": 10527.8
+    },
+    {
+      "question": "Which department has the fewest available seats?",
+      "trace_id": "7fe59eb0-ceb4-4997-a190-a268abfd18cd",
+      "is_cached": false,
+      "similarity": 0.8939,
+      "status": "approved",
+      "latency_ms": 10096.9
+    },
+    {
+      "question": "Which instructor is assigned to ENGR-200?",
+      "trace_id": "2891fc5a-bc90-4286-ac62-db3e8f10f3e6",
+      "is_cached": false,
+      "similarity": 0.5664,
+      "status": "approved",
+      "latency_ms": 11058.3
+    },
+    {
+      "question": "What is the department of ENGR-200?",
+      "trace_id": "ca60997b-f258-47a8-8a2f-ab3a0bac87ff",
+      "is_cached": false,
+      "similarity": 0.348,
+      "status": "approved",
+      "latency_ms": 11373.7
+    },
+    {
+      "question": "What is the title of the course ENGR-200?",
+      "trace_id": "b939bc53-fc68-4f24-b838-424ca65040b1",
+      "is_cached": false,
+      "similarity": 0.4887,
+      "status": "approved",
+      "latency_ms": 10463.9
+    },
+    {
+      "question": "Which course has the most seats left?",
+      "trace_id": "a558ab23-de3d-49a7-8e75-1f608cd2454b",
+      "is_cached": false,
+      "similarity": 0.9372,
+      "status": "approved",
+      "latency_ms": 10533.8
+    },
+    {
+      "question": "How many courses does the Computer Science department offer?",
+      "trace_id": "6f2b58be-17e8-42fa-98f6-ee469ada595d",
+      "is_cached": false,
+      "similarity": 0.8451,
+      "status": "approved",
+      "latency_ms": 11631.0
+    },
+    {
+      "question": "I want to enrol in DATA-260; how many places are left?",
+      "trace_id": "4096f49d-9bbe-481f-a023-8ea8d1a6defc",
+      "is_cached": false,
+      "similarity": 0.6062,
+      "status": "approved",
+      "latency_ms": 11782.2
+    },
+    {
+      "question": "What is the title of the course DATA-230?",
+      "trace_id": "335375a7-c98d-4d46-a0b2-9100f64e937f",
+      "is_cached": false,
+      "similarity": 0.7789,
+      "status": "approved",
+      "latency_ms": 10969.5
+    },
+    {
+      "question": "How many courses does Dr. Elena Rossi teach?",
+      "trace_id": "d0e683e6-5d9f-4d79-a05e-7d072295b38a",
+      "is_cached": false,
+      "similarity": 0.6313,
+      "status": "approved",
+      "latency_ms": 12289.4
+    },
+    {
+      "question": "Which instructor is assigned to CS-146?",
+      "trace_id": "73958814-2599-4db0-9d26-2f0df166f8b0",
+      "is_cached": false,
+      "similarity": 0.6155,
+      "status": "approved",
+      "latency_ms": 12175.6
+    },
+    {
+      "question": "I want to enrol in CS-146; how many places are left?",
+      "trace_id": "1cf57d22-5f97-478f-9558-8c03b2ca51c8",
+      "is_cached": false,
+      "similarity": 0.5855,
+      "status": "approved",
+      "latency_ms": 11018.2
+    },
+    {
+      "question": "I want to enrol in DATA-245; how many places are left?",
+      "trace_id": "6ad43038-d653-441b-9748-acee70ebf4fb",
+      "is_cached": false,
+      "similarity": 0.5682,
+      "status": "approved",
+      "latency_ms": 12196.5
+    },
+    {
+      "question": "What is the department of CS-157A?",
+      "trace_id": "3208592d-deb0-47fa-b5e6-f1211e2c368c",
+      "is_cached": false,
+      "similarity": 0.3192,
+      "status": "approved",
+      "latency_ms": 11395.6
+    },
+    {
+      "question": "What courses does Dr. Marcus Lee teach, and how many seats do they have in total?",
+      "trace_id": "c00728d0-1a51-469b-8d6b-652388fb2eab",
+      "is_cached": false,
+      "similarity": 0.8948,
+      "status": "approved",
+      "latency_ms": 12473.1
+    },
+    {
+      "question": "List every course offered by Data Science.",
+      "trace_id": "3be2778d-56f2-4412-a634-7533ef8fed0f",
+      "is_cached": false,
+      "similarity": 0.8909,
+      "status": "approved",
+      "latency_ms": 14370.6
+    },
+    {
+      "question": "I want to enrol in ENGR-200; how many places are left?",
+      "trace_id": "3129aa80-8015-408f-9e7c-e452f086bb9a",
+      "is_cached": false,
+      "similarity": 0.4121,
+      "status": "approved",
+      "latency_ms": 11949.5
+    },
+    {
+      "question": "What is the department of CS-146?",
+      "trace_id": "e5d2fc37-661f-4c72-9f68-8fb2a7570d5c",
+      "is_cached": false,
+      "similarity": 0.3565,
+      "status": "approved",
+      "latency_ms": 11423.5
+    },
+    {
+      "question": "Which instructor is assigned to DATA-230?",
+      "trace_id": "34b2981a-cd6f-474d-9c76-e667aa36a4fc",
+      "is_cached": false,
+      "similarity": 0.8884,
+      "status": "approved",
+      "latency_ms": 11228.4
+    },
+    {
+      "question": "What is the total seat count of the Engineering department?",
+      "trace_id": "901365d1-edc7-41e7-bb09-1afe4adb63fe",
+      "is_cached": false,
+      "similarity": 0.6483,
+      "status": "approved",
+      "latency_ms": 11131.0
+    },
+    {
+      "question": "What courses does Dr. Priya Nair teach, and how many seats do they have in total?",
+      "trace_id": "55a0ae94-e6d3-4731-91be-c8d61364f311",
+      "is_cached": false,
+      "similarity": 0.5575,
+      "status": "approved",
+      "latency_ms": 14051.8
+    },
+    {
+      "question": "Which instructor is assigned to DATA-245?",
+      "trace_id": "9b5e5fdb-82c5-4810-8239-030d67233537",
+      "is_cached": false,
+      "similarity": 0.833,
+      "status": "approved",
+      "latency_ms": 10428.2
+    },
+    {
+      "question": "Does CS-157A still have open seats, and how many?",
+      "trace_id": "bd8a68c1-30c6-4003-aec4-9fc76ae91359",
+      "is_cached": false,
+      "similarity": 0.6651,
+      "status": "approved",
+      "latency_ms": 11731.9
+    },
+    {
+      "question": "What is the title of the course DATA-245?",
+      "trace_id": "9d8e5f91-4e6c-44ac-b3a6-09a75d6d12b2",
+      "is_cached": false,
+      "similarity": 0.7201,
+      "status": "approved",
+      "latency_ms": 11248.8
+    },
+    {
+      "question": "What is the department of DATA-230?",
+      "trace_id": "6496c33c-b393-414e-95ca-f67b5a40c4d0",
+      "is_cached": false,
+      "similarity": 0.5728,
+      "status": "approved",
+      "latency_ms": 11842.9
+    },
+    {
+      "question": "How many seats are open across the whole catalogue?",
+      "trace_id": "0e98b285-f311-46c2-bd0a-98cbe325b09c",
+      "is_cached": false,
+      "similarity": 0.7057,
+      "status": "rejected",
+      "latency_ms": 13436.0
+    },
+    {
+      "question": "Which course has the least room left?",
+      "trace_id": "9c49f5fa-d001-4347-9ed2-ff36152c4834",
+      "is_cached": false,
+      "similarity": 0.7226,
+      "status": "approved",
+      "latency_ms": 12194.9
+    },
+    {
+      "question": "How many courses does Dr. Priya Nair teach?",
+      "trace_id": "d6e59a43-d3a5-4c10-83b1-0ad2fdd00d53",
+      "is_cached": false,
+      "similarity": 0.6326,
+      "status": "approved",
+      "latency_ms": 12770.5
+    },
+    {
+      "question": "Does DATA-245 still have open seats, and how many?",
+      "trace_id": "f8de8220-b548-4051-a2f5-691233e7d12d",
+      "is_cached": false,
+      "similarity": 0.8441,
+      "status": "approved",
+      "latency_ms": 12006.4
+    },
+    {
+      "question": "What is the total seat count of the Computer Science department?",
+      "trace_id": "6cda313b-f514-4712-92a5-ddc3e94dbcbc",
+      "is_cached": false,
+      "similarity": 0.8274,
+      "status": "approved",
+      "latency_ms": 12773.4
+    },
+    {
+      "question": "What courses does Dr. Samuel Okafor teach, and how many seats do they have in total?",
+      "trace_id": "7307b8e6-80ea-4982-ac9b-b86b063abf6f",
+      "is_cached": false,
+      "similarity": 0.583,
+      "status": "approved",
+      "latency_ms": 13592.0
+    },
+    {
+      "question": "I want to enrol in DATA-230; how many places are left?",
+      "trace_id": "2e2a8db5-3740-4adf-85d5-80d2df4f6e0b",
+      "is_cached": false,
+      "similarity": 0.552,
+      "status": "approved",
+      "latency_ms": 14144.5
+    },
+    {
+      "question": "What is the title of the course DATA-260?",
+      "trace_id": "7c11ad90-857f-4472-bcdd-60ad04acea9a",
+      "is_cached": false,
+      "similarity": 0.7425,
+      "status": "approved",
+      "latency_ms": 11575.5
+    },
+    {
+      "question": "What is the title of the course CS-146?",
+      "trace_id": "4d3c937f-1f93-4ec5-b722-8a7c96816363",
+      "is_cached": false,
+      "similarity": 0.5198,
+      "status": "approved",
+      "latency_ms": 11524.3
+    },
+    {
+      "question": "What courses does Dr. Elena Rossi teach, and how many seats do they have in total?",
+      "trace_id": "4c00b7ac-14d5-4469-8ddb-882579319481",
+      "is_cached": false,
+      "similarity": 0.5601,
+      "status": "approved",
+      "latency_ms": 13620.2
+    },
+    {
+      "question": "List every course offered by Computer Science.",
+      "trace_id": "c96dee2f-5bfe-4015-b1da-f548d69537d7",
+      "is_cached": false,
+      "similarity": 0.6639,
+      "status": "approved",
+      "latency_ms": 12150.0
+    },
+    {
+      "question": "Which instructor teaches the most courses?",
+      "trace_id": "8bad0d46-2047-48fc-8858-014a668830d6",
+      "is_cached": false,
+      "similarity": 0.6582,
+      "status": "approved",
+      "latency_ms": 11040.0
+    },
+    {
+      "question": "What is the department of DATA-260?",
+      "trace_id": "4d984838-1c59-4fe7-a4e7-8f8bcf769ac0",
+      "is_cached": false,
+      "similarity": 0.556,
+      "status": "approved",
+      "latency_ms": 11451.6
+    },
+    {
+      "question": "Does CS-146 still have open seats, and how many?",
+      "trace_id": "2ca3d6b7-ee39-419a-ae57-fc36d671af86",
+      "is_cached": false,
+      "similarity": 0.676,
+      "status": "approved",
+      "latency_ms": 12169.0
+    },
+    {
+      "question": "Which instructor is assigned to DATA-260?",
+      "trace_id": "b2fd2ff9-47cc-4737-a06a-26c3f9cfa32e",
+      "is_cached": false,
+      "similarity": 0.8328,
+      "status": "approved",
+      "latency_ms": 11206.3
+    },
+    {
+      "question": "What is the total seat count of the Data Science department?",
+      "trace_id": "5f15abe5-2175-4e85-97b5-70fd9c5ef2cd",
+      "is_cached": false,
+      "similarity": 0.6592,
+      "status": "approved",
+      "latency_ms": 12408.1
+    },
+    {
+      "question": "Does ENGR-200 still have open seats, and how many?",
+      "trace_id": "d1bb1bff-46ca-452b-a61e-18be6887c5d7",
+      "is_cached": false,
+      "similarity": 0.6743,
+      "status": "approved",
+      "latency_ms": 13160.8
+    },
+    {
+      "question": "How many courses are in the catalogue?",
+      "trace_id": "a8f3ed2c-9d8f-466c-9301-e27d0e0aa72e",
+      "is_cached": false,
+      "similarity": 0.5915,
+      "status": "rejected",
+      "latency_ms": 10285.7
+    },
+    {
+      "question": "Which instructor is assigned to CS-157A?",
+      "trace_id": "e9ff99b8-7f4a-4477-84c5-ebe7d517cd0c",
+      "is_cached": false,
+      "similarity": 0.6005,
+      "status": "approved",
+      "latency_ms": 12080.8
+    },
+    {
+      "question": "I want to enrol in CS-157A; how many places are left?",
+      "trace_id": "40947013-a32d-4ae6-82e6-8e94fc175b6e",
+      "is_cached": false,
+      "similarity": 0.5322,
+      "status": "approved",
+      "latency_ms": 12416.9
+    }
+  ],
+  "discarded_cache_hits": [
+    {
+      "question": "How many courses does Dr. Marcus Lee teach?",
+      "trace_id": "4837c82f-7588-402b-bead-6a7b86f40046",
+      "is_cached": true,
+      "similarity": 1.0,
+      "status": "approved",
+      "latency_ms": 142.6
+    }
+  ],
+  "hits": [
+    {
+      "question": "How many seats are available in DATA-260?",
+      "trace_id": "4a89e526-cb05-4028-8e81-85c4804b63b4",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 87.9
+    },
+    {
+      "question": "Who teaches Web Programming?",
+      "trace_id": "750498ff-898c-470b-8f6b-1a11127b7931",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 21.8
+    },
+    {
+      "question": "How many seats do the Computer Science courses offer in total?",
+      "trace_id": "233f33c4-5786-4c4d-9243-a560116e9596",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 14.7
+    },
+    {
+      "question": "Which course has the most available seats?",
+      "trace_id": "8fadf8ce-5e29-4c0e-aa5e-acc3a6505515",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 13.4
+    },
+    {
+      "question": "How many courses does Dr. Marcus Lee teach?",
+      "trace_id": "e2d8db60-3452-4ba8-8432-0b9cd3162874",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 13.7
+    },
+    {
+      "question": "Which department has the most available seats, and which course there has the most seats?",
+      "trace_id": "e1d76361-a246-42a8-8077-3a5e40b9d946",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 12.8
+    },
+    {
+      "question": "List the courses in the Data Science department.",
+      "trace_id": "280fa75f-ce9f-48bc-a35a-bc523b9008ae",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 14.4
+    },
+    {
+      "question": "How many seats are available in DATA-260?",
+      "trace_id": "b6d5111e-5462-4562-be98-137d2f690dc3",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 15.0
+    },
+    {
+      "question": "Who teaches Web Programming?",
+      "trace_id": "fbeb4534-9f61-450f-afdf-36dba112740d",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 14.0
+    },
+    {
+      "question": "How many seats do the Computer Science courses offer in total?",
+      "trace_id": "bb4ccc4d-de81-4d41-83f6-c1dd21b8d845",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 11.1
+    },
+    {
+      "question": "Which course has the most available seats?",
+      "trace_id": "0bd55237-bc0e-493d-85c6-b23f7639a6a5",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 10.2
+    },
+    {
+      "question": "How many courses does Dr. Marcus Lee teach?",
+      "trace_id": "2c464af3-ebd2-48e8-9884-1f901f269d46",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 9.8
+    },
+    {
+      "question": "Which department has the most available seats, and which course there has the most seats?",
+      "trace_id": "9e908585-e74a-423d-ae3d-b33376c7ff67",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 15.6
+    },
+    {
+      "question": "List the courses in the Data Science department.",
+      "trace_id": "eb03fd35-1acc-47a8-a5e2-3c4878f7232c",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 10.5
+    },
+    {
+      "question": "How many seats are available in DATA-260?",
+      "trace_id": "b4628890-cb87-410c-8321-2950108db43a",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 8.9
+    },
+    {
+      "question": "Who teaches Web Programming?",
+      "trace_id": "caf9f15f-0c91-4cd5-8fbe-06181816329c",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 10.4
+    },
+    {
+      "question": "How many seats do the Computer Science courses offer in total?",
+      "trace_id": "dc915d97-9a13-42be-8ba0-2ab85f847263",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 12.6
+    },
+    {
+      "question": "Which course has the most available seats?",
+      "trace_id": "0de72e85-05e6-4f20-a18d-81c3323ce443",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 12.7
+    },
+    {
+      "question": "How many courses does Dr. Marcus Lee teach?",
+      "trace_id": "ab1e6001-c1ae-497c-9281-cd1856dbf725",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 10.8
+    },
+    {
+      "question": "Which department has the most available seats, and which course there has the most seats?",
+      "trace_id": "2241d206-740e-40ba-b575-cd2484e1abd5",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 9.0
+    },
+    {
+      "question": "List the courses in the Data Science department.",
+      "trace_id": "b0e01f03-a9be-4283-a9c9-248f889ecf04",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 10.1
+    },
+    {
+      "question": "How many seats are available in DATA-260?",
+      "trace_id": "33229c2c-4c37-46b8-a08e-c08fa9fedfad",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 13.3
+    },
+    {
+      "question": "Who teaches Web Programming?",
+      "trace_id": "0809bae8-b5c7-423c-8cc4-49a768a8d59d",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 10.4
+    },
+    {
+      "question": "How many seats do the Computer Science courses offer in total?",
+      "trace_id": "7189f3dc-b039-4ac9-8e6f-1615f85e620c",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 10.4
+    },
+    {
+      "question": "Which course has the most available seats?",
+      "trace_id": "9c3dc005-c801-441f-b944-2ebe0e8a9c6a",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 9.9
+    },
+    {
+      "question": "How many courses does Dr. Marcus Lee teach?",
+      "trace_id": "19dcdf54-eae3-4424-8590-c7ad295a9708",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 10.4
+    },
+    {
+      "question": "Which department has the most available seats, and which course there has the most seats?",
+      "trace_id": "ff4c35ab-be20-4610-9ae8-f58226cd859f",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 12.4
+    },
+    {
+      "question": "List the courses in the Data Science department.",
+      "trace_id": "fc2373fa-e6fe-48f1-9817-df2efd2a5cce",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 11.5
+    },
+    {
+      "question": "How many seats are available in DATA-260?",
+      "trace_id": "a06a9cb9-e070-4b3f-ae96-89d4a07ee77e",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 12.3
+    },
+    {
+      "question": "Who teaches Web Programming?",
+      "trace_id": "b1e2abdb-8501-4f91-afa8-d2109f37955a",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 11.6
+    }
+  ]
+}

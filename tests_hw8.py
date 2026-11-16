@@ -1,3 +1,7 @@
+import os
+import tempfile as _tempfile
+
+os.environ["TRACE_FILE"] = os.path.join(_tempfile.mkdtemp(prefix="trace_tests_"), "spans.jsonl")  # HW10: the tests must not write spans into the real trace file
 import json
 import logging
 import sys

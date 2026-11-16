@@ -1,0 +1,502 @@
+# RUN_LOG.txt - DATA-260 Homework 10 (Karthik Pragada, SID4 8360, PORT_BASE 8260)
+# Real console output captured on a MacBook Air (Apple M4): Kafka 3.8.0, Redis Stack 7.4, MySQL, the HW8 agents, the HW9 ingress and cache; Ollama qwen3:8b (also the judge).
+# Agent/evaluator log lines are in UTC (the trailing Z); the '=== date ===' headers are local time. Each block was produced by the command shown above it.
+
+====================================================================================================
+## Setup - containers, agents, ingress and Ollama
+$ docker ps / process list
+====================================================================================================
+=== 2026-11-15 04:11:32 === The system the dashboard watches: containers, agents, ingress, evaluator model
+$ docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}' | grep -E 'NAMES|s8360'
+NAMES                    IMAGE                             STATUS
+s8360-redis              redis/redis-stack-server:latest   Up 2 days (healthy)
+s8360-kafka              apache/kafka:3.8.0                Up 3 hours (healthy)
+s8360-mongo              mongo:7.0                         Up 2 days
+s8360-mysql              mysql:8.0                         Up 3 hours
+$ ps -Ao command | grep -E 'planner.py|writer.py|reviewer.py|uvicorn cache_svc|streamlit run' | grep -v -E 'grep|caffeinate' | sed -E 's#^.*/Python (-m )?##' | cut -c1-90
+writer.py
+planner.py
+reviewer.py
+uvicorn cache_svc.api:app --host 127.0.0.1 --port 8260
+streamlit run dashboard/label_cases.py --server.port 8502 --server.headless true --browser
+streamlit run dashboard/app.py --server.port 8501 --server.headless true --browser.gatherU
+$ curl -s localhost:8260/health
+{"status":"ok","port":8260,"cached_entries":8}
+$ curl -s localhost:11434/api/tags | python3 -c "import sys,json; print([m['name'] for m in json.load(sys.stdin)['models']])"
+['qwen3:8b', 'codellama:7b']
+
+====================================================================================================
+## Part 2 - eight test questions through the ingress, cache and Kafka pipeline
+$ PYTHONPATH=. python scripts/hw10_part2_run.py
+====================================================================================================
+=== 2026-11-15 01:19:33 === Part 2: eight test questions through the ingress, cache and Kafka pipeline
+$ .venv/bin/python scripts/hw10_part2_run.py
+c01 MISS approved      8843 ms trace_id=86141204-40cc-440d-ae91-d50d3094c406
+     Q: How many seats are available in DATA-260?
+     A: The course DATA-260 has 40 seats available.
+c02 MISS approved      9072 ms trace_id=a871bec7-320a-40c6-8909-c5e9df4159f3
+     Q: Who teaches Web Programming?
+     A: The course "Web Programming" is taught by Dr. Marcus Lee.
+c03 MISS approved      8169 ms trace_id=3d759a78-56a1-43d0-94f9-6eef419b1c9a
+     Q: How many seats do the Computer Science courses offer in total?
+     A: The Computer Science courses offer a total of 95 seats.
+c04 MISS approved      9088 ms trace_id=f207b4fe-1cd1-440c-8711-b6ffc8e65ce8
+     Q: Which course has the most available seats?
+     A: The course with the most available seats is CS-146, which has 50 seats available.
+c05 MISS approved      9726 ms trace_id=b7ed48d7-eaa7-4a1a-b6e5-61705e4a678c
+     Q: How many courses does Dr. Marcus Lee teach?
+     A: Dr. Marcus Lee teaches 2 courses. The courses are CS-157A and CS-146.
+c06 MISS approved      9502 ms trace_id=bf4e76c1-692b-414d-8b48-7e1f8ede152d
+     Q: Which department has the most available seats, and which course there has the most seats?
+     A: The department with the most available seats is Data Science, and the course within that department with the most seats is DATA-260 with 40 seats available.
+c07 MISS approved     10383 ms trace_id=6d6fcea1-e590-4f2d-9d22-2f207f28a4ba
+     Q: List the courses in the Data Science department.
+     A: The courses in the Data Science department are: Introduction to Distributed Systems (DATA-260), Machine Learning Foundations (DATA-245), and Data Visualization (DATA-230).
+c08 MISS rejected      8991 ms trace_id=fc1aa986-8493-431a-bb65-86053bb52733
+     Q: What time does DATA-260 meet?
+     A: None
+saved 8 requests to reports/hw10/raw/part2_requests.json
+
+====================================================================================================
+## Part 2 - the evaluator joins plan, draft and final by correlation_id and scores them
+$ python evaluator.py --once
+====================================================================================================
+=== 2026-11-15 02:26:11 === Part 2: the evaluator joins plan, draft and final by correlation_id and scores them
+$ python evaluator.py --once --since 2026-11-15T09:19:30Z --only <the 8 trace ids> --out reports/hw10/raw/part2_evals.jsonl
+2026-11-15T10:26:12.359Z evaluator INFO evaluator ready: topics ['s8360_tasks', 's8360_drafts', 's8360_final'], judge qwen3:8b (ollama, temperature 0.0, seed 8360), output reports/hw10/raw/part2_evals.jsonl, 0 requests already scored
+2026-11-15T10:26:12.549Z evaluator INFO plan, draft and final joined for correlation_id=86141204-40cc-440d-ae91-d50d3094c406; judging
+2026-11-15T10:26:40.151Z evaluator INFO scored correlation_id=86141204-40cc-440d-ae91-d50d3094c406 plan=4 writer=5 final=5 in 27.6s errors=none
+2026-11-15T10:26:40.151Z evaluator INFO plan, draft and final joined for correlation_id=a871bec7-320a-40c6-8909-c5e9df4159f3; judging
+2026-11-15T10:26:59.589Z evaluator INFO scored correlation_id=a871bec7-320a-40c6-8909-c5e9df4159f3 plan=3 writer=4 final=5 in 19.4s errors=none
+2026-11-15T10:26:59.589Z evaluator INFO plan, draft and final joined for correlation_id=3d759a78-56a1-43d0-94f9-6eef419b1c9a; judging
+2026-11-15T10:27:19.461Z evaluator INFO scored correlation_id=3d759a78-56a1-43d0-94f9-6eef419b1c9a plan=4 writer=4 final=5 in 19.9s errors=none
+2026-11-15T10:27:19.461Z evaluator INFO plan, draft and final joined for correlation_id=f207b4fe-1cd1-440c-8711-b6ffc8e65ce8; judging
+2026-11-15T10:27:41.952Z evaluator INFO scored correlation_id=f207b4fe-1cd1-440c-8711-b6ffc8e65ce8 plan=3 writer=4 final=5 in 22.5s errors=none
+2026-11-15T10:27:41.953Z evaluator INFO plan, draft and final joined for correlation_id=b7ed48d7-eaa7-4a1a-b6e5-61705e4a678c; judging
+2026-11-15T10:28:02.188Z evaluator INFO scored correlation_id=b7ed48d7-eaa7-4a1a-b6e5-61705e4a678c plan=3 writer=5 final=5 in 20.2s errors=none
+2026-11-15T10:28:02.189Z evaluator INFO plan, draft and final joined for correlation_id=bf4e76c1-692b-414d-8b48-7e1f8ede152d; judging
+2026-11-15T10:28:25.891Z evaluator INFO scored correlation_id=bf4e76c1-692b-414d-8b48-7e1f8ede152d plan=3 writer=4 final=4 in 23.7s errors=none
+2026-11-15T10:28:25.892Z evaluator INFO plan, draft and final joined for correlation_id=6d6fcea1-e590-4f2d-9d22-2f207f28a4ba; judging
+2026-11-15T10:28:46.810Z evaluator INFO scored correlation_id=6d6fcea1-e590-4f2d-9d22-2f207f28a4ba plan=3 writer=4 final=5 in 20.9s errors=none
+2026-11-15T10:28:46.810Z evaluator INFO plan, draft and final joined for correlation_id=fc1aa986-8493-431a-bb65-86053bb52733; judging
+2026-11-15T10:29:08.517Z evaluator INFO scored correlation_id=fc1aa986-8493-431a-bb65-86053bb52733 plan=4 writer=2 final=1 in 21.7s errors=none
+2026-11-15T10:29:23.762Z evaluator INFO evaluator finished: 8 scored, 0 malformed or skipped, 2 incomplete joins
+
+====================================================================================================
+## Part 4.2 - a cache-hit, a cache-miss and a failed request
+$ PYTHONPATH=. python scripts/hw10_trace_examples.py
+====================================================================================================
+=== 2026-11-15 01:24:36 === Part 4.2: a cache-hit, a cache-miss and a failed request
+$ .venv/bin/python scripts/hw10_trace_examples.py
+1. cache hit   : is_cached=True similarity=1.0 latency=207.1 ms trace_id=b86ddd2a-ea86-43b1-a33a-b427fcec3b86
+2. cache miss  : is_cached=False status=approved latency=11785.4 ms trace_id=7c6d4004-62b8-4ff2-9543-ba63dfc36cfd
+3. failed trace: stopping s8360-mysql, then asking a new question (the Writer needs the live catalogue)
+   result: status=timeout answer=None latency=25810.9 ms trace_id=dad26c70-f9ad-4657-a0e9-8413fc0b173d
+   s8360-mysql is back: True
+saved reports/hw10/raw/trace_examples.json
+
+====================================================================================================
+## Part 4.2 - the spans of the three required traces
+$ PYTHONPATH=. python scripts/hw10_show_trace.py <trace_id>
+====================================================================================================
+=== 2026-11-15 02:06:30 === Part 4.2: the spans of the three required traces
+$ PYTHONPATH=. .venv/bin/python scripts/hw10_show_trace.py b86ddd2a-ea86-43b1-a33a-b427fcec3b86 reports/hw10/raw/spans.jsonl 
+trace_id b86ddd2a-ea86-43b1-a33a-b427fcec3b86   path: cache_hit   total 208.74 ms
+stage              start (UTC)                end (UTC)                         ms  status  error
+request            2026-11-15T09:24:36.297Z   2026-11-15T09:24:36.506Z       208.7  ok      
+cache_lookup       2026-11-15T09:24:36.297Z   2026-11-15T09:24:36.503Z       206.2  ok      
+$ PYTHONPATH=. .venv/bin/python scripts/hw10_show_trace.py 7c6d4004-62b8-4ff2-9543-ba63dfc36cfd reports/hw10/raw/spans.jsonl 
+trace_id 7c6d4004-62b8-4ff2-9543-ba63dfc36cfd   path: cache_miss   total 11786.73 ms
+stage              start (UTC)                end (UTC)                         ms  status  error
+request            2026-11-15T09:24:36.508Z   2026-11-15T09:24:48.295Z     11786.7  ok      
+cache_lookup       2026-11-15T09:24:36.508Z   2026-11-15T09:24:36.519Z        11.3  ok      
+queue_inbox        2026-11-15T09:24:36.520Z   2026-11-15T09:24:36.536Z        16.8  ok      
+agent_round_trip   2026-11-15T09:24:36.520Z   2026-11-15T09:24:48.270Z     11750.6  ok      
+planner            2026-11-15T09:24:36.545Z   2026-11-15T09:24:39.546Z      3001.0  ok      
+queue_tasks        2026-11-15T09:24:39.537Z   2026-11-15T09:24:39.572Z        35.5  ok      
+writer             2026-11-15T09:24:39.572Z   2026-11-15T09:24:48.257Z      8684.9  ok      
+queue_drafts       2026-11-15T09:24:48.246Z   2026-11-15T09:24:48.257Z        11.9  ok      
+reviewer           2026-11-15T09:24:48.265Z   2026-11-15T09:24:48.269Z         3.5  ok      
+queue_final        2026-11-15T09:24:48.267Z   2026-11-15T09:24:48.270Z         3.8  ok      
+cache_store        2026-11-15T09:24:48.291Z   2026-11-15T09:24:48.293Z         2.5  ok      
+$ PYTHONPATH=. .venv/bin/python scripts/hw10_show_trace.py dad26c70-f9ad-4657-a0e9-8413fc0b173d reports/hw10/raw/spans.jsonl 
+trace_id dad26c70-f9ad-4657-a0e9-8413fc0b173d   path: failed   total 25817.61 ms   FAILED at writer: OperationalError: (pymysql.err.OperationalError) (2003, "Can't connect to MySQL server on 'localhost' ([Errno 61] Connection refused)")
+stage              start (UTC)                end (UTC)                         ms  status  error
+request            2026-11-15T09:24:49.760Z   2026-11-15T09:25:15.578Z     25817.6  error   agent pipeline did not answer in time
+cache_lookup       2026-11-15T09:24:49.760Z   2026-11-15T09:24:49.814Z        53.7  ok      
+queue_inbox        2026-11-15T09:24:49.815Z   2026-11-15T09:24:49.825Z        10.9  ok      
+agent_round_trip   2026-11-15T09:24:49.815Z   2026-11-15T09:25:15.570Z     25755.4  error   TimeoutError: no final message within 25s
+planner            2026-11-15T09:24:49.831Z   2026-11-15T09:24:53.878Z      4047.1  ok      
+queue_tasks        2026-11-15T09:24:53.868Z   2026-11-15T09:24:53.888Z        20.1  ok      
+writer             2026-11-15T09:24:53.888Z   2026-11-15T09:24:55.532Z      1644.2  error   OperationalError: (pymysql.err.OperationalError) (2003, "Can't...
+
+====================================================================================================
+## Part 4.3 - 50 confirmed cache-miss requests and 30 cache hits
+$ PYTHONPATH=. python scripts/hw10_latency_experiment.py
+====================================================================================================
+=== 2026-11-15 01:25:18 === Part 4.3: 50 confirmed cache-miss requests and 30 cache hits
+$ .venv/bin/python scripts/hw10_latency_experiment.py
+miss  1/50 approved      9918 ms sim=0.8804 Does DATA-260 still have open seats, and how many?
+miss  2/50 approved      8854 ms sim=0.5446 What is the department of DATA-245?
+miss  3/50 approved      8937 ms sim=0.8147 How many courses does the Data Science department offer?
+miss  4/50 approved      9383 ms sim=0.4965 What is the title of the course CS-157A?
+miss  5/50 approved      9574 ms sim=0.618 How many courses does the Engineering department offer?
+miss  6/50 approved     10528 ms sim=0.8285 Does DATA-230 still have open seats, and how many?
+miss  7/50 approved     10097 ms sim=0.8939 Which department has the fewest available seats?
+miss  8/50 approved     11058 ms sim=0.5664 Which instructor is assigned to ENGR-200?
+miss  9/50 approved     11374 ms sim=0.348 What is the department of ENGR-200?
+miss 10/50 approved     10464 ms sim=0.4887 What is the title of the course ENGR-200?
+miss 11/50 approved     10534 ms sim=0.9372 Which course has the most seats left?
+miss 12/50 approved     11631 ms sim=0.8451 How many courses does the Computer Science department offer?
+miss 13/50 approved     11782 ms sim=0.6062 I want to enrol in DATA-260; how many places are left?
+miss 14/50 approved     10970 ms sim=0.7789 What is the title of the course DATA-230?
+miss 15/50 approved     12289 ms sim=0.6313 How many courses does Dr. Elena Rossi teach?
+miss 16/50 approved     12176 ms sim=0.6155 Which instructor is assigned to CS-146?
+miss 17/50 approved     11018 ms sim=0.5855 I want to enrol in CS-146; how many places are left?
+miss 18/50 approved     12196 ms sim=0.5682 I want to enrol in DATA-245; how many places are left?
+miss 19/50 approved     11396 ms sim=0.3192 What is the department of CS-157A?
+miss 20/50 approved     12473 ms sim=0.8948 What courses does Dr. Marcus Lee teach, and how many seats do they have in total?
+miss 21/50 approved     14371 ms sim=0.8909 List every course offered by Data Science.
+miss 22/50 approved     11950 ms sim=0.4121 I want to enrol in ENGR-200; how many places are left?
+miss 23/50 approved     11424 ms sim=0.3565 What is the department of CS-146?
+miss 24/50 approved     11228 ms sim=0.8884 Which instructor is assigned to DATA-230?
+miss 25/50 approved     11131 ms sim=0.6483 What is the total seat count of the Engineering department?
+miss 26/50 approved     14052 ms sim=0.5575 What courses does Dr. Priya Nair teach, and how many seats do they have in total?
+miss 27/50 approved     10428 ms sim=0.833 Which instructor is assigned to DATA-245?
+miss 28/50 approved     11732 ms sim=0.6651 Does CS-157A still have open seats, and how many?
+miss 29/50 approved     11249 ms sim=0.7201 What is the title of the course DATA-245?
+miss 30/50 approved     11843 ms sim=0.5728 What is the department of DATA-230?
+miss 31/50 rejected     13436 ms sim=0.7057 How many seats are open across the whole catalogue?
+miss 32/50 approved     12195 ms sim=0.7226 Which course has the least room left?
+miss 33/50 approved     12770 ms sim=0.6326 How many courses does Dr. Priya Nair teach?
+miss 34/50 approved     12006 ms sim=0.8441 Does DATA-245 still have open seats, and how many?
+miss 35/50 approved     12773 ms sim=0.8274 What is the total seat count of the Computer Science department?
+miss 36/50 approved     13592 ms sim=0.583 What courses does Dr. Samuel Okafor teach, and how many seats do they have in total?
+miss 37/50 approved     14144 ms sim=0.552 I want to enrol in DATA-230; how many places are left?
+miss 38/50 approved     11576 ms sim=0.7425 What is the title of the course DATA-260?
+miss 39/50 approved     11524 ms sim=0.5198 What is the title of the course CS-146?
+miss 39/50 DISCARDED (cache hit)      143 ms sim=1.0 How many courses does Dr. Marcus Lee teach?
+miss 40/50 approved     13620 ms sim=0.5601 What courses does Dr. Elena Rossi teach, and how many seats do they have in total?
+miss 41/50 approved     12150 ms sim=0.6639 List every course offered by Computer Science.
+miss 42/50 approved     11040 ms sim=0.6582 Which instructor teaches the most courses?
+miss 43/50 approved     11452 ms sim=0.556 What is the department of DATA-260?
+miss 44/50 approved     12169 ms sim=0.676 Does CS-146 still have open seats, and how many?
+miss 45/50 approved     11206 ms sim=0.8328 Which instructor is assigned to DATA-260?
+miss 46/50 approved     12408 ms sim=0.6592 What is the total seat count of the Data Science department?
+miss 47/50 approved     13161 ms sim=0.6743 Does ENGR-200 still have open seats, and how many?
+miss 48/50 rejected     10286 ms sim=0.5915 How many courses are in the catalogue?
+miss 49/50 approved     12081 ms sim=0.6005 Which instructor is assigned to CS-157A?
+miss 50/50 approved     12417 ms sim=0.5322 I want to enrol in CS-157A; how many places are left?
+phase B: 30/30 requests were cache hits; median 12.3 ms
+saved reports/hw10/raw/latency_requests.json (started at epoch 1794734718)
+
+====================================================================================================
+## Part 4.3 - the evaluation stage for the 50 requests
+$ python evaluator.py --once
+====================================================================================================
+=== 2026-11-15 02:29:23 === Part 4.3: the evaluation stage for the 50 requests (evaluator runs after the pipeline is idle)
+$ python evaluator.py --once --since 2026-11-15T09:35:00Z --only <the 50 trace ids> --out reports/hw10/raw/latency_evals.jsonl
+2026-11-15T10:29:25.055Z evaluator INFO evaluator ready: topics ['s8360_tasks', 's8360_drafts', 's8360_final'], judge qwen3:8b (ollama, temperature 0.0, seed 8360), output reports/hw10/raw/latency_evals.jsonl, 0 requests already scored
+2026-11-15T10:29:25.273Z evaluator INFO plan, draft and final joined for correlation_id=eb5ad15c-a8bd-4e40-a231-6d6c823f9c14; judging
+2026-11-15T10:29:44.561Z evaluator INFO scored correlation_id=eb5ad15c-a8bd-4e40-a231-6d6c823f9c14 plan=4 writer=5 final=5 in 19.3s errors=none
+2026-11-15T10:29:44.562Z evaluator INFO plan, draft and final joined for correlation_id=d72562d8-6a33-481b-959d-cc4d976aef0f; judging
+2026-11-15T10:30:05.344Z evaluator INFO scored correlation_id=d72562d8-6a33-481b-959d-cc4d976aef0f plan=4 writer=4 final=5 in 20.8s errors=none
+2026-11-15T10:30:05.345Z evaluator INFO plan, draft and final joined for correlation_id=4baa19aa-9513-46b5-adea-15bcfa0514c8; judging
+2026-11-15T10:30:43.314Z evaluator INFO scored correlation_id=4baa19aa-9513-46b5-adea-15bcfa0514c8 plan=5 writer=5 final=5 in 38.0s errors=none
+2026-11-15T10:30:43.314Z evaluator INFO plan, draft and final joined for correlation_id=ba47c1d6-988e-45dd-aaa5-680ea216fb63; judging
+2026-11-15T10:31:25.825Z evaluator INFO scored correlation_id=ba47c1d6-988e-45dd-aaa5-680ea216fb63 plan=4 writer=4 final=4 in 42.5s errors=none
+2026-11-15T10:31:25.825Z evaluator INFO plan, draft and final joined for correlation_id=26598092-5dec-4ef9-9846-0e8eeface0ce; judging
+2026-11-15T10:32:04.986Z evaluator INFO scored correlation_id=26598092-5dec-4ef9-9846-0e8eeface0ce plan=3 writer=4 final=5 in 39.2s errors=none
+2026-11-15T10:32:04.986Z evaluator INFO plan, draft and final joined for correlation_id=7fe59eb0-ceb4-4997-a190-a268abfd18cd; judging
+2026-11-15T10:32:43.371Z evaluator INFO scored correlation_id=7fe59eb0-ceb4-4997-a190-a268abfd18cd plan=3 writer=2 final=2 in 38.4s errors=none
+2026-11-15T10:32:43.371Z evaluator INFO plan, draft and final joined for correlation_id=2891fc5a-bc90-4286-ac62-db3e8f10f3e6; judging
+2026-11-15T10:33:22.537Z evaluator INFO scored correlation_id=2891fc5a-bc90-4286-ac62-db3e8f10f3e6 plan=4 writer=5 final=5 in 39.2s errors=none
+2026-11-15T10:33:22.538Z evaluator INFO plan, draft and final joined for correlation_id=ca60997b-f258-47a8-8a2f-ab3a0bac87ff; judging
+2026-11-15T10:33:59.042Z evaluator INFO scored correlation_id=ca60997b-f258-47a8-8a2f-ab3a0bac87ff plan=4 writer=5 final=5 in 36.5s errors=none
+2026-11-15T10:33:59.042Z evaluator INFO plan, draft and final joined for correlation_id=b939bc53-fc68-4f24-b838-424ca65040b1; judging
+2026-11-15T10:34:35.820Z evaluator INFO scored correlation_id=b939bc53-fc68-4f24-b838-424ca65040b1 plan=5 writer=5 final=5 in 36.8s errors=none
+2026-11-15T10:34:35.820Z evaluator INFO plan, draft and final joined for correlation_id=a558ab23-de3d-49a7-8e75-1f608cd2454b; judging
+2026-11-15T10:35:14.878Z evaluator INFO scored correlation_id=a558ab23-de3d-49a7-8e75-1f608cd2454b plan=3 writer=4 final=5 in 39.1s errors=none
+2026-11-15T10:35:14.879Z evaluator INFO plan, draft and final joined for correlation_id=6f2b58be-17e8-42fa-98f6-ee469ada595d; judging
+2026-11-15T10:35:55.445Z evaluator INFO scored correlation_id=6f2b58be-17e8-42fa-98f6-ee469ada595d plan=4 writer=4 final=5 in 40.6s errors=none
+2026-11-15T10:35:55.445Z evaluator INFO plan, draft and final joined for correlation_id=4096f49d-9bbe-481f-a023-8ea8d1a6defc; judging
+2026-11-15T10:36:29.614Z evaluator INFO scored correlation_id=4096f49d-9bbe-481f-a023-8ea8d1a6defc plan=3 writer=5 final=5 in 34.2s errors=none
+2026-11-15T10:36:29.614Z evaluator INFO plan, draft and final joined for correlation_id=335375a7-c98d-4d46-a0b2-9100f64e937f; judging
+2026-11-15T10:37:06.644Z evaluator INFO scored correlation_id=335375a7-c98d-4d46-a0b2-9100f64e937f plan=5 writer=5 final=5 in 37.0s errors=none
+2026-11-15T10:37:06.644Z evaluator INFO plan, draft and final joined for correlation_id=d0e683e6-5d9f-4d79-a05e-7d072295b38a; judging
+2026-11-15T10:37:46.789Z evaluator INFO scored correlation_id=d0e683e6-5d9f-4d79-a05e-7d072295b38a plan=3 writer=5 final=5 in 40.1s errors=none
+2026-11-15T10:37:46.790Z evaluator INFO plan, draft and final joined for correlation_id=73958814-2599-4db0-9d26-2f0df166f8b0; judging
+2026-11-15T10:38:23.412Z evaluator INFO scored correlation_id=73958814-2599-4db0-9d26-2f0df166f8b0 plan=3 writer=5 final=5 in 36.6s errors=none
+2026-11-15T10:38:23.414Z evaluator INFO plan, draft and final joined for correlation_id=1cf57d22-5f97-478f-9558-8c03b2ca51c8; judging
+2026-11-15T10:39:02.719Z evaluator INFO scored correlation_id=1cf57d22-5f97-478f-9558-8c03b2ca51c8 plan=3 writer=5 final=5 in 39.3s errors=none
+2026-11-15T10:39:02.719Z evaluator INFO plan, draft and final joined for correlation_id=6ad43038-d653-441b-9748-acee70ebf4fb; judging
+2026-11-15T10:39:39.139Z evaluator INFO scored correlation_id=6ad43038-d653-441b-9748-acee70ebf4fb plan=3 writer=5 final=5 in 36.4s errors=none
+2026-11-15T10:39:39.139Z evaluator INFO plan, draft and final joined for correlation_id=3208592d-deb0-47fa-b5e6-f1211e2c368c; judging
+2026-11-15T10:40:19.401Z evaluator INFO scored correlation_id=3208592d-deb0-47fa-b5e6-f1211e2c368c plan=4 writer=4 final=5 in 40.3s errors=none
+2026-11-15T10:40:19.401Z evaluator INFO plan, draft and final joined for correlation_id=c00728d0-1a51-469b-8d6b-652388fb2eab; judging
+2026-11-15T10:41:05.888Z evaluator INFO scored correlation_id=c00728d0-1a51-469b-8d6b-652388fb2eab plan=3 writer=4 final=4 in 46.3s errors=none
+2026-11-15T10:41:05.892Z evaluator INFO plan, draft and final joined for correlation_id=3be2778d-56f2-4412-a634-7533ef8fed0f; judging
+2026-11-15T10:41:43.573Z evaluator INFO scored correlation_id=3be2778d-56f2-4412-a634-7533ef8fed0f plan=3 writer=4 final=5 in 37.7s errors=none
+2026-11-15T10:41:43.573Z evaluator INFO plan, draft and final joined for correlation_id=3129aa80-8015-408f-9e7c-e452f086bb9a; judging
+2026-11-15T10:42:17.236Z evaluator INFO scored correlation_id=3129aa80-8015-408f-9e7c-e452f086bb9a plan=3 writer=5 final=5 in 33.7s errors=none
+2026-11-15T10:42:17.237Z evaluator INFO plan, draft and final joined for correlation_id=e5d2fc37-661f-4c72-9f68-8fb2a7570d5c; judging
+2026-11-15T10:42:57.135Z evaluator INFO scored correlation_id=e5d2fc37-661f-4c72-9f68-8fb2a7570d5c plan=4 writer=4 final=5 in 39.9s errors=none
+2026-11-15T10:42:57.135Z evaluator INFO plan, draft and final joined for correlation_id=34b2981a-cd6f-474d-9c76-e667aa36a4fc; judging
+2026-11-15T10:43:33.842Z evaluator INFO scored correlation_id=34b2981a-cd6f-474d-9c76-e667aa36a4fc plan=4 writer=5 final=5 in 36.7s errors=none
+2026-11-15T10:43:33.843Z evaluator INFO plan, draft and final joined for correlation_id=901365d1-edc7-41e7-bb09-1afe4adb63fe; judging
+2026-11-15T10:45:40.198Z evaluator INFO scored correlation_id=901365d1-edc7-41e7-bb09-1afe4adb63fe plan=3 writer=5 final=5 in 126.3s errors=none
+2026-11-15T10:45:40.614Z evaluator INFO plan, draft and final joined for correlation_id=55a0ae94-e6d3-4731-91be-c8d61364f311; judging
+2026-11-15T10:46:40.946Z evaluator INFO scored correlation_id=55a0ae94-e6d3-4731-91be-c8d61364f311 plan=3 writer=4 final=4 in 60.3s errors=none
+2026-11-15T10:46:40.947Z evaluator INFO plan, draft and final joined for correlation_id=9b5e5fdb-82c5-4810-8239-030d67233537; judging
+2026-11-15T10:47:25.804Z evaluator INFO scored correlation_id=9b5e5fdb-82c5-4810-8239-030d67233537 plan=4 writer=5 final=5 in 44.8s errors=none
+2026-11-15T10:47:25.806Z evaluator INFO plan, draft and final joined for correlation_id=bd8a68c1-30c6-4003-aec4-9fc76ae91359; judging
+2026-11-15T10:48:11.771Z evaluator INFO scored correlation_id=bd8a68c1-30c6-4003-aec4-9fc76ae91359 plan=3 writer=5 final=5 in 45.9s errors=none
+2026-11-15T10:48:11.774Z evaluator INFO plan, draft and final joined for correlation_id=9d8e5f91-4e6c-44ac-b3a6-09a75d6d12b2; judging
+2026-11-15T10:48:53.075Z evaluator INFO scored correlation_id=9d8e5f91-4e6c-44ac-b3a6-09a75d6d12b2 plan=5 writer=5 final=5 in 41.3s errors=none
+2026-11-15T10:48:53.075Z evaluator INFO plan, draft and final joined for correlation_id=6496c33c-b393-414e-95ca-f67b5a40c4d0; judging
+2026-11-15T10:49:37.150Z evaluator INFO scored correlation_id=6496c33c-b393-414e-95ca-f67b5a40c4d0 plan=4 writer=4 final=5 in 44.1s errors=none
+2026-11-15T10:49:37.151Z evaluator INFO plan, draft and final joined for correlation_id=0e98b285-f311-46c2-bd0a-98cbe325b09c; judging
+2026-11-15T10:50:24.920Z evaluator INFO scored correlation_id=0e98b285-f311-46c2-bd0a-98cbe325b09c plan=4 writer=4 final=1 in 47.7s errors=none
+2026-11-15T10:50:24.921Z evaluator INFO plan, draft and final joined for correlation_id=9c49f5fa-d001-4347-9ed2-ff36152c4834; judging
+2026-11-15T10:51:08.311Z evaluator INFO scored correlation_id=9c49f5fa-d001-4347-9ed2-ff36152c4834 plan=3 writer=4 final=5 in 43.4s errors=none
+2026-11-15T10:51:08.311Z evaluator INFO plan, draft and final joined for correlation_id=d6e59a43-d3a5-4c10-83b1-0ad2fdd00d53; judging
+2026-11-15T10:51:58.399Z evaluator INFO scored correlation_id=d6e59a43-d3a5-4c10-83b1-0ad2fdd00d53 plan=3 writer=4 final=4 in 50.1s errors=none
+2026-11-15T10:51:58.400Z evaluator INFO plan, draft and final joined for correlation_id=f8de8220-b548-4051-a2f5-691233e7d12d; judging
+2026-11-15T10:52:45.927Z evaluator INFO scored correlation_id=f8de8220-b548-4051-a2f5-691233e7d12d plan=3 writer=4 final=5 in 47.5s errors=none
+2026-11-15T10:52:45.927Z evaluator INFO plan, draft and final joined for correlation_id=6cda313b-f514-4712-92a5-ddc3e94dbcbc; judging
+2026-11-15T10:53:35.965Z evaluator INFO scored correlation_id=6cda313b-f514-4712-92a5-ddc3e94dbcbc plan=3 writer=4 final=4 in 50.0s errors=none
+2026-11-15T10:53:35.965Z evaluator INFO plan, draft and final joined for correlation_id=7307b8e6-80ea-4982-ac9b-b86b063abf6f; judging
+2026-11-15T10:54:32.260Z evaluator INFO scored correlation_id=7307b8e6-80ea-4982-ac9b-b86b063abf6f plan=3 writer=5 final=5 in 56.2s errors=none
+2026-11-15T10:54:32.260Z evaluator INFO plan, draft and final joined for correlation_id=2e2a8db5-3740-4adf-85d5-80d2df4f6e0b; judging
+2026-11-15T10:55:22.164Z evaluator INFO scored correlation_id=2e2a8db5-3740-4adf-85d5-80d2df4f6e0b plan=3 writer=4 final=4 in 49.9s errors=none
+2026-11-15T10:55:22.166Z evaluator INFO plan, draft and final joined for correlation_id=7c11ad90-857f-4472-bcdd-60ad04acea9a; judging
+2026-11-15T10:56:09.615Z evaluator INFO scored correlation_id=7c11ad90-857f-4472-bcdd-60ad04acea9a plan=5 writer=5 final=5 in 47.4s errors=none
+2026-11-15T10:56:09.616Z evaluator INFO plan, draft and final joined for correlation_id=4d3c937f-1f93-4ec5-b722-8a7c96816363; judging
+2026-11-15T10:56:58.309Z evaluator INFO scored correlation_id=4d3c937f-1f93-4ec5-b722-8a7c96816363 plan=5 writer=5 final=5 in 48.7s errors=none
+2026-11-15T10:56:58.310Z evaluator INFO plan, draft and final joined for correlation_id=4c00b7ac-14d5-4469-8ddb-882579319481; judging
+2026-11-15T10:59:09.313Z evaluator INFO scored correlation_id=4c00b7ac-14d5-4469-8ddb-882579319481 plan=4 writer=4 final=4 in 131.0s errors=none
+2026-11-15T10:59:09.313Z evaluator INFO plan, draft and final joined for correlation_id=c96dee2f-5bfe-4015-b1da-f548d69537d7; judging
+2026-11-15T10:59:33.589Z evaluator INFO scored correlation_id=c96dee2f-5bfe-4015-b1da-f548d69537d7 plan=3 writer=4 final=3 in 24.3s errors=none
+2026-11-15T10:59:33.589Z evaluator INFO plan, draft and final joined for correlation_id=8bad0d46-2047-48fc-8858-014a668830d6; judging
+2026-11-15T11:00:19.653Z evaluator INFO scored correlation_id=8bad0d46-2047-48fc-8858-014a668830d6 plan=4 writer=3 final=2 in 46.1s errors=none
+2026-11-15T11:00:19.654Z evaluator INFO plan, draft and final joined for correlation_id=4d984838-1c59-4fe7-a4e7-8f8bcf769ac0; judging
+2026-11-15T11:00:59.655Z evaluator INFO scored correlation_id=4d984838-1c59-4fe7-a4e7-8f8bcf769ac0 plan=3 writer=5 final=5 in 40.0s errors=none
+2026-11-15T11:00:59.655Z evaluator INFO plan, draft and final joined for correlation_id=2ca3d6b7-ee39-419a-ae57-fc36d671af86; judging
+2026-11-15T11:06:49.874Z evaluator INFO scored correlation_id=2ca3d6b7-ee39-419a-ae57-fc36d671af86 plan=3 writer=4 final=5 in 350.2s errors=none
+2026-11-15T11:06:49.879Z evaluator WARNING consumer error: KafkaError{code=_MAX_POLL_EXCEEDED,val=-147,str="Application maximum poll interval (300000ms) exceeded by 48192ms"}
+2026-11-15T11:06:51.011Z evaluator INFO evaluator finished: 43 scored, 0 malformed or skipped, 6 incomplete joins
+
+--- follow-up: the first re-run stopped after 43 requests (one request took 350 s under heavy machine load, the evaluator's consumer exceeded Kafka's 300 s poll limit and was dropped from its group).
+--- Fixed in evaluator.py (max.poll.interval.ms = 1 500 000). The 7 missing requests were then scored; one more needed a corrected --since cutoff:
+2026-11-15T11:46:34.319Z evaluator INFO evaluator ready: topics ['s8360_tasks', 's8360_drafts', 's8360_final'], judge qwen3:8b (ollama, temperature 0.0, seed 8360), output reports/hw10/raw/latency_evals.jsonl, 43 requests already scored
+2026-11-15T11:47:02.477Z evaluator INFO scored correlation_id=b2fd2ff9-47cc-4737-a06a-26c3f9cfa32e plan=4 writer=5 final=5 in 27.9s errors=none
+2026-11-15T11:47:19.063Z evaluator INFO scored correlation_id=5f15abe5-2175-4e85-97b5-70fd9c5ef2cd plan=3 writer=5 final=5 in 16.6s errors=none
+2026-11-15T11:47:39.563Z evaluator INFO scored correlation_id=d1bb1bff-46ca-452b-a61e-18be6887c5d7 plan=3 writer=4 final=4 in 20.5s errors=none
+2026-11-15T11:47:58.264Z evaluator INFO scored correlation_id=a8f3ed2c-9d8f-466c-9301-e27d0e0aa72e plan=4 writer=5 final=2 in 18.7s errors=none
+2026-11-15T11:48:16.475Z evaluator INFO scored correlation_id=e9ff99b8-7f4a-4477-84c5-ebe7d517cd0c plan=4 writer=5 final=5 in 18.2s errors=none
+2026-11-15T11:48:35.640Z evaluator INFO scored correlation_id=40947013-a32d-4ae6-82e6-8e94fc175b6e plan=3 writer=5 final=5 in 19.2s errors=none
+2026-11-15T11:48:36.685Z evaluator INFO evaluator finished: 6 scored, 0 malformed or skipped, 0 incomplete joins
+2026-11-15T12:07:16Z evaluator INFO scored correlation_id=089c4033-a946-4a43-9711-df864673dad1 plan=3 writer=4 final=5 (the last request)
+
+====================================================================================================
+## Part 4.3 - p50 / p95 per stage from the spans
+$ PYTHONPATH=. python scripts/hw10_latency_report.py
+====================================================================================================
+=== 2026-11-15 04:06:13 === Part 4.3: p50 / p95 per stage from the spans
+$ PYTHONPATH=. python scripts/hw10_latency_report.py
+50 confirmed cache-miss requests (none served from the cache: True); spans from /Users/prags/Desktop/HW1_DATA260/kafka_state/traces/spans.jsonl
+Stage                    n   p50 (ms)   p95 (ms)  % of cache-miss end-to-end (mean of per-request shares)
+Cache lookup            50       31.8       52.2                                                      0.3
+Planner                 50     3569.6     4231.8                                                     30.3
+Writer                  50     7865.3    10039.0                                                     69.1
+Reviewer                50        4.8       12.9                                                      0.1
+Queue wait (total)      50       43.7       58.4                                                      0.4
+Evaluation              50    29958.4    36011.3                                                    262.4
+End-to-end (request)    50    11614.3    13866.6                                                    100.0
+request-path stages (cache lookup, planner, writer, reviewer, queue wait, cache store) account for 100.1% of the end-to-end time; the rest is -0.1% other (HTTP handling, JSON, the ingress's own bookkeeping). Evaluation runs after the answer is returned, in the evaluator process, so it is not part of the request path.
+dominant contributor: Writer (69.1% of the end-to-end time, p50 7865.3 ms)
+cache-hit latency (30 hits, request spans): p50 13.1 ms, p95 20.1 ms
+saved reports/hw10/raw/latency_table.json
+
+====================================================================================================
+## Part 3.1 - the frozen files were committed before the judge ran
+$ git log / status for eval_cases.json and human_labels.csv
+====================================================================================================
+=== 2026-11-15 04:08:56 === Part 3.1: the frozen evaluation files were committed before any judge score existed
+$ git log --format='%h  %aI  %s' -- eval_cases.json human_labels.csv
+fa2b717  2026-11-15T03:46:22-08:00  HW10: freeze eval_cases.json and human_labels.csv before any judge score
+$ git status --short -- eval_cases.json human_labels.csv | wc -l | awk '{print $1" uncommitted changes to eval_cases.json / human_labels.csv"}'
+0 uncommitted changes to eval_cases.json / human_labels.csv
+$ python3 -c "import json; d=json.load(open('reports/hw10/raw/judge_validation.json')); f=d['frozen_files']; print('judge scores were computed against commit', f['commit'][:7], 'committed at', f['committed_at'])"
+judge scores were computed against commit fa2b717 committed at 2026-11-15T03:46:22-08:00
+$ ls -l --time-style=full-iso reports/hw10/raw/judge_validation.json 2>/dev/null || stat -f '%Sm %N' -t '%Y-%m-%dT%H:%M:%S' reports/hw10/raw/judge_validation.json
+2026-11-15T04:05:35 reports/hw10/raw/judge_validation.json
+
+====================================================================================================
+## Part 3.2 / 3.3 - judge vs human labels, and repeatability
+$ PYTHONPATH=. python scripts/hw10_judge_validation.py --sampling-check
+====================================================================================================
+=== 2026-11-15 03:48:37 === Part 3.2 / 3.3: judge vs human labels, and repeatability
+$ PYTHONPATH=. python scripts/hw10_judge_validation.py --sampling-check
+eval_cases.json and human_labels.csv were committed in fa2b717 at 2026-11-15T03:46:22-08:00; running the judge now (2026-11-15T11:48:38.889Z).
+  run 1 e01: judge 2  (8.5s)
+  run 1 e02: judge 5  (7.3s)
+  run 1 e03: judge 3  (8.6s)
+  run 1 e04: judge 4  (9.8s)
+  run 1 e05: judge 3  (8.3s)
+  run 1 e06: judge 5  (9.0s)
+  run 1 e07: judge 4  (12.3s)
+  run 1 e08: judge 2  (8.8s)
+  run 1 e09: judge 2  (9.6s)
+  run 1 e10: judge 4  (10.3s)
+  run 1 e11: judge 5  (9.4s)
+  run 1 e12: judge 5  (8.7s)
+  run 1 e13: judge 4  (9.2s)
+  run 1 e14: judge 5  (8.9s)
+  run 1 e15: judge 3  (11.6s)
+  run 1 e16: judge 4  (10.8s)
+  run 1 e17: judge 4  (14.1s)
+  run 1 e18: judge 5  (8.8s)
+  run 1 e19: judge 5  (8.6s)
+  run 1 e20: judge 2  (10.1s)
+  run 2 e01: judge 2  (11.0s)
+  run 2 e02: judge 5  (8.4s)
+  run 2 e03: judge 3  (6.2s)
+  run 2 e04: judge 4  (11.4s)
+  run 2 e05: judge 3  (8.6s)
+  run 2 e06: judge 5  (9.9s)
+  run 2 e07: judge 4  (8.0s)
+  run 2 e08: judge 2  (5.5s)
+  run 2 e09: judge 2  (10.2s)
+  run 2 e10: judge 4  (11.1s)
+  run 2 e11: judge 5  (5.7s)
+  run 2 e12: judge 5  (8.9s)
+  run 2 e13: judge 4  (5.4s)
+  run 2 e14: judge 5  (4.9s)
+  run 2 e15: judge 3  (6.6s)
+  run 2 e16: judge 4  (7.8s)
+  run 2 e17: judge 4  (9.9s)
+  run 2 e18: judge 5  (9.2s)
+  run 2 e19: judge 5  (8.9s)
+  run 2 e20: judge 2  (11.9s)
+  run 3 e01: judge 2  (6.5s)
+  run 3 e02: judge 5  (9.8s)
+  run 3 e03: judge 3  (6.8s)
+  run 3 e04: judge 4  (11.9s)
+  run 3 e05: judge 3  (10.1s)
+  run 3 e06: judge 5  (5.9s)
+  run 3 e07: judge 4  (8.8s)
+  run 3 e08: judge 2  (5.1s)
+  run 3 e09: judge 2  (11.1s)
+  run 3 e10: judge 4  (12.1s)
+  run 3 e11: judge 5  (6.0s)
+  run 3 e12: judge 5  (5.0s)
+  run 3 e13: judge 4  (6.7s)
+  run 3 e14: judge 5  (5.1s)
+  run 3 e15: judge 3  (8.0s)
+  run 3 e16: judge 4  (7.1s)
+  run 3 e17: judge 4  (12.1s)
+  run 3 e18: judge 5  (8.9s)
+  run 3 e19: judge 5  (10.9s)
+  run 3 e20: judge 2  (10.8s)
+  sampling 1 e01: judge 2  (6.6s)
+  sampling 1 e02: judge 5  (9.0s)
+  sampling 1 e03: judge 2  (7.1s)
+  sampling 1 e04: judge 3  (11.6s)
+  sampling 1 e05: judge 3  (14.4s)
+  sampling 1 e06: judge 5  (4.9s)
+  sampling 1 e07: judge 4  (7.9s)
+  sampling 1 e08: judge 2  (5.6s)
+  sampling 1 e09: judge 2  (10.8s)
+  sampling 1 e10: judge 4  (12.3s)
+  sampling 1 e11: judge 5  (5.6s)
+  sampling 1 e12: judge 5  (4.8s)
+  sampling 1 e13: judge 4  (7.4s)
+  sampling 1 e14: judge 4  (6.8s)
+  sampling 1 e15: judge 3  (8.3s)
+  sampling 1 e16: judge 4  (8.3s)
+  sampling 1 e17: judge 4  (12.7s)
+  sampling 1 e18: judge 5  (10.3s)
+  sampling 1 e19: judge 5  (9.6s)
+  sampling 1 e20: judge 2  (12.0s)
+  sampling 2 e01: judge 2  (7.0s)
+  sampling 2 e02: judge 5  (5.7s)
+  sampling 2 e03: judge 2  (8.3s)
+  sampling 2 e04: judge 5  (5.4s)
+  sampling 2 e05: judge 3  (6.0s)
+  sampling 2 e06: judge 5  (5.3s)
+  sampling 2 e07: judge 4  (9.5s)
+  sampling 2 e08: judge 2  (7.1s)
+  sampling 2 e09: judge 2  (6.6s)
+  sampling 2 e10: judge 4  (8.2s)
+  sampling 2 e11: judge 5  (5.9s)
+  sampling 2 e12: judge 5  (4.9s)
+  sampling 2 e13: judge 4  (6.8s)
+  sampling 2 e14: judge 5  (6.1s)
+  sampling 2 e15: judge 3  (7.7s)
+  sampling 2 e16: judge 4  (7.2s)
+  sampling 2 e17: judge 4  (10.7s)
+  sampling 2 e18: judge 5  (11.0s)
+  sampling 2 e19: judge 5  (5.3s)
+  sampling 2 e20: judge 3  (12.6s)
+  sampling 3 e01: judge 2  (7.5s)
+  sampling 3 e02: judge 5  (5.8s)
+  sampling 3 e03: judge 2  (8.6s)
+  sampling 3 e04: judge 3  (7.9s)
+  sampling 3 e05: judge 4  (7.5s)
+  sampling 3 e06: judge 5  (7.1s)
+  sampling 3 e07: judge 4  (9.3s)
+  sampling 3 e08: judge 2  (6.3s)
+  sampling 3 e09: judge 3  (9.1s)
+  sampling 3 e10: judge 4  (8.4s)
+  sampling 3 e11: judge 5  (7.5s)
+  sampling 3 e12: judge 5  (4.5s)
+  sampling 3 e13: judge 4  (7.9s)
+  sampling 3 e14: judge 5  (5.6s)
+  sampling 3 e15: judge 3  (10.9s)
+  sampling 3 e16: judge 4  (6.9s)
+  sampling 3 e17: judge 4  (12.7s)
+  sampling 3 e18: judge 5  (10.4s)
+  sampling 3 e19: judge 5  (5.3s)
+  sampling 3 e20: judge 2  (12.4s)
+
+Spearman rho = 0.12018603552997517  (p = 0.6137585215796385)   MAD = 1.450   bias = -0.15   exact = 25%
+repeatability over 3 runs: {'runs': 3, 'pairs': 3, 'cases_with_any_change': 0, 'changed_cases': [], 'fraction_of_pair_scores_changed': 0.0, 'mean_abs_change': 0.0, 'max_abs_change': 0, 'max_spread_across_runs': 0}
+I would NOT trust this judge to gate a deployment yet: rank agreement with the humans is 0.12 (threshold 0.80); the judge is off by 1.45 points on average (threshold 0.50); only 20 labeled cases are far too few to set a deployment gate (at least 100 are needed).
+
+====================================================================================================
+## Offline tests and the live smoke test (writes reports/hw10/verification.json)
+$ python tests_hw10.py && PYTHONPATH=. python verify_hw10.py
+====================================================================================================
+=== 2026-11-15 04:12:45 === Offline tests and live verification
+$ PYTHONPATH=. .venv/bin/python tests_hw10.py 2>&1 | grep -v -E 'WARNING|use_container|Please replace|removed after|^$' | tail -9
+PASS  test_the_judge_timeout_is_part_of_the_client_configuration
+PASS  test_the_labeling_page_renders_and_does_not_show_judge_scores
+PASS  test_the_per_trace_deadline_stops_the_remaining_judge_calls
+PASS  test_the_record_keeps_kafka_metadata_and_the_criteria_text_needed_to_reproduce_the_scores
+PASS  test_trace_paths_are_hit_miss_or_failed_and_the_failing_stage_is_the_root_cause
+PASS  test_verdict_refuses_a_deployment_gate_with_few_cases_even_when_everything_else_is_perfect
+PASS  test_writer_failure_after_all_attempts_writes_an_error_span_and_dead_letters
+PASS  test_writer_success_writes_an_ok_span
+40/40 tests passed (1.2s)
+$ PYTHONPATH=. .venv/bin/python verify_hw10.py 2>&1 | grep -v -E 'WARNING|use_container|Please replace|removed after|^$'
+  [OK  ] docker: s8360-redis, s8360-kafka and s8360-mysql are running -- running: ['s8360-redis', 's8360-kafka', 's8360-mysql']
+  [OK  ] the ingress API answers /health and Ollama serves qwen3:8b -- ingress http://127.0.0.1:8260 ok (8 cached entries); Ollama has qwen3:8b
+  [OK  ] Part 4.1: every span is valid JSON with trace_id, stage, start, end, status and error -- 727 spans, every one has trace_id, stage, start, end, status, error, duration_ms; statuses ok/error only
+  [OK  ] Part 4.1: trace_id (= correlation_id) is propagated through cache lookup, inbox, tasks, drafts, final and the evaluator -- 50 cache-miss traces carry cache_lookup, queue_inbox, planner, queue_tasks, writer, queue_drafts, reviewer, queue_final and evaluation spans, and the plan, draft and final messages share the trace_id (= HW8 correlation_id)
+  [OK  ] Part 4.2: one cache-hit, one successful cache-miss and one failed trace exist, with the failing stage identified -- cache hit b86ddd2a..., cache miss 7c6d4004..., failed dad26c70... (writer: OperationalError: (pymysql.err.OperationalError) (2003, "Can)
+  [OK  ] Part 2: evaluation results for the four criteria, joined by correlation_id -- 8 requests scored on the four criteria (1-5); plan, draft and final share the correlation_id; judge settings, original messages, Kafka topic/partition/offset/timestamp and the criteria text stored
+  [OK  ] Part 3.1: eval_cases.json (20 drafts) and human_labels.csv (20 hand labels) are complete -- 20 drafts, 20 hand-assigned labels (distribution {1: 5, 2: 0, 3: 0, 4: 1, 5: 14})
+  [OK  ] Part 3.1: both files were committed before any judge score was computed and are unchanged -- committed in fa2b717 at 2026-11-15T03:46:22-08:00, before the judge scores were written (2026-11-15T12:05:35+00:00); unchanged since
+  [OK  ] Part 3.2/3.3: Spearman and mean absolute difference can be recomputed from the raw per-case data (3 runs) -- Spearman 0.120 and mean absolute difference 1.450 recomputed from the per-case data of 3 runs
+  [OK  ] Part 4.3: 50 confirmed cache misses, six-stage p50/p95 table, cache-hit latency kept separate -- 50 confirmed cache misses (1 candidate questions were discarded because the cache answered); p50 <= p95 for all six stages; cache-hit p50 13.1 ms (n=30)
+  [OK  ] Part 1: the three Streamlit pages render and look up a trace -- Summary, Evaluation and Trace lookup render from the committed spans; the failed example trace is looked up by trace_id
+  [OK  ] offline tests pass (HW10, HW9, HW8; no Kafka / Redis / network / model) -- tests_hw10.py: 40/40 tests passed (1.0s); tests_hw9.py: 38/38 tests passed (0.1s); tests_hw8.py: 24/24 tests passed (0.0s)
+  [OK  ] ruff passes on the repository -- All checks passed!
+  [OK  ] reports/hw10/RUN_LOG.txt exists and is non-empty -- reports/hw10/RUN_LOG.txt
+  [OK  ] reports/hw10/METRICS.md exists and is non-empty -- reports/hw10/METRICS.md
+  [OK  ] reports/hw10/AI_USE.md exists and is non-empty -- reports/hw10/AI_USE.md or reports/hw10/AI_Usage.md
+  [OK  ] reports/hw10/Pragada_HW10.pdf exists and is non-empty -- reports/hw10/Pragada_HW10.pdf
+  [OK  ] the PDF is within the 35-page limit -- 32 pages (limit 35)
+18/18 checks passed.
+Wrote reports/hw10/verification.json

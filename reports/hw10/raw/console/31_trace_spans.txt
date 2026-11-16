@@ -1,0 +1,30 @@
+=== 2026-11-15 02:06:30 === Part 4.2: the spans of the three required traces
+$ PYTHONPATH=. .venv/bin/python scripts/hw10_show_trace.py b86ddd2a-ea86-43b1-a33a-b427fcec3b86 reports/hw10/raw/spans.jsonl 
+trace_id b86ddd2a-ea86-43b1-a33a-b427fcec3b86   path: cache_hit   total 208.74 ms
+stage              start (UTC)                end (UTC)                         ms  status  error
+request            2026-11-15T09:24:36.297Z   2026-11-15T09:24:36.506Z       208.7  ok      
+cache_lookup       2026-11-15T09:24:36.297Z   2026-11-15T09:24:36.503Z       206.2  ok      
+$ PYTHONPATH=. .venv/bin/python scripts/hw10_show_trace.py 7c6d4004-62b8-4ff2-9543-ba63dfc36cfd reports/hw10/raw/spans.jsonl 
+trace_id 7c6d4004-62b8-4ff2-9543-ba63dfc36cfd   path: cache_miss   total 11786.73 ms
+stage              start (UTC)                end (UTC)                         ms  status  error
+request            2026-11-15T09:24:36.508Z   2026-11-15T09:24:48.295Z     11786.7  ok      
+cache_lookup       2026-11-15T09:24:36.508Z   2026-11-15T09:24:36.519Z        11.3  ok      
+queue_inbox        2026-11-15T09:24:36.520Z   2026-11-15T09:24:36.536Z        16.8  ok      
+agent_round_trip   2026-11-15T09:24:36.520Z   2026-11-15T09:24:48.270Z     11750.6  ok      
+planner            2026-11-15T09:24:36.545Z   2026-11-15T09:24:39.546Z      3001.0  ok      
+queue_tasks        2026-11-15T09:24:39.537Z   2026-11-15T09:24:39.572Z        35.5  ok      
+writer             2026-11-15T09:24:39.572Z   2026-11-15T09:24:48.257Z      8684.9  ok      
+queue_drafts       2026-11-15T09:24:48.246Z   2026-11-15T09:24:48.257Z        11.9  ok      
+reviewer           2026-11-15T09:24:48.265Z   2026-11-15T09:24:48.269Z         3.5  ok      
+queue_final        2026-11-15T09:24:48.267Z   2026-11-15T09:24:48.270Z         3.8  ok      
+cache_store        2026-11-15T09:24:48.291Z   2026-11-15T09:24:48.293Z         2.5  ok      
+$ PYTHONPATH=. .venv/bin/python scripts/hw10_show_trace.py dad26c70-f9ad-4657-a0e9-8413fc0b173d reports/hw10/raw/spans.jsonl 
+trace_id dad26c70-f9ad-4657-a0e9-8413fc0b173d   path: failed   total 25817.61 ms   FAILED at writer: OperationalError: (pymysql.err.OperationalError) (2003, "Can't connect to MySQL server on 'localhost' ([Errno 61] Connection refused)")
+stage              start (UTC)                end (UTC)                         ms  status  error
+request            2026-11-15T09:24:49.760Z   2026-11-15T09:25:15.578Z     25817.6  error   agent pipeline did not answer in time
+cache_lookup       2026-11-15T09:24:49.760Z   2026-11-15T09:24:49.814Z        53.7  ok      
+queue_inbox        2026-11-15T09:24:49.815Z   2026-11-15T09:24:49.825Z        10.9  ok      
+agent_round_trip   2026-11-15T09:24:49.815Z   2026-11-15T09:25:15.570Z     25755.4  error   TimeoutError: no final message within 25s
+planner            2026-11-15T09:24:49.831Z   2026-11-15T09:24:53.878Z      4047.1  ok      
+queue_tasks        2026-11-15T09:24:53.868Z   2026-11-15T09:24:53.888Z        20.1  ok      
+writer             2026-11-15T09:24:53.888Z   2026-11-15T09:24:55.532Z      1644.2  error   OperationalError: (pymysql.err.OperationalError) (2003, "Can't...

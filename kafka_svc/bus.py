@@ -34,7 +34,7 @@ def make_producer(client_id: str) -> Producer:
     })
 
 
-def make_consumer(group_id: str, client_id: str, *, offset_reset: str = "earliest", auto_commit: bool = False) -> Consumer:
+def make_consumer(group_id: str, client_id: str, *, offset_reset: str = "earliest", auto_commit: bool = False, extra: dict | None = None) -> Consumer:
     conf = {
         "bootstrap.servers": config.BOOTSTRAP,
         "group.id": group_id,
@@ -46,6 +46,7 @@ def make_consumer(group_id: str, client_id: str, *, offset_reset: str = "earlies
     }
     if auto_commit:
         conf["auto.commit.interval.ms"] = 1000
+    conf.update(extra or {})
     return Consumer(conf)
 
 
